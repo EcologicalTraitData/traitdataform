@@ -21,8 +21,12 @@
 fixlogical <- function(x, output = "logical", categories = c("No", "Yes")) {
 
   x <- factor(tolower(x))
+
+  # ToDo: add test or fuzzy matching algorithm
+
   levels(x) <- list('0'=c("0", "no", "n", "nein", "false", "non"),
                     '1'=c("1", "yes", "y", "ja",  "j", "true", "oui"))
+
   levels(x) <- categories
 
   x <- switch(output,
@@ -32,4 +36,4 @@ fixlogical <- function(x, output = "logical", categories = c("No", "Yes")) {
               logical = as.logical(as.numeric(x)-1)
   )
   return(x)
-} # input: a vector with some kind of non-standard binary data, output: a logical vector
+}
