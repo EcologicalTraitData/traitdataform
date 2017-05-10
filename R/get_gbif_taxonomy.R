@@ -70,6 +70,6 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
 
   }
 
-
+  class(out) <- c("data.frame", "taxonomy")
   return(out)
 }
