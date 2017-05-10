@@ -41,14 +41,12 @@ as.traitdata <- function(
   input,  # takes data.frame object
   mapping = map1, # mapping object provides taxonomy, column and trait name matching
   template = BExIS.traitdata,
-  metadata = list(authorName = NULL,  datasetVersion = NULL, maintainerEmail = NULL, datasetName = NULL, bibliographicCitation = NULL, identifier = NULL, rights = NULL, templateVersion = NULL, checkStatus = NULL), # a valid metadata object, will be created by a metadata function
-  verbose = TRUE,
-  warnings = TRUE
+  metadata = c(authorName = NULL,  datasetVersion = NULL, maintainerEmail = NULL, datasetName = NULL, bibliographicCitation = NULL, identifier = NULL, rights = NULL, templateVersion = NULL, checkStatus = NULL), # a valid metadata object, will be created by a metadata function
+  verbose = TRUE
 ) {
 
   out <- list(
     metadata = as.list(metadata),
-    mapping = mapping,
     traitdata = NA
   )
 
@@ -57,6 +55,7 @@ as.traitdata <- function(
   # author information
 
   # data information
+
 
   ## which columns of input are mapped either as column or trait value?
 
@@ -70,43 +69,55 @@ as.traitdata <- function(
   ismapped <- which(cols_in %in% c(traitNames_user, datacolumns ) )
   unmapped <- which(!cols_in %in% c(traitNames_user, datacolumns ) )
 
-
-  # check for mandatory input columns (_user provided columns, this check differs for matrix data and table data)
-
-  #    mandatory <- c(4,7,10,11,22) #which(as.logical(template$template$mandatory))
-  #
-
-
   # warn if provided columns are not mapped
-  if(warnings & length(unmapped) > 0) warning(paste("The following data columns are not mapped to standard column names and will be omitted from the dataset:", toString(cols_in[unmapped]), "! Please add columns to mapping if they should not be omitted!") )
+  if(verbose & length(unmapped) > 0) warning(paste("The following data columns are not mapped to standard column names and will be omitted from the dataset:", toString(cols_in[unmapped]), "! Please add columns to mapping if they should not be omitted!") )
 
   # warn if mapped columns are unexpected
 
   cols_expected <- template$template$columnName
 
   unexpected <- which(!names(datacolumns) %in% cols_expected)
-  if( length(unexpected) > 0 ) warning(paste("The following data columns are mapped to unexpected column names!", toString(names(datacolumns)[unexpected])," Unexpected columns will be kept for your personal use. Please double-check for misspelled column names!"))
+  if(verbose & length(unexpected) > 0 ) warning(paste("The following data columns are mapped to unexpected column names!", toString(names(datacolumns)[unexpected])," Unexpected columns will be kept for your personal use. Please double-check for misspelled column names!"))
 
   #out <- t(data.frame( row.names = template$template$columnName))
 
 
+  # check for mandatory input columns (_user provided columns, this check differs for matrix data and table data)
+
+  #    mandatory <- c(4,7,10,11,22) #which(as.logical(template$template$mandatory))
+  #
+  #  cols_expected[mandatory] %in% names(datacolumns)
+
+
   # check for species names and provide accepted species name table (via taxize?)
 
-  scientificNames_user <- levels(input[,datacolumns[names(datacolumns) == "scientificName_user"]])
+  if("scientificName_user" %in% names(datacolumns)) {
 
-  # resolve synonyms to accepted names
+    if(!"taxonomy" %in% class(mapping$taxonomy)  ) {
+      mapping$taxonomy <- switch(mapping$taxonomy,
+                                 gbif = get_gbif_taxonomy(levels(input[,datacolumns[which("scientificName_user" %in% names(datacolumns))]]) ),
+                                 eol = stop("no valid taxonomy provided!")
+      )
+    }
 
-  get_gbif_taxonomy(scientificNames_user)
+    input$scientificName <- input[,datacolumns[which("scientificName_user" %in% names(datacolumns))]]
+
+    levels(input$scientificName) <- mapping$taxonomy$scientificName
+
+    matchvec <- match(input$scientificName, mapping$taxonomy$scientificName)
+
+    input$taxonID <- paste0(mapping$taxonomy$taxonomy, "::", mapping$taxonomy$taxonID)[matchvec]
+    input$taxonRank <- mapping$taxonomy$rank[matchvec]
+    input$warnings  <- c(NA, paste("User provided synonym!"))[mapping$taxonomy$synonym[matchvec]+1]
+    datacolumns <- c(datacolumns, taxonID = "taxonID", scientificName = "scientificName", taxonRank = "taxonRank", warnings = "warnings")
+
+  } else {
+    stop("The column 'scientificName_user' has not been provided or has not been mapped! please provide a column with species names and map it to this mandatory column name!")
+  }
 
 
-  # get GBIF ID as taxonID
+  #
 
-  synonyms
-
-  gbifid <- get_gbifid_(matching_table$matched_name2)
-  lapply(gbifid, function(x) subset(x, synonym == FALSE))
-
-  #  cols_expected[mandatory] %in% names(datacolumns)
 
 
   # check for matrix format, return warning if not sure
@@ -117,25 +128,25 @@ as.traitdata <- function(
 
     # get user data
 
-    temp <- lapply(traitNames_user, FUN = function(i) {
+    out$traitdata <- lapply(traitNames_user, FUN = function(i) {
 
-      out <- input[!is.na(input[,as.character(i)]), names(input) %in% datacolumns]
-      names(out) <- names(mapping$columns)[match(names(out), mapping$columns)]
-      out$traitName_user <- i
-      out$measurementValue_user <- na.exclude(input[,as.character(i)])
+      temp1 <- input[!is.na(input[,as.character(i)]), names(input) %in% datacolumns]
+      names(temp1) <- names(datacolumns)[match(names(temp1), datacolumns)]
+      temp1$traitName_user <- i
+      temp1$measurementValue_user <- na.exclude(input[,as.character(i)])
       # if length(measurementUnit_user) == length(traitName_user) map trait units here, elseif length(measurementUnit_user) == 1 do it later on the accepted trait level
-      return(out)
+      return(temp1)
     }  )
 
-  names(temp) <- unique(traitNames_user)
+  names(out$traitdata) <- traitNames_user
 
   # merge list entries by same accepted trait ID, concatenate traittable information
 
   out$traitdata <- lapply(names(mapping$traits), FUN = function(i) {
 
-    out <- data.table::rbindlist(temp[mapping$traits[[i]]$traitName_user])  # use faster data.table::rbindlist(data) instead?
-    out$traitName <- i
-    out <- merge(out, mapping$traitlist$thesaurus[,c("traitName", "measurementUnit", "traitClass","traitType", "traitID")], by = "traitName")
+    temp2 <- data.table::rbindlist(out$traitdata[mapping$traits[[i]]$traitName_user])  # use faster data.table::rbindlist(data) instead?
+    temp2$traitName <- i
+    temp2 <- merge(temp2, mapping$traitlist$thesaurus[,c("traitName", "measurementUnit", "traitClass","traitType", "traitID")], by = "traitName")
     # test for correct type of value (categorical, ordinal, numerical, binary, integer, as expected by traitlist)
 
 
@@ -145,10 +156,10 @@ as.traitdata <- function(
     # stop if false: try perform unit conversion or request valid factor levels
     # https://edzer.github.io/units/articles/measurement_units_in_R.html
 
-    return(out)
+    return(temp2)
   }
   )
-  rm(temp)
+
   names(out$traitdata) <- names(mapping$traits)
 
 
@@ -170,3 +181,5 @@ write.traitdata <- function(x, file, ... ) {
   write.csv(data.table::rbindlist(printobject, fill = TRUE), file = file, row.names = FALSE, ...)
   # write metadata objects
 }
+
+
