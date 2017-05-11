@@ -13,6 +13,8 @@
 #'
 #' @examples
 #'
+#' inputdata <- read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv")
+#'
 #' map1 <- list(
 #' traits = list(
 #'   pronotum_length = list(traitName_user = c("pronl1", "pronl2"), measurementUnit_user = "mm"),
@@ -29,18 +31,19 @@
 #'   age = "age",
 #'   measurementDeterminedBy = "name"
 #' ), # possible to provide function instead of string?
-#' template = BExIS.traitdata,
+#' template = template.base,
 #' taxonomy = "gbif",
 #' traitlist = BExIS.invertebrates,
 #' matrixdata = TRUE
 #' )
+#'
 #' test <- as.traitdata(inputdata, mapping = map1)
 
 
 as.traitdata <- function(
   input,  # takes data.frame object
   mapping = map1, # mapping object provides taxonomy, column and trait name matching
-  template = BExIS.traitdata,
+  template = template.base,
   metadata = c(authorName = NULL,  datasetVersion = NULL, maintainerEmail = NULL, datasetName = NULL, bibliographicCitation = NULL, identifier = NULL, rights = NULL, templateVersion = NULL, checkStatus = NULL), # a valid metadata object, will be created by a metadata function
   verbose = TRUE
 ) {
@@ -60,11 +63,22 @@ as.traitdata <- function(
   ## which columns of input are mapped either as column or trait value?
 
   cols_in <-  names(inputdata)
-  traitNames_user <- unlist(sapply(mapping$traits, function(x) return(x[["traitName_user"]]) ) )
+  traitNames_user <- unlist(sapply(mapping$traitmap, function(x) return(x[["traitName_user"]]) ) )
+
+  cols_in[cols_in %in% names(mapping$traitlist$thesaurus)]
+  traitNames_mapped <- names(mapping$traits)
+
+  ####### TODO ####
+  # - mode for matching multiples to accepted trait names
+  # - think about non-matrix data
+  # - function to get trait matching table for this particular traitset (analogue to species taxonomy)
+
+  traitlookup <- traitlist(traitmap = mapping$traitmap, thesaurus = mapping$traitlist, appliestoall = mapping$appliestoall)
 
   #sapply(sapply(mapping$traits, function(x) (x[["traitName_user"]]) ), function(i) rep())
-  # ToDo: Add unmapped expected columns to datacolumns/to mapping
-  datacolumns <- sapply(mapping$columns, function(x) return(x) )
+  # ToDo: Automatically add unmapped expected columns to datacolumns/to mapping
+
+  datacolumns <- sapply(mapping$columnmap, function(x) return(x) )
 
   ismapped <- which(cols_in %in% c(traitNames_user, datacolumns ) )
   unmapped <- which(!cols_in %in% c(traitNames_user, datacolumns ) )
@@ -73,13 +87,10 @@ as.traitdata <- function(
   if(verbose & length(unmapped) > 0) warning(paste("The following data columns are not mapped to standard column names and will be omitted from the dataset:", toString(cols_in[unmapped]), "! Please add columns to mapping if they should not be omitted!") )
 
   # warn if mapped columns are unexpected
-
-  cols_expected <- template$template$columnName
+  cols_expected <- template$columns
 
   unexpected <- which(!names(datacolumns) %in% cols_expected)
   if(verbose & length(unexpected) > 0 ) warning(paste("The following data columns are mapped to unexpected column names!", toString(names(datacolumns)[unexpected])," Unexpected columns will be kept for your personal use. Please double-check for misspelled column names!"))
-
-  #out <- t(data.frame( row.names = template$template$columnName))
 
 
   # check for mandatory input columns (_user provided columns, this check differs for matrix data and table data)
@@ -134,27 +145,59 @@ as.traitdata <- function(
       names(temp1) <- names(datacolumns)[match(names(temp1), datacolumns)]
       temp1$traitName_user <- i
       temp1$measurementValue_user <- na.exclude(input[,as.character(i)])
-      # if length(measurementUnit_user) == length(traitName_user) map trait units here, elseif length(measurementUnit_user) == 1 do it later on the accepted trait level
+
+      # concatenate traittable information
+      i_maps_to <- traitlookup[traitlookup$traitName_user == i,]$traitName
+      furthercols <-  unique(c(names(mapping$traitmap[[i_maps_to]]), names(mapping$appliestoall)))
+      furthercols <- furthercols[furthercols != "traitName_user"]
+
+      temp1 <- merge(temp1, traitlookup[,c("measurementUnit", "traitName", "traitID", "traitName_user", furthercols), with = FALSE], by = "traitName_user")
+
+      # TEST: if trait is not provided in the thesaurus skip next steps!
+      if(!is.na(traitlookup[traitlookup$traitName_user == i,]$traitID))  {
+
+        # validate type of data
+        type <- as.character(traitlookup[traitlookup$traitName_user == i,]$type_of_value)
+
+        if(!type %in% c("factor", "logical", "numeric", "integer", "character")) stop("the traitlist must provide a valid data type in column 'type_of_value'! make sure it is one of:  'factor', 'logical', 'numeric', 'integer', 'character'" )
+
+        temp1$measurementValue_user <- switch(type,
+                          numeric = as.numeric(temp1$measurementValue_user),
+                          factor = as.factor(temp1$measurementValue_user),
+                          logical = as.logical(temp1$measurementValue_user),
+                          character = as.character(temp1$measurementValue_user),
+                          integer = as.integer(temp1$measurementValue_user)
+        )
+
+        if(type == "numeric") {
+          unit_user <- as.character(traitlookup[traitlookup$traitName_user == i,]$measurementUnit_user)
+          unit_target <- as.character(traitlookup[traitlookup$traitName_user == i,]$measurementUnit)
+
+          dd_user <- temp1$measurementValue_user * ud_units[[unit_user]]
+
+          temp1$measurementValue <- set_units(dd_user, parse_unit(unit_target))
+
+        }
+        if(type == "factor") {
+          factorLevels <- as.character(traitlookup[traitlookup$traitName_user == i,]$factorLevels)
+          level_map <- as.data.frame(mapping$traitmap[[i_maps_to]]) # get valid factor levels map from mapping object
+          levels_user <- levels(temp1$measurementValue_user)
+        }
+
+
+      }
+
+
       return(temp1)
     }  )
 
   names(out$traitdata) <- traitNames_user
 
-  # merge list entries by same accepted trait ID, concatenate traittable information
+  # merge list entries by same accepted trait ID
 
-  out$traitdata <- lapply(names(mapping$traits), FUN = function(i) {
+  out$traitdata <- lapply(names(mapping$traitmap), FUN = function(i) {
 
-    temp2 <- data.table::rbindlist(out$traitdata[mapping$traits[[i]]$traitName_user])  # use faster data.table::rbindlist(data) instead?
-    temp2$traitName <- i
-    temp2 <- merge(temp2, mapping$traitlist$thesaurus[,c("traitName", "measurementUnit", "traitClass","traitType", "traitID")], by = "traitName")
-    # test for correct type of value (categorical, ordinal, numerical, binary, integer, as expected by traitlist)
-
-
-    # test for trait unit match, and match in factor levels
-
-
-    # stop if false: try perform unit conversion or request valid factor levels
-    # https://edzer.github.io/units/articles/measurement_units_in_R.html
+    temp2 <- data.table::rbindlist(out$traitdata[mapping$traitmap[[i]]$traitName_user])  # use faster data.table::rbindlist(data) instead?
 
     return(temp2)
   }
@@ -166,12 +209,16 @@ as.traitdata <- function(
   return(out)
 }
 
+test <- as.traitdata(inputdata, mapping = map1)
+
+
+
 
 write.traitdata <- function(x, file, ... ) {
 
   printobject <- list(template = read.table(text = "",
                                             #colClasses = template$template$valueType,
-                                            col.names = template$template$columnName) #ToDo. extract from metadata
+                                            col.names = template$columns) #ToDo. extract from metadata
   )
 
   for(i in 1:length(x$traitdata)) {
@@ -182,4 +229,10 @@ write.traitdata <- function(x, file, ... ) {
   # write metadata objects
 }
 
+write.traitdata(test, file = "test.csv")
 
+#as.matrix.traitdata <- function( ) # function to compile trait data tables into matrix format. This requires many user options, e.g. adding filters and check for outliers, averaging method etc. a conservative scenario will be provided as default.
+
+#summary.traitdata <- function( ) # summary method for traitdata objects
+
+#print.traitdata <- function( ) ## print method for traitdata objects, prints short header of metadata and stats (number of traits, species etc.) and top 30 of rows (minus some hidden columns for clarity)
