@@ -10,3 +10,4 @@ The toolset of the package includes
 - saving trait dataset into a desired format using templates (for BExIS)
 - merging multiple datasets into one 
 
+The package is based on the trait data core standard (Schneider, Simons, Penone, Ostrowski).  
