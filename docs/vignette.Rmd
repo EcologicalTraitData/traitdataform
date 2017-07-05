@@ -1,78 +1,375 @@
 ---
-title: "vignette"
+title: "vignette of package 'traitdataform'"
 author: "Florian D. Schneider"
 date: "26 Juni 2017"
 output: html_document
 ---
 
 
-Step-by step instructions for transferring own data  to a valid traitdata-object.
+This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. The output object uses the trait data standard put forward in the Whitepaper (refer to pub). 
 
+## step 1 reading in data
 
-# preparations
+First, load your own data into R, preferrably in a matrix, table or longtable format (See notes on different data formats of trait data). 
 
-load your own data into R, preferrably in a matrix, table or longtable format. 
+You may rename the column names of the original file to match the column names described in the trait data standard, but this howto also describes a mapping of the column names along the process of data handling. 
 
-(See notes on different data formats of trait data.)
+R knows many ways of getting your original data into an R object. In most cases you would read an object from a csv or txt file while maintaining the column headers. 
 
-You may rename the column names of the original file to match the described column names below, but this howto also describes a mapping of the column names along the process of data handling. The mapping is not necessary if you use the expected colum names from the start. 
+```{r}
 
-# 1. provide a list of traits to identify format of own data
-
-Depending on the original format of your data, the process that follows may vary a little. How your data are interpreted is mainly defined by providing a list of terms that are to be interpreted as trait names.
-
-```
-traits <- traitmap("Petal.Width", "Petal.Length", "Sepal.Width", "Sepal.Length")
-```
-
-in case those user-provided trait names are not  compliant with the standard trait list (see below), you should provide mapping information here by specifying the target name of the trait names that your provide in the original data: 
-
-```
-traits <- traitmap(petal_width = "Petal.Width", petal_length = "Petal.Length", sepal_width = "Sepal.Width", sepal_length = "Sepal.Length")
-```
-
-Different special cases are described below that might apply for your data, e.g. if you stored additional information in separate columns of your data matrix, or if you want to add information that is not stored in your original data table. 
-
-## species-trait matrix data
-
-Matrix data are defined as follows: you have a single account of a trait value for each species (in rows) for a couple of different traits (in columns). 
-
-No replicates of species are existing (this would be a occurence table, see below). This is the most likely format for literature data, where average values or facts for entire species have been collated into a single lookup table. 
-
-Additional information on the value may be reported in further colums (e.g. the unit in which a value is reported or the literature source for this measurement or fact). 
-
-## table data
-
-In this case, your data report several measurements on a single specimen (per row) in several trait columns. Repeated
-
-There might be original data reporting repeated measures of the same trait taken from the same specimen, e.g. several measures of leaf traits within a single plant or repeated measures of a wing length for increasing precision. In those situations the individual measurements should be kept for allowing a more flexible downstream data use. In terms of data structure that means we need to link those individual measurements via a unique identifier for the specimen. If the raw data provide such an identifier, it must be renamed into `occurenceID` . 
-
-
-## longtable data
-
-
-# 2. load a trait thesaurus or list of accepted trait names
-
-preferrably from a published ontology or glossary, that is globally available on the internet. 
-This list must provide the following collumns:
-- trait name
-- trait id (globally valid identifier, e.g. an URI)
-- trait description
-- expected unit
-- value Type
-
-in case of factorial traits, it should also provide
-- valid factor levels 
-
-Ideally, the trait list also links to the original source of the trait definition via the global trait ID, Comments can provide examples. 
-
-(see notes on trait data ontologies and standardisation)
-
-The trait list will be created from a text-file like this: 
-
-```
-traits <- as.traitlist(read.csv("example.csv"), measurementType = trait, measurementTypeDescription = Definition, measurementUnit = unit, measurementTypeID = Identifier, valueType = type_of_variable)
+inputdata1 <- read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv")
+inputdata2 <- read.csv("../example_data/Moths_Traits_Sagrario.csv")
+inputdata3 <- read.csv("../example_data/moth_traits_jule.csv")
+inputdata4 <- read.table("../example_data/carabid traits final (Fons).txt", header = TRUE)
+inputdata5 <- read.table("../example_data/18987.txt", header = TRUE)
+inputdata6 <- read.csv("../example_data/ArthropodSpeciesTraits.csv")
 
 ```
 
-# 3. provide Metadata
+## step 2 transfer into longtable format
+
+As explained in the whitepaper, most trait data are stored in a species--trait matrix format or a table with replicated measurements of multiple individuals.
+
+- **species-trait matrix data** :  a single account of a trait value for each species (in rows) for a couple of different traits (in columns). No replicates of species are reported. This is the most likely format for literature data, where average values or facts for entire species have been collated into a single lookup table. 
+- **occurence table** : In this case, your data report one or several raw measurements (in columns) taken from a single specimen (in rows). Repeated measures of the same trait might also be included as columns or pooled into average values. This is most common for measured data and is valuable for investigations of intra-specific variation. 
+
+Additional information on the reported value may be stored in further colums (e.g. the unit in which a value is reported or the literature source for this measurement or fact), or in a separate data sheet linked via identifiers for specimen, trait, taxon, or sampling/measurement event. Examples below will explain how these information can be added to the data sheet.
+
+For a standardisation of trait data for use in databases, we highly recommend a longtable format, where each row comprises the reporting of a single measurement or fact, linked to a trait definition as well as a valid taxon name, and optionally to other layers of information.
+
+The function `as.traittable()`  provided in the package assist in transferring own data into the longtable format. For this function to work, it needs to know about the columns of the original data that contain trait values (parameter `traits`), and the column which contains the taxonomic specification (parameter `taxa`).
+
+```{r}
+
+out1 <- as.traittable(inputdata1,
+              traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
+              taxa = "spec", 
+              occurence = "nr"
+              )
+head(out1, 25)
+subset(out1, occurence == "772" ) # show different trait measurements for same occurence/individual
+
+```
+
+
+### case example: provide measurement unit 
+
+For a standardisation of quantitative trait data, the unit of measurement is essential. Often, this information is kept in the metadata descriptions. But for a standardised scheme, this information should always accompany the measurement value. A common way to provide the unit is adding another column to your original data table containing the unit in an unambiguous format. 
+The function `as.traittable()` assists in adding the units. This can be done for all traits in a single stroke (if all reported values refer to the same unit) or to each trait specifically (if they used different measuremnt units or if the table comprises a mixture of quantitative and qualitative traits).  
+
+The syntax for this uses the parameter `units`, which takes a single character string, or a vector of character strings, containing valid entries as expected  by the package 'units' (Pebesma et al. 2016, https://github.com/edzer/units/, v0.4-5, Examples are 'mm', 'm2' or 'm^2', 'm/s'). The character string should have the same length as the provided vector of trait names (in parameter `traits`), or otherwise should be a named vector of the form `c(trait1 = "mm", trait2 = "mm2")`, where only the traits contained in the vector names will receive units while the others will remain blank. 
+
+
+```{r}
+
+out1 <- as.traittable(inputdata1,
+              traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
+              taxa = "spec", 
+              occurence = "nr",
+              units = "mm"
+              )
+head(out1, 25)
+
+out1 <- as.traittable(inputdata1,
+              traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
+              taxa = "spec", 
+              occurence = "nr",
+              units = c(rep("mm", 12), rep("mm2", 4))
+              )
+head(out1, 25)
+
+
+out2 <- as.traittable(inputdata2,
+                      traits = c("Fl.period", "Specialisation", "Gen.per.year", "Wingspan.med"),
+                      taxa = "Species", 
+                      units = c(Wingspan.med = "mm")
+)
+head(subset(out2, trait == "Wingspan.med"), 15)
+
+
+out6 <- as.traittable(inputdata6, 
+                      traits = c("Body_Size", "Dispersal_ability", "Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use_short"),
+                      taxa = "SpeciesID",
+                      units = c("mm", "unitless", "", "","", "", "", "", "" ))
+
+
+```
+
+### case example: raw data are coded as numeric factor levels 
+
+the data table should be human readable, thus you may consider translation into true factorial data via function `factor()`. 
+This may not be useful if the numeric levels correspond to fine grained distinctions that cannot be translated into short factor levels. 
+A translation into factorials is even ill-adviced if factor levels are ordinal, i.e. they correspond to a sequence of logically ordered levels and the ordering would be lost by translating into alphabetically ordered factorials. In this case, provide a definition of factor levels in the metadata description of variables or in an accompanying dataset containing trait definitions.
+
+```{r}
+
+inputdata3$hibernation <- factor(inputdata3$hibernation, levels = c(1,2,3,4), labels = c("egg", "larva", "pupa", "adult"))
+inputdata3$feeding_niche <- factor(inputdata3$feeding_niche, levels = c(1,2,3,4), labels = c("narrow_specialist", "moderate_specialist", "moderate_generalist", "wide_generalist"))
+
+out3 <- as.traittable(inputdata3,
+                      traits = c("size", "feeding_niche", "hibernation", "voltinism", "grassland", "dispersion", "cold_adapt", "warm_adapt", "endangered"),
+                      taxa = "Name"
+                      )
+
+head(subset(out3, trait == "feeding_niche"), 25)
+head(subset(out3, trait == "hibernation"), 25)
+
+
+```
+
+
+### case example: keep additional data columns
+
+The raw data might contain further information on the specimen or the trait measurement itself in further data columns that are valuable for later analysis. This can be for instance data about the sex or developmental stage of the individual, the sampling or preservation method of the specimen, or the conditions under which the measurement was taken. 
+
+The parameter `keep` allows you to specify which columns contain valuable information as a character vector. As a negative version of `keep`, specifying `drop` would allow you to name the columns that are not valueable, while all others will be kept. Not specifying `keep` or `drop` will result in dropping all columns except the core measurement and identifier columns.  
+
+
+```{r}
+
+out1 <- as.traittable(inputdata1,
+              traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
+              taxa = "spec", 
+              occurence = "nr",
+              units = c(rep("mm", 12), rep("mm2", 4)),
+              keep = c("bz",  "EP", "sex", "age", "name")
+              )
+head(out1, 25)
+subset(out1, occurence == "772" ) # show different trait measurements for same occurence/individual
+
+```
+
+The traitdata glossary suggests standard names for many of these extra information. We highly reccomend mapping the columns provided into these standard names by using the rename feature of the `as.traittable()` function. This is simply acheived by providing a named vector for `keep` that uses the compatible column names as vector names.  
+
+```{r}
+
+out1 <- as.traittable(inputdata1,
+              traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
+              taxa = "spec", 
+              occurence = "nr",
+              units = c(rep("mm", 12), rep("mm2", 4)),
+              keep = c("bz", locationID = "EP", sex = "sex", age =  "age", measurementDeterminedBy = "name")
+              )
+
+head(out1, 25)
+
+```
+
+Note that a lack of a name in the named vector maintains the original name. Note also, that no checking for valid column names (as compared to the traitdata glossary) is performed at this stage. This is to ensure that the raw data table created by `as.traittable()` can contain any columns that the author considers relevant. The `keep` parameter can be used to rename columns into intuitive column names. 
+
+
+### case example: adding further information on traits, species or single measurements
+
+Beyond measurement units, further information might be available that are not recorded in the raw data table, but are related to the trait type, the taxon, the individual or specimen, or to the reported fact, measurement or sampling event. 
+In most cases those information are kept in seperate data sheets of your file, e.g. the place were a specimen has been sampled or the literature source from where a species value has been cited. In this case, a unique identifier might link to this other datasheet, such as an individual specimen ID (conventionally termed `occurenceID`). We recommend to add these information to the data table a better analysis of cofactors and correlations.  
+
+The function `as.traittable()` provides parameters to add information at different levels. The following three examples will illustrate how to add covariates to each trait, each taxon or even each single measurement.  The principle is always the same: A unique identifier for each level can be associated with a vector or data table containing the additional information, which will then be merged into the data table. 
+
+
+
+<!-- TODO: add functionality -->
+
+
+## step 3 map to standardised column names 
+
+Step 1 and 2 produced a tidy and correctly formatted version of your own trait data. We now turn to the challenging task of standardisation. 
+
+At first, we will make sure that the columns are mapped to the column names expected by the trait template. The definitions and standard column names are given in the glossary of terms provided at http://fdschneider.de/bexis_traits/traitdatastandard.html. Make sure this step produces column names appended by `_original`, which highlights that the data in these columns are the author's raw data and have not been standardized in any way. 
+
+A detailled description of these terms is provided in our traits whitepaper. 
+
+<!--If you were following the previous steps, the use of function `as.traitdata()` already ensured that the core data columns are corresponding to standard column names (`measurementValue`, `measurementUnit`, `taxonName`, `traitName`, `specimenID`, `measurementID`). -->
+
+The mapping process is done by the function `mapping()` which renames any data table into the columns expected by the template. Plain output of function `as.traitdata()` will be automatically handled correctly. 
+
+```{r}
+head(mapping(out2), 5)
+```
+
+Additional columns beyond the core columns are not mapped automatically. For these, your input is required. After a first run of function mapping() to fix the core columns, run it again to provide the user-defined columns until no warning message remains: 
+
+```{r}
+out1mapped <- mapping(out1)
+out1mapped <- mapping(out1mapped, replace = c(bz = "locationID", locationID = "ExploratoriesPlotID"))
+```
+
+Using mapping to produce compliant data is optional. You also may provide a table that uses compliant column names in the first place. However, mapping checks that no column names are misspelled and fields are filled with valid entries. 
+
+For further steps of processing, a  correct use of column names is obligatory!
+
+## step 4 standardise taxon names and trait values
+
+Two aspects of trait data need thorough standardisation: the names of species and higher taxa need to be mapped to globally accepted definitions and the names of traits should be referenced to unambiguous definitions and, where possible, translated to standard units and accepted factor levels. 
+
+### taxon name standardisation
+
+For taxon name standardisation, the function `standardize.taxonomy()` makes use of fuzzy matching algorithms provided by the package 'taxize' to match the entries of column `taxonName_original` against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column `taxonName`. Additional columns comprise the kingdom (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
+
+Note that for this to work, `taxonName_original` must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright). 
+
+```{r}
+out1std <- standardize(out1mapped)
+
+head(out1std)
+
+
+out2std <- standardize.taxonomy(mapping(out2))
+head(out2std)
+
+
+out6std <- standardize.taxonomy(mapping(out6))
+head(out6std)
+```
+
+
+### trait name and value standardisation
+
+Due to the heterogeneity of approaches and research questions related to trait-based research, a universal trait standard does not exist. Therefore it is difficult to assign globally unique identifiers that provide a reference to an unambiguous definition. Some databases offer a list of traits in some way or another, e.g. via an API interface, but few offer a stable URI reference. For most cases, you would need to refer to an own lookup table or metadata using dataset specific identifiers. 
+
+To transfer the user provided traits and trait values into standardised values, the function `standardize.traits()` merges the data table with this reference table to produce values of a compliant format. 
+
+#### refer to an existing trait thesaurus
+
+A couple of trait ontologies do exist, e.g. the TOP Thesaurus of plant traits (used by TRY) or Gramene.org offer definitions of plant traits via an API. For soil invertebrates, the T-SITA thesaurus offers a set of traits relevant for this organism group. To date, no script for a systematic access of these ontologies can be provided here. Thus, the key information must be provided manually as an own data object in R. 
+
+This procedure is only recommended if *all* of the traits reported in your dataset refer to a definition  in an online thesaurus. 
+
+```{r}
+
+out4 <- as.traittable(inputdata4,
+                      traits = c("body_length", "antenna_length", "metafemur_length"),
+                      taxa = "name_correct", 
+                      units = "mm"
+                      )
+head(subset(out4), 15)
+
+out4mapped <- mapping(out4)
+out4std <- standardize.taxonomy(out4mapped)
+
+
+#edit to use thesaurus
+trait.thesaurus <- list(body_length = list(traitID = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", unit = "mm"), 
+                        antenna_length = list(traitID = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length", unit = "mm"), 
+                        metafemur_length = list(traitID = NA, unit = "mm") )
+
+out4std <- standardize.traits(out4std, trait.thesaurus)
+
+```
+
+We highly encourage the implementation of APIs for these online glossaries, which would allow a looking up existing trait definitions programmatically in the future. 
+
+#### refer to an own trait list
+
+For an interim solution, until comprehensive trait ontologies are compiled, your dataset should therefore be referenced to a publicly available dataset or file that specifies the trait in detail. Ideally it is stored as an asset along with your trait dataset. This can be a csv or txt file published on a open access repository (figshare, researchgate or github, to name but a few), or a website providing direct links to the trait definition (URI). 
+
+The reference file should contain at least the following columns: 
+
+- `traitName` should be a short descriptive name. No spaces should be used. Rather use a scheme with underscore or capital letters to highlight multiple words (e.g. 'body_length' or 'bodyLenght').  
+- `traitID` should specify an alphanumeric ID for the specific use in your dataset or - better - a URI that reliably links to the definition of the trait measurement on an online repository. This could be achieved by providing a online version of your traitlist (TODO: provide instructions in wiki how to achieve this). We highly encourage to submit your own trait definitions to existing ontology servers to facilitate this process of trait standardisation (e.g. with GFBio). 
+- `traitDescription`: a detailled and unambiguous, human readable definition.
+- `valueType` to specify the expected kind of entries. Set it to 'numeric' for quantitative traits, 'integer' for counts or ordinal traits, 'character' for trait values that are provided as free text, 'factor' for traits that take one of few non-ordinal levels, 'logical' for binary/boolean entries (yes/no).  
+- For *numeric traits*, the field `measurementUnit` should provide the expected unit for the trait. The R script will then try to convert trait values into this unit. 
+- for *categorical traits* of kind 'factor' or 'integer', the field `factorLevels` should contain a list the valid factorial traits separated by semicolon. In case of ordinal traits, the order must be precisely corresponding to the number of possible integer values. 
+- `Comments` may contain examples and clarifications
+
+Further Columns can be added to specify the trait definition in relation to other current or outdated definitions or to set a version number
+
+- `Refines` would link the trait definition to an existing ontology on the web. Ideally this contains a URI.  
+- `Reference` would contain a original literature reference where the trait measurement has been described. 
+- `Version`
+- `DateIssued`
+- `DateModified`
+- `Replaces`
+
+The trait thesaurus can be created from a csv or txt-file using the function `thesaurus()`. The parameter `replace` can be used for fixing column names to the expected names outlined above (see function `rename()` of the reshape package). 
+
+```{r}
+traits1 <- thesaurus(read.csv("../data/traitlist_arthropods.csv"), replace = c(measurementType = "traitName", measurementTypeDescription = "traitDescription", measurementTypeID = "traitID", measurementValueType = "valueType") )
+
+head(traits1)
+
+```
+
+Alternatively, the thesaurus can be created manually by providing named vectors for the function `thesaurus()` which will be used to create a valid data frame. This is especially useful if your data comprise only a small number of traits.
+
+
+```{r}
+traits2 <- thesaurus(
+  traitID = paste0("mothtrait", 1:4),
+  traitName = c("flightPeriod", "specialisation", "GenerationsPerYear", "wingspanMedian"),
+  traitDescription = c("length of flight period in months", "degree of specialisation: 1) wide generalist, 2) moderate generalist, 3) moderate specialist, 4) strict specialist", "number of reproductive cycles per year on average", "stretched wingspan in mm"), 
+  valueType = c("numeric", "integer", "integer", "numeric"), 
+  measurementUnit = c("months","","","cm") 
+  )
+
+traits2
+
+
+traits6 <- thesaurus(
+  traitID = paste0("A", 1:9),
+  traitName = c("Body_Size", "Dispersal_ability", "Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use_short"),
+  valueType = c("numeric", "numeric", "factor", "factor", "factor", "factor", "factor", "factor", "factor"), 
+  factorLevels = c("", "", "predator; detritivore; fungivore; herbivore; omnivore", "chewing; extraintestinal; sucking", "monophagous; oligophagous; polyphagous", "", "", "", "" ),
+  measurementUnit = c("cm","unitless","","","","","","","") 
+  )
+
+traits6
+
+```
+
+As with a data.frame, if providing a parameter of shorter length as the others, the vector will be recycled. In case of homogeneous quantitative traits, this allows for instance to enter a universal unit that applies to all traits likewise. 
+
+#### providing the thesaurus to standardise trait data
+
+The function `standardize.traits()` now finally has all it needs to complete its job. 
+
+```{r}
+
+out2taxtrt <- standardize.traits(out2std, traits2, map = c(Wingspan.med = "wingspanMedian", Fl.period = "flightPeriod", Gen.per.year = "GenerationsPerYear", Specialisation = "specialisation"))
+
+head(subset(out2taxtrt, traitName == "wingspanMedian" ))
+
+write.csv(out2std, file = "traits_.csv")
+
+```
+
+What does the function do in terms of standardisation. 
+
+- **Unit conversion**: on all numerical traits, unit conversion to the target unit will be attempted. Unit conversion can only be successfully performed if both columns `measurementUnit_original` and `measurementUnit` are provided with valid unit names for the numeric trait.
+- **factor level checking** :
+- **logical value harmonization** : 
+
+In case the traitnames of the thesaurus and the trait names of the original data are not the same, a named mapping vector can be provided to translate the user provided traits to the traits in the thesaurus. 
+
+Note that multiple traits can be mapped to the same output trait, e.g. if the original trait names refer to left and right wing but now are to be pooled into the same trait. For use on the authors side, the original naming will be preserved in the column `traitName_original`. 
+
+```{r}
+
+out4std <- standardize.traits(out4std, traits4)
+head(out4std)
+
+write.csv(out4std, file = "traits_.csv", map = )
+
+```
+
+#### two-in-one standardization
+
+To make things even simpler, the two functions for standardization are wrapped into one named `standardized()`. A single call will do, taking all the optional parameters described above. 
+
+```{r}
+out6taxtrt <- standardize(mapping(out6), traits2)
+
+```
+
+
+
+
+## single-line command
+
+The functions described here are applied sequentially. The output of the first step can be piped into the second step, etc. Therefore it is possible to run the functions in an automated fashion, if all necessary parameters for the intermediate steps are provided.  
+
+```{r}
+standardize(read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv"), traits = , taxa = , units = , thesaurus = , map = , replace = , )
+```
+
