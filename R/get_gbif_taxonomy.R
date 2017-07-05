@@ -22,7 +22,9 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
     out <- data.table::rbindlist(out, fill = TRUE) # combine into data.frame
 
   } else {
-
+    
+    if(nchar(gsub(" ","",x)) == 0) x <- NULL
+    
     # spellchecking: resolve names using data source 11 (GBIF Backbone Taxonomy)
     resolved <- taxize::gnr_resolve(x,
                                     preferred_data_sources = c(11),
@@ -30,7 +32,7 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
                                     canonical = TRUE)
 
     # return NA for unsuccessful matches
-    if(is.null(resolved$matched_name2) ) {
+    if(is.null(resolved$matched_name2) || nchar(gsub(" ","",resolved$matched_name2)) == 0 ) {
       out <- data.frame(user_supplied_name = x)
       attributes(out)$warning <- paste("No matching species name found!")
     } else {
@@ -52,17 +54,26 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
         out$user_supplied_name = x
 
       }
-      if(length(unique(temp$species)) > 1) out <- get_gbif_taxonomy(temp$species[which.max(temp$rank)])
+      if(length(unique(temp$species)) > 1) out <- get_gbif_taxonomy(temp$species[which.max(temp$confidence)])
       out$synonym = TRUE
       out$user_supplied_name = x
     } else {  # if given name is an accepted name, return result into 'out'
-      if(any(temp$status == "ACCEPTED")) {
-        temp <- subset(temp, status == "ACCEPTED")
+      if(any(temp$status %in% c("ACCEPTED", "DOUBTFUL") )) {
+        temp <- subset(temp, status %in% c("ACCEPTED", "DOUBTFUL"))
         out <- temp
         # add choice for fuzzy matching which returns warning
-            }
-
-      out <- cbind(user_supplied_name = x, synonym = FALSE,   scientificName = out$species,fullname = out$scientificname, out[,c("rank", "confidence", "kingdom",  "phylum", "class","order", "family", "genus")], taxonomy = "GBIF Backbone Taxonomy",  taxonID = out$usagekey)
+      }
+      
+ 
+      out <- cbind(user_supplied_name = x, 
+                   synonym = FALSE, 
+                   taxonName = out$species, 
+                   scientificName = out$scientificname, 
+                   taxonRank = out$rank,
+                   out[,c("confidence", "kingdom", "phylum", "class","order", "family", "genus")], 
+                   taxonomy = "GBIF Backbone Taxonomy", 
+                   taxonID = paste0("http://www.gbif.org/species/", out$usagekey, "#")
+                   )
 
       if(out$synonym & verbose) warning(paste("Synonym provided! Automatically set ScientificName to accepted species Name!"))
     }
