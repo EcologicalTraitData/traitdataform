@@ -1,4 +1,3 @@
-
 #' Title
 #'
 #' @param input
@@ -15,42 +14,34 @@
 #'
 #' inputdata <- read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv")
 #'
-#' map1 <- list(
-#' traits = list(
-#'   pronotum_length = list(traitName_user = c("pronl1", "pronl2"), measurementUnit_user = "mm"),
-#'   pronotum_width = list(traitName_user = c("pronw1", "pronw2"), measurementUnit_user = "mm"),     ovipositor_length = list(traitName_user = c("ov1", "ov2"), measurementUnit_user = "mm"),
-#'   hind_femur_length = list(traitName_user = c("femurleft2", "femurright2", "femurleft1", "femurright1"), measurementUnit_user = "mm"),
-#'   front_wing_length = list(traitName_user = c("forewingleft1", "forewingright1", "forewingleft2", "forewingright2"), measurementUnit_user = "mm")
-#' ),
-#' columns = list(
-#'   scientificName_user = "spec",
-#'   specimenID = "nr",
-#'   ExploratoriesPlotID = "EP",
-#'   locationID = "bz",
-#'   sex = "sex",
-#'   age = "age",
-#'   measurementDeterminedBy = "name"
-#' ), # possible to provide function instead of string?
-#' template = template.base,
-#' taxonomy = "gbif",
-#' traitlist = BExIS.invertebrates,
-#' matrixdata = TRUE
-#' )
-#'
-#' test <- as.traitdata(inputdata, mapping = map1)
+#' map1 <- traitmap(
+#'   pronotum_length = list(measurementType_original = c("pronl1", "pronl2"), measurementUnit_original = "mm", basisOfRecord = "PreservedSpecimen", basisOfRecordDescription = "dry sample"),
+#'   pronotum_width = list(measurementType_original = c("pronw1", "pronw2"), measurementUnit_original = "mm", basisOfRecord = "PreservedSpecimen", basisOfRecordDescription = "dry sample"),     
+#'   ovipositor_length = list(measurementType_original = c("ov1", "ov2"), measurementUnit_original = "mm", basisOfRecord = "PreservedSpecimen", basisOfRecordDescription = "dry sample"),
+#'   hind_femur_length = list(measurementType_original = c("femurleft2", "femurright2", "femurleft1", "femurright1"),  measurementUnit_original = "mm", basisOfRecord = "PreservedSpecimen", basisOfRecordDescription = "dry sample"),
+#'   front_wing_length = list(measurementType_original = c("forewingleft1", "forewingright1", "forewingleft2", "forewingright2"), measurementUnit_original = "mm", basisOfRecord = "PreservedSpecimen", basisOfRecordDescription = "dry sample")
+#'   )
+#'    
+#' test <- as.traitdata(input = rename(inputdata, ### ),
+#'    traits = traitlist(traits = map2, thesaurus = BExIS.invertebrates$thesaurus)
+#'    )
 
 
 as.traitdata <- function(
   input,  # takes data.frame object
-  mapping = map1, # mapping object provides taxonomy, column and trait name matching
-  template = template.base,
+  traits = NULL, # mapping object provides taxonomy, column and trait name matching
   metadata = c(authorName = NULL,  datasetVersion = NULL, maintainerEmail = NULL, datasetName = NULL, bibliographicCitation = NULL, identifier = NULL, rights = NULL, templateVersion = NULL, checkStatus = NULL), # a valid metadata object, will be created by a metadata function
   verbose = TRUE
 ) {
-
+  # check if metadata use compatible fields
+  
   out <- list(
     metadata = as.list(metadata),
-    traitdata = NA
+    traitdata = NA,
+    specieslist = NA,
+    traitlist = NA,
+    occurence = NA,
+    measurementOrFact = NA
   )
 
   class(out) <- c("list", "traitdata")
@@ -59,38 +50,42 @@ as.traitdata <- function(
 
   # data information
 
+  
+  # check if input uses expected column names (core traitdata standard)
+  
+  # check if traitlist is compatible with input
+  
 
   ## which columns of input are mapped either as column or trait value?
 
-  cols_in <-  names(inputdata)
-  traitNames_user <- unlist(sapply(mapping$traitmap, function(x) return(x[["traitName_user"]]) ) )
-
-  cols_in[cols_in %in% names(mapping$traitlist$thesaurus)]
-  traitNames_mapped <- names(mapping$traits)
+  cols_input <-  names(inputdata)
+  
+  if(any(cols_input %in% traits$measurementType_original)) type_of_dataset <- "matrix"
+  
+  traitNames_mapped <- cols_input[cols_input %in% traits$measurementType_original]
 
   ####### TODO ####
   # - mode for matching multiples to accepted trait names
   # - think about non-matrix data
   # - function to get trait matching table for this particular traitset (analogue to species taxonomy)
 
-  traitlookup <- traitlist(traitmap = mapping$traitmap, thesaurus = mapping$traitlist, appliestoall = mapping$appliestoall)
-
   #sapply(sapply(mapping$traits, function(x) (x[["traitName_user"]]) ), function(i) rep())
   # ToDo: Automatically add unmapped expected columns to datacolumns/to mapping
+  
+  # toDo: check entry columns for matching to expected names from template
+  # datacolumns <- sapply(mapping$columnmap, function(x) return(x) )
 
-  datacolumns <- sapply(mapping$columnmap, function(x) return(x) )
-
-  ismapped <- which(cols_in %in% c(traitNames_user, datacolumns ) )
-  unmapped <- which(!cols_in %in% c(traitNames_user, datacolumns ) )
+  #ismapped <- which(cols_input %in% c(traits$measurementType_original, datacolumns ) )
+  #unmapped <- which(!cols_input %in% c(traitNames_user, datacolumns ) )
 
   # warn if provided columns are not mapped
-  if(verbose & length(unmapped) > 0) warning(paste("The following data columns are not mapped to standard column names and will be omitted from the dataset:", toString(cols_in[unmapped]), "! Please add columns to mapping if they should not be omitted!") )
+  #if(verbose & length(unmapped) > 0) warning(paste("The following data columns are not mapped to standard column names and will be omitted from the dataset:", toString(cols_in[unmapped]), "! Please add columns to mapping if they should not be omitted!") )
 
   # warn if mapped columns are unexpected
-  cols_expected <- template$columns
+  #cols_expected <- template$columns
 
-  unexpected <- which(!names(datacolumns) %in% cols_expected)
-  if(verbose & length(unexpected) > 0 ) warning(paste("The following data columns are mapped to unexpected column names!", toString(names(datacolumns)[unexpected])," Unexpected columns will be kept for your personal use. Please double-check for misspelled column names!"))
+  #unexpected <- which(!names(datacolumns) %in% cols_expected)
+  #if(verbose & length(unexpected) > 0 ) warning(paste("The following data columns are mapped to unexpected column names!", toString(names(datacolumns)[unexpected])," Unexpected columns will be kept for your personal use. Please double-check for misspelled column names!"))
 
 
   # check for mandatory input columns (_user provided columns, this check differs for matrix data and table data)
@@ -102,7 +97,7 @@ as.traitdata <- function(
 
   # check for species names and provide accepted species name table (via taxize?)
 
-  if("scientificName_user" %in% names(datacolumns)) {
+  if("scientificName_original" %in% names(datacolumns)) {
 
     if(!"taxonomy" %in% class(mapping$taxonomy)  ) {
       mapping$taxonomy <- switch(mapping$taxonomy,
@@ -209,10 +204,6 @@ as.traitdata <- function(
   return(out)
 }
 
-test <- as.traitdata(inputdata, mapping = map1)
-
-
-
 
 write.traitdata <- function(x, file, ... ) {
 
@@ -228,8 +219,6 @@ write.traitdata <- function(x, file, ... ) {
   write.csv(data.table::rbindlist(printobject, fill = TRUE), file = file, row.names = FALSE, ...)
   # write metadata objects
 }
-
-write.traitdata(test, file = "test.csv")
 
 #as.matrix.traitdata <- function( ) # function to compile trait data tables into matrix format. This requires many user options, e.g. adding filters and check for outliers, averaging method etc. a conservative scenario will be provided as default.
 
