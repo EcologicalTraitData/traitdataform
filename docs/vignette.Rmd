@@ -1,0 +1,78 @@
+---
+title: "vignette"
+author: "Florian D. Schneider"
+date: "26 Juni 2017"
+output: html_document
+---
+
+
+Step-by step instructions for transferring own data  to a valid traitdata-object.
+
+
+# preparations
+
+load your own data into R, preferrably in a matrix, table or longtable format. 
+
+(See notes on different data formats of trait data.)
+
+You may rename the column names of the original file to match the described column names below, but this howto also describes a mapping of the column names along the process of data handling. The mapping is not necessary if you use the expected colum names from the start. 
+
+# 1. provide a list of traits to identify format of own data
+
+Depending on the original format of your data, the process that follows may vary a little. How your data are interpreted is mainly defined by providing a list of terms that are to be interpreted as trait names.
+
+```
+traits <- traitmap("Petal.Width", "Petal.Length", "Sepal.Width", "Sepal.Length")
+```
+
+in case those user-provided trait names are not  compliant with the standard trait list (see below), you should provide mapping information here by specifying the target name of the trait names that your provide in the original data: 
+
+```
+traits <- traitmap(petal_width = "Petal.Width", petal_length = "Petal.Length", sepal_width = "Sepal.Width", sepal_length = "Sepal.Length")
+```
+
+Different special cases are described below that might apply for your data, e.g. if you stored additional information in separate columns of your data matrix, or if you want to add information that is not stored in your original data table. 
+
+## species-trait matrix data
+
+Matrix data are defined as follows: you have a single account of a trait value for each species (in rows) for a couple of different traits (in columns). 
+
+No replicates of species are existing (this would be a occurence table, see below). This is the most likely format for literature data, where average values or facts for entire species have been collated into a single lookup table. 
+
+Additional information on the value may be reported in further colums (e.g. the unit in which a value is reported or the literature source for this measurement or fact). 
+
+## table data
+
+In this case, your data report several measurements on a single specimen (per row) in several trait columns. Repeated
+
+There might be original data reporting repeated measures of the same trait taken from the same specimen, e.g. several measures of leaf traits within a single plant or repeated measures of a wing length for increasing precision. In those situations the individual measurements should be kept for allowing a more flexible downstream data use. In terms of data structure that means we need to link those individual measurements via a unique identifier for the specimen. If the raw data provide such an identifier, it must be renamed into `occurenceID` . 
+
+
+## longtable data
+
+
+# 2. load a trait thesaurus or list of accepted trait names
+
+preferrably from a published ontology or glossary, that is globally available on the internet. 
+This list must provide the following collumns:
+- trait name
+- trait id (globally valid identifier, e.g. an URI)
+- trait description
+- expected unit
+- value Type
+
+in case of factorial traits, it should also provide
+- valid factor levels 
+
+Ideally, the trait list also links to the original source of the trait definition via the global trait ID, Comments can provide examples. 
+
+(see notes on trait data ontologies and standardisation)
+
+The trait list will be created from a text-file like this: 
+
+```
+traits <- as.traitlist(read.csv("example.csv"), measurementType = trait, measurementTypeDescription = Definition, measurementUnit = unit, measurementTypeID = Identifier, valueType = type_of_variable)
+
+```
+
+# 3. provide Metadata
