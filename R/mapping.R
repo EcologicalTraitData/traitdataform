@@ -4,17 +4,17 @@
 #' @param replace 
 #' @param template 
 #' @param ... 
-#'
-#' @return
+#' 
+#' @usage data(glossary)
 #' @export
 #'
 mapping <- function(x, 
-                    replace = c(taxon = "scientificName_original", occurence = "specimenID", trait = "traitName_original", value = "measurementValue_original", unit = "measurementUnit_original"), 
-                    template = template.base$glossarys,
+                    replace,
+                    template = glossary,
                     ...
 ) {
   
-  if(!"traitdata" %in% class(x)) as.traittable(x, ...)
+  if(!"traitdata" %in% class(x)) as.traitdata(x, ...)
   
   # perform renaming following sequence
   if(length(replace) == length(colnames(x)) && is.null(names(replace))) colnames(x) <- replace
@@ -28,4 +28,3 @@ mapping <- function(x,
   
   return(x)
 }
-
