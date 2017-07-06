@@ -60,7 +60,7 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
     } else {  # if given name is an accepted name, return result into 'out'
       if(any(temp$status %in% c("ACCEPTED", "DOUBTFUL") )) {
         temp <- subset(temp, status %in% c("ACCEPTED", "DOUBTFUL"))
-        out <- temp
+        out <- temp[which.max(temp$confidence),]
         # add choice for fuzzy matching which returns warning
       }
       
@@ -68,14 +68,14 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
       out <- cbind(user_supplied_name = x, 
                    synonym = FALSE, 
                    taxonName = out$species, 
-                   scientificName = out$scientificname, 
+                   scientificNameStd = out$scientificname, 
                    taxonRank = out$rank,
                    out[,c("confidence", "kingdom", "phylum", "class","order", "family", "genus")], 
                    taxonomy = "GBIF Backbone Taxonomy", 
                    taxonID = paste0("http://www.gbif.org/species/", out$usagekey, "#")
                    )
 
-      if(out$synonym & verbose) warning(paste("Synonym provided! Automatically set ScientificName to accepted species Name!"))
+      if(out$synonym[1] & verbose) warning(paste("Synonym provided! Automatically set ScientificName to accepted species Name!"))
     }
   }
 
