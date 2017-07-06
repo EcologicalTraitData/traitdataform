@@ -1,12 +1,17 @@
-# transforms csv glossary of terms into the machine readable traitdata-template in xml format
-
-library(XML)
-
-glossary <- read.csv("data/template_glossary.csv")
-
+#' Transforms csv glossary of terms into the machine readable traitdata-template in xml format
+#'
+#' @param df 
+#' @param name 
+#'
+#' @return
+#' @export
+#' @import XML
+#'
+#' @examples
+#' 
 convertToXML <- function(df,name)
 {
-  xml <- xmlTree("Test")
+  xml <- XML::xmlTree("Test")
   xml$addNode(name, close=FALSE)
   for (i in 1:nrow(df)) {
     xml$addNode("value", close=FALSE)
@@ -20,4 +25,4 @@ convertToXML <- function(df,name)
 }
 
 template = convertToXML(glossary,"BExIS_template")
-saveXML(template$value(), file = "data/template.xml")
+XML::saveXML(template$value(), file = "data/template.xml")
