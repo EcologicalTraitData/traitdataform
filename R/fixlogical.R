@@ -1,10 +1,10 @@
 #' Standardise logical variables
 #'
-#' @param x
-#' @param output
+#' @param x a vector.
+#' @param output a switch to set the desired output format. Defaults to "logical", but can be "character", "binary" or "factor".  
 #' @param categories
 #'
-#' @return
+#' @return A vector of harmonized logical values.
 #' @export
 #'
 #' @examples
