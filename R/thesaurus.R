@@ -1,3 +1,24 @@
+#' Title
+#'
+#' @param x 
+#' @param replace 
+#' @param appliestoall 
+#' @param ... 
+#'
+#' @return std
+#' @export
+#'
+#' @examples
+#' 
+#' traits6 <- thesaurus(
+#' traitID = paste0("A", 1:9),
+#' traitName = c("Body_Size", "Dispersal_ability", "Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use_short"),
+#' valueType = c("numeric", "numeric", "factor", "factor", "factor", "factor", "factor", "factor", "factor"), 
+#' factorLevels = c("", "", "predator; detritivore; fungivore; herbivore; omnivore", "chewing; extraintestinal; sucking", "monophagous; oligophagous; polyphagous", "", "", "", "" ),
+#' measurementUnit = c("cm","unitless","","","","","","","") 
+#' )
+#' 
+
 thesaurus <- function(x = NULL,
                       replace = NULL,
                       appliestoall = NULL,
