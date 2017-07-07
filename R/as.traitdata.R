@@ -3,7 +3,7 @@
 #' @param x 
 #' @param traits 
 #' @param taxon 
-#' @param individual 
+#' @param individuals
 #' @param occurence 
 #' @param measurement 
 #' @param keep 
@@ -19,7 +19,7 @@ as.traitdata <- function(x,
                           traits, # name of column or vector of trait names
                           taxa, # name of column or vector of species/taxon names
                           individuals = NULL,  # deprecated/implemented for ambiguity
-                          occurences = individual,
+                          occurences = individuals,
                           datasetID = NULL,
                           measurements = NULL,
                           units = NULL,
@@ -67,12 +67,19 @@ as.traitdata <- function(x,
     )
   }
   
+  names(out)[names(out) == "value"] <- "traitValue"
+  
   if(!is.null(units)) {
-    if(length(units) == 1) out$traitUnit <- units
-    if(length(units) == length(traits)) out$traitUnit <- units[match(out$traitUnit, traits)]
-    if(length(units) != length(traits) & !is.null(names(units)) ) out$traitUnit <- as.factor(match(out$trait, names(units))) ; levels(out$traitUnit) <- units
+    out$traitUnit <- NA
+    if(length(units) == 1) out$traitUnit <- as.factor(units)
+    if(length(units) == length(traits)) out$traitUnit <- as.factor(units[match(out$traitName, traits)])
+    if(length(units) != length(traits) & !is.null(names(units)) ) {
+      out$traitUnit <- as.factor(match(out$traitName, names(units))) 
+      levels(out$traitUnit) <- units
+    }
   } 
    
+  
   # perform renaming if keep contains named vector
   if(!is.null(names(keep))) {
     named <- keep[names(keep) != ""]
