@@ -26,12 +26,12 @@ thesaurus <- function(x = NULL,
   
   
   if(class(x) == "data.frame") {
-    if(!c("traitName", "traitID", "traitDescription", "measurementType") %in% names(x)) {
+    if(!c("traitName", "traitID", "traitDescription", "valueType") %in% names(x)) {
       message("Dataset does not match expected column names.")
         if(!is.null(replace)) {
           message("I'm using parameter 'replace' for renaming!")
           x <- reshape::rename(x, replace)
-          if(!c("traitName", "traitID", "traitDescription", "measurementType") %in% names(x)) stop("Parameter 'replace' must at least provide mapping for 'traitName', 'traitID', 'traitDescription', 'measurementType'")
+          if(!c("traitName", "traitID", "traitDescription", "valueType") %in% names(x)) stop("Parameter 'replace' must at least provide mapping for 'traitName', 'traitID', 'traitDescription', 'valueType'")
         } else { stop("Provide mapping of column names in parameter 'replace'!")}
     }
     out <- x
