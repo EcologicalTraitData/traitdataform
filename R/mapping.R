@@ -22,9 +22,9 @@ mapping <- function(x,
   # perform renaming following named vector
   if(!is.null(names(replace))) {x <- reshape::rename(x, replace)}
   
-  checkagainst <- names(template)
+  checkagainst <- template$columnName
   
-  if(!all(replace %in% checkagainst)) warning("not all column names are corresponding to names expected by the template! Not corresponding: ... .")
+  if(!all(names(x) %in% checkagainst)) warning("not all column names are corresponding to names expected by the template! Not corresponding: ... .")
   
   return(x)
 }
