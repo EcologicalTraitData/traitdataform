@@ -61,7 +61,7 @@ out1 <- as.traitdata(inputdata1,
               taxa = "spec",
               occurences = "nr"
               )
-head(out1, 25)
+
 subset(out1, occurenceID == "772" ) # show different trait measurements for same occurence/individual
 
 ```
@@ -122,8 +122,8 @@ out3 <- as.traitdata(inputdata3,
                       taxa = "Name"
                       )
 
-head(subset(out3, trait == "feeding_niche"))
-head(subset(out3, trait == "hibernation"))
+head(subset(out3, traitName == "feeding_niche"))
+head(subset(out3, traitName == "hibernation"))
 
 ```
 
@@ -160,7 +160,7 @@ out1 <- as.traitdata(inputdata1,
               keep = c("bz", locationID = "EP", sex = "sex", age =  "age", measurementDeterminedBy = "name")
               )
 
-head(out1, 25)
+head(out1)
 
 ```
 
@@ -209,6 +209,7 @@ Run `mapping()` on your data table with a named vector as the second parameter t
 
 ```{r}
 out1mapped <- mapping(out1, replace = c(bz = "locationID", locationID = "ExploratoriesPlotID"))
+head(out1mapped)
 ```
 
 Using mapping to produce compliant data is optional. You also may provide a table that uses compliant column names in the first place. However, mapping checks that no column names are misspelled and fields are filled with valid entries. 
@@ -223,16 +224,19 @@ Two aspects of trait data need thorough standardisation: the names of species an
 
 ### taxon name standardisation
 
-For taxon name standardisation, the function `standardize.taxonomy()` makes use of fuzzy matching algorithms provided by the package 'taxize' to match the entries of column `scientificName` against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column `scientificNameStd`. Additional columns comprise the kingdom (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
+For taxon name standardisation, the function `standardize.taxonomy()` makes use of fuzzy matching algorithms provided by the package 'taxize' to match the entries of column `scientificName` against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column `scientificNameStd`. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
+
+If further layers of taxonomic information are desired as an output, the function takes the parameter `return`, which by default contains `c("taxonID", "scientificNameStd", "order", "taxonRank")`. Other specifications can be added here. 
 
 Note that for this to work, `scientificName` must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright). 
 
-```{r}
-out1std <- standardize(out1, traits1)
+Note also, that taxon name mapping requires an internet connection and might take some time, depending on the length of your species list. 
 
+```{r, message=FALSE}
+out1std <- standardize.taxonomy(out1)
 head(out1std)
 
-out2std <- standardize.taxonomy(mapping(out2))
+out2std <- standardize.taxonomy(out2, return = c("taxonID", "scientificNameStd", "rank", "order", "genus", "taxonRank"))
 head(out2std)
 
 out6std <- standardize.taxonomy(mapping(out6))
@@ -259,18 +263,19 @@ out4 <- as.traitdata(inputdata4,
                       taxa = "name_correct", 
                       units = "mm"
                       )
-head(subset(out4), 15)
+head(subset(out4))
 
-out4mapped <- mapping(out4)
-out4std <- standardize.taxonomy(out4mapped)
+out4tax <- standardize.taxonomy(out4)
 
 
 #edit to use thesaurus
-trait.thesaurus <- list(body_length = list(traitID = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", unit = "mm"), 
-                        antenna_length = list(traitID = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length", unit = "mm"), 
-                        metafemur_length = list(traitID = NA, unit = "mm") )
+traits4 <- thesaurus(
+                      traitName = c("body_length", "antenna_length", "metafemur_length"),
+                      traitID = c("http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length", ""), 
+                      valueType = c("numeric"),
+                      traitUnit = c("mm", "mm", "mm") )
 
-out4std <- standardize.traits(out4std, trait.thesaurus)
+out4tra <- standardize.traits(out4, traits4)
 
 ```
 
@@ -286,7 +291,7 @@ The reference file should contain at least the following columns:
 - `traitID` should specify an alphanumeric ID for the specific use in your dataset or - better - a URI that reliably links to the definition of the trait measurement on an online repository. This could be achieved by providing a online version of your traitlist (TODO: provide instructions in wiki how to achieve this). We highly encourage to submit your own trait definitions to existing ontology servers to facilitate this process of trait standardisation (e.g. with GFBio). 
 - `traitDescription`: a detailled and unambiguous, human readable definition.
 - `valueType` to specify the expected kind of entries. Set it to 'numeric' for quantitative traits, 'integer' for counts or ordinal traits, 'character' for trait values that are provided as free text, 'factor' for traits that take one of few non-ordinal levels, 'logical' for binary/boolean entries (yes/no).  
-- For *numeric traits*, the field `measurementUnit` should provide the expected unit for the trait. The R script will then try to convert trait values into this unit. 
+- For *numeric traits*, the field `traitUnit` should provide the expected unit for the trait. The R script will then try to convert trait values into this unit. 
 - for *categorical traits* of kind 'factor' or 'integer', the field `factorLevels` should contain a list the valid factorial traits separated by semicolon. In case of ordinal traits, the order must be precisely corresponding to the number of possible integer values. 
 - `Comments` may contain examples and clarifications
 
@@ -302,7 +307,7 @@ Further Columns can be added to specify the trait definition in relation to othe
 The trait thesaurus can be created from a csv or txt-file using the function `thesaurus()`. The parameter `replace` can be used for fixing column names to the expected names outlined above (see function `rename()` of the reshape package). 
 
 ```{r}
-traits1 <- thesaurus(read.csv("../data/traitlist_arthropods.csv"), replace = c(measurementType = "traitName", measurementTypeDescription = "traitDescription", measurementTypeID = "traitID", measurementValueType = "valueType") )
+traits1 <- thesaurus(read.csv("../docs/traitlist_arthropods.csv"), replace = c(measurementType = "traitName", measurementTypeDescription = "traitDescription", measurementTypeID = "traitID", measurementValueType = "valueType") )
 
 head(traits1)
 
@@ -317,7 +322,7 @@ traits2 <- thesaurus(
   traitName = c("flightPeriod", "specialisation", "GenerationsPerYear", "wingspanMedian"),
   traitDescription = c("length of flight period in months", "degree of specialisation: 1) wide generalist, 2) moderate generalist, 3) moderate specialist, 4) strict specialist", "number of reproductive cycles per year on average", "stretched wingspan in mm"), 
   valueType = c("numeric", "integer", "integer", "numeric"), 
-  measurementUnit = c("months","","","cm") 
+  traitUnit = c("months","","","cm") 
   )
 
 traits2
@@ -328,7 +333,7 @@ traits6 <- thesaurus(
   traitName = c("Body_Size", "Dispersal_ability", "Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use_short"),
   valueType = c("numeric", "numeric", "factor", "factor", "factor", "factor", "factor", "factor", "factor"), 
   factorLevels = c("", "", "predator; detritivore; fungivore; herbivore; omnivore", "chewing; extraintestinal; sucking", "monophagous; oligophagous; polyphagous", "", "", "", "" ),
-  measurementUnit = c("cm","unitless","","","","","","","") 
+  traitUnit = c("cm","unitless","","","","","","","") 
   )
 
 traits6
@@ -345,7 +350,7 @@ The function `standardize.traits()` now finally has all it needs to complete its
 
 out2taxtrt <- standardize.traits(out2std, traits2, map = c(Wingspan.med = "wingspanMedian", Fl.period = "flightPeriod", Gen.per.year = "GenerationsPerYear", Specialisation = "specialisation"))
 
-head(subset(out2taxtrt, traitName == "wingspanMedian" ))
+head(subset(out2taxtrt, traitNameStd == "wingspanMedian" ))
 
 write.csv(out2std, file = "traits_.csv")
 
@@ -353,9 +358,9 @@ write.csv(out2std, file = "traits_.csv")
 
 What does the function do in terms of standardisation. 
 
-- **Unit conversion**: on all numerical traits, unit conversion to the target unit will be attempted. Unit conversion can only be successfully performed if both columns `measurementUnit_original` and `measurementUnit` are provided with valid unit names for the numeric trait.
-- **factor level checking** :
-- **logical value harmonization** : 
+- **Unit conversion**: on all numerical traits, unit conversion to the target unit will be attempted. Unit conversion can only be successfully performed if both columns `traitUnit` and `traitUnitStd` are provided with valid unit names for the numeric trait.
+- **factor level checking** : if a controlled vocabulary is provided in the trait thesaurus, the function checks whether the provided factor levels are valid and asks for a mapping vector otherwise. 
+- **logical value harmonization** : for logical traits, the function harmonizes the standardised output. By default it produces a vector of TRUE and FALSE entries. Missing values return NA. The parameters `output` and `categories` can be provided to function `standardize()`. See `?fixlogical` for further detail. 
 
 In case the traitnames of the thesaurus and the trait names of the original data are not the same, a named mapping vector can be provided to translate the user provided traits to the traits in the thesaurus. 
 
@@ -363,19 +368,19 @@ Note that multiple traits can be mapped to the same output trait, e.g. if the or
 
 ```{r, meassage = FALSE}
 
-out4std <- standardize.traits(out4std, traits4)
-head(out4std)
+out4taxtra <- standardize.traits(out4tax, traits4)
+head(out4taxtra)
 
-write.csv(out4std, file = "traits_standardized.csv", map = )
+write.csv(out4taxtra, file = "traits_standardized.csv", map = )
 
 ```
 
 #### two-in-one standardization
 
-To make things even simpler, the two functions for standardization are wrapped into one named `standardized()`. A single call will do, taking all the optional parameters described above. 
+To make things even simpler, the two functions for standardization are wrapped into one named `standardize()`. A single call will do, taking all the optional parameters described above. 
 
 ```{r, meassage = FALSE}
-out6taxtra <- standardize.traits(out6tax, traits6)
+out6taxtra <- standardize(out6, traits6)
 
 ```
 
@@ -387,6 +392,13 @@ out6taxtra <- standardize.traits(out6tax, traits6)
 The functions described here are applied sequentially. The output of the first step can be piped into the second step, etc. Therefore it is possible to run the functions in an automated fashion, if all necessary parameters for the intermediate steps are provided.  
 
 ```{r, meassage = FALSE}
-standardize(read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv"), traits = , taxa = , units = , thesaurus = , map = , replace = , )
+standardize(read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv"), 
+            traits = , 
+            taxa = , 
+            units = , 
+            thesaurus = , 
+            map = , 
+            replace = , 
+            )
 ```
 
