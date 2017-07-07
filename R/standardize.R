@@ -17,7 +17,7 @@ standardize.taxonomy <- function(x,
                                  infraspecies = FALSE, 
                                  fuzzy = FALSE, 
                                  verbose = TRUE, 
-                                 return = c("taxonID", "scientificNameStd", "kingdom", "taxonRank"), 
+                                 return = c("taxonID", "scientificNameStd", "order", "taxonRank"), 
                                  ...) {
 
   if(!"traitdata" %in% class(x)) mapping(x, ...)
@@ -27,7 +27,10 @@ standardize.taxonomy <- function(x,
   out <- merge(x, temp[, c(return, "user_supplied_name")], by.x = "scientificName", by.y = "user_supplied_name")
   
   #TODO: produce warning for unmatched names!
+  # sort columns according to glossary of terms
+  temp <- temp[, order(match(names(temp), glossary$columnName) )]
   
+  class(temp) <- c("data.frame", "traitdata")
   return(out)
 }
 
@@ -40,26 +43,34 @@ standardize.taxonomy <- function(x,
 #' @return std
 #' @export
 #'
-standardize.traits <- function(x, map = NULL, thesaurus) {
+standardize.traits <- function(x,
+                               thesaurus, 
+                               traitmap = NULL, 
+                               categories = c("No", "Yes"), 
+                               output = "logical"
+                               ) {
   
   x$traitNameStd <- x$traitName
   
   # perform renaming following sequence
-  if(length(map) == length(levels(x$traitName)) && is.null(names(map))) { 
-    levels(x$traitNameStd) <- map
+  if(length(traitmap) == length(levels(x$traitName)) && is.null(names(traitmap))) { 
+    levels(x$traitNameStd) <- traitmap
   }
   
   # perform renaming following named vector
-  if(!is.null(names(map))) {
-    levels(x$traitNameStd) <- map[match(levels(x$traitName), names(map) )]
+  if(!is.null(names(traitmap))) {
+    levels(x$traitNameStd) <- traitmap[match(levels(x$traitName), names(traitmap) )]
   }
   
  lookup <- data.frame(traitNameStd = thesaurus$traitName, 
                       traitID = thesaurus$traitID,
-                      traitUnit = thesaurus$measurementUnit,
+                      traitUnitStd = as.factor(thesaurus$traitUnit),
                       row.names = NULL
                       )
- temp <- merge(x, lookup, by = "traitNameStd" )
+ temp <- merge(x, lookup, by = "traitNameStd", sort = FALSE )
+
+ ## generate standardized trait vector
+ 
  temp$traitValueStd <- NA
  
  #templist <- split(temp, f = temp$traitNameStd) 
@@ -70,7 +81,7 @@ standardize.traits <- function(x, map = NULL, thesaurus) {
    
    # harmonize logical values
    if(thesaurus[i,]$valueType == "logical") {
-     subset(temp, traitName == traits[i])$traitValueStd <- fixlogical(templist[[i]]$traitValue)
+     subset(temp, traitName == traits[i])$traitValueStd <- fixlogical(templist[[i]]$traitValue, output = output, categories = categories)
    }
    
    ## factor level harmonization
@@ -82,8 +93,8 @@ standardize.traits <- function(x, map = NULL, thesaurus) {
    ## unit conversion:
    if(thesaurus[i,]$valueType == "numeric") {
      
-     unit_original <- droplevels(subset(temp, traitName == traits[i])$measurementUnit_original)
-     unit_target <- droplevels(subset(temp, traitName == traits[i])$measurementUnit)
+     unit_original <- droplevels(subset(temp, traitName == traits[i])$traitUnit)
+     unit_target <- droplevels(subset(temp, traitName == traits[i])$traitUnitStd)
 
      # case 1: homogeneous units for the entire trait
      if(length(levels(unit_original)) == 1 && length(levels(unit_target)) == 1) {
@@ -105,7 +116,11 @@ standardize.traits <- function(x, map = NULL, thesaurus) {
    } ## end of unit conversion
      
  }
- class(out) <- c("data.frame", "traitdata")
+ 
+ # sort columns according to glossary of terms
+ temp <- temp[, order(match(names(temp), glossary$columnName) )]
+ 
+ class(temp) <- c("data.frame", "traitdata")
  return(temp)
 }
 
