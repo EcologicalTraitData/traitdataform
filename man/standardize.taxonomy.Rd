@@ -6,7 +6,7 @@
 \usage{
 standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
   fuzzy = FALSE, verbose = TRUE, return = c("taxonID",
-  "scientificNameStd", "kingdom", "taxonRank"), ...)
+  "scientificNameStd", "order", "taxonRank"), ...)
 }
 \arguments{
 \item{x}{}

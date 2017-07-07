@@ -3,7 +3,6 @@
 export(as.traitdata)
 export(fixlogical)
 export(get_gbif_taxonomy)
-export(glossary)
 export(mapping)
 export(standardize)
 export(standardize.taxonomy)

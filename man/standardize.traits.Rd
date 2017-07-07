@@ -4,14 +4,15 @@
 \alias{standardize.traits}
 \title{Title}
 \usage{
-standardize.traits(x, map = NULL, thesaurus)
+standardize.traits(x, thesaurus, traitmap = NULL, categories = c("No",
+  "Yes"), output = "logical")
 }
 \arguments{
 \item{x}{}
 
-\item{map}{}
-
 \item{thesaurus}{}
+
+\item{map}{}
 }
 \value{
 std
