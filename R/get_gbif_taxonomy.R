@@ -72,7 +72,7 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = FALSE, verbose = 
                    taxonRank = out$rank,
                    out[,c("confidence", "kingdom", "phylum", "class","order", "family", "genus")], 
                    taxonomy = "GBIF Backbone Taxonomy", 
-                   taxonID = paste0("http://www.gbif.org/species/", out$usagekey, "#")
+                   taxonID = paste0("http://www.gbif.org/species/", out$usagekey, "")
                    )
 
       if(out$synonym[1] & verbose) warning(paste("Synonym provided! Automatically set ScientificName to accepted species Name!"))
