@@ -29,9 +29,23 @@ devtools::install_github('fdschneider/traitdataform')
 
 ...
 
+
+## datasets
+
+The traitdataform package links to a couple of public domain datasets, which are used for demo purposes, but can be used for research and production use.  
+
+- `passerines` by 
+- `arthropodtraits` by Gossner, Simons et al. 
+- `heteropteraRaw` & `heteroptera`
+
+The datasets have been published by their authors under [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/) license, which means they can be copied, modified, distributed without asking permission. For additional information and interpretation of the data please refer to the help pages of the data objects (e.g. calling `?passerines` in R) and the original data sources given therein. 
+
+If you want  further datasources published under CC0 or in the public domain being added to this package, feel free to file a pull-request with an updated  `R/data.R`! 
+
 ## cite as
 
 ...
+
 
 ## License
 
