@@ -13,4 +13,5 @@ Imports:
     reshape, 
     taxize
 RoxygenNote: 6.0.0
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
