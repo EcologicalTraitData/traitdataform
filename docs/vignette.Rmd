@@ -236,10 +236,10 @@ Note also, that taxon name mapping requires an internet connection and might tak
 out1std <- standardize.taxonomy(out1)
 head(out1std)
 
-out2std <- standardize.taxonomy(out2, return = c("taxonID", "scientificNameStd", "rank", "order", "genus", "taxonRank"))
-head(out2std)
+#out2std <- standardize.taxonomy(out2, return = c("taxonID", "scientificNameStd", "rank", "order", "genus", "taxonRank"))
+#head(out2std)
 
-out6std <- standardize.taxonomy(mapping(out6))
+out6std <- standardize.taxonomy(out6)
 head(out6std)
 ```
 
@@ -391,7 +391,7 @@ out6taxtra <- standardize(out6, traits6)
 
 The functions described here are applied sequentially. The output of the first step can be piped into the second step, etc. Therefore it is possible to run the functions in an automated fashion, if all necessary parameters for the intermediate steps are provided.  
 
-```{r, meassage = FALSE}
+```{r, meassage = FALSE, eval=FALSE}
 standardize(read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv"), 
             traits = , 
             taxa = , 
