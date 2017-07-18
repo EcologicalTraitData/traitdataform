@@ -9,9 +9,9 @@
 #' >   Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Scientific Data 2: 150013. http://dx.doi.org/10.1038/sdata.2015.13
 #' Additionally, please cite the Dryad data package:
 #' >   Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Dryad Digital Repository. http://dx.doi.org/10.5061/dryad.53ds2
-
 #' @authors Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
-#' @license Creative Commons 0 (http://creativecommons.org/publicdomain/zero/1.0/). To the extent possible under law, the authors have waived all copyright and related or neighboring rights to this data. 
+#' @license Creative Commons 0 (http://creativecommons.org/publicdomain/zero/1.0/). To the extent possible under law, the authors have waived all copyright and related or neighboring rights to this data.
+#' @export 
 #' @URL DOI: http://dx.doi.org/10.5061/dryad.53ds2
 "arthropodtraits"
 
@@ -33,6 +33,7 @@ print({cat("loading dataset 'arthropodtraits' from original data source! \n When
 
 
 #' @title Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany
+#' @export
 #' 
 #' @citation https://figshare.com/articles/Data_Paper_Data_Paper/3561936
 "heteropteraRaw" 
@@ -51,7 +52,7 @@ attr(heteropteraRaw, 'citeAs') <- bibentry(
   year = 2015,
   doi = "10.1890/14-2159.1"
 )
-print({cat("loading dataset 'arthropodtraits' from original data source! \n When using this data, please cite the original publication: \n") 
+print({cat("loading dataset 'heteropteraRaw' from original data source! \n When using this data, please cite the original publication: \n") 
   (attributes(heteropteraRaw)$citeAs) })
 
 
@@ -68,5 +69,32 @@ attr(heteroptera, 'citeAs') <- bibentry(
   year = 2015,
   doi = "10.1890/14-2159.1"
 )
-print({cat("loading dataset 'arthropodtraits' from original data source! \n When using this data, please cite the original publication: \n") 
+print({cat("loading dataset 'heteroptera' from original data source! \n When using this data, please cite the original publication: \n") 
   (attributes(heteroptera)$citeAs) })
+
+#' 
+#' @import readxl
+#' @export
+
+"passerines"
+temp <- tempfile(fileext = ".zip")
+download.file("http://onlinelibrary.wiley.com/store/10.1002/ecy.1783/asset/supinfo/ecy1783-sup-0002-DataS1.zip?v=1&s=361647dd673d04c9b0838931cda1cf28e1f6eb1f", temp, method = "curl", quiet = TRUE)
+unzip(temp, files = "Measurements of passerine birds.xlsx", exdir = ".")
+unlink(temp)
+passerines <- readxl::read_xlsx("Measurements of passerine birds.xlsx", sheet = 1)
+file.remove("Measurements of passerine birds.xlsx")
+
+attr(passerines, 'citeAs') <- bibentry(
+  bibtype = "Article",
+  title = "Passerine morphology: external measurements of approximately one-quarter of passerine bird species",
+  journal = "Ecology",
+  volume = 98,
+  issue = 5,
+  pages = 1472,
+  author = c(person(given = "Robert", middle = "E.", family = "Ricklefs" , email = "ricklefs@umsl.edu")
+  ),
+  year = 2017,
+  doi = "10.1002/ecy.1783"
+)
+print({cat("loading dataset 'passerines' from original data source! \n When using this data, please cite the original publication: \n") 
+  (attributes(passerines)$citeAs) })
