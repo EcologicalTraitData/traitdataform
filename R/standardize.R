@@ -18,11 +18,11 @@ standardize.taxonomy <- function(x,
                                  return = c("taxonID", "scientificNameStd", "order", "taxonRank"), 
                                  ...) {
 
-  if(!"traitdata" %in% class(x)) mapping(x, ...)
+  #if(!"traitdata" %in% class(x)) mapping(x, ...)
     
-  temp <- get_gbif_taxonomy(levels(droplevels(x$scientificName)), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
+  temp <- method(levels(droplevels(x$scientificName)), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
   
-  out <- merge(x, temp[, unique(c(return, "scientificName", "warning"))], by.x = "scientificName", by.y = "scientificName")
+  out <- merge(x, temp[, unique(c(return, "taxonID", "scientificNameStd", "scientificName", "warnings"))], by.x = "scientificName", by.y = "scientificName")
   
   #TODO: produce warning for unmatched names!
   
@@ -34,39 +34,40 @@ standardize.taxonomy <- function(x,
 }
 
 
-#' Title
+#' Standardize trait names and harmonize measured values and reported facts.
 #'
 #' @param x 
 #' @param map 
 #' @param thesaurus 
 #' @return std
-#' @export
+#' @export units
 #'
 standardize.traits <- function(x,
                                thesaurus, 
-                               traitmap = NULL, 
+                               rename = NULL,
                                categories = c("No", "Yes"), 
-                               output = "logical"
+                               output = "logical",
+                               ...
                                ) {
   
   x$traitNameStd <- x$traitName
   
-  # perform renaming following sequence
-  if(length(traitmap) == length(levels(x$traitName)) && is.null(names(traitmap))) { 
-    levels(x$traitNameStd) <- traitmap
+  # perform renaming of traits
+  if(is.null(rename) && length(traitmap) == length(levels(x$traitName)) && !is.null(names(thesaurus()))) { 
+    levels(x$traitNameStd) <- names(thesaurus)
   }
   
   # perform renaming following named vector
-  if(!is.null(names(traitmap))) {
-    levels(x$traitNameStd) <- traitmap[match(levels(x$traitName), names(traitmap) )]
+  if(is.null(names(thesaurus)) && !is.null(names(rename))) {
+    levels(x$traitNameStd) <- traitmap[match(levels(x$traitName), names(rename) )]
   }
   
- lookup <- data.frame(traitNameStd = thesaurus$traitName, 
-                      traitID = thesaurus$traitID,
-                      traitUnitStd = as.factor(thesaurus$traitUnit),
-                      row.names = NULL
-                      )
- temp <- merge(x, lookup, by = "traitNameStd", sort = FALSE )
+ lookup <- do.call(rbind, lapply(thesaurus,data.frame))
+ 
+ if(is.null(levels(lookup$traitID))) lookup$traitID <- as.factor(seq_along(lookup$traitName))
+ lookup <- cbind(traitNameStd = names(thesaurus), lookup)
+ 
+ temp <- merge(x, lookup[,c("traitName", "traitUnitStd", "traitID" )], by = "traitName", sort = FALSE )
 
  ## generate standardized trait vector
  
@@ -76,44 +77,47 @@ standardize.traits <- function(x,
  
  traits <- levels(temp$traitName)
  
- for(i in length(traits)) {
+ for(i in 1:length(traits)) { # iterate over all trait categories (by user provided names)
    
    # harmonize logical values
-   if(thesaurus[i,]$valueType == "logical") {
-     subset(temp, traitName == traits[i])$traitValueStd <- fixlogical(templist[[i]]$traitValue, output = output, categories = categories)
-   }
-   
-   ## factor level harmonization
-   if(thesaurus[i,]$valueType == "factor") { 
-     subset(temp, traitName == traits[i])$traitValueStd 
-     
-   } ## end of factor level harmonization
-   
-   ## unit conversion:
-   if(thesaurus[i,]$valueType == "numeric") {
-     
-     unit_original <- droplevels(subset(temp, traitName == traits[i])$traitUnit)
-     unit_target <- droplevels(subset(temp, traitName == traits[i])$traitUnitStd)
-
-     # case 1: homogeneous units for the entire trait
-     if(length(levels(unit_original)) == 1 && length(levels(unit_target)) == 1) {
-      
-       value_original <-  subset(temp, traitName == traits[i])$traitValue * units::ud_units[[levels(unit_original)]]
-       temp[temp$traitName == traits[i],"traitValueStd"] <- units::set_units(value_original, units::parse_unit(levels(unit_target)))
-        
-     } else {     # case 2: heterogeneous units used within a single trait
-       
-        value_original <-  subset(temp, traitName == traits[i])$traitValue
-        for(j in seq_along(value_original))  {
-          
-          value_original_j <- value_original[j] * units::ud_units[[unit_original[j]]] 
-          temp[temp$traitName == traits[i],"traitValueStd"][j] <- units::set_units(value_original_j , units::parse_unit(unit_target[j])) 
-        }
-        
+   if(is.na(lookup[i,]$traitType) ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'traitType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
+     if(lookup[i,]$traitType == "logical") {
+       temp[temp$traitName == traits[i],"traitValueStd"] <- fixlogical(templist[[i]]$traitValue, output = output, categories = categories)
      }
      
-   } ## end of unit conversion
+     ## factor level harmonization
+     if(lookup[i,]$traitType == "factor") { 
+       subset(temp, traitName == traits[i])$traitValueStd 
+       
+     } ## end of factor level harmonization
      
+     ## unit conversion:
+     if(lookup[i,]$traitType == "numeric") {
+       
+       unit_original <- droplevels(subset(temp, traitName == traits[i])$traitUnit)
+       unit_target <- droplevels(subset(temp, traitName == traits[i])$traitUnitStd)
+       
+       # case 1: homogeneous units for the entire trait
+       if(length(levels(unit_original)) == 1 && length(levels(unit_target)) == 1) {
+         
+         value_original <-  subset(temp, traitName == traits[i])$traitValue * units::ud_units[[levels(unit_original)]]
+         temp[temp$traitName == traits[i], "traitValueStd"] <- units::set_units(value_original, units::parse_unit(levels(unit_target)))
+         
+       } else {     # case 2: heterogeneous units used within a single trait
+         
+         value_original <-  subset(temp, traitName == traits[i])$traitValue
+         for(j in seq_along(value_original))  {
+           
+           value_original_j <- value_original[j] * units::ud_units[[unit_original[j]]] 
+           temp[temp$traitName == traits[i],"traitValueStd"][j] <- units::set_units(value_original_j , units::parse_unit(unit_target[j])) 
+         }
+         
+       }
+       
+     } ## end of unit conversion
+     
+   }
+   
  }
  
  # sort columns according to glossary of terms
@@ -134,6 +138,12 @@ standardize.traits <- function(x,
 #' @return std
 #' @export
 #'
-standardize <- function(..., 
+standardize <- function(x,
+                        ..., 
                         verbose = NULL,
-                        warnings = NULL) {standardize.traits(standardize.taxonomy( ...), ...)}
+                        warnings = NULL) {
+  
+                          if("data.frame" %in% class(x) && ! "traitdata" %in% class(x) ) x <- as.traitdata(x,...)
+                          x <- standardize.taxonomy(x, ...)
+                          x <- standardize.traits(x, ...)
+                      }
