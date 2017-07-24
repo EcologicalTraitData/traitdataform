@@ -1,51 +1,59 @@
 # minimal example
 
-# read raw data
-
-inputdata1 <- read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv")
-
-head(inputdata1)
+# review raw data
+head(carabids)
 
 # bring into longtable format
 
-out1 <- as.traitdata(inputdata1,
-                     traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
-                     taxa = "spec",
-                     occurences = "nr",
-                     datasetID = "CHISTE",
-                     units = "mm",
-                     keep = c("bz", locationID = "EP", sex = "sex", age =  "age", measurementDeterminedBy = "name")
-)
-head(out1)
+dataset1 <- as.traitdata(carabids, 
+                         taxa = "name_correct",
+                         traits = c("body_length", "antenna_length", "metafemur_length", "eyewidth_corr"),
+                         units = "mm",
+                         datasetID = "carabidtraits",
+                         keep = c(measurementDeterminedBy = "source_measurement")
+                         )
 
-# mapping columns to traitdata standard
+head(dataset1)
 
-out1mapped <- mapping(out1, replace = c(bz = "locationID", locationID = "ExploratoriesPlotID"))
-head(out1mapped)
 
-# standardize taxonomy 
+# standardize taxonomy
 
-out1taxonomy <- standardize.taxonomy(out1mapped)
-head(out1taxonomy)
+dataset1std <- standardize.taxonomy(dataset1)
+head(dataset1std)
 
 # standardize traits
 
-traits1 <- thesaurus(read.csv("docs/traitlist_arthropods.csv"), replace = c(measurementType = "traitName", measurementTypeDescription = "traitDescription", measurementTypeID = "traitID", measurementValueType = "valueType", measurementUnit = "traitUnit") )
+thesaurus <- as.thesaurus(body_length = as.trait("body_length", 
+                                                 traitUnit = "mm", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric"),
+                          antenna_length = as.trait("antenna_length", 
+                                                 traitUnit = "mm", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric"),
+                          metafemur_length = as.trait("metafemur_length", 
+                                                 traitUnit = "mm", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric"),
+                          eyewidth = as.trait("eyewidth_corr", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric")
+            ) 
+                          
+str(traitmap)
 
-head(traits1)
+dataset1std2 <- standardize.traits(dataset1std, thesaurus)
 
-out1taxtraits <- standardize.traits(out1taxonomy, traits1, traitmap = c(length1 ="body_length", body_length = "body_length", pronl1 = "pronothum_length", pronl2 = "pronothum_length", pronw1 = "pronothum_width", pronw2 = "pronothum_width", ov1 = "ovipositor_length", ov2 = "ovipositor_length", femurright1 = "femur_length", femurright2 = "femur_length", femurleft1 = "femur_length", femurleft2 = "femur_length", forewingleft1 = "wing_length" , forewingleft2 = "wing_length", forewingright1 = "wing_length", forewingright2 = "wing_length"))
-
-head(out1taxtraits)
+head(dataset1std2)
 
 # all-in-one
 
-traitdataset1 <- standardize(x = read.csv("../example_data/Orthoptera_MelanieChiste_flucAssym.csv"),
-            traits = c("length1", "body_length", "pronl1", "pronl2", "pronw1", "pronw2", "ov1", "ov2", "femurleft1", "femurright1", "femurleft2", "femurright2", "forewingleft1", "forewingright1", "forewingleft2", "forewingright2"),
-            taxa = "spec",
-            occurences = "nr",
+traitdataset1 <- standardize(carabids,
+            thesaurus = thesaurus,
+            taxa = "name_correct",
             units = "mm",
-            keep = c("bz", locationID = "EP", sex = "sex", age =  "age", measurementDeterminedBy = "name"), 
-            map = c(length1 ="body_length", body_length = "body_length", pronl1 = "pronothum_length", pronl2 = "pronothum_length", pronw1 = "pronothum_width", pronw2 = "pronothum_width", ov1 = "ovipositor_length", ov2 = "ovipositor_length", femurright1 = "femur_length", femurright2 = "femur_length", femurleft1 = "femur_length", femurleft2 = "femur_length", forewingleft1 = "wing_length" , forewingleft2 = "wing_length", forewingright1 = "wing_length", forewingright2 = "wing_length")
-            thesaurus = thesaurus(read.csv("docs/traitlist_arthropods.csv"), replace = c(measurementType = "traitName", measurementTypeDescription = "traitDescription", measurementTypeID = "traitID", measurementValueType = "valueType") )
-)
+            keep = c(measurementDeterminedBy = "source_measurement")
+            )
+
+
+
