@@ -1,13 +1,11 @@
-
-
-#' Title
+#' Standardize scientific names of species.
 #'
-#' @param x 
-#' @param reference 
-#' @param infraspecies 
-#' @param fuzzy 
-#' @param verbose 
-#' @param return 
+#' @param x a traitdata object (as returned by as.traitdata()) or a data table containing at least the column 'scientificName'. 
+#' @param method not functional. Will allow to chose from different sources of taxonomic reference. 
+#' @param infraspecies not functional. 
+#' @param fuzzy disable fuzzy matching if problems with ambiguous species names arise. 
+#' @param verbose has currently no effect. 
+#' @param return a character vector containing the informatoin that should be extracted into the output. Valid entries are the column names returned by function 'get_gbif_taxonomy()'.
 #'
 #' @return std
 #' @export
@@ -22,15 +20,16 @@ standardize.taxonomy <- function(x,
 
   if(!"traitdata" %in% class(x)) mapping(x, ...)
     
-  temp <- get_gbif_taxonomy(levels(x$scientificName), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
+  temp <- get_gbif_taxonomy(levels(droplevels(x$scientificName)), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
   
-  out <- merge(x, temp[, c(return, "user_supplied_name")], by.x = "scientificName", by.y = "user_supplied_name")
+  out <- merge(x, temp[, unique(c(return, "scientificName", "warning"))], by.x = "scientificName", by.y = "scientificName")
   
   #TODO: produce warning for unmatched names!
-  # sort columns according to glossary of terms
-  temp <- temp[, order(match(names(temp), glossary$columnName) )]
   
-  class(temp) <- c("data.frame", "traitdata")
+  # sort columns according to glossary of terms
+  out <- out[, order(match(names(out), glossary$columnName) )]
+  
+  class(out) <- c("data.frame", "traitdata")
   return(out)
 }
 
@@ -123,6 +122,9 @@ standardize.traits <- function(x,
  class(temp) <- c("data.frame", "traitdata")
  return(temp)
 }
+
+
+#standardize.exploratories <- function(x)
 
 
 #' Title
