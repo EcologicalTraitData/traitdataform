@@ -9,8 +9,8 @@ There are two major use cases for the package:
 
 The toolset of the package includes
 
-- transforming species-trait-matrix or occurence table data into a unified longtable format
-- mapping column names into terms provided in the trait data standard.
+- transforming species-trait-matrix or occurence table data into a unified format
+- mapping column names into terms provided in the trait data standard
 - matching of species names into GBIF Backbone Taxonomy (taxonomic ontology server)
 - matching of trait names into a user-provided traitlist, i.e. a thesaurus of traits
 - unifying trait values into target unit format and legit factor levels
@@ -27,16 +27,41 @@ devtools::install_github('fdschneider/traitdataform')
 
 ## minimal example
 
-...
+```r
+thesaurus <- as.thesaurus(body_length = as.trait("body_length", 
+                                                 traitUnit = "mm", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric"),
+                          antenna_length = as.trait("antenna_length", 
+                                                 traitUnit = "mm", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric"),
+                          metafemur_length = as.trait("metafemur_length", 
+                                                 traitUnit = "mm", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric"),
+                          eyewidth = as.trait("eyewidth_corr", 
+                                                 traitUnitStd = "mm", 
+                                                 traitType = "numeric")
+            ) 
+                          
+traitdataset1 <- standardize(carabids,
+            thesaurus = thesaurus,
+            taxa = "name_correct",
+            units = "mm",
+            keep = c(measurementDeterminedBy = "source_measurement")
+            )
 
+```
 
 ## datasets
 
 The traitdataform package links to a couple of public domain datasets, which are used for demo purposes, but can be used for research and production use.  
 
-- `passerines` by 
-- `arthropodtraits` by Gossner, Simons et al. 
-- `heteropteraRaw` & `heteroptera`
+- `passerines` by Ricklefs 2017
+- `arthropodtraits` by Gossner, Simons et al. 2016
+- `heteropteraRaw` & `heteroptera` by Gossner, Simons et al. 
+- `carabids` by van der Plas et al. 2017
 
 The datasets have been published by their authors under [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/) license, which means they can be copied, modified, distributed without asking permission. For additional information and interpretation of the data please refer to the help pages of the data objects (e.g. calling `?passerines` in R) and the original data sources given therein. 
 
