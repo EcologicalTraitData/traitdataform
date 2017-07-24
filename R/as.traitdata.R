@@ -10,13 +10,14 @@
 #' @param drop 
 #' @param na.rm 
 #' @param id.vars 
+#' @param ...
 #'
 #' @export
 #' @import reshape
 #'
 
 as.traitdata <- function(x, 
-                          traits, # name of column or vector of trait names
+                          traits = NULL, # name of column or vector of trait names
                           taxa, # name of column or vector of species/taxon names
                           individuals = NULL,  # deprecated/implemented for ambiguity
                           occurences = individuals,
@@ -26,8 +27,12 @@ as.traitdata <- function(x,
                           keep = NULL,
                           drop = NULL, 
                           na.rm = TRUE,
-                          id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop]
+                          id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
+                          thesaurus = NULL,
+                          ...
 ) {
+  
+  if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus)) traits = sapply(thesaurus, function(x) x$traitName)
   
   if(length(taxa) == 1 && !is.null(taxa)) colnames(x)[colnames(x) == taxa] <- "scientificName"
 
@@ -44,7 +49,6 @@ as.traitdata <- function(x,
       }
       if(is.null(occurences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
         message("it seems you are providing data in a species -- trait matrix. If this is not the case, please check out parameters!")
-        x$occurenceID <- NA
       }
     }
   
@@ -60,7 +64,7 @@ as.traitdata <- function(x,
                          measure.vars = traits, 
                          variable_name = "traitName", 
                          id.vars = c("scientificName", 
-                                     c("occurenceID"),
+                                     c("occurenceID")[!is.null(occurences)],
                                      c("measurementID")[!is.null(measurements)], 
                                      id.vars),
                          na.rm = na.rm
@@ -85,6 +89,10 @@ as.traitdata <- function(x,
     named <- keep[names(keep) != ""]
     colnames(out)[match(named, colnames(out))] <- names(named)
   }
+  
+  
+  # sort columns according to glossary of terms
+  out <- out[, order(match(names(out), glossary$columnName) )]
   
   class(out) <- c("data.frame", "traitdata")
   return(out)
