@@ -11,9 +11,9 @@ data(glossary)
 
 \item{replace}{}
 
-\item{template}{}
-
 \item{...}{}
+
+\item{template}{}
 }
 \description{
 Title

@@ -4,10 +4,11 @@
 \alias{as.traitdata}
 \title{Title}
 \usage{
-as.traitdata(x, traits, taxa, individuals = NULL, occurences = individuals,
-  datasetID = NULL, measurements = NULL, units = NULL, keep = NULL,
-  drop = NULL, na.rm = TRUE, id.vars = names(x)[names(x) \%in\% keep &
-  !names(x) \%in\% drop])
+as.traitdata(x, traits = NULL, taxa, individuals = NULL,
+  occurences = individuals, datasetID = NULL, measurements = NULL,
+  units = NULL, keep = NULL, drop = NULL, na.rm = TRUE,
+  id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
+  thesaurus = NULL, ...)
 }
 \arguments{
 \item{x}{}
@@ -21,6 +22,8 @@ as.traitdata(x, traits, taxa, individuals = NULL, occurences = individuals,
 \item{na.rm}{}
 
 \item{id.vars}{}
+
+\item{...}{}
 
 \item{taxon}{}
 

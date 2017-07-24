@@ -2,28 +2,28 @@
 % Please edit documentation in R/standardize.R
 \name{standardize.taxonomy}
 \alias{standardize.taxonomy}
-\title{Title}
+\title{Standardize scientific names of species.}
 \usage{
 standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
   fuzzy = FALSE, verbose = TRUE, return = c("taxonID",
   "scientificNameStd", "order", "taxonRank"), ...)
 }
 \arguments{
-\item{x}{}
+\item{x}{a traitdata object (as returned by as.traitdata()) or a data table containing at least the column 'scientificName'.}
 
-\item{infraspecies}{}
+\item{method}{not functional. Will allow to chose from different sources of taxonomic reference.}
 
-\item{fuzzy}{}
+\item{infraspecies}{not functional.}
 
-\item{verbose}{}
+\item{fuzzy}{disable fuzzy matching if problems with ambiguous species names arise.}
 
-\item{return}{}
+\item{verbose}{has currently no effect.}
 
-\item{reference}{}
+\item{return}{a character vector containing the informatoin that should be extracted into the output. Valid entries are the column names returned by function 'get_gbif_taxonomy()'.}
 }
 \value{
 std
 }
 \description{
-Title
+Standardize scientific names of species.
 }

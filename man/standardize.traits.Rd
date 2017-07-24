@@ -2,10 +2,10 @@
 % Please edit documentation in R/standardize.R
 \name{standardize.traits}
 \alias{standardize.traits}
-\title{Title}
+\title{Standardize trait names and harmonize measured values and reported facts.}
 \usage{
-standardize.traits(x, thesaurus, traitmap = NULL, categories = c("No",
-  "Yes"), output = "logical")
+standardize.traits(x, thesaurus, rename = NULL, categories = c("No", "Yes"),
+  output = "logical", ...)
 }
 \arguments{
 \item{x}{}
@@ -18,5 +18,5 @@ standardize.traits(x, thesaurus, traitmap = NULL, categories = c("No",
 std
 }
 \description{
-Title
+Standardize trait names and harmonize measured values and reported facts.
 }

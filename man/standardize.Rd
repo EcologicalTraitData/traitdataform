@@ -4,7 +4,7 @@
 \alias{standardize}
 \title{Title}
 \usage{
-standardize(..., verbose = NULL, warnings = NULL)
+standardize(x, ..., verbose = NULL, warnings = NULL)
 }
 \arguments{
 \item{...}{}

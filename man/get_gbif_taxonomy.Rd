@@ -4,7 +4,7 @@
 \alias{get_gbif_taxonomy}
 \title{Get accepted canonical names and taxonomy for a given species name}
 \usage{
-get_gbif_taxonomy(x, infraspecies = FALSE, fuzzy = FALSE, verbose = TRUE)
+get_gbif_taxonomy(x, infraspecies = FALSE, fuzzy = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{x}{a character string or vector of species names.}
@@ -16,7 +16,7 @@ get_gbif_taxonomy(x, infraspecies = FALSE, fuzzy = FALSE, verbose = TRUE)
 \item{verbose}{logical. If FALSE, warnings and messages are suppressed.}
 }
 \value{
-a data.frame of accepted taxon names and higher taxa.
+a data.frame mapping the user supplied names to the accepted taxon names and higher taxonomic information (kingdom, phylum, class, order, family, genus). If 'synonym' is returned as TRUE, the user provided name has been identified as a synonym and was mapped to an accepted name. The field confidence reports the confidence of the matching procedure performed by the function 'get_gbifid_()' of the package 'taxize'. The taxonID is a globally valid URI that links to the taxon description of the GBIF backbone taxonomy.
 }
 \description{
 Get accepted canonical names and taxonomy for a given species name
