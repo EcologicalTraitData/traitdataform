@@ -1,7 +1,8 @@
 #'
 "glossary"
 
-
+#'
+"exploratories"
 
 #' @title Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany
 #' 
@@ -72,7 +73,26 @@ attr(heteroptera, 'citeAs') <- bibentry(
 print({cat("loading dataset 'heteroptera' from original data source! \n When using this data, please cite the original publication: \n") 
   (attributes(heteroptera)$citeAs) })
 
+#' @title Carabid morphological traits
 #' 
+#' @details Column names: name_correct = species name; source_measurement = researcher who performed measurement; body_length = body length in mm; antenna_length = antenna length in mm; metafemur_length = length metafemur in mm; eyewith_corr = eye width in mm; note = note; resid_femur = residual femur length in mm (i.e. residual from linear model in which femur length is explained by body length); resid_eye = residual eye length in mm (i.e. residual from linear model in which eye length is explained by body length) resid_antenna = residual antenna length in mm (i.e. residual from linear model in which antenna length is explained by body length)
+#' 
+#' @export
+
+carabids <- read.table("http://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt", sep = "\t", header = TRUE)
+attr(carabids, 'citeAs') <- bibentry(
+  bibtype = "Article",
+  title = "Sensitivity of functional diversity metrics to sampling intensity",
+  journal = "Methods in Ecology and Evolution",
+  author = c(as.person("Fons van der Plas, Roel van Klink, Pete Manning, Han Olff, Markus Fischer")
+  ),
+  year = 2017,
+  doi = "10.1111/2041-210x.12728"
+)
+print({cat("loading dataset 'carabids' from original data source! \n When using this data, please cite the original publication: \n") 
+  (attributes(carabids)$citeAs) })
+
+
 #' @import readxl
 #' @export
 
@@ -98,3 +118,6 @@ attr(passerines, 'citeAs') <- bibentry(
 )
 print({cat("loading dataset 'passerines' from original data source! \n When using this data, please cite the original publication: \n") 
   (attributes(passerines)$citeAs) })
+
+
+
