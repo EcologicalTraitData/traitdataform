@@ -1,17 +1,17 @@
 Package: traitdataform
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1
-Date: 2017-04-06
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Title: Formatting trait data compliant with the Ecological Traitdata Standard
+Version: 0.1.3
+Date: 2017-07-24
+Author: Florian D. Schneider
+Maintainer: Florian D. Schneider <fd.schneider@senckenberg.de>
+Description: This package assists in handling functional trait data and transferring them into the trait data standard.
 License: MIT
 LazyData: TRUE
 Imports: 
     data.table, 
     reshape, 
     taxize
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1
 VignetteBuilder: 
     knitr
