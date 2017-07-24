@@ -36,7 +36,7 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = TRUE, verbose = T
     if(is.null(resolved$matched_name2) || nchar(gsub(" ","",resolved$matched_name2)) == 0 ) {
       out <- data.frame(user_supplied_name = x)
       attributes(out)$warning <- paste("No matching species name found!")
-      out$warning <- attributes(out)$warning
+      out$warnings <- paste(out$warnings, attributes(out)$warning, sep = "; ")
       
     } else {
 
@@ -55,8 +55,8 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = TRUE, verbose = T
         out <- get_gbif_taxonomy(temp$species[which.max(temp$confidence)])
         out$synonym = TRUE
         out$user_supplied_name = x
-        out$warning <- paste("Synonym provided! Automatically set to accepted species Name!")
-        
+        attributes(out)$warning <- paste("Synonym provided! Automatically set to accepted species Name!")
+        out$warnings <- paste(out$warnings, attributes(out)$warning, sep = "; ")
     } else {  # if given name is an accepted name, return result into 'out'
       if(any(temp$status %in% c("ACCEPTED", "DOUBTFUL") )) {
         temp <- subset(temp, status %in% c("ACCEPTED", "DOUBTFUL"))
@@ -73,7 +73,7 @@ get_gbif_taxonomy <- function(x, infraspecies = FALSE, fuzzy = TRUE, verbose = T
                    out[,c("confidence", "kingdom", "phylum", "class","order", "family", "genus")], 
                    taxonomy = "GBIF Backbone Taxonomy", 
                    taxonID = paste0("http://www.gbif.org/species/", out$usagekey, ""),
-                   warning = ""
+                   warnings = ""
       )
       }
     }
