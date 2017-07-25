@@ -12,7 +12,7 @@ standardize.traits(x, thesaurus, rename = NULL, categories = c("No", "Yes"),
 
 \item{thesaurus}{}
 
-\item{map}{}
+\item{output}{}
 }
 \value{
 std

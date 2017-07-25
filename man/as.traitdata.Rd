@@ -8,7 +8,7 @@ as.traitdata(x, traits = NULL, taxa, individuals = NULL,
   occurences = individuals, datasetID = NULL, measurements = NULL,
   units = NULL, keep = NULL, drop = NULL, na.rm = TRUE,
   id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
-  thesaurus = NULL, ...)
+  mutate = NULL, thesaurus = NULL, ...)
 }
 \arguments{
 \item{x}{}
