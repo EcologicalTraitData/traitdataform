@@ -1,8 +1,8 @@
 Package: traitdataform
 Type: Package
 Title: Formatting trait data compliant with the Ecological Traitdata Standard
-Version: 0.1.3
-Date: 2017-07-24
+Version: 0.1.4
+Date: 2017-07-25
 Author: Florian D. Schneider
 Maintainer: Florian D. Schneider <fd.schneider@senckenberg.de>
 Description: This package assists in handling functional trait data and transferring them into the trait data standard.
@@ -11,7 +11,10 @@ LazyData: TRUE
 Imports: 
     data.table, 
     reshape, 
-    taxize
+    taxize,
+    plyr,
+    units,
+    readxl
 RoxygenNote: 6.0.1
 VignetteBuilder: 
     knitr
