@@ -4,17 +4,20 @@
 #'
 "exploratories"
 
-#' @title Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany
+#' @title Functional Arthropod Traits.
+#' @description Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany
 #' 
-#' @return When using this data, please cite the original publication: 
-#' >   Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Scientific Data 2: 150013. http://dx.doi.org/10.1038/sdata.2015.13
+#' @details When using this data, please cite the original publication: 
+#' \itemize{
+#' \item  Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Scientific Data 2: 150013. http://dx.doi.org/10.1038/sdata.2015.13
+#' }
 #' Additionally, please cite the Dryad data package:
-#' >   Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Dryad Digital Repository. http://dx.doi.org/10.5061/dryad.53ds2
-#' @authors Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
-#' @license Creative Commons 0 (http://creativecommons.org/publicdomain/zero/1.0/). To the extent possible under law, the authors have waived all copyright and related or neighboring rights to this data.
+#' \itemize{
+#' \item Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Dryad Digital Repository. http://dx.doi.org/10.5061/dryad.53ds2
+#' }
+#' @author Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
 #' @export 
-#' @URL DOI: http://dx.doi.org/10.5061/dryad.53ds2
-"arthropodtraits"
+#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2}; \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 0}. To the extent possible under law, the authors have waived all copyright and related or neighboring rights to this data.
 
 arthropodtraits <- read.csv("http://datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1", sep = "\t")
 attr(arthropodtraits, 'citeAs') <- bibentry(
@@ -33,12 +36,19 @@ print({cat("loading dataset 'arthropodtraits' from original data source! \n When
 
 
 
-#' @title Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany
-#' @export
+#' @title Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany.
 #' 
-#' @citation https://figshare.com/articles/Data_Paper_Data_Paper/3561936
-"heteropteraRaw" 
-"heteroptera" 
+
+#' @author Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W. Weisser
+#' @source \url{https://figshare.com/articles/Data_Paper_Data_Paper/3561936}
+#' @seealso  \code{\link{arthropodtraits}},  \code{\link{passerines}},
+#' @description The data sets comprise morphometric trait data of species that were sampled and measured within the a subproject of the Biodiversity Exploratories Project (Fischer et al. 2010) which focuses on the  effect of land use on arthropod community composition and related processes in three regions of Germany (Gossner et al. 2014, Simons et al. 2014, Simons et al. 2015).
+#' @return The dataset \code{heteropteraRaw} contains multiple observations of each species (occurence table). The dataset \code{heteroptera} is a compiled species-trait matrix. 
+#' @details Cite this dataset as: 
+#' \itemize{ 
+#' \item M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W. Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany. figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1 
+#' }
+#' @export
 
 heteropteraRaw <- read.table("https://ndownloader.figshare.com/files/5633883", sep = "\t", header = TRUE)
 attr(heteropteraRaw, 'citeAs') <- bibentry(
@@ -56,6 +66,9 @@ attr(heteropteraRaw, 'citeAs') <- bibentry(
 print({cat("loading dataset 'heteropteraRaw' from original data source! \n When using this data, please cite the original publication: \n") 
   (attributes(heteropteraRaw)$citeAs) })
 
+
+#' @rdname heteropteraRaw
+#' @export
 
 heteroptera <- read.table("https://ndownloader.figshare.com/files/5633880", sep = "\t", header = TRUE)
 attr(heteroptera, 'citeAs') <- bibentry(
