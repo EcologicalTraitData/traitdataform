@@ -28,6 +28,7 @@ as.traitdata <- function(x,
                           drop = NULL, 
                           na.rm = TRUE,
                           id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
+                          mutate = NULL,
                           thesaurus = NULL,
                           ...
 ) {
@@ -91,10 +92,11 @@ as.traitdata <- function(x,
   }
   
   
+  
   # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]
   
-  class(out) <- c("data.frame", "traitdata")
+  class(out) <- c( "traitdata", "data.frame")
   return(out)
   
 }
