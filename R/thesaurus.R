@@ -30,7 +30,6 @@
 
 as.thesaurus <- function(...) {
   if( "data.frame" %in% class(..1)) {
-    message("take data frame")
     out <- lapply(split(..1, f = ..1$traitName, drop= TRUE), function(y) do.call(as.trait, y))
     
   }
@@ -42,32 +41,6 @@ as.thesaurus <- function(...) {
   class(out) <- c("thesaurus", "list")
   return(out)
 }
-
-thesaurus <- function(x = NULL,
-                      replace = NULL,
-                      appliestoall = NULL,
-                      ...) {
-  
-  
-  if(class(x) == "data.frame") {
-    if(!c("traitName", "traitID", "traitDescription", "valueType") %in% names(x)) {
-      message("Dataset does not match expected column names.")
-        if(!is.null(replace)) {
-          message("I'm using parameter 'replace' for renaming!")
-          x <- reshape::rename(x, replace)
-          if(!c("traitName", "traitID", "traitDescription", "valueType") %in% names(x)) stop("Parameter 'replace' must at least provide mapping for 'traitName', 'traitID', 'traitDescription', 'valueType'")
-        } else { stop("Provide mapping of column names in parameter 'replace'!")}
-    }
-    out <- x
-  } else {
-    out <- thesaurus(data.frame(...))
-    
-  }
-  
-  class(out) <- c("thesaurus", "data.frame")
-  return(out)
-}
-
 
 #' Create a trait definition
 #'
