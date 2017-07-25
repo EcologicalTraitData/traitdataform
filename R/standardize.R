@@ -37,10 +37,14 @@ standardize.taxonomy <- function(x,
 #' Standardize trait names and harmonize measured values and reported facts.
 #'
 #' @param x 
-#' @param map 
 #' @param thesaurus 
+#' @param rename
+#' @param categories
+#' @param output
+#' 
+#' @import units
 #' @return std
-#' @export units
+#' @export 
 #'
 standardize.traits <- function(x,
                                thesaurus, 
@@ -53,7 +57,7 @@ standardize.traits <- function(x,
   x$traitNameStd <- x$traitName
   
   # perform renaming of traits
-  if(is.null(rename) && length(traitmap) == length(levels(x$traitName)) && !is.null(names(thesaurus()))) { 
+  if(is.null(rename) && length(thesaurus) == length(levels(x$traitName)) && !is.null(names(thesaurus))) { 
     levels(x$traitNameStd) <- names(thesaurus)
   }
   
@@ -65,6 +69,7 @@ standardize.traits <- function(x,
  lookup <- do.call(rbind, lapply(thesaurus,data.frame))
  
  if(is.null(levels(lookup$traitID))) lookup$traitID <- as.factor(seq_along(lookup$traitName))
+ 
  lookup <- cbind(traitNameStd = names(thesaurus), lookup)
  
  temp <- merge(x, lookup[,c("traitName", "traitUnitStd", "traitID" )], by = "traitName", sort = FALSE )
@@ -75,7 +80,7 @@ standardize.traits <- function(x,
  
  #templist <- split(temp, f = temp$traitNameStd) 
  
- traits <- levels(temp$traitName)
+ traits <- unique(temp$traitName)
  
  for(i in 1:length(traits)) { # iterate over all trait categories (by user provided names)
    
