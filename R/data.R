@@ -107,6 +107,7 @@ print({cat("loading dataset 'carabids' from original data source! \n When using 
 
 
 #' @import readxl
+#' @import curl
 #' @export
 
 "passerines"
