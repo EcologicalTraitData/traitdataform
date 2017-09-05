@@ -52,7 +52,7 @@ print({cat("loading dataset 'arthropodtraits' from original data source! \n When
 #' }
 #' @export
 
-heteropteraRaw <- read.table("https://ndownloader.figshare.com/files/5633883", sep = "\t", header = TRUE)
+heteropteraRaw <- read.table("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", sep = "\t", header = TRUE, colClasses = c(Center_Sampling_region = "NULL"))
 attr(heteropteraRaw, 'citeAs') <- bibentry(
   bibtype = "Article",
   title = "Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany",
@@ -72,7 +72,7 @@ print({cat("loading dataset 'heteropteraRaw' from original data source! \n When 
 #' @rdname heteropteraRaw
 #' @export
 
-heteroptera <- read.table("https://ndownloader.figshare.com/files/5633880", sep = "\t", header = TRUE)
+heteroptera <- read.csv("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraits.txt", sep = "\t", header = TRUE, stringsAsFactors=FALSE, fileEncoding="latin1")
 attr(heteroptera, 'citeAs') <- bibentry(
   bibtype = "Article",
   title = "Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany",
@@ -109,12 +109,11 @@ print({cat("loading dataset 'carabids' from original data source! \n When using 
 
 
 #' @import readxl
-#' @import curl
 #' @export
 
 "passerines"
 temp <- tempfile(fileext = ".zip")
-download.file("http://onlinelibrary.wiley.com/store/10.1002/ecy.1783/asset/supinfo/ecy1783-sup-0002-DataS1.zip?v=1&s=361647dd673d04c9b0838931cda1cf28e1f6eb1f", temp, method = "curl", quiet = TRUE)
+download.file("http://onlinelibrary.wiley.com/store/10.1002/ecy.1783/asset/supinfo/ecy1783-sup-0002-DataS1.zip?v=1&s=361647dd673d04c9b0838931cda1cf28e1f6eb1f", temp, method = "auto", quiet = TRUE, mode="wb")
 unzip(temp, files = "Measurements of passerine birds.xlsx", exdir = ".")
 unlink(temp)
 passerines <- readxl::read_xlsx("Measurements of passerine birds.xlsx", sheet = 1)
