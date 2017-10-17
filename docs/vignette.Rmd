@@ -13,13 +13,13 @@ geometry: margin=1.3in
 
 ---
 
-This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. The output object uses the trait data standard put forward in the Whitepaper (refer to pub). 
+This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. The output object uses the trait data standard put forward in Schneider et al. XX (refer to pub). 
 
 ## step 1 reading in data
 
-First, load your own data into R, preferrably in a species--trait matrix, occurence table or measurement longtable format (See notes on different data formats of trait data). 
+First, load your own data into R, preferrably in a species--trait matrix, occurrence table or measurement longtable format (See notes on different data formats of trait data). 
 
-You may rename the column names of the original file to match the column names described in the trait data standard, but this howto also describes the mapping of the column names along the process of data handling. 
+You may rename the column names of the original file to match the column names described in the trait data standard, but this vignette also describes the mapping of the column names along the process of data handling. 
 
 R knows many ways of getting your original data into an R object. In most cases you would read an object from a csv or txt file while maintaining the column headers. 
 
@@ -34,13 +34,13 @@ carabids <- read.table("../../data/carabid traits final.txt", header = TRUE)
 
 ## step 2 transfer into measurement longtable format
 
-As explained in the whitepaper, most trait data are stored in a species--trait matrix format or a table with replicated trait measurements on multiple individuals (i.e. occurences of a species).
+As explained in Schneider et al. XX, most trait data are stored in one of the following formats:
 
-- **species-trait matrix data** :  a single account of a trait value for each species (in rows) for a couple of different traits (in columns). No replicates of species are reported. This is the most likely format for literature data, where aggregate measurements or facts for entire species have been collated into a single lookup table. 
-- **occurence table** :  In case of measured data, authors may report multiple raw measurements of different traits (in columns) taken from a single occurence of a species, i.e. an individual specimen (in rows). Repeated measures of the same trait might also be included as columns or pooled into average values. This is valuable for investigations of intra-specific variation, and also leaves space for filtering by cofactors or analysing trait response along environmental gradients.
+- **species-trait matrix** :  a single account of a trait value for each species (in rows) for a couple of different traits (in columns). No replicates of species are reported. This is the most likely format for literature data, where aggregate measurements or facts for entire species have been collated into a single lookup table. 
+- **occurrence table** :  In case of measured data, authors may report multiple raw measurements of different traits (in columns) taken from a single occurrence of a species, i.e. an individual specimen (in rows). Repeated measures of the same trait might also be included as columns or pooled into average values. This is valuable for investigations of intra-specific variation, and also leaves space for filtering by cofactors or analysing trait response along environmental gradients.
 - **measurement longtable** : For a standardisation of trait data for use in online databases, we propose a measurement longtable format, where each row comprises the reporting of a single measurement or fact, linked to a trait definition as well as a valid taxon name, and optionally to other layers of information. This data format is more predictable in terms of columns and thus easiert to merge with other datasets. 
 
-In all cases, additional information on the reported value may be stored in further colums (e.g. the unit in which a value is reported or the literature source for this measurement or fact), or in a separate data sheet linked via identifiers for trait, taxon, occurence or sampling/measurement event. Examples below will explain how these information can be added to the data sheet.
+In all cases, additional information on the reported value may be stored in further colums (e.g. the unit in which a value is reported or the literature source for this measurement or fact), or in a separate data sheet linked via identifiers for trait, taxon, occurrence or sampling/measurement event. Examples below will explain how these information can be added to the main data sheet.
 
 The function `as.traitdata()` provided in the package assist in transferring any data format into the measurement longtable format. For this function to work, it needs to know about the columns of the original data that contain trait values (parameter `traits`), and the column which contains the taxonomic specification (parameter `taxa`).
 
@@ -60,7 +60,7 @@ head(dataset1)
 
 Note that in the output table the columns have been named after the traitdata standard proposed in the whitepaper (ref). The essential columns are `traitName`, `traitValue` for the reported measurement or fact as well as  `ScientificName` for the taxon assignment. The function auomaticall interprets data as species- trait matrix if the taxa column contains only unique entries and no duplicates. 
 
-In case of occurence table data, an occurenceID is provided automatically, or can be provided by the author using the parameter `occurences` (as a column name or a vector of occurence IDs).
+In case of occurrence table data, an occurrenceID is provided automatically, or can be provided by the author using the parameter `occurrences` (as a column name or a vector of occurrence IDs).
 
 ```{r}
 
@@ -73,11 +73,11 @@ dataset2 <- as.traitdata(heteropteraRaw,
                          "Hind.Femur_width", "Rostrum_length", "Rostrum_width", 
                          "Wing_length", "Wing_width"),
               taxa = "SpeciesID",
-              occurences = "ID"
+              occurrences = "ID"
               )
 
-# show different trait measurements for same occurence/individual
-subset(dataset2, occurenceID == "5" ) 
+# show different trait measurements for same occurrence/individual
+subset(dataset2, occurrenceID == "5" ) 
 
 ```
 
@@ -145,11 +145,11 @@ updated <- mutate.traitdata(dataset2,
                             Body_volume = Body_length*Body_width*Body_height,
                             Wingload = Wing_length*Wing_width/Body_volume)
 
-head(subset(updated, occurenceID == 23))
+head(subset(updated, occurrenceID == 23))
 ```
 Note that all existing traits remain untouched and additional trait measures will be added to the dataset, unless a definition replaces an already existing trait (such as 'Stratum_use' in this example).
 
-It is important to note that the mutate function works at the level of data resolution that is provided by the data, i.e. for occurence data with multiple measurements on a single individual, the data columns are mutated per occurenceID. 
+It is important to note that the mutate function works at the level of data resolution that is provided by the data, i.e. for occurrence data with multiple measurements on a single individual, the data columns are mutated per occurrenceID. 
 
 ### case example: raw data are coded as numeric factor levels 
 
@@ -200,7 +200,7 @@ dataset2 <- as.traitdata(heteropteraRaw,
                          "Hind.Femur_width", "Rostrum_length", "Rostrum_width", 
                          "Wing_length", "Wing_width"),
               taxa = "SpeciesID",
-              occurences = "ID",
+              occurrences = "ID",
               keep = c("Sex")
               )
 
@@ -208,7 +208,7 @@ head(dataset2)
 
 ```
 
-The traitdata standard (whitepaper) suggests standard names for many of these extra information, which might fall into the domain of the extensions for occurence or measurementOrFact (see below). We highly reccomend mapping the columns provided into these standard names by using the rename feature of the `as.traitdata()` function. This is simply acheived by providing a named vector for `keep` that uses the compatible column names as vector names.  
+The traitdata standard (whitepaper) suggests standard names for many of these extra information, which might fall into the domain of the extensions for occurrence or measurementOrFact (see below). We highly reccomend mapping the columns provided into these standard names by using the rename feature of the `as.traitdata()` function. This is simply acheived by providing a named vector for `keep` that uses the compatible column names as vector names.  
 
 ```{r}
 
@@ -230,11 +230,11 @@ Note that a lack of a name in the named vector maintains the original name. Note
 
 Beyond measurement units, further information might be available that are not recorded in the raw data table, but are related to the trait type, the taxon, the individual or specimen, or to the reported fact, measurement or sampling event. 
 
-In most cases those information are kept in seperate data sheets of your file, e.g. the place were a specimen has been sampled or the literature source from where a species value has been cited. In this case, a unique identifier might link to this other datasheet, such as a number for each individual occurence of a specimen (`occurenceID`) or a identifier for a single measurement or reported fact (`measurementID`). 
+In most cases those information are kept in seperate data sheets of your file, e.g. the place were a specimen has been sampled or the literature source from where a species value has been cited. In this case, a unique identifier might link to this other datasheet, such as a number for each individual occurrence of a specimen (`occurrenceID`) or an identifier for a single measurement or reported fact (`measurementID`). 
 
-The trait data standard described in the whitepaper provides two extensions of the namespace that should be used to describe these data:
+The trait data standard  provides two extensions of the namespace that should be used to describe these data:
 
-- the `occurence` extension contains information on the level of individual specimens, such as date and location and method of sampling and preservation, or physiological specifications of the phenotype, such as sex, life stage or age. 
+- the `occurrence` extension contains information on the level of individual specimens, such as date and location and method of sampling and preservation, or physiological specifications of the phenotype, such as sex, life stage or age. 
 - the `measurementOrFact` extension takes information at the level of single measurements or reported values, such as the original literature from where the value is cited, the method of measurement or statistical method of aggregation. 
 
 The extensions are compatible with Darwin Core Standard and EOL TraitBank.  
@@ -243,11 +243,11 @@ You may decide to keep the information in a seperate data sheet. In that case, t
 
 It is however recommended to add these information directly as own columns within the data table to enable an analysis of cofactors and correlations further down the road. This way, if datasets of different source are merged, the information is readily available without the risk of breaking the reference to an external datasheet. 
 
-The function `as.traittable()` provides a set of parameters to add information at the different levels. The following three examples will illustrate how to add covariates to each occurence or  measurement.  The principle is always the same: A unique identifier for these levels of information can be associated with a vector or data table containing the additional information, which will then be merged into the data table. 
+The function `as.traitdata()` provides a set of parameters to add information at the different levels. The following three examples will illustrate how to add covariates to each occurrence or  measurement.  The principle is always the same: A unique identifier for these levels of information can be associated with a vector or data table containing the additional information, which will then be merged into the data table. The functionality builds on the base R function `merge.data.frame`, but checks for compatibility with the glossary of terms of the traitdata standard. 
 
 <!-- TODO: add functionality -->
 
-#### Adding information on specimen level (occurence Extension)
+#### Adding information on specimen level (occurrence Extension)
 
 - under construction - 
 
@@ -307,7 +307,7 @@ traits1 <- as.thesaurus(data.frame(traitName = c("body_length", "antenna_length"
 
 ```
 
-We highly encourage the implementation of open online resources for these glossaries (e.g. via APIs), which would allow a looking up existing trait definitions programmatically in the future. 
+We highly encourage the implementation of open online resources for these glossaries (e.g. via APIs), which would allow a looking up existing trait definitions programmatically, and match user provided names to accepted trait names via fuzzy matching. 
 
 #### refer to an own trait list
 
@@ -377,7 +377,16 @@ What does the function do in terms of standardisation.
 - **factor level checking** : if a controlled vocabulary is provided in the trait thesaurus, the function checks whether the provided factor levels are valid and asks for a mapping vector otherwise. (**buggy and incomplete!**)
 - **logical value harmonization** : for logical traits, the function harmonizes the standardised output. By default it produces a vector of TRUE and FALSE entries. Missing values return NA. The parameters `output` and `categories` can be provided to function `standardize()`. See `?fixlogical` for further detail. 
 
-#### two-in-one standardization
+### georeference standardization for Biodiversity Exploratories
+
+The traitdata standard has been developed within the Biodiversity Exploratories project (DFG ) which is a long-term assessment of plant and animal communities in three regions across Germany starting in 2008. Trait data extracted from one of the 300 project plots can be georeferenced using the function `standardize.exploratories()`. 
+
+To access the high-resolution location data, credentials to BEXIS will be requested. If credentials are incorrect or missing, only low-resolution geolocation can be extracted. 
+
+
+
+
+### single stroke standardization
 
 The functions described here are applied sequentially. The output of the first step can be piped into the second step, etc. 
 
