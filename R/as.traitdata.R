@@ -1,26 +1,54 @@
-#' Title
+#' Standardize format of traitdata
 #'
-#' @param x 
-#' @param traits 
-#' @param taxon 
-#' @param individuals
-#' @param occurence 
-#' @param measurement 
-#' @param keep 
-#' @param drop 
-#' @param na.rm 
-#' @param id.vars 
+#' Turns wide-table formats (species-traits matrix and occurrence table) into
+#' long-table format. As input, the function requires information about which
+#' columns contain traits, given as a list of trait-names, and which column
+#' contains the taxon name. For tables containing repeated measurements of
+#' traits within the same taxon, an occurrenceID should be given or will be
+#' created.
+#'  
+#' @param x data.frame object, containing at least a column of taxa, and one or more columns of trait measurements.
+#' @param traits a vector of column names containing traits. 
+#' @param taxon the name of the column containing taxon names.
+#' @param individuals identical to `occurrence`. (old term kept for clarification)
+#' @param occurrence either a column name containing identifiers for each individual specimen on which several traits were measured, i.e. an occurrence of this taxon, or a vector of occurrence identifiers which must be of the same length as the number of rows of the table. See 'Details'. 
+#' @param measurement either a column name containing identifiers for each individual measurement, or a vector of measurement identifiers. This applies, if single trait measurements span across multiple columns of data, e.g. multivariate traits like quantitative measures of chemical compounds, wavelengths or x-y-z coordinates. In most cases, a measurementID will link the data across rows in the longtable format. Make sure that the traitnames given reflect the different dimensions of the trait measurement. If `measurement` remains blank, sequential identifiers will be auto-generated for each measured value. 
+#' @param datasetID a unique name for this dataset (optional). Will be prepended to the occurrence ID and measurement ID. 
+#' @param keep a vector or named vector containing the names of the input columns to be kept in the output. Vector names will be used to rename the columns. It is recommended to use accepted column names of the traitdata standard for renaming! 
+#' @param drop a vector acting as the inverse of `keep`. All columns listed will be removed from the output dataset. 
+#' @param na.rm logical defaults to `TRUE`. If `FALSE`, all measured Values containing NA will be kept in the output table. This is not reccomended for most data. 
 #' @param ...
 #'
+#' @details If `occurrence` is left blank, the script will check for the structure of the input table. If several entries are given for the same taxon, it assumes that input is an occurrence table and assigns identifiers.
+#' 
 #' @export
 #' @import reshape
+#' 
+#' @examples 
+#' 
+#' # species-trait matrix: 
+#' 
+#' # occurrence table: 
+#' 
+#' dataset2 <- as.traitdata(heteropteraRaw, 
+#'   taxa = "SpeciesID", 
+#'   traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
+#'     "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
+#'     "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Front.Tibia_length",
+#'     "Mid.Tibia_length", "Hind.Tibia_length", "Front.Femur_length",
+#'     "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
+#'     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
+#'   units = "mm", 
+#'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development")
+#' )
+#'
 #'
 
 as.traitdata <- function(x, 
                           traits = NULL, # name of column or vector of trait names
                           taxa, # name of column or vector of species/taxon names
                           individuals = NULL,  # deprecated/implemented for ambiguity
-                          occurences = individuals,
+                          occurrences = individuals,
                           datasetID = NULL,
                           measurements = NULL,
                           units = NULL,
@@ -35,45 +63,68 @@ as.traitdata <- function(x,
   
   if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus)) traits = sapply(thesaurus, function(x) x$traitName)
   
+  # rename taxon column into 'scientificName'
   if(length(taxa) == 1 && !is.null(taxa)) colnames(x)[colnames(x) == taxa] <- "scientificName"
 
-  if(!is.null(occurences) && length(occurences) == 1) { 
-      colnames(x)[colnames(x) == occurences] <- "occurenceID" 
-      x$occurenceID <- paste(datasetID, x$occurenceID, sep = "")
+  # check for occurrence table format & add occurrence ID 
+  if(!is.null(occurrences) && length(occurrences) == 1) { 
+      colnames(x)[colnames(x) == occurrences] <- "occurrenceID" 
+      x$occurrenceID <- paste(datasetID, x$occurrenceID, sep = "")
     } else {
-      if(!is.null(occurences) && length(occurences) == length(x$scientificName) ) {
-            x$occurenceID <- paste(datasetID, occurences, sep = "")
+      if(!is.null(occurrences) && length(occurrences) == length(x$scientificName) ) {
+            x$occurrenceID <- paste(datasetID, occurrences, sep = "")
       }
-      if(is.null(occurences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
-        message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurenceIDs you may specify the column name in parameter 'occurences'. ")
-        x$occurenceID <- paste(datasetID, seq_along(x$scientificName), sep = "")
+      if(is.null(occurrences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
+        message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
+        occurrences <- seq_along(x$scientificName)
+        x$occurrenceID <- paste(datasetID, occurrences, sep = "")
       }
-      if(is.null(occurences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
-        message("it seems you are providing data in a species -- trait matrix. If this is not the case, please check out parameters!")
+      if(is.null(occurrences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
+        message("Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!")
       }
     }
   
-  if(!is.null(measurements) && length(measurements) == 1) colnames(x)[colnames(x) == measurements] <- "measurementID"  #TODO specify case for self provided measurementID vector
+  # add measurementID, if measurement table or multivariate table is given
+  # TODO add condition: question if multiple traits are defined (multivariate measurement?)
+  if(!is.null(measurements) && length(measurements) == 1) {
+      colnames(x)[colnames(x) == measurements] <- "measurementID"
+      measurements <- x$measurementID 
+  }
+    #TODO specify case for self provided measurementID vector
   
   if(length(traits) == 1 && !is.null(traits)) {
     colnames(x)[colnames(x) == traits] <- "traitName"
-    
-    # produce out while respecting id.vars to keep and drop
   }
+  
+  # produce out while respecting id.vars to keep and drop
   if(length(traits) > 1) {
     
     out <- reshape::melt(x, 
                          measure.vars = traits[traits %in% colnames(x)], 
                          variable_name = "traitName", 
                          id.vars = c("scientificName", 
-                                     c("occurenceID")[!is.null(occurences)],
+                                     c("occurrenceID")[!is.null(occurrences)],
                                      c("measurementID")[!is.null(measurements)], 
                                      id.vars),
                          na.rm = na.rm
     )
+    #rename value column in "traitValue"
+    names(out)[names(out) == "value"] <- "traitValue"
+    
+  } else { #TODO test case if only one trait is wrapped (eliminate further columns)
+    out <- subset(x, select = c("scientificName", 
+                                c("occurrenceID")[!is.null(occurrences)],
+                                c("measurementID")[!is.null(measurements)], 
+                                id.vars, traits))
+    colnames(out)[colnames(out) == traits] <- "traitValue"
+    out$traitName <- traits
+    
   }
   
-  names(out)[names(out) == "value"] <- "traitValue"
+  # add measurement ID 
+  if(is.null(measurements) && !"measurementID" %in% colnames(out)) {
+    out$measurementID <- paste0(datasetID, seq_along(out$traitValue)) 
+  }
   
   if(!is.null(units)) {
     out$traitUnit <- NA
