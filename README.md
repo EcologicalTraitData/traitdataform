@@ -1,6 +1,6 @@
 # traitdataform
 
-This package assists in handling functional trait data and transferring them into the trait data standard (Schneider et al). 
+This package assists in handling functional trait data and transferring them into the Trait Data Standard (Schneider et al). 
 
 There are two major use cases for the package: 
 
@@ -66,6 +66,18 @@ The traitdataform package links to a couple of public domain datasets, which are
 The datasets have been published by their authors under [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/) license, which means they can be copied, modified, distributed without asking permission. For additional information and interpretation of the data please refer to the help pages of the data objects (e.g. calling `?passerines` in R) and the original data sources given therein. 
 
 If you want  further datasources published under CC0 or in the public domain being added to this package, feel free to file a pull-request with an updated  `R/data.R`! 
+
+
+## future features
+
+The package is under open source development. You are invited to submit pull-requests with your improvements. 
+
+We are aiming to provide the following features in future iterations of the package: 
+
+- automated matching of user-provided trait names against trait definitions in online resources, by looking up traits via API and extract traitID (i.e. a public URI) and further information.
+- extracting trait definitions and hierarchies from semantic ontologies via APIs, to facilitate analysis of comparable traits across taxa. 
+- harmonization of levels of factorial traits via fuzzy matching (requires lookup tables and ontologies providing legit factor levels). 
+- managing trait databases locally in R by turning the traitdataset objects into lists containing additional linked data (e.g. on occurence level or measurement level, sampling event,  taxon etc.). 
 
 ## cite as
 
