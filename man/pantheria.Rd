@@ -19,9 +19,9 @@ Data were gathered from the literature for 25 types of ecological and life histo
 see http://esapubs.org/archive/ecol/E090/184/metadata.htm for further information.
 }
 \seealso{
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{heteropteraRaw}}, \code{\link{mammaldiet}},
-  \code{\link{passerines}}
+Other rawdata: \code{\link{amniota}},
+  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
+  \code{\link{carabids}}, \code{\link{heteropteraRaw}},
+  \code{\link{mammaldiet}}, \code{\link{passerines}}
 }
 \keyword{datasets}

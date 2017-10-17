@@ -31,15 +31,15 @@ Cite this dataset as:
 \seealso{
 \code{\link{arthropodtraits}},  \code{\link{passerines}},
 
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{mammaldiet}}, \code{\link{pantheria}},
-  \code{\link{passerines}}
+Other rawdata: \code{\link{amniota}},
+  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
+  \code{\link{carabids}}, \code{\link{mammaldiet}},
+  \code{\link{pantheria}}, \code{\link{passerines}}
 
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{mammaldiet}}, \code{\link{pantheria}},
-  \code{\link{passerines}}
+Other rawdata: \code{\link{amniota}},
+  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
+  \code{\link{carabids}}, \code{\link{mammaldiet}},
+  \code{\link{pantheria}}, \code{\link{passerines}}
 }
 \author{
 Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W. Weisser

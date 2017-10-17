@@ -15,10 +15,10 @@ amphibio
 AmphiBIO, a global database for amphibian ecological traits
 }
 \seealso{
-Other rawdata: \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{heteropteraRaw}},
-  \code{\link{mammaldiet}}, \code{\link{pantheria}},
-  \code{\link{passerines}}
+Other rawdata: \code{\link{amniota}},
+  \code{\link{arthropodtraits}}, \code{\link{carabids}},
+  \code{\link{heteropteraRaw}}, \code{\link{mammaldiet}},
+  \code{\link{pantheria}}, \code{\link{passerines}}
 }
 \author{
 Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa

@@ -13,8 +13,8 @@ mutate.traitdata(.data, ...)
 }
 \value{
 an updated traitdata object with the new trait measures or facts
-  appended to the original table. If the given trait name has been refined,
-  it will be replaced.
+appended to the original table. If the given trait name has been refined,
+it will be replaced.
 }
 \description{
 This function allows to transform, factorize, or combine trait measurements
@@ -22,7 +22,7 @@ into compound measurements or update factor levels into binaries.
 }
 \details{
 Note that units will not be maintained or refined. They can be
-  assigned later through the \code{thesaurus()} function.
+assigned later through the \code{thesaurus()} function.
 }
 \examples{
 

@@ -34,7 +34,7 @@ read.service.blocks(datasetid, user, pswd, dec = ".", na.strings = "NA",
 Read table from a web service. Inherits functionality of \code{read.table()}.
 }
 \details{
-\code{read.service.blocks()} returns a data.frame array.
+\code{read.service.blocks()} returns a data.frame array as a list of data.frames.
 }
 \author{
 Dennis Heimann, Andreas Ostrowski

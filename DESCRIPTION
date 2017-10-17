@@ -7,14 +7,18 @@ Author: Florian D. Schneider
 Maintainer: Florian D. Schneider <fd.schneider@senckenberg.de>
 Description: This package assists in handling functional trait data and transferring them into the trait data standard.
 License: MIT
-LazyData: TRUE
+LazyData: FALSE
 Imports: 
     data.table, 
     reshape, 
     taxize,
+    getPass,
+    XML,
+    RCurl,
     plyr,
     units,
     readxl
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
 VignetteBuilder: 
     knitr

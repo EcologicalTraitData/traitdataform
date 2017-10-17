@@ -2,21 +2,19 @@
 % Please edit documentation in R/standardize.R
 \name{standardize.traits}
 \alias{standardize.traits}
-\title{Standardize trait names and harmonize measured values and reported facts.}
+\title{Standardize trait names and harmonize measured values and reported facts}
 \usage{
 standardize.traits(x, thesaurus, rename = NULL, categories = c("No", "Yes"),
   output = "logical", ...)
 }
 \arguments{
-\item{x}{}
-
-\item{thesaurus}{}
-
 \item{output}{}
 }
 \value{
 std
 }
 \description{
-Standardize trait names and harmonize measured values and reported facts.
+Adds columns to a traitdata table with standardized trait names
+and relates them to globally unique identifiers via URIs. Optionally
+converts units of values and renames factor levels into accepted terms.
 }

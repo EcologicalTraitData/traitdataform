@@ -12,10 +12,10 @@ Ricklefs, R. E. (2017), Passerine morphology: external measurements of approxima
 passerines
 }
 \seealso{
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{heteropteraRaw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}
+Other rawdata: \code{\link{amniota}},
+  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
+  \code{\link{carabids}}, \code{\link{heteropteraRaw}},
+  \code{\link{mammaldiet}}, \code{\link{pantheria}}
 }
 \author{
 Robert E. Ricklefs

@@ -2,35 +2,45 @@
 % Please edit documentation in R/as.traitdata.R
 \name{as.traitdata}
 \alias{as.traitdata}
-\title{Title}
+\title{Standardize format of traitdata}
 \usage{
 as.traitdata(x, traits = NULL, taxa, individuals = NULL,
-  occurences = individuals, datasetID = NULL, measurements = NULL,
+  occurrences = individuals, datasetID = NULL, measurements = NULL,
   units = NULL, keep = NULL, drop = NULL, na.rm = TRUE,
   id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
   mutate = NULL, thesaurus = NULL, ...)
 }
 \arguments{
-\item{x}{}
+\item{x}{data.frame object, containing at least a column of taxa, and one or more columns of trait measurements.}
 
-\item{traits}{}
+\item{traits}{a vector of column names containing traits.}
 
-\item{keep}{}
+\item{individuals}{identical to \code{occurrence}. (old term kept for clarification)}
 
-\item{drop}{}
+\item{datasetID}{a unique name for this dataset (optional). Will be prepended to the occurrence ID and measurement ID.}
 
-\item{na.rm}{}
+\item{keep}{a vector or named vector containing the names of the input columns to be kept in the output. Vector names will be used to rename the columns. It is recommended to use accepted column names of the traitdata standard for renaming!}
 
-\item{id.vars}{}
+\item{drop}{a vector acting as the inverse of \code{keep}. All columns listed will be removed from the output dataset.}
+
+\item{na.rm}{logical defaults to \code{TRUE}. If \code{FALSE}, all measured Values containing NA will be kept in the output table. This is not reccomended for most data.}
 
 \item{...}{}
 
-\item{taxon}{}
+\item{taxon}{the name of the column containing taxon names.}
 
-\item{occurence}{}
+\item{occurrence}{either a column name containing identifiers for each individual specimen on which several traits were measured, i.e. an occurrence of this taxon, or a vector of occurrence identifiers which must be of the same length as the number of rows of the table. See 'Details'.}
 
-\item{measurement}{}
+\item{measurement}{either a column name containing identifiers for each individual measurement, or a vector of measurement identifiers. This applies, if single trait measurements span across multiple columns of data, e.g. multivariate traits like quantitative measures of chemical compounds, wavelengths or x-y-z coordinates. In most cases, a measurementID will link the data across rows in the longtable format. Make sure that the traitnames given reflect the different dimensions of the trait measurement. If \code{measurement} remains blank, sequential identifiers will be auto-generated for each measured value.}
 }
 \description{
-Title
+Turns wide-table formats (species-traits matrix and occurrence table) into
+long-table format. As input, the function requires information about which
+columns contain traits, given as a list of trait-names, and which column
+contains the taxon name. For tables containing repeated measurements of
+traits within the same taxon, an occurrenceID should be given or will be
+created.
+}
+\details{
+If \code{occurrence} is left blank, the script will check for the structure of the input table. If several entries are given for the same taxon, it assumes that input is an occurrence table and assigns identifiers.
 }

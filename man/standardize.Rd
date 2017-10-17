@@ -7,11 +7,15 @@
 standardize(x, ..., verbose = NULL, warnings = NULL)
 }
 \arguments{
-\item{...}{}
+\item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
+containing at least the column `scientificName.}
+
+\item{verbose}{has currently no effect.}
 }
 \value{
 std
 }
 \description{
-Standardize trait datasets
+wrapper that applies \code{standardize.taxonomy()} and
+\code{standardize.traits()} in one go.
 }

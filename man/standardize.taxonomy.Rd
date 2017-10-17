@@ -2,28 +2,53 @@
 % Please edit documentation in R/standardize.R
 \name{standardize.taxonomy}
 \alias{standardize.taxonomy}
-\title{Standardize scientific names of species.}
+\title{Standardize scientific names of species}
 \usage{
 standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
   fuzzy = FALSE, verbose = TRUE, return = c("taxonID",
   "scientificNameStd", "order", "taxonRank"), ...)
 }
 \arguments{
-\item{x}{a traitdata object (as returned by as.traitdata()) or a data table containing at least the column 'scientificName'.}
+\item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
+containing at least the column `scientificName.}
 
-\item{method}{not functional. Will allow to chose from different sources of taxonomic reference.}
+\item{method}{not functional. Will allow to chose from different sources of
+taxonomic reference.}
 
 \item{infraspecies}{not functional.}
 
-\item{fuzzy}{if set to FALSE (default mode), this disables fuzzy matching if problems with ambiguous species names arise.}
+\item{fuzzy}{if set to \code{FALSE} (default mode), this disables fuzzy matching
+if problems with ambiguous species names arise.}
 
 \item{verbose}{has currently no effect.}
 
-\item{return}{a character vector containing the informatoin that should be extracted into the output. Valid entries are the column names returned by function 'get_gbif_taxonomy()'.}
+\item{return}{a character vector containing the informatoin that should be
+extracted into the output. Valid entries are the column names returned by
+function \code{get_gbif_taxonomy()}. See 'Details'.}
 }
 \value{
 std
 }
 \description{
-Standardize scientific names of species.
+Adds columns to a traitdata object containing accepted species
+names and relates to globally unique taxon identifiers via URI.
+}
+\details{
+Taxonomic standardisation is an enormous challenge for biodiversity
+data management and research. Constant changes in species and higher taxa,
+refinements of phylogenetic trees and changing attribution to original
+authors, moving species into other genera or difficulties to place species
+into the Linean nomenclature results in highly fluctuent taxonomic
+definitions.
+
+As a consequence, there is not one reference for accepted species names and
+dependin on the field of resaerch and taxonomic focus other authorities
+will be employed.
+
+For reasons of simplicity and because of its high coverage of taxa, the
+function \code{standardize.taxonomy()} uses the GBIF Backbone Taxonomy as its
+reference system and resolves all provided species names to the accepted
+name according to GBIF (resolving misspellings and synonyms in the
+process). We invite pull requests to make this function more general and
+enable a choice of a taxonomic reference.
 }

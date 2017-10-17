@@ -12,8 +12,8 @@ carabids
 Column names: name_correct = species name; source_measurement = researcher who performed measurement; body_length = body length in mm; antenna_length = antenna length in mm; metafemur_length = length metafemur in mm; eyewith_corr = eye width in mm; note = note; resid_femur = residual femur length in mm (i.e. residual from linear model in which femur length is explained by body length); resid_eye = residual eye length in mm (i.e. residual from linear model in which eye length is explained by body length) resid_antenna = residual antenna length in mm (i.e. residual from linear model in which antenna length is explained by body length)
 }
 \seealso{
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}},
+Other rawdata: \code{\link{amniota}},
+  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
   \code{\link{heteropteraRaw}}, \code{\link{mammaldiet}},
   \code{\link{pantheria}}, \code{\link{passerines}}
 }

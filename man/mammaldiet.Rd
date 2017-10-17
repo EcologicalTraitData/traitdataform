@@ -12,9 +12,9 @@ mammaldiet
 Establishing macroecological trait datasets: digitalization, extrapolation, and validation of diet preferences in terrestrial mammals worldwide.s
 }
 \seealso{
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{heteropteraRaw}}, \code{\link{pantheria}},
-  \code{\link{passerines}}
+Other rawdata: \code{\link{amniota}},
+  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
+  \code{\link{carabids}}, \code{\link{heteropteraRaw}},
+  \code{\link{pantheria}}, \code{\link{passerines}}
 }
 \keyword{datasets}
