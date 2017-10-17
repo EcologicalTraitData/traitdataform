@@ -15,7 +15,7 @@ standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
 
 \item{infraspecies}{not functional.}
 
-\item{fuzzy}{disable fuzzy matching if problems with ambiguous species names arise.}
+\item{fuzzy}{if set to FALSE (default mode), this disables fuzzy matching if problems with ambiguous species names arise.}
 
 \item{verbose}{has currently no effect.}
 

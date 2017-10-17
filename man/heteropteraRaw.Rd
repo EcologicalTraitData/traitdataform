@@ -4,8 +4,8 @@
 \name{heteropteraRaw}
 \alias{heteropteraRaw}
 \alias{heteroptera}
-\title{Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany.}
-\format{An object of class \code{data.frame} with 425 rows and 34 columns.}
+\title{Heteroptera morphometry traits}
+\format{An object of class \code{data.frame} with 425 rows and 33 columns.}
 \source{
 \url{https://figshare.com/articles/Data_Paper_Data_Paper/3561936}
 }
@@ -21,13 +21,25 @@ The dataset \code{heteropteraRaw} contains multiple observations of each species
 The data sets comprise morphometric trait data of species that were sampled and measured within the a subproject of the Biodiversity Exploratories Project (Fischer et al. 2010) which focuses on the  effect of land use on arthropod community composition and related processes in three regions of Germany (Gossner et al. 2014, Simons et al. 2014, Simons et al. 2015).
 }
 \details{
-Cite this dataset as: 
-\itemize{ 
-\item M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W. Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany. figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1 
+Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany.
+
+Cite this dataset as:
+\itemize{
+\item M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W. Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany. figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1
 }
 }
 \seealso{
 \code{\link{arthropodtraits}},  \code{\link{passerines}},
+
+Other rawdata: \code{\link{amphibio}},
+  \code{\link{arthropodtraits}}, \code{\link{carabids}},
+  \code{\link{mammaldiet}}, \code{\link{pantheria}},
+  \code{\link{passerines}}
+
+Other rawdata: \code{\link{amphibio}},
+  \code{\link{arthropodtraits}}, \code{\link{carabids}},
+  \code{\link{mammaldiet}}, \code{\link{pantheria}},
+  \code{\link{passerines}}
 }
 \author{
 Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W. Weisser

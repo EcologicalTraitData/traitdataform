@@ -2,7 +2,7 @@
 % Please edit documentation in R/standardize.R
 \name{standardize}
 \alias{standardize}
-\title{Title}
+\title{Standardize trait datasets}
 \usage{
 standardize(x, ..., verbose = NULL, warnings = NULL)
 }
@@ -13,5 +13,5 @@ standardize(x, ..., verbose = NULL, warnings = NULL)
 std
 }
 \description{
-Title
+Standardize trait datasets
 }
