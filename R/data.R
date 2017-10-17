@@ -157,18 +157,6 @@ print({cat("loading dataset 'passerines' from original data source! \n When usin
 # ---------------------------------------------------------------
 
 
-#' @export
-#"angiosperms"
-#temp <- read.csv("http://datadryad.org/bitstream/handle/10255/dryad.59005/GlobalLeafPhenologyDatabase.csv?sequence=1")
-
-#' @export
-#"thermal"
-#thermal <- read.csv2("https://ndownloader.figshare.com/files/5626476")
-
-
-# ---------------------------------------------------------------
-
-
 #' Amniote life-history traits
 #' 
 #' An amniote life-history database to perform comparative analyses with birds, mammals, and reptiles 

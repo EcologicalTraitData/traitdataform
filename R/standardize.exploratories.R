@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @import getPass
-#' @example
+#' @examples
 #' 
 #' moths <- read.service(21247, dec = ",")
-#' dataset1 <- as.traitdata(moths, taxa = "species", traits = c(body_mass = "weight", wing_length = "wing_length", wing_width = "wing_width", wing_area = "wing_area", wing_loading = "wing_loading"), keep = c(locationID = "plot"))
+#' 
+#' dataset1 <- as.traitdata(moths, taxa = "species", traits = c(body_mass =
+#'     "weight", wing_length = "wing_length", wing_width = "wing_width", wing_area =
+#'     "wing_area", wing_loading = "wing_loading"),
+#'   keep = c(locationID = "plot"))
+#' 
 #' dataset1Std <- standardize.exploratories(dataset1)
 #' 
 

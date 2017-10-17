@@ -1,15 +1,41 @@
-#' Standardize scientific names of species.
-#'
-#' @param x a traitdata object (as returned by as.traitdata()) or a data table containing at least the column 'scientificName'. 
-#' @param method not functional. Will allow to chose from different sources of taxonomic reference. 
-#' @param infraspecies not functional. 
-#' @param fuzzy disable fuzzy matching if problems with ambiguous species names arise. 
-#' @param verbose has currently no effect. 
-#' @param return a character vector containing the informatoin that should be extracted into the output. Valid entries are the column names returned by function 'get_gbif_taxonomy()'.
-#'
+#' Standardize scientific names of species
+#' 
+#' @description Adds columns to a traitdata object containing accepted species
+#'   names and relates to globally unique taxon identifiers via URI.
+#'   
+#' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
+#'   containing at least the column `scientificName.
+#' @param method not functional. Will allow to chose from different sources of 
+#'   taxonomic reference.
+#' @param infraspecies not functional.
+#' @param fuzzy if set to `FALSE` (default mode), this disables fuzzy matching 
+#'   if problems with ambiguous species names arise.
+#' @param verbose has currently no effect.
+#' @param return a character vector containing the informatoin that should be 
+#'   extracted into the output. Valid entries are the column names returned by 
+#'   function `get_gbif_taxonomy()`. See 'Details'.
+#'   
+#' @details Taxonomic standardisation is an enormous challenge for biodiversity 
+#'   data management and research. Constant changes in species and higher taxa, 
+#'   refinements of phylogenetic trees and changing attribution to original 
+#'   authors, moving species into other genera or difficulties to place species 
+#'   into the Linean nomenclature results in highly fluctuent taxonomic 
+#'   definitions.
+#'   
+#'   As a consequence, there is not one reference for accepted species names and
+#'   dependin on the field of resaerch and taxonomic focus other authorities 
+#'   will be employed.
+#'   
+#'   For reasons of simplicity and because of its high coverage of taxa, the 
+#'   function `standardize.taxonomy()` uses the GBIF Backbone Taxonomy as its 
+#'   reference system and resolves all provided species names to the accepted 
+#'   name according to GBIF (resolving misspellings and synonyms in the 
+#'   process). We invite pull requests to make this function more general and 
+#'   enable a choice of a taxonomic reference.
+#'   
 #' @return std
 #' @export
-#'
+#' 
 standardize.taxonomy <- function(x, 
                                  method = get_gbif_taxonomy, 
                                  infraspecies = FALSE, 
@@ -34,18 +60,22 @@ standardize.taxonomy <- function(x,
 }
 
 
-#' Standardize trait names and harmonize measured values and reported facts.
-#'
-#' @param x 
-#' @param thesaurus 
+#' Standardize trait names and harmonize measured values and reported facts
+#' 
+#' @description Adds columns to a traitdata table with standardized trait names
+#'   and relates them to globally unique identifiers via URIs. Optionally
+#'   converts units of values and renames factor levels into accepted terms.
+#'   
+#' @param x
+#' @param thesaurus
 #' @param rename
 #' @param categories
 #' @param output
-#' 
+#'   
 #' @import units
 #' @return std
-#' @export 
-#'
+#' @export
+#' 
 standardize.traits <- function(x,
                                thesaurus, 
                                rename = NULL,
@@ -134,14 +164,17 @@ standardize.traits <- function(x,
 
 
 
-
-#' Title
-#'
-#' @param ... 
-#'
+#' Standardize trait datasets
+#' 
+#' @description wrapper that applies `standardize.taxonomy()` and
+#'   `standardize.traits()` in one go.
+#'   
+#' @param ...
+#' @inheritParams standardize.traits 
+#' @inheritParams standardize.taxonomy
 #' @return std
 #' @export
-#'
+#' 
 standardize <- function(x,
                         ..., 
                         verbose = NULL,
