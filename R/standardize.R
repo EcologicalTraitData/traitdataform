@@ -133,7 +133,6 @@ standardize.traits <- function(x,
 }
 
 
-#standardize.exploratories <- function(x)
 
 
 #' Title
