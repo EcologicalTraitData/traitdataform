@@ -61,8 +61,9 @@ as.traitdata <- function(x,
     # produce out while respecting id.vars to keep and drop
   }
   if(length(traits) > 1) {
+    
     out <- reshape::melt(x, 
-                         measure.vars = traits, 
+                         measure.vars = traits[traits %in% colnames(x)], 
                          variable_name = "traitName", 
                          id.vars = c("scientificName", 
                                      c("occurenceID")[!is.null(occurences)],
