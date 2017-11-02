@@ -6,22 +6,67 @@
 \title{PanTHERIA mammal traits}
 \format{An object of class \code{data.frame} with 5416 rows and 55 columns.}
 \source{
-\url {http://esapubs.org/archive/ecol/E090/184/metadata.htm}; \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 0}. To the extent possible under law, the authors have waived all copyright and related or neighboring rights to this data.
+Cite as:
+
+E. Jones, Kate; Bielby, Jon; Cardillo, Marcel; A. Fritz, Susanne; O'Dell,
+Justin; David L. Orme, C.; Safi, Kamran; Sechrest, Wes; H. Boakes,
+Elizabeth; Carbone, Chris; Connolly, Christina; Cutts, Michael J.; Foster,
+Janine K.; Grenyer, Richard; Habib, Michael; Plaster, Christopher A.;
+Price, Samantha A.; Rigby, Elizabeth A.; Rist, Janna; Teacher, Amber;
+Bininda-Emonds, Olaf R. P.; Gittleman, John L.; M. Mace, Georgina; Purvis,
+Andy (2016): PanTHERIA: a species-level database of life history, ecology,
+and geography of extant and recently extinct mammals.
+\url{http://esapubs.org/archive/ecol/E090/184/metadata.htm};
+
+\href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+0}. To the extent possible under law, the authors have waived all copyright
+and related or neighboring rights to this data.
 }
 \usage{
 pantheria
 }
 \description{
-PanTHERIA: a species-level database of life history, ecology, and geography of extant and recently extinct mammals.
+Here we describe a global species-level data set of key
+life-history, ecological and geographical traits of all known extant and
+recently extinct mammals (PanTHERIA) developed for a number of
+macroecological and macroevolutionary research projects.
 }
 \details{
-Data were gathered from the literature for 25 types of ecological and life history information for any extant or recently extinct species within class Mammalia (100740 data lines): 1. Activity Cycle; 2. Age at Eye Opening; 3. Age at First Birth; 4. Average Lifespan; 5. Body Mass; 6. Diet; 7. Dispersal Age; 8. Adult Limb Length; 9. Gestation Length; 10. Group Composition & Size; 11. Growth Data; 12. Habitat Layer; 13. Head-Body Length; 14. Interbirth Interval; 15. Litter size; 16. Litters Per Year; 17. Maximum Longevity; 18. Metabolic Rate; 19. Migratory Behaviour; 20. Mortality Data;  21. Population Density; 22. Ranging Behaviour; 23. Sexual Maturity Age; 24. Teat Number; and 25. Weaning Age. 30 specific variables (see Class IV, Table 1) were extracted from the above data types for PanTHERIA from a total of 94729 data lines (before error checking). Additionally, 4 variables were derived from extracted variables within PanTHERIA and 19 variables were calculated from other spatial data sources (see Class V, Section C).
-see http://esapubs.org/archive/ecol/E090/184/metadata.htm for further information.
+Data were gathered from the literature for 25 types of ecological
+and life history information for any extant or recently extinct species
+within class Mammalia (100740 data lines):
+\enumerate{
+\item Activity Cycle; 2. Age at Eye Opening; 3. Age at First Birth; 4. Average
+Lifespan; 5. Body Mass; 6. Diet; 7. Dispersal Age; 8. Adult Limb Length; 9.
+Gestation Length; 10. Group Composition & Size; 11. Growth Data; 12.
+Habitat Layer; 13. Head-Body Length; 14. Interbirth Interval; 15. Litter
+size; 16. Litters Per Year; 17. Maximum Longevity; 18. Metabolic Rate; 19.
+Migratory Behaviour; 20. Mortality Data;  21. Population Density; 22.
+Ranging Behaviour; 23. Sexual
+Maturity Age; 24. Teat Number; and 25. Weaning Age.
+}
+
+30 specific variables (see Class IV, Table 1) were extracted from the above
+data types for PanTHERIA from a total of 94729 data lines (before error
+checking). Additionally, 4 variables were derived from extracted variables
+within PanTHERIA and 19 variables were calculated from other spatial data
+sources (see Class V, Section C).
+
+see \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm} for further
+information.
 }
 \seealso{
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{heteropteraRaw}},
-  \code{\link{mammaldiet}}, \code{\link{passerines}}
+  \code{\link{carabids}}, \code{\link{heteroptera_raw}},
+  \code{\link{mammaldiet}}
+}
+\author{
+Kate E. Jones, Jon Bielby, Marcel Cardillo, Susanne A. Fritz, Justin
+O'Dell, C. David L. Orme, Kamran Safi, Wes Sechrest, Elizabeth H. Boakes,
+Chris Carbone, Christina Connolly, Michael J. Cutts, Janine K. Foster,
+Richard Grenyer, Michael Habib, Christopher A. Plaster, Samantha A. Price,
+Elizabeth A. Rigby, Janna Rist, Amber Teacher, Olaf R. P. Bininda-Emonds,
+John L. Gittleman, Georgina M. Mace, and Andy Purvis.
 }
 \keyword{datasets}

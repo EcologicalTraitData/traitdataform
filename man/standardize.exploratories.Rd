@@ -20,3 +20,15 @@ Adds columns of georeference to trait-data table if measurements relate to speci
 
 This function requires valid credentials for the Biodiversity Exploratories Information System (BExIS)!
 }
+\examples{
+
+moths <- read.service(21247, dec = ",")
+
+dataset1 <- as.traitdata(moths, taxa = "species", traits = c(body_mass =
+    "weight", wing_length = "wing_length", wing_width = "wing_width", wing_area =
+    "wing_area", wing_loading = "wing_loading"),
+  keep = c(locationID = "plot"))
+
+dataset1Std <- standardize.exploratories(dataset1)
+
+}

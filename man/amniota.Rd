@@ -5,16 +5,60 @@
 \alias{amniota}
 \title{Amniote life-history traits}
 \format{An object of class \code{data.frame} with 21322 rows and 36 columns.}
+\source{
+Cite this dataset as \itemize{ \item P. Myhrvold, Nathan; Baldridge,
+Elita; Chan, Benjamin; Sivam, Dhileep; L. Freeman, Daniel; Ernest, S. K.
+Morgan (2016): An amniote life-history database to perform comparative
+analyses with birds, mammals, and reptiles.
+http://esapubs.org/archive/ecol/E096/269/}
+
+\href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+0}. To the extent possible under law, the authors have waived all copyright
+and related or neighboring rights to this data.
+}
 \usage{
 amniota
 }
 \description{
-An amniote life-history database to perform comparative analyses with birds, mammals, and reptiles
+An amniote life-history database to perform comparative analyses
+with birds, mammals, and reptiles, Ecological Archives E096-269
+}
+\details{
+Studying life-history traits within and across taxonomic
+classifications has revealed many interesting and important patterns, but
+this approach to life history requires access to large compilations of data
+containing many different life-history parameters. Currently, life-history
+data for amniotes (birds, mammals, and reptiles) is split among a variety
+of publicly available databases, data tables embedded in individual papers
+and books, and species-specific studies by experts. Using data from this
+wide range of sources is a challenge for conducting macroecological studies
+because of a lack of standardization in taxonomic classifications,
+parameter values, and even in which parameters are reported. In order to
+facilitate comparative analyses between amniote life-history data, we
+created a database compiled from peer-reviewed studies on individual
+species, macroecological studies of multiple species, existing life-history
+databases, and other aggregated sources as well as published books and
+other compilations. First, we extracted and aggregated the raw data from
+the aforementioned sources. Next, we resolved spelling errors and other
+formatting inconsistencies in species names through a number of
+computational and manual methods. Once this was completed, subspecies-level
+data and species-level data were shared via a data-sharing algorithm to
+accommodate the variety of species transformations (taxonomic promotions,
+demotions, merges, divergences, etc.) that have occurred over time.
+Finally, in species where multiple raw data points were identified for a
+given parameter, we report the median value. Here, we report a normalized
+and consolidated database of up to 29 life-history parameters, containing
+at least one life-history parameter for 21 322 species of birds, mammals,
+and reptiles.
 }
 \seealso{
 Other rawdata: \code{\link{amphibio}},
   \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{heteropteraRaw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}, \code{\link{passerines}}
+  \code{\link{heteroptera_raw}}, \code{\link{mammaldiet}},
+  \code{\link{pantheria}}
+}
+\author{
+Nathan P. Myhrvold, Elita Baldridge, Benjamin Chan, Dhileep Sivam,
+Daniel L. Freeman, and S. K. Morgan Ernest
 }
 \keyword{datasets}

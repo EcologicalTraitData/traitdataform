@@ -6,29 +6,40 @@
 \title{Functional Arthropod Traits}
 \format{An object of class \code{data.frame} with 1230 rows and 17 columns.}
 \source{
-\url{http://dx.doi.org/10.5061/dryad.53ds2}; \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 0}. To the extent possible under law, the authors have waived all copyright and related or neighboring rights to this data.
+\url{http://dx.doi.org/10.5061/dryad.53ds2};
+\href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+0}. To the extent possible under law, the authors have waived all copyright
+and related or neighboring rights to this data.
 }
 \usage{
 arthropodtraits
 }
 \description{
-Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany.
+Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
+Araneae, occurring in grasslands in Germany.
 }
 \details{
 When using this data, please cite the original publication:
-\itemize{
-\item  Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Scientific Data 2: 150013. http://dx.doi.org/10.1038/sdata.2015.13
-}
+
+\itemize{ \item  Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO,
+Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits
+of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands
+in Germany. Scientific Data 2: 150013.
+http://dx.doi.org/10.1038/sdata.2015.13 }
+
 Additionally, please cite the Dryad data package:
-\itemize{
-\item Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Dryad Digital Repository. http://dx.doi.org/10.5061/dryad.53ds2
-}
+
+\itemize{ \item  Gossner MM, Simons NK, Achtziger R,
+Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) Data
+from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
+Araneae, occurring in grasslands in Germany. Dryad Digital Repository.
+http://dx.doi.org/10.5061/dryad.53ds2 }
 }
 \seealso{
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{carabids}},
-  \code{\link{heteropteraRaw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}, \code{\link{passerines}}
+  \code{\link{heteroptera_raw}}, \code{\link{mammaldiet}},
+  \code{\link{pantheria}}
 }
 \author{
 Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW

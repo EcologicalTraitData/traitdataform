@@ -44,3 +44,23 @@ created.
 \details{
 If \code{occurrence} is left blank, the script will check for the structure of the input table. If several entries are given for the same taxon, it assumes that input is an occurrence table and assigns identifiers.
 }
+\examples{
+
+# species-trait matrix: 
+
+# occurrence table: 
+
+dataset2 <- as.traitdata(heteropteraRaw, 
+  taxa = "SpeciesID", 
+  traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
+    "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
+    "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Front.Tibia_length",
+    "Mid.Tibia_length", "Hind.Tibia_length", "Front.Femur_length",
+    "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
+    "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
+  units = "mm", 
+  keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development")
+)
+
+
+}
