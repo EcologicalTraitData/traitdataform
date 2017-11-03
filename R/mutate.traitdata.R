@@ -11,7 +11,7 @@
 #'   it will be replaced.
 #'   
 #' @details Note that units will not be maintained or refined. They can be
-#'   assigned later through the \code{thesaurus()} function.
+#'   assigned later through the `thesaurus()` function.
 #' @export
 #' 
 #' @examples

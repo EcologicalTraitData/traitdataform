@@ -1,29 +1,52 @@
 #' Standardize format of traitdata
-#'
-#' Turns wide-table formats (species-traits matrix and occurrence table) into
-#' long-table format. As input, the function requires information about which
-#' columns contain traits, given as a list of trait-names, and which column
-#' contains the taxon name. For tables containing repeated measurements of
-#' traits within the same taxon, an occurrenceID should be given or will be
-#' created.
-#'  
-#' @param x data.frame object, containing at least a column of taxa, and one or more columns of trait measurements.
-#' @param traits a vector of column names containing traits. 
-#' @param taxon the name of the column containing taxon names.
-#' @param individuals identical to `occurrence`. (old term kept for clarification)
-#' @param occurrence either a column name containing identifiers for each individual specimen on which several traits were measured, i.e. an occurrence of this taxon, or a vector of occurrence identifiers which must be of the same length as the number of rows of the table. See 'Details'. 
-#' @param measurement either a column name containing identifiers for each individual measurement, or a vector of measurement identifiers. This applies, if single trait measurements span across multiple columns of data, e.g. multivariate traits like quantitative measures of chemical compounds, wavelengths or x-y-z coordinates. In most cases, a measurementID will link the data across rows in the longtable format. Make sure that the traitnames given reflect the different dimensions of the trait measurement. If `measurement` remains blank, sequential identifiers will be auto-generated for each measured value. 
-#' @param datasetID a unique name for this dataset (optional). Will be prepended to the occurrence ID and measurement ID. 
-#' @param keep a vector or named vector containing the names of the input columns to be kept in the output. Vector names will be used to rename the columns. It is recommended to use accepted column names of the traitdata standard for renaming! 
-#' @param drop a vector acting as the inverse of `keep`. All columns listed will be removed from the output dataset. 
-#' @param na.rm logical defaults to `TRUE`. If `FALSE`, all measured Values containing NA will be kept in the output table. This is not reccomended for most data. 
-#' @param ...
-#'
-#' @details If `occurrence` is left blank, the script will check for the structure of the input table. If several entries are given for the same taxon, it assumes that input is an occurrence table and assigns identifiers.
 #' 
+#' Turns wide-table formats (species-traits matrix and occurrence table) into 
+#' long-table format. As input, the function requires information about which 
+#' columns contain traits, given as a list of trait-names, and which column 
+#' contains the taxon name. For tables containing repeated measurements of 
+#' traits within the same taxon, an occurrenceID should be given or will be 
+#' created.
+#' 
+#' @param x data.frame object, containing at least a column of taxa, and one or
+#'   more columns of trait measurements.
+#' @param traits a vector of column names containing traits.
+#' @param taxon the name of the column containing taxon names.
+#' @param individuals identical to `occurrence`. (old term kept for
+#'   clarification)
+#' @param occurrence either a column name containing identifiers for each
+#'   individual specimen on which several traits were measured, i.e. an
+#'   occurrence of this taxon, or a vector of occurrence identifiers which must
+#'   be of the same length as the number of rows of the table. See 'Details'.
+#' @param measurement either a column name containing identifiers for each
+#'   individual measurement, or a vector of measurement identifiers. This
+#'   applies, if single trait measurements span across multiple columns of data,
+#'   e.g. multivariate traits like quantitative measures of chemical compounds,
+#'   wavelengths or x-y-z coordinates. In most cases, a measurementID will link
+#'   the data across rows in the longtable format. Make sure that the traitnames
+#'   given reflect the different dimensions of the trait measurement. If
+#'   `measurement` remains blank, sequential identifiers will be auto-generated
+#'   for each measured value.
+#' @param datasetID a unique name for this dataset (optional). Will be prepended
+#'   to the occurrence ID and measurement ID.
+#' @param keep a vector or named vector containing the names of the input
+#'   columns to be kept in the output. Vector names will be used to rename the
+#'   columns. It is recommended to use accepted column names of the traitdata
+#'   standard for renaming!
+#' @param drop a vector acting as the inverse of `keep`. All columns listed will
+#'   be removed from the output dataset.
+#' @param na.rm logical defaults to `TRUE`. If `FALSE`, all measured Values
+#'   containing NA will be kept in the output table. This is not reccomended for
+#'   most data.
+#' @param ...
+#'   
+#' @details If `occurrence` is left blank, the script will check for the
+#'   structure of the input table. If several entries are given for the same
+#'   taxon, it assumes that input is an occurrence table and assigns
+#'   identifiers.
+#'   
 #' @export
 #' @import reshape
-#' 
+#'   
 #' @examples 
 #' 
 #' # species-trait matrix: 
@@ -41,8 +64,8 @@
 #'   units = "mm", 
 #'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development")
 #' )
-#'
-#'
+#' 
+#' 
 
 as.traitdata <- function(x, 
                           traits = NULL, # name of column or vector of trait names
