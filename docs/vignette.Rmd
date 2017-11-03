@@ -424,20 +424,57 @@ dataset1final <- standardize(carabids,
 ## 4.Working with trait datasets
 
 
-## merging traitdata tables
+## combine multiple traitdata tables
 
-The merging of separate datasets can be done before or after the standardisation process, depending on the use case. Use cases of merging data are:
+Combining separate datasets can be done using `rbind()` before or after the standardisation process, depending on the use case. Use cases of merging data are:
 
 - you collected data from different sources and want to harmonize taxon and trait names: bring data in long-table format and merge into one data object, then harmonize taxa and units following a uniform standard
 - No unified trait list or taxon reference exists for the heterogeneous data assembled of different sources (e.g. because spanning many different taxa): Apply standardization to different reference systems before merging the datasets.
 
+The function call will append the data tables while merging the common columns and maintaining columns that are not present in all datasets (this might produce lots of NA). The column `datasetID` will be added to keep track of the origin of the data. By default this column will contain the object names of the original datasets, but it can be replaced by more meaningful IDs using the parameter `datasetID`. 
 
 ```{r}
+
+newdata <- rbind(dataset1, dataset3, 
+                datasetID = c("carabids", "arthropodtraits")
+              )
+
+```
+
+Note that the package provides a method for the base function `rbind()`. Documentation can be accessed via `?rbind.traitdata`. 
+
+The function can be used to add information on the dataset level as described in the section 'Metadata' of the Traitdata Standard, such as `author` or `bibliographicCitation`. For this, either add the information manually to the data before calling `rbind()`.
+
+```{r}
+# example for adding data columns to individual datasets
+
+dataset1$author <- as.factor("Fons van der Plas")
+dataset1$bibliographicCitation <- as.factor("van der Plas F, et al. (2017) Sensitivity of functional diversity metrics to sampling intensity. Methods in Ecology and Evolution 8(9): 1072-1080. https://doi.org/10.1111/2041-210x.12728")
+dataset1$datasetName <- as.factor("Carabid Traits")
+dataset1$license <- "http://creativecommons.org/publicdomain/zero/1.0/"
+
+dataset3$author <- as.factor("Martin Gossner")
+dataset3$bibliographicCitation <- as.factor("Gossner MM, Simons NK, et al. (2015) A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands in Germany. Scientific Data 2: 150013. http://dx.doi.org/10.1038/sdata.2015.13")
+dataset3$datasetName <- as.factor("Functional Arthropod Traits")
+dataset3$license <- "http://creativecommons.org/publicdomain/zero/1.0/"
+
+newdata <- rbind(dataset1, dataset3, 
+                datasetID = c("carabids", "arthropodtraits")
+              )
+```
+Note to use factor level entries to keep memory usage low. 
+
+When storing data, it might be advised to externalise repetitive entries in a separate datasheet and link to it via datasetID. In R, you can use the function `merge()` to map metadata information from a second data table into the core data table based on the datasetID. 
+
+```{r}
+#example for adding metadata as a table
+
 ```
 
 
 ## filter data
 
+Filtering data based on the 
 
 ## compile aggregate values
 
@@ -445,4 +482,4 @@ base::reshape()
 reshape2::melt()
 tidyr::gather()
 
-
+cast
