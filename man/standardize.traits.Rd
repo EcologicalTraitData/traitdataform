@@ -8,13 +8,64 @@ standardize.traits(x, thesaurus, rename = NULL, categories = c("No", "Yes"),
   output = "logical", ...)
 }
 \arguments{
-\item{output}{}
+\item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
+containing at least the columns \code{traitValue}.}
+
+\item{thesaurus}{an object of class 'thesaurus' (as returned by
+\code{as.thesaurus()}).}
+
+\item{rename}{character vector of same length and order as
+\code{levels(x$traitName)}. Will superimpose names of traits to match thesaurus
+input names. (see Details)}
+
+\item{categories}{output target categories for binary/logical traits
+harmonization if \code{output} is not set to 'logical'.}
+
+\item{output}{a switch to set the desired output format. Defaults to
+"logical", but can be "character", "binary" or "factor".}
 }
 \value{
-std
+Adds harmonized columns to the traitdata object, including
+\itemize{
+\item unit conversion
+\item factor level harmonization
+\item global or dataset-specific identifier for trait definitions
+}
+
+The lookup table of trait definitions (Thesaurus) is attached to the output
+object as an attribute and can be accessed by calling
+\code{attributes(<output>)$thesaurus}.
 }
 \description{
 Adds columns to a traitdata table with standardized trait names
 and relates them to globally unique identifiers via URIs. Optionally
 converts units of values and renames factor levels into accepted terms.
+}
+\examples{
+
+data(carabids)
+
+dataset1 <- as.traitdata(carabids, 
+  taxa = "name_correct", 
+  traits = c("body_length", "antenna_length", "metafemur_length"),
+  units = "mm",
+  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  metadata = list(
+    bibliographicCitation = attributes(carabids)$citeAs,
+    author = "Fons van der Plas", 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
+)
+
+traitlist <- as.thesaurus(
+body_length = as.trait("body_length", expectedUnit = "mm", valueType = "numeric",
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+antenna_length = as.trait("antenna_length", expectedUnit = "mm", valueType = "numeric",
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
+metafemur_length = as.trait("metafemur_length", expectedUnit = "mm", valueType = "numeric",
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
+)
+
+dataset1Std <- standardize.traits(dataset1, thesaurus = traitlist)
+
 }

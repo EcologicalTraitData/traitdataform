@@ -4,36 +4,50 @@
 \alias{as.trait}
 \title{Create a trait definition}
 \usage{
-as.trait(traitName, traitID = NA, author = NA, URI = NA, traitUnit = NA,
-  traitUnitStd = traitUnit, factorLevels = NA, traitType = NA,
-  traitDescription = NA, bibliographicReference = NA, version = NA, ...)
+as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
+  expectedUnit = NA, maxAllowedValue = NA, minAllowedValue = NA,
+  factorLevels = NA, valueType = NA, traitDescription = NA,
+  comments = NA, relationSource = NA, source = NA, version = NA,
+  author = NA, ...)
 }
 \arguments{
-\item{traitName}{}
+\item{trait}{A character string, providing an intuitive, human-readable trait name.}
 
-\item{traitID}{}
+\item{identifier}{Unique identifier for the trait, ideally unique and stable URI which identify the source of the trait definition.}
 
-\item{author}{}
+\item{broaderTerm}{One or several terms that enclose the trait definition.}
 
-\item{URI}{}
+\item{narrowerTerm}{One or several terms that are enclosed by the trait definition.}
 
-\item{traitUnit}{}
+\item{expectedUnit}{the unit expected for measurement entries.}
 
-\item{factorLevels}{}
+\item{maxAllowedValue}{An upper boundary for accepted numerical values.}
 
-\item{traitDescription}{}
+\item{minAllowedValue}{A lower boundary for accepted numerical values.}
 
-\item{bibliographicReference}{}
+\item{factorLevels}{A comma separated list of terms comprising the constrained vocabulary for categorical traits or ordinal binary traits.}
+
+\item{valueType}{the type of trait values. Possible entries are 'numeric', 'integer', 'categorical', 'logical', or 'character'.}
+
+\item{traitDescription}{A short, unambiguous definition of the trait. May refer to a method of measurement.}
+
+\item{comments}{Details and Examples for clarification of the trait definition.}
+
+\item{source}{}
 
 \item{version}{}
+
+\item{author}{}
 
 \item{...}{}
 }
 \description{
-Create a trait definition
+Creating an object containing a standardised trait definition according to the Ecological Traitdata Standard. Parameters correspond to the definition at http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri.
 }
 \examples{
 
-body_size = as.trait("body_size", traitID = "http://url.to/thesaurus.html#body_size", author = "F.D. Schneider", traitDescription = "body length from head  to end of abdomen in mm")
+body_length <- as.trait("body_length", expectedUnit = "mm", valueType = "numeric", 
+  Identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
+  traitDescription = "The known longest dimension of the physical structure of organisms", relationSource = "Maggenti and Maggenti, 2005", broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_dimension")
 
 }

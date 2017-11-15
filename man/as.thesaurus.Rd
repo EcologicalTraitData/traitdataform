@@ -2,42 +2,65 @@
 % Please edit documentation in R/thesaurus.R
 \name{as.thesaurus}
 \alias{as.thesaurus}
-\title{Create a lookup table of trait definitions (a thesaurus of traits)}
+\title{Create a list of trait definitions (a thesaurus of traits)}
 \usage{
-as.thesaurus(...)
+as.thesaurus(..., replace = NULL)
 }
 \arguments{
-\item{...}{}
-
-\item{x}{}
-
-\item{replace}{}
-
-\item{appliestoall}{}
+\item{...}{multiple objects of class 'trait' (produced by function
+\code{as.trait()}) or a data.frame containing columns according to the terms
+provided by https://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri.}
 }
 \value{
-a list of formalized objects of class 'trait', as returned by function as.trait().
+a list of formalized objects of class 'trait', as returned by
+function as.trait().
 }
 \description{
-Create a lookup table of trait definitions (a thesaurus of traits)
+Create a trait thesaurus object for use as a reference object/lookup table of
+traits within function \code{standardize.traits()}.
 }
 \details{
-the object class 'trait' comprises necessary information to map a trait name to a  trait definition, a target unit and a globally unique identifier. The thesaurus will be used in function 'standardize.traits()' to apply unit conversion and factor level harmonization.
+the object class 'trait' comprises necessary information to map a
+trait name to a  trait definition, a target unit and a globally unique
+identifier. The thesaurus will be used in function 'standardize.traits()'
+to apply unit conversion and factor level harmonization.
 }
 \examples{
 
-as.thesaurus(body_length = as.trait("body_length", traitUnit = "mm", traitUnitStd = "mm"), 
-             antenna_length = as.trait("antenna_length", traitUnitStd = "mm"),
-             metafemur_length = as.trait("metafemur_length"),
-             eyewidth = as.trait("eyewidth_corr")
+# provide traitlist by defining individual traits using function `as.trait()`:
+
+traitlist <- as.thesaurus(body_length = as.trait("body_length", expectedUnit = "mm", 
+    valueType = "numeric", 
+    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+  antenna_length = as.trait("antenna_length", expectedUnit = "mm", 
+    valueType = "numeric", 
+    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
+  metafemur_length = as.trait("metafemur_length", expectedUnit = "mm", 
+    valueType = "numeric", 
+    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 )
 
+# provide traitlist from data frame object: 
+
 as.thesaurus(data.frame(
-  traitName = c("body_length", "antenna_length", "metafemur_length", "eyewidth_corr"),
-  # traitNameStd = traitName,
-  traitUnit = "mm",
-  traitType = "numeric",
-  traitDescription = c("body length in mm", "length of antenna in mm", "length of metafemur in mm", "eye width in mm")
+  trait = c("body_length", "antenna_length", "metafemur_length", "eyewidth_corr"),
+  expectedUnit = "mm",
+  valueType = "numeric",
+  traitDescription = c("body length in mm", "length of antenna in mm", "length of metafemur in mm", "eye width in mm"), 
+  identifier = c("http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
+    "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length", 
+    "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length", 
+    "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Eye_diameter"
+    )
 )
+)
+
+# provide traitlist from remote archive with renaming
+
+traits1 <- as.thesaurus(read.csv("https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"), 
+replace = c(traitID = "identifier", 
+            traitName = "trait",
+            traitUnit = "expectedUnit",
+            Comments = "comments") 
 )
 }

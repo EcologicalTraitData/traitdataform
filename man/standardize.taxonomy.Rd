@@ -4,9 +4,9 @@
 \alias{standardize.taxonomy}
 \title{Standardize scientific names of species}
 \usage{
-standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
-  fuzzy = FALSE, verbose = TRUE, return = c("taxonID",
-  "scientificNameStd", "order", "taxonRank"), ...)
+standardize.taxonomy(x, method = get_gbif_taxonomy, update = FALSE,
+  infraspecies = FALSE, fuzzy = FALSE, verbose = TRUE,
+  return = c("taxonID", "scientificNameStd", "order", "taxonRank"), ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
@@ -14,6 +14,9 @@ containing at least the column `scientificName.}
 
 \item{method}{not functional. Will allow to chose from different sources of
 taxonomic reference.}
+
+\item{update}{if TRUE, force update of taxonomy, even if attributes already
+contain one. defaults to FALSE.}
 
 \item{infraspecies}{not functional.}
 
@@ -25,9 +28,6 @@ if problems with ambiguous species names arise.}
 \item{return}{a character vector containing the informatoin that should be
 extracted into the output. Valid entries are the column names returned by
 function \code{get_gbif_taxonomy()}. See 'Details'.}
-}
-\value{
-std
 }
 \description{
 Adds columns to a traitdata object containing accepted species
@@ -51,4 +51,28 @@ reference system and resolves all provided species names to the accepted
 name according to GBIF (resolving misspellings and synonyms in the
 process). We invite pull requests to make this function more general and
 enable a choice of a taxonomic reference.
+}
+\examples{
+
+
+data(carabids)
+
+dataset1 <- as.traitdata(carabids, 
+  taxa = "name_correct", 
+  traits = c("body_length", "antenna_length", "metafemur_length"),
+  units = "mm",
+  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  metadata = list(
+    bibliographicCitation = attributes(carabids)$citeAs,
+    author = "Fons van der Plas", 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
+)
+
+dataset1Std <- standardize.taxonomy(dataset1)
+
+#update to include more taxon detail
+
+dataset1Std <- standardize.taxonomy(dataset1Std, return = c("author", "genus", "order", "class"))
+
 }

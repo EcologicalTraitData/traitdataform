@@ -7,11 +7,11 @@
 fixlogical(x, output = "logical", categories = c("No", "Yes"))
 }
 \arguments{
-\item{x}{a vector.}
+\item{x}{a vector of two different types of entries (can be of type factor, integer, logical, or character).}
 
 \item{output}{a switch to set the desired output format. Defaults to "logical", but can be "character", "binary" or "factor".}
 
-\item{categories}{}
+\item{categories}{output target categories for binary/logical traits harmonization if \code{output} is not set to 'logical'.}
 }
 \value{
 A vector of harmonized logical values.

@@ -2,44 +2,61 @@
 % Please edit documentation in R/rbind.traitdata.R
 \name{rbind.traitdata}
 \alias{rbind.traitdata}
-\title{Title}
+\title{Combine trait datasets}
 \usage{
-\method{rbind}{traitdata}(..., metadata = NULL, datasetID = NULL)
+\method{rbind}{traitdata}(..., metadata = NULL, datasetID = NULL,
+  drop = NULL)
 }
 \arguments{
 \item{...}{two or more objects of class traitdata.}
 
-\item{metadata}{a list of metadata entries which are to be added as dataset-level information.}
+\item{metadata}{a list of metadata entries which are to be added as
+dataset-level information.}
 
-\item{datasetID}{a vector of the same length as number of objects. If \code{NULL} (default), object names will be returned as ID.}
+\item{datasetID}{a vector of the same length as number of objects. If \code{NULL}
+(default), object names will be returned as ID.}
 }
 \description{
-Title
+Function to append objects of class 'traitdata' to each other.
 }
 \examples{
 
 library(traitdataform)
-data(carabids, arthropodtraits)
+
+data(carabids)
 
 dataset1 <- as.traitdata(carabids, 
-                        taxa = "name_correct",
-                        traits = c("body_length", 
-                                   "antenna_length", 
-                                   "metafemur_length", 
-                                   "eyewidth_corr")
+  taxa = "name_correct", 
+  traits = c("body_length", "antenna_length", "metafemur_length"),
+  units = "mm",
+  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  metadata = list(
+    bibliographicCitation = attributes(carabids)$citeAs,
+    author = "Fons van der Plas", 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
 )
 
-dataset3 <- as.traitdata(arthropodtraits,
-taxa = "SpeciesID",
-traits = c("Body_Size", "Dispersal_ability", "Feeding_guild",
-           "Feeding_mode", "Feeding_specialization", 
-           "Feeding_tissue", "Feeding_plant_part",
-           "Endophagous_lifestyle", "Stratum_use",
-           "Stratum_use_short"), 
-units = c(Body_Size = "mm", Dispersal_ability = "unitless")
+# occurrence table: 
+
+data(heteroptera_raw)
+
+dataset2 <- as.traitdata(heteroptera_raw, 
+  taxa = "SpeciesID", 
+  traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
+    "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
+    "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Front.Tibia_length",
+    "Mid.Tibia_length", "Hind.Tibia_length", "Front.Femur_length",
+    "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
+    "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
+  units = "mm", 
+  keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
+  metadata = list(
+    bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
 )
 
-newdata <- rbind(dataset1, dataset3, 
-               datasetID = c("carabids", "arthropodtraits")
-             )
+
+database <- rbind(dataset1, dataset2)
 }

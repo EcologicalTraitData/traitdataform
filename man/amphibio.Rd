@@ -8,7 +8,12 @@
 \source{
 Cite as:
 \itemize{
-\item Oliveira, B. F. et al. AmphiBIO, a global database for amphibian ecological traits. Sci. Data. 4:170123 doi: 10.1038/sdata.2017.123 (2017). \url{https://doi.org/10.6084/m9.figshare.4644424};
+\item Oliveira, B.F., São-Pedro, V.A., Santos-Barrera, G., Penone, C. & Costa, G.C. (2017). AmphiBIO, a global database for amphibian ecological traits. Scientific Data, 4:170123. doi: \href{https://www.nature.com/articles/sdata2017123}{10.1038/sdata.2017.123}
+}
+
+Please also cite the data repository on figshare:
+\itemize{
+\item Oliveira, Brunno Freire; São-Pedro, Vinícius Avelar; Santos-Barrera, Georgina; Penone, Caterina; C. Costa, Gabriel (2017): AmphiBIO_v1. figshare. \url{https://doi.org/10.6084/m9.figshare.4644424.v5}
 }
 
 \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
@@ -17,7 +22,10 @@ Cite as:
 amphibio
 }
 \description{
-AmphiBIO, a global database for amphibian ecological traits
+A comprehensive database of natural history traits for amphibians worldwide.
+}
+\details{
+Current ecological and evolutionary research are increasingly moving from species- to trait-based approaches because traits provide a stronger link to organism’s function and fitness. Trait databases covering a large number of species are becoming available, but such data remains scarce for certain groups. Amphibians are among the most diverse vertebrate groups on Earth, and constitute an abundant component of major terrestrial and freshwater ecosystems. They are also facing rapid population declines worldwide, which is likely to affect trait composition in local communities, thereby impacting ecosystem processes and services. In this context, we introduce AmphiBIO, a comprehensive database of natural history traits for amphibians worldwide. The database releases information on 17 traits related to ecology, morphology and reproduction features of amphibians. We compiled data from more than 1,500 literature sources, and for more than 6,500 species of all orders (Anura, Caudata and Gymnophiona), 61 families and 531 genera. This database has the potential to allow unprecedented large-scale analyses in ecology, evolution and conservation of amphibians.
 }
 \seealso{
 Other rawdata: \code{\link{amniota}},

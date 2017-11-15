@@ -8,30 +8,57 @@ as.traitdata(x, traits = NULL, taxa, individuals = NULL,
   occurrences = individuals, datasetID = NULL, measurements = NULL,
   units = NULL, keep = NULL, drop = NULL, na.rm = TRUE,
   id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
-  mutate = NULL, thesaurus = NULL, ...)
+  mutate = NULL, thesaurus = NULL, metadata = list(rightsHolder = NULL,
+  bibliographicCitation = NULL, license = NULL, author = NULL, datasetID =
+  datasetID, datasetName = NULL, version = NULL), ...)
 }
 \arguments{
-\item{x}{data.frame object, containing at least a column of taxa, and one or more columns of trait measurements.}
+\item{x}{data.frame object, containing at least a column of taxa, and one or
+more columns of trait measurements.}
 
 \item{traits}{a vector of column names containing traits.}
 
-\item{individuals}{identical to \code{occurrence}. (old term kept for clarification)}
+\item{taxa}{the name of the column containing taxon names.}
 
-\item{datasetID}{a unique name for this dataset (optional). Will be prepended to the occurrence ID and measurement ID.}
+\item{individuals}{identical to \code{occurrence}. (old term kept for
+clarification)}
 
-\item{keep}{a vector or named vector containing the names of the input columns to be kept in the output. Vector names will be used to rename the columns. It is recommended to use accepted column names of the traitdata standard for renaming!}
+\item{occurrences}{either a column name containing identifiers for each
+individual specimen on which several traits were measured, i.e. an
+occurrence of this taxon, or a vector of occurrence identifiers which must
+be of the same length as the number of rows of the table. See 'Details'.}
 
-\item{drop}{a vector acting as the inverse of \code{keep}. All columns listed will be removed from the output dataset.}
+\item{datasetID}{a unique name for this dataset (optional). Will be prepended
+to the occurrence ID and measurement ID.}
 
-\item{na.rm}{logical defaults to \code{TRUE}. If \code{FALSE}, all measured Values containing NA will be kept in the output table. This is not reccomended for most data.}
+\item{measurements}{either a column name containing identifiers for each
+individual measurement, or a vector of measurement identifiers. This
+applies, if single trait measurements span across multiple columns of data,
+e.g. multivariate traits like quantitative measures of chemical compounds,
+wavelengths or x-y-z coordinates. In most cases, a measurementID will link
+the data across rows in the longtable format. Make sure that the traitnames
+given reflect the different dimensions of the trait measurement. If
+\code{measurement} remains blank, sequential identifiers will be auto-generated
+for each measured value.}
+
+\item{keep}{a vector or named vector containing the names of the input
+columns to be kept in the output. Vector names will be used to rename the
+columns. It is recommended to use accepted column names of the traitdata
+standard for renaming!}
+
+\item{drop}{a vector acting as the inverse of \code{keep}. All columns listed will
+be removed from the output dataset.}
+
+\item{na.rm}{logical defaults to \code{TRUE}. If \code{FALSE}, all measured Values
+containing NA will be kept in the output table. This is not reccomended for
+most data.}
+
+\item{metadata}{a list of named entries, according to the terms for metadata
+of the traitdata standard. Metadata will be added as attributes to the data
+table. Possible entries are: \code{rightsHolder}, \code{bibliographicCitation},
+\code{license}, \code{author}, \code{datasetID}, \code{datasetName}, \code{version}. (see 'Details')}
 
 \item{...}{}
-
-\item{taxon}{the name of the column containing taxon names.}
-
-\item{occurrence}{either a column name containing identifiers for each individual specimen on which several traits were measured, i.e. an occurrence of this taxon, or a vector of occurrence identifiers which must be of the same length as the number of rows of the table. See 'Details'.}
-
-\item{measurement}{either a column name containing identifiers for each individual measurement, or a vector of measurement identifiers. This applies, if single trait measurements span across multiple columns of data, e.g. multivariate traits like quantitative measures of chemical compounds, wavelengths or x-y-z coordinates. In most cases, a measurementID will link the data across rows in the longtable format. Make sure that the traitnames given reflect the different dimensions of the trait measurement. If \code{measurement} remains blank, sequential identifiers will be auto-generated for each measured value.}
 }
 \description{
 Turns wide-table formats (species-traits matrix and occurrence table) into
@@ -42,15 +69,40 @@ traits within the same taxon, an occurrenceID should be given or will be
 created.
 }
 \details{
-If \code{occurrence} is left blank, the script will check for the structure of the input table. If several entries are given for the same taxon, it assumes that input is an occurrence table and assigns identifiers.
+If \code{occurrence} is left blank, the script will check for the
+structure of the input table. If several entries are given for the same
+taxon, it assumes that input is an occurrence table and assigns
+identifiers.
+
+Metadata will be stored as attributes to the data frame and can be accessed
+via \code{attributes()}. It is not necessary but highly recommended to provide
+metadata when working with multiple trait data files. When appending
+datasets using \code{rbind()}, the metadata will be stored in additional
+columns.
 }
 \examples{
 
 # species-trait matrix: 
 
+data(carabids)
+
+dataset1 <- as.traitdata(carabids, 
+  taxa = "name_correct", 
+  traits = c("body_length", "antenna_length", "metafemur_length"),
+  units = "mm",
+  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  metadata = list(
+    bibliographicCitation = attributes(carabids)$citeAs,
+    author = "Fons van der Plas", 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
+)
+
 # occurrence table: 
 
-dataset2 <- as.traitdata(heteropteraRaw, 
+data(heteroptera_raw)
+
+dataset2 <- as.traitdata(heteroptera_raw, 
   taxa = "SpeciesID", 
   traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
     "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
@@ -59,7 +111,11 @@ dataset2 <- as.traitdata(heteropteraRaw,
     "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
   units = "mm", 
-  keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development")
+  keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
+  metadata = list(
+    bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
 )
 
 

@@ -26,11 +26,13 @@ assigned later through the \code{thesaurus()} function.
 }
 \examples{
 
+data(arthropodtraits)
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",
                          traits = c("Body_Size", "Dispersal_ability", "Feeding_guild","Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use", "Stratum_use_short"), 
                          units = c(Body_Size = "mm", Dispersal_ability = "unitless"),
-                         keep = c(measurementRemark = "Remark")
+                         keep = c(measurementRemark = "Remark"),
+                         metadata = list(license = "http://creativecommons.org/publicdomain/zero/1.0/")
 )
 head(dataset3)
 
