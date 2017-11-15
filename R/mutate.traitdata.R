@@ -16,11 +16,13 @@
 #' 
 #' @examples
 #' 
+#' data(arthropodtraits)
 #' dataset3 <- as.traitdata(arthropodtraits,
 #'                          taxa = "SpeciesID",
 #'                          traits = c("Body_Size", "Dispersal_ability", "Feeding_guild","Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use", "Stratum_use_short"), 
 #'                          units = c(Body_Size = "mm", Dispersal_ability = "unitless"),
-#'                          keep = c(measurementRemark = "Remark")
+#'                          keep = c(measurementRemark = "Remark"),
+#'                          metadata = list(license = "http://creativecommons.org/publicdomain/zero/1.0/")
 #' )
 #' head(dataset3)
 #' 
@@ -63,7 +65,13 @@ mutate.traitdata <- function(.data,
   # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]
   
-  plyr::rbind.fill(subset(.data, !traitName %in% names(out_traits)), out)
+  out <- plyr::rbind.fill(subset(.data, !traitName %in% names(out_traits)), out)
+  
+  attribs <- attributes(.data)
+  attribs$names <- attributes(out)$names
+  attributes(out) <- attribs
+  
+  return(out)
 }
 
 
