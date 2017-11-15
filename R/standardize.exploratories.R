@@ -62,6 +62,11 @@ standardize.exploratories <- function(x,
   # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]
   
-  class(out) <- c("data.frame", "traitdata")
+  # keep attributes of x
+  attribs <- attributes(x)
+  attribs$names <- attributes(out)$names
+  attributes(out) <- attribs
+  attr(out, "exploratories") <- as.thesaurus(temp)
+  
   return(out)
 }
