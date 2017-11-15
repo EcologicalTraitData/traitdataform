@@ -7,42 +7,53 @@
 #' traits within the same taxon, an occurrenceID should be given or will be 
 #' created.
 #' 
-#' @param x data.frame object, containing at least a column of taxa, and one or
+#' @param x data.frame object, containing at least a column of taxa, and one or 
 #'   more columns of trait measurements.
 #' @param traits a vector of column names containing traits.
-#' @param taxon the name of the column containing taxon names.
-#' @param individuals identical to `occurrence`. (old term kept for
+#' @param taxa the name of the column containing taxon names.
+#' @param individuals identical to `occurrence`. (old term kept for 
 #'   clarification)
-#' @param occurrence either a column name containing identifiers for each
-#'   individual specimen on which several traits were measured, i.e. an
-#'   occurrence of this taxon, or a vector of occurrence identifiers which must
+#' @param occurrences either a column name containing identifiers for each 
+#'   individual specimen on which several traits were measured, i.e. an 
+#'   occurrence of this taxon, or a vector of occurrence identifiers which must 
 #'   be of the same length as the number of rows of the table. See 'Details'.
-#' @param measurement either a column name containing identifiers for each
-#'   individual measurement, or a vector of measurement identifiers. This
+#' @param measurements either a column name containing identifiers for each 
+#'   individual measurement, or a vector of measurement identifiers. This 
 #'   applies, if single trait measurements span across multiple columns of data,
-#'   e.g. multivariate traits like quantitative measures of chemical compounds,
-#'   wavelengths or x-y-z coordinates. In most cases, a measurementID will link
+#'   e.g. multivariate traits like quantitative measures of chemical compounds, 
+#'   wavelengths or x-y-z coordinates. In most cases, a measurementID will link 
 #'   the data across rows in the longtable format. Make sure that the traitnames
-#'   given reflect the different dimensions of the trait measurement. If
-#'   `measurement` remains blank, sequential identifiers will be auto-generated
+#'   given reflect the different dimensions of the trait measurement. If 
+#'   `measurement` remains blank, sequential identifiers will be auto-generated 
 #'   for each measured value.
+#' @param units
 #' @param datasetID a unique name for this dataset (optional). Will be prepended
 #'   to the occurrence ID and measurement ID.
-#' @param keep a vector or named vector containing the names of the input
-#'   columns to be kept in the output. Vector names will be used to rename the
-#'   columns. It is recommended to use accepted column names of the traitdata
+#' @param keep a vector or named vector containing the names of the input 
+#'   columns to be kept in the output. Vector names will be used to rename the 
+#'   columns. It is recommended to use accepted column names of the traitdata 
 #'   standard for renaming!
 #' @param drop a vector acting as the inverse of `keep`. All columns listed will
 #'   be removed from the output dataset.
-#' @param na.rm logical defaults to `TRUE`. If `FALSE`, all measured Values
+#' @param na.rm logical defaults to `TRUE`. If `FALSE`, all measured Values 
 #'   containing NA will be kept in the output table. This is not reccomended for
 #'   most data.
+#' @param metadata a list of named entries, according to the terms for metadata 
+#'   of the traitdata standard. Metadata will be added as attributes to the data
+#'   table. Possible entries are: `rightsHolder`, `bibliographicCitation`, 
+#'   `license`, `author`, `datasetID`, `datasetName`, `version`. (see 'Details')
 #' @param ...
 #'   
-#' @details If `occurrence` is left blank, the script will check for the
-#'   structure of the input table. If several entries are given for the same
-#'   taxon, it assumes that input is an occurrence table and assigns
+#' @details If `occurrence` is left blank, the script will check for the 
+#'   structure of the input table. If several entries are given for the same 
+#'   taxon, it assumes that input is an occurrence table and assigns 
 #'   identifiers.
+#'   
+#'   Metadata will be stored as attributes to the data frame and can be accessed
+#'   via `attributes()`. It is not necessary but highly recommended to provide
+#'   metadata when working with multiple trait data files. When appending
+#'   datasets using `rbind()`, the metadata will be stored in additional
+#'   columns.
 #'   
 #' @export
 #' @import reshape
@@ -51,9 +62,25 @@
 #' 
 #' # species-trait matrix: 
 #' 
+#' data(carabids)
+#' 
+#' dataset1 <- as.traitdata(carabids, 
+#'   taxa = "name_correct", 
+#'   traits = c("body_length", "antenna_length", "metafemur_length"),
+#'   units = "mm",
+#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+#'   metadata = list(
+#'     bibliographicCitation = attributes(carabids)$citeAs,
+#'     author = "Fons van der Plas", 
+#'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
+#'     )
+#' )
+#' 
 #' # occurrence table: 
 #' 
-#' dataset2 <- as.traitdata(heteropteraRaw, 
+#' data(heteroptera_raw)
+#' 
+#' dataset2 <- as.traitdata(heteroptera_raw, 
 #'   taxa = "SpeciesID", 
 #'   traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
 #'     "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
@@ -62,26 +89,39 @@
 #'     "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
 #'     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
 #'   units = "mm", 
-#'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development")
+#'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
+#'   metadata = list(
+#'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+#'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
+#'     )
 #' )
 #' 
 #' 
 
 as.traitdata <- function(x, 
-                          traits = NULL, # name of column or vector of trait names
-                          taxa, # name of column or vector of species/taxon names
-                          individuals = NULL,  # deprecated/implemented for ambiguity
-                          occurrences = individuals,
-                          datasetID = NULL,
-                          measurements = NULL,
-                          units = NULL,
-                          keep = NULL,
-                          drop = NULL, 
-                          na.rm = TRUE,
-                          id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
-                          mutate = NULL,
-                          thesaurus = NULL,
-                          ...
+                         traits = NULL, # name of column or vector of trait names
+                         taxa, # name of column or vector of species/taxon names
+                         individuals = NULL,  # deprecated/implemented for ambiguity
+                         occurrences = individuals,
+                         datasetID = NULL,
+                         measurements = NULL,
+                         units = NULL,
+                         keep = NULL,
+                         drop = NULL, 
+                         na.rm = TRUE,
+                         id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
+                         mutate = NULL,
+                         thesaurus = NULL,
+                         metadata = list(
+                           rightsHolder = NULL,
+                           bibliographicCitation = NULL,
+                           license = NULL,
+                           author = NULL,
+                           datasetID = datasetID,
+                           datasetName = NULL,
+                           version = NULL
+                         ),
+                         ...
 ) {
   
   if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus)) traits = sapply(thesaurus, function(x) x$traitName)
@@ -157,6 +197,9 @@ as.traitdata <- function(x,
       out$traitUnit <- as.factor(match(out$traitName, names(units))) 
       levels(out$traitUnit) <- units
     }
+    if(length(units) == (length(traits)*length(x$scientificName))) {
+      out$traitUnit <- as.factor(units)
+    }
   } 
    
   
@@ -171,7 +214,30 @@ as.traitdata <- function(x,
   # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]
   
+  # set metadata attributes
+  attr(out, "rightsHolder") <- metadata$rightsHolder 
+  attr(out, "bibliographicCitation") <- metadata$bibliographicCitation 
+  attr(out, "license") <- metadata$license 
+  attr(out, "author") <- metadata$author 
+  attr(out, "datasetID") <- metadata$datasetID 
+  attr(out, "datasetName") <- metadata$datasetName
+  attr(out, "version") <- metadata$version
+
+    
   class(out) <- c( "traitdata", "data.frame")
   return(out)
   
+}
+
+
+print.traitdata <- function(x) {
+
+  class(x) <- "data.frame"
+  print(x)
+  
+  if(!is.null(attributes(x)$bibliographicCitation)) {
+    cat("\n Cite this trait dataset as: \n")
+    print(attributes(x)$bibliographicCitation)
+  }
+  if(!is.null(attributes(x)$license)) cat("\n Published under:", attributes(x)$license)
 }
