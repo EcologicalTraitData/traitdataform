@@ -314,54 +314,49 @@ We highly encourage the implementation of open online resources for these glossa
 
 #### refer to an own trait thesaurus
 
-For an interim solution, until comprehensive trait ontologies are compiled, your dataset should therefore be referenced to a publicly available dataset or file that specifies the trait in detail. Ideally it is stored as an asset along with your trait dataset. This can be a csv or txt file published on a open access repository (figshare, researchgate or github, to name but a few), or a website providing direct links to the trait definition (URI). 
+If no published trait definition is available that can be referenced, trait-datasets should be accompanied by a dataset-specific glossary of traits, or thesaurus. A thesaurus provides a "controlled vocabulary designed to clarify the definition and structuring of key terms and associated concepts in a specific discipline".
 
-The reference file should contain at least the following columns: 
+Ideally this thesaurus is stored as an asset along with your trait dataset or in a public file on the internet. This can be a csv or txt file published on a open access repository (figshare, researchgate or github, to name but a few), or a website providing direct links to the trait definition (URI). 
 
-- `traitName` should be a short descriptive name. No spaces should be used. Rather use a scheme with underscore or capital letters to highlight multiple words (e.g. 'body_length' or 'bodyLenght').  
-- `traitID` should specify an alphanumeric ID for the specific use in your dataset or - better - a URI that reliably links to the definition of the trait measurement on an online repository. This could be achieved by providing a online version of your traitlist (TODO: provide instructions in wiki how to achieve this). We highly encourage to submit your own trait definitions to existing ontology servers to facilitate this process of trait standardisation (e.g. with GFBio). 
+
+This reference file should contain at least the following columns: 
+
+- `trait` should be a short descriptive name. No spaces should be used. Rather use a scheme with underscore or capital letters to highlight multiple words (e.g. 'body_length' or 'bodyLenght').
+- `identifier` should specify an alphanumeric ID for the specific use in your dataset or - better - a URI that reliably links to the definition of the trait measurement on an online repository. This could be achieved by providing a online version of your traitlist (TODO: provide instructions in wiki how to achieve this). We highly encourage to submit your own trait definitions to existing ontology servers to facilitate this process of trait standardisation (e.g. with GFBio). 
 - `traitDescription`: a detailled and unambiguous, human readable definition.
-- `traitType` to specify the expected kind of entries. Set it to 'numeric' for quantitative traits, 'integer' for counts or ordinal traits, 'character' for trait values that are provided as free text, 'factor' for traits that take one of few non-ordinal levels, 'logical' for binary/boolean entries (yes/no).  
-  - For *numeric traits*, the field `traitUnit` should provide the expected unit for the trait. The R script will then try to convert trait values into this unit. 
+- `valueType` to specify the expected kind of entries. Set it to 'numeric' for quantitative traits, 'integer' for counts or ordinal traits, 'character' for trait values that are provided as free text, 'factor' for traits that take one of few non-ordinal levels, 'logical' for binary/boolean entries (yes/no).  
+  - For *numeric traits*, the parameter `expectedUnit` should provide the expected unit for the trait. The R script will then try to convert trait values into this unit. 
   - for *categorical traits* of kind 'factor' or 'integer', the field `factorLevels` should contain a list the valid factorial traits separated by semicolon. In case of ordinal traits, the order must be precisely corresponding to the number of possible integer values. 
-- `Comments` may contain examples and clarifications
+- `comments` may contain examples and clarifications
 
-Further Columns can be added to specify the trait definition in relation to other current or outdated definitions or to set a version number
-
-- `Refines` would link the trait definition to an existing ontology on the web. Ideally this contains a URI.  
-- `Reference` would contain a original literature reference where the trait measurement has been described. 
-- `Version`
-- `DateIssued`
-- `DateModified`
-- `Replaces`
-
-The trait thesaurus can be created from a data.frame using the function `thesaurus()`. The parameter `replace` can be used for fixing column names to the expected names outlined above (see function `rename()` of the reshape package). 
+The trait thesaurus can be created from a data.frame using the function `as.thesaurus()`. The parameter `replace` can be used for fixing column names to the expected names outlined above (see function `plyr::rename()` of the plyr package). 
 
 ```{r, eval = FALSE}
 
-#NOT WORKING! call from repository!
-traits1 <- as.thesaurus(read.csv("../data_test/traitlist_arthropods.csv"), 
-                     replace = c(measurementType = "traitName", 
-                                 measurementTypeDescription = "traitDescription",
-                                 measurementTypeID = "traitID", 
-                                 measurementValueType = "valueType") 
-                     )
+traits1 <- as.thesaurus(read.csv("https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"), 
+     replace = c(
+       traitID = "identifier", 
+       traitName = "trait",
+       traitUnit = "expectedUnit",
+       Comments = "comments"
+       ) 
+ )
 
 ```
 
-Alternatively, the thesaurus can be created manually by providing objects of class 'trait' for the function `as.thesaurus()` which will be used to create a valid data frame. This is especially useful if your data comprise only a small number of traits. Using the `as.trait()` syntax may allow a more flexible trait definition and an ensures compliance with the terms of the traitdata standard outlined above. It also allows building a library of trait definitions where single traits can be reused in multiple projects. 
+In R, the thesaurus can be created manually by providing objects of class 'trait' for the function `as.thesaurus()` which will be used to create a valid data frame. This is especially useful if your data comprise only a small number of traits. Using the `as.trait()` syntax may allow a more flexible trait definition and an ensures compliance with the terms of the traitdata standard outlined above. It also allows building a library of trait definitions where single traits can be reused in multiple projects. 
 
 ```{r}
-
 traits1 <- as.thesaurus(
-       body_length = as.trait("body_length", traitUnit = "mm", traitUnitStd = "mm"), 
-       antenna_length = as.trait("antenna_length", traitUnitStd = "mm"),
-       metafemur_length = as.trait("metafemur_length", traitUnit = "mm", traitUnitStd = "mm"),
-       eyewidth = as.trait("eyewidth_corr", traitUnit = "mm", traitUnitStd = "mm")
+       body_length = as.trait("body_length", expectedUnit = "mm", identifier = "length"), 
+       antenna_length = as.trait("antenna_length", expectedUnit = "mm", identifier = "antenna"),
+       metafemur_length = as.trait("metafemur_length", expectedUnit = "mm", identifier = "metafemur"),
+       eyewidth = as.trait("eyewidth_corr", expectedUnit = "mm", identifier = "eyewidth")
 )
 ```
 
-#### providing the thesaurus to standardise trait data
+
+#### standardise trait data
 
 The function `standardize.traits()` now finally has all it needs to complete its job. 
 
@@ -377,7 +372,7 @@ write.csv(dataset1final, file = "traitdataset_carabids.csv")
 What does the function do in terms of standardisation. 
 
 - **Unit conversion**: on all numerical traits, unit conversion to the target unit will be attempted. Unit conversion can only be successfully performed if both columns `traitUnit` and `traitUnitStd` are provided with valid unit names for the numeric trait.
-- **factor level checking** : if a controlled vocabulary is provided in the trait thesaurus, the function checks whether the provided factor levels are valid and asks for a mapping vector otherwise. (**buggy and incomplete!**)
+- **factor level checking** : if a controlled vocabulary is provided in the trait thesaurus, the function checks whether the provided factor levels are valid and asks for a mapping vector otherwise. (**not functional!**)
 - **logical value harmonization** : for logical traits, the function harmonizes the standardised output. By default it produces a vector of TRUE and FALSE entries. Missing values return NA. The parameters `output` and `categories` can be provided to function `standardize()`. See `?fixlogical` for further detail. 
 
 ### georeference standardization for Biodiversity Exploratories
