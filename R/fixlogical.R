@@ -1,8 +1,8 @@
 #' Standardise logical variables
 #'
-#' @param x a vector.
+#' @param x a vector of two different types of entries (can be of type factor, integer, logical, or character).
 #' @param output a switch to set the desired output format. Defaults to "logical", but can be "character", "binary" or "factor".  
-#' @param categories
+#' @param categories output target categories for binary/logical traits harmonization if `output` is not set to 'logical'.
 #'
 #' @return A vector of harmonized logical values.
 #' @export
@@ -25,7 +25,7 @@ fixlogical <- function(x, output = "logical", categories = c("No", "Yes")) {
   # ToDo: add test or fuzzy matching algorithm
 
   levels(x) <- list('0'=c("0", "no", "n", "nein", "false", "non"),
-                    '1'=c("1", "yes", "y", "ja",  "j", "true", "oui"))
+                    '1'=c("1", "yes", "y", "ja",  "j", "true", "oui", "si"))
 
   levels(x) <- categories
 
