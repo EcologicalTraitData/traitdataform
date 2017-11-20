@@ -93,6 +93,8 @@
 #'   units = "mm", 
 #'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
 #'   metadata = list(
+#'     author = "Gossner MM, Simons NK, Höck L and Weisser WW",
+#'     datasetName = "Morphometric traits Heteroptera", 
 #'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
@@ -126,6 +128,8 @@ as.traitdata <- function(x,
                          ...
 ) {
   
+  input_name <- deparse(substitute(x))
+
   if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus)) traits = sapply(thesaurus, function(x) x$traitName)
   
   # rename taxon column into 'scientificName'
@@ -217,29 +221,86 @@ as.traitdata <- function(x,
   out <- out[, order(match(names(out), glossary$columnName) )]
   
   # set metadata attributes
-  attr(out, "rightsHolder") <- metadata$rightsHolder 
-  attr(out, "bibliographicCitation") <- metadata$bibliographicCitation 
-  attr(out, "license") <- metadata$license 
-  attr(out, "author") <- metadata$author 
-  attr(out, "datasetID") <- metadata$datasetID 
-  attr(out, "datasetName") <- metadata$datasetName
-  attr(out, "version") <- metadata$version
+  
+  metadata_template = list(
+    rightsHolder = NA,
+    bibliographicCitation = NA,
+    license = NA,
+    author = NA,
+    datasetID = NA,
+    datasetName = NA,
+    version = NA
+  )
+  
+  metadata_out <- lapply(names(metadata_template), function(i) {
+    if (i %in% names(metadata)) metadata[[i]]
+    else metadata_template[[i]]  
+  })
+  names(metadata_out) <- names(metadata_template)
 
-    
+  attr(out, "metadata") <- list(a = metadata_out)
+  names(attributes(out)$metadata) <- input_name
+  
+  #out$metadata[sapply(out$metadata, is.null)] <- NA
+  class(attributes(out)$metadata) <- c("metadata", "list")
+
   class(out) <- c( "traitdata", "data.frame")
   return(out)
   
 }
 
 
+#' @export
 print.traitdata <- function(x) {
-
+  
+  n_traits <- length(levels(x$traitName))
+  n_taxa <- length(levels(x$scientificName))
+  n_measurements <- length(attributes(x)$row.names)
+  
   class(x) <- "data.frame"
   print(x)
+
+  # dataset summary  
+  cat("\nThis trait-dataset contains", n_traits, "traits for", n_taxa, 
+      "taxa (", n_measurements, "measurements in total).\n\n" )
   
-  if(!is.null(attributes(x)$bibliographicCitation)) {
-    cat("\n Cite this trait dataset as: \n")
-    print(attributes(x)$bibliographicCitation)
+  # for each dataset contained (by datasetID) print:
+  if(!is.null(attributes(x)$metadata)) {
+    
+   for(i in 1:length(attributes(x)$metadata)) {
+    
+      if(!is.na(attributes(x)$metadata[[i]]$datasetID)) {
+        cat(attributes(x)$metadata[[i]]$datasetID, ": ")
+      } else {cat("[1]: ")}
+      
+       # trait-dataset: datasetname (version) by author 
+      
+      if(!is.na(attributes(x)$metadata[[i]]$datasetName)) {
+        cat(attributes(x)$metadata[[i]]$datasetName)
+      }
+      if(!is.na(attributes(x)$metadata[[i]]$version)) {
+        cat(" (", attributes(x)$metadata[[i]]$version, ") ")
+      }
+      if(!is.na(attributes(x)$metadata[[i]]$author)) {
+        cat(" by", attributes(x)$metadata[[i]]$author,".\n") 
+      }
+      
+      
+      if(!is.na(attributes(x)$metadata[[i]]$bibliographicCitation) |
+           !is.na(attributes(x)$metadata[[i]]$license))  {
+      cat("\n    When using these data must acknowledge the following usage policies: \n")
+      }
+      
+      # cite as: 
+      if(!is.na(attributes(x)$metadata[[i]]$bibliographicCitation)) {
+        
+        cat("\n    Cite this trait dataset as: \n")
+        print(attributes(x)$metadata[[i]]$bibliographicCitation)
+      }
+      # published under
+      if(!is.na(attributes(x)$metadata[[i]]$license)) {
+        cat("\n    Published under:", attributes(x)$metadata[[i]]$license, "\n\n")
+      }
+    }
   }
-  if(!is.null(attributes(x)$license)) cat("\n Published under:", attributes(x)$license)
 }
