@@ -26,7 +26,9 @@
 #'   given reflect the different dimensions of the trait measurement. If 
 #'   `measurement` remains blank, sequential identifiers will be auto-generated 
 #'   for each measured value.
-#' @param units
+#' @param units a single character string or named vector giving the units that
+#'   apply to the traits. If only one unit type is given, it will be applied to
+#'   all traits.
 #' @param datasetID a unique name for this dataset (optional). Will be prepended
 #'   to the occurrence ID and measurement ID.
 #' @param keep a vector or named vector containing the names of the input 
@@ -50,9 +52,9 @@
 #'   identifiers.
 #'   
 #'   Metadata will be stored as attributes to the data frame and can be accessed
-#'   via `attributes()`. It is not necessary but highly recommended to provide
-#'   metadata when working with multiple trait data files. When appending
-#'   datasets using `rbind()`, the metadata will be stored in additional
+#'   via `attributes()`. It is not necessary but highly recommended to provide 
+#'   metadata when working with multiple trait data files. When appending 
+#'   datasets using `rbind()`, the metadata will be stored in additional 
 #'   columns.
 #'   
 #' @export
