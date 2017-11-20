@@ -33,7 +33,7 @@
 #'   taxa = "name_correct", 
 #'   traits = c("body_length", "antenna_length", "metafemur_length"),
 #'   units = "mm",
-#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+#'   keep = c(datasetID = "source_measurement", measurementRemarks = "note"), 
 #'   metadata = list(
 #'     bibliographicCitation = attributes(carabids)$citeAs,
 #'     author = "Fons van der Plas", 
@@ -54,7 +54,7 @@
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #')
 #'
-#' dataset1Std <- standardize(dataset1, thesaurus = traits1)
+#' dataset1Std <- standardize.traits(dataset1, thesaurus = traits1)
 #' 
 #' # occurrence table: 
 #' 
@@ -65,9 +65,10 @@
 #'   traits = c("Body_length", "Antenna_Seg1", "Antenna_Seg2",
 #'     "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
 #'   units = "mm", 
-#'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
+#'   keep = c(sex = "Sex", references = "Source", lifeStage = "Wing_development"),
 #'   metadata = list(
 #'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+#'     author = "Martin Gossner",
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
@@ -87,7 +88,7 @@
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #')
 #'
-#' dataset2Std <- standardize(dataset2, 
+#' dataset2Std <- standardize.traits(dataset2, 
 #'     thesaurus = traits2, 
 #'     rename = c(Body_length = "body_length", 
 #'                antenna_length = "antenna_length", 
@@ -95,7 +96,7 @@
 #'                )
 #'     )
 #' 
-#' database <- rbind.traitdata(dataset1Std, dataset2Std)
+#' database <- rbind(dataset1Std, dataset2Std)
 
 rbind.traitdata <- function(..., 
                             metadata = NULL, 
@@ -116,7 +117,7 @@ rbind.traitdata <- function(...,
   # set datasetID according to parameter datasetID
   if(!is.null(datasetID) && length(datasetID) == length(input) ) {
     for(i in 1:length(input)) {
-      attributes(input[[i]])$datasetID <- datasetID[i]
+      attributes(input[[i]])$metadata[[1]]$datasetID <- datasetID[i]
       input[[i]]$datasetID <- input_names[i]
       }
   }  
@@ -124,16 +125,16 @@ rbind.traitdata <- function(...,
   # set datasetID according to metadata entry names
   if(is.null(datasetID) && !is.null(names(metadata)) && length(metadata) == length(input)) {
     for(i in 1:length(input)) {
-      attributes(input[[i]])$datasetID <- names(metadata)[i]
+      attributes(input[[i]])$metadata[[1]]$datasetID <- names(metadata)[i]
       input[[i]]$datasetID <- input_names[i]
       }
   }  
   
   # set datasetID according to object names
   if(is.null(datasetID) && is.null(metadata) && 
-       is.null(unlist(lapply(input, function(x) attributes(x)$datasetID)))) {
+       is.null(unlist(lapply(input, function(x) attributes(x)$metadata[[1]]$datasetID)))) {
     for(i in 1:length(input)) {
-      attributes(input[[i]])$datasetID <- input_names[i]
+      attributes(input[[i]])$metadata[[1]]$datasetID <- input_names[i]
       input[[i]]$datasetID <- input_names[i]
       }
   }  
@@ -151,7 +152,7 @@ rbind.traitdata <- function(...,
                    )
   
   metadata <- lapply(input, function(x) {
-        out <- attributes(x)[metacolumns]
+        out <- attributes(x)$metadata[[1]][metacolumns]
         names(out) <- metacolumns
         out[sapply(out, is.null)] <- NA
         class(out) <- c("metadata", "list")
@@ -168,12 +169,6 @@ rbind.traitdata <- function(...,
   
   traits_standardized <- sapply(terms_used, function(x) c("traitNameStd") %in% x ) 
   taxa_standardized <- sapply(terms_used, function(x) c("ScientificNameStd") %in% x ) 
-  
-  # # assign dataset ID 
-  # if(is.null(datasetID)) { datasetID <- input_names } else {
-  #   if(length(datasetID) != length(input)) stop("parameter 'datasetID' must be of same length as the number of input objects.")
-  # }
-  # for(x in 1:length(input)) input[[x]]$datasetID <- as.factor(datasetID[x])
   
   # Check if trait names are compatible
   traits <- lapply(input, function(x) levels(x$traitName))
@@ -197,7 +192,7 @@ rbind.traitdata <- function(...,
   # rbind data objects in input list
   input <- lapply(input, data.table::as.data.table)
   
-  out <- data.table::rbindlist(input, use.names = TRUE, fill = !drop)
+  out <- data.table::rbindlist(input, use.names = TRUE, fill = TRUE)
   
   out <- as.data.frame(out)
   
@@ -213,9 +208,8 @@ rbind.traitdata <- function(...,
   attribs$names <- attributes(out)$names
   attribs$row.names <- seq_along(out[,1])
 
-  attr(out, "metadata") <- metadata
-  
   attributes(out) <- attribs
+  attr(out, "metadata") <- metadata
   
   return(out)
 }
