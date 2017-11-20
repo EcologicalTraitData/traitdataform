@@ -106,36 +106,22 @@ standardize.taxonomy <- function(x,
 
 #' Standardize trait names and harmonize measured values and reported facts
 #' 
-#' @description Adds columns to a traitdata table with standardized trait names 
-#'   and relates them to globally unique identifiers via URIs. Optionally 
+#' @description Adds columns to a traitdata table with standardized trait names
+#'   and relates them to globally unique identifiers via URIs. Optionally
 #'   converts units of values and renames factor levels into accepted terms.
 #'   
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
-#'   containing at least the columns `traitValue`.
-#' @param thesaurus an object of class 'thesaurus' (as returned by 
-#'   `as.thesaurus()`).
-#' @param rename character vector of same length and order as 
-#'   `levels(x$traitName)`. Will superimpose names of traits to match thesaurus 
-#'   input names. (see Details)
-#' @param output a switch to set the desired output format. Defaults to 
-#'   "logical", but can be "character", "binary" or "factor".
-#' @param categories output target categories for binary/logical traits 
-#'   harmonization if `output` is not set to 'logical'.
+#'   containing at least the column `scientificName.
+#' @param thesaurus an object of class 'thesaurus' (as returned by `as.thesaurus()`). 
+#' @param rename
+#' @param categories target categories for binary/logical traits harmonization.
+#' @param output
 #'   
 #' @import units
-#' @return Adds harmonized columns to the traitdata object, including
-#'   
-#'   - unit conversion 
-#'   - factor level harmonization 
-#'   - global or dataset-specific identifier for trait definitions
-#'   
-#'   The lookup table of trait definitions (Thesaurus) is attached to the output
-#'   object as an attribute and can be accessed by calling
-#'   `attributes(<output>)$thesaurus`.
-#'   
 #' @export
 #' 
 #' @examples 
+#' 
 #' 
 #' data(carabids)
 #' 
@@ -161,7 +147,7 @@ standardize.taxonomy <- function(x,
 #' )
 #' 
 #' dataset1Std <- standardize.traits(dataset1, thesaurus = traitlist)
-#' 
+
 standardize.traits <- function(x,
                                thesaurus, 
                                rename = NULL,
@@ -172,6 +158,15 @@ standardize.traits <- function(x,
   
   x$traitNameStd <- x$traitName
   
+  # build lookup data.frame from thesaurus object
+  lookup <- do.call(rbind, lapply(thesaurus,data.frame))
+ 
+  # if no identifier is provided, set integer values
+  if(is.null(levels(lookup$identifier))) lookup$identifier <- as.factor(seq_along(lookup$trait))
+ 
+  # add standardised trait name according to defined thesaurus (object names within list)
+  lookup <- cbind(traitNameStd = names(thesaurus), lookup)
+ 
   # perform renaming of traits
   if(is.null(rename) && length(thesaurus) == length(levels(x$traitName)) && !is.null(names(thesaurus))) { 
     levels(x$traitNameStd) <- names(thesaurus)
@@ -182,71 +177,75 @@ standardize.traits <- function(x,
     levels(x$traitNameStd) <- traitmap[match(levels(x$traitName), names(rename) )]
   }
   
- lookup <- do.call(rbind, lapply(thesaurus,data.frame))
+  # merge lookup table into original data frame based on user provided trait name mapping
+  out <- merge.data.frame(x, lookup[,c("trait","identifier", "expectedUnit" )], by.x = "traitNameStd", by.y = "trait", sort = FALSE )
  
- if(is.null(levels(lookup$identifier))) lookup$identifier <- as.factor(seq_along(lookup$trait))
+  ## rename columns according to ETS
+  colnames(out)[colnames(out) == "trait"] <- "traitNameStd"
+  colnames(out)[colnames(out) == "expectedUnit"] <- "traitUnitStd"
+  colnames(out)[colnames(out) == "identifier"] <- "traitID"
  
- lookup <- cbind(traitNameStd = names(thesaurus), lookup)
+  ## generate standardized trait vector
  
- out <- merge(x, lookup[,c("trait","identifier" )], by.x = "traitNameStd", by.y = "trait", sort = FALSE )
+  out$traitValueStd <- NA
  
- ## rename columns according to ETS
- colnames(out)[colnames(out) == "trait"] <- "traitNameStd"
+  #templist <- split(temp, f = temp$traitNameStd) 
  
- ## generate standardized trait vector
+  traits <- levels(out$traitNameStd) #levels(lookup$trait) #
  
- out$traitValueStd <- NA
-
- # add column for standardised Unit and preserve factor levels
- out$traitUnitStd <- factor(NA, levels = levels(lookup$expectedUnit))
- 
- #templist <- split(temp, f = temp$traitNameStd) 
- 
- traits <- levels(out$traitNameStd) #levels(lookup$trait) #
- 
- for(i in 1:length(traits)) { # iterate over all trait categories (by user provided names)
+  for(i in 1:length(traits)) { # iterate over all trait categories (by user provided names)
    
    # harmonize logical values
    if(is.na(lookup[i,]$valueType) ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
-     
-     # harmonize logical/binary/boolean trait variables
      if(lookup[i,]$valueType == "logical") {
        templist <- split(out, f = out$traitNameStd) 
-       out[out$traitName == traits[i],"traitValueStd"] <- fixlogical(
-           templist[[i]]$traitValue, output = output, categories = categories
-           )
+       out[out$traitName == traits[i],"traitValueStd"] <- fixlogical(templist[[i]]$traitValue, output = output, categories = categories)
      }
      
-     ## factor level harmonization 
-     
-     #NOT WORKING !!!
-     
+     ## factor level harmonization
      if(lookup[i,]$valueType == "categorical") { 
        subset(out, traitName == traits[i])$traitValueStd 
        
      } ## end of factor level harmonization
      
+     
      ## unit conversion:
      if(lookup[i,]$valueType == "numeric") {
        
-       out$traitUnitStd[out$traitName == traits[1]] <- lookup$expectedUnit[i]
+       
        
        unit_original <- droplevels(subset(out, traitName == traits[i])$traitUnit)
        unit_target <- droplevels(subset(out, traitName == traits[i])$traitUnitStd)
        
+       
        # case 1: homogeneous units for the entire trait
        if(length(levels(unit_original)) == 1 && length(levels(unit_target)) == 1) {
          
-         value_original <-  subset(out, traitName == traits[i])$traitValue * units::ud_units[[levels(unit_original)]]
-         out[out$traitName == traits[i], "traitValueStd"] <- units::set_units(value_original, units::parse_unit(levels(unit_target)))
+         unit_original <- as.character(levels(unit_original))
+         unit_target <- as.character(levels(unit_target))
+         
+         # extract original value
+         value_original <- subset(out, traitName == traits[i])$traitValue * units::ud_units[[unit_original]]
+         
+         # create vector with standardized value and write into output
+         value_standardized <- value_original
+         units(value_standardized) <- units::parse_unit(unit_target)
+         out[out$traitName == traits[i], "traitValueStd"] <- value_standardized
+         
          
        } else {     # case 2: heterogeneous units used within a single trait
          
+         # extract original value
          value_original <-  subset(out, traitName == traits[i])$traitValue
+         
+         # convert value in standardized value and write into output
          for(j in seq_along(value_original))  {
            
-           value_original_j <- value_original[j] * units::ud_units[[as.character(unit_original[j])]] 
-           out[out$traitName == traits[i],"traitValueStd"][j] <- units::set_units(value_original_j , units::parse_unit(as.character(unit_target[j]))) 
+           value_original_j <- value_original[j] * units::ud_units[[unit_original[j]]] 
+           
+           value_standardized_j <- value_original_j
+           units(value_standardized_j) <- units::parse_unit(unit_target[j])
+           out[out$traitName == traits[i],"traitValueStd"][j] <- value_standardized_j
          }
          
        }
@@ -256,15 +255,15 @@ standardize.traits <- function(x,
    }
    
  }
- 
+  
  # sort columns according to glossary of terms
  out <- out[, order(match(names(out), glossary$columnName) )]
  
  # keep attributes of x
  attribs <- attributes(x)
  attribs$names <- attributes(out)$names
+ attribs$row.names <- seq_along(out[,1])
  attributes(out) <- attribs
- attr(out, "thesaurus") <- as.thesaurus(lookup)
  
  return(out)
 }
@@ -275,10 +274,11 @@ standardize.traits <- function(x,
 #' @description wrapper that applies `standardize.taxonomy()` and
 #'   `standardize.traits()` in one go.
 #' 
-#' @param x
-#' @param ... 
+#' @param ... parameters as described for `standardize.traits()` and `standardize.taxonomy()`.
+#' 
 #' @inheritParams standardize.traits 
 #' @inheritParams standardize.taxonomy
+#' 
 #' @export
 #' 
 standardize <- function(x,
