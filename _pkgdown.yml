@@ -1,0 +1,31 @@
+reference:
+  - title: "Reading and Writing Data"
+    desc: "Functions for reading and writing Spark DataFrames."
+    contents:
+      - as.traitdata
+      - as.trait
+      - as.thesaurus
+      - standardize.taxonomy
+      - standardize.traits
+      - standardize.exploratories
+      - standardize
+      - mutate.traitdata
+      - merge.traitdata
+      - rbind.traitdata
+  - title: "Datasets"
+    desc: "List of data objects available after calling `data(<nameofdataset>)`."
+    contens: 
+      - amniota
+      - amphibio
+      - arthropodtraits
+      - carabids
+      - heteroptera
+      - heteroptera_raw
+      - mammaldiet
+      - pantheria
+  - title: "Helper functions"
+    desc: "Internal functions called by the main functions of the package."
+    contents: 
+      - accessBexis
+      - fixlogical
+      - get_gbif_taxonomy
