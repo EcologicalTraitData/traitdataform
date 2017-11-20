@@ -10,6 +10,8 @@ as.thesaurus(..., replace = NULL)
 \item{...}{multiple objects of class 'trait' (produced by function
 \code{as.trait()}) or a data.frame containing columns according to the terms
 provided by https://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri.}
+
+\item{replace}{named character vector, with new names as values, and old names as names.}
 }
 \value{
 a list of formalized objects of class 'trait', as returned by

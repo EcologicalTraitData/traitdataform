@@ -22,6 +22,7 @@ This function requires valid credentials for the Biodiversity Exploratories Info
 }
 \examples{
 
+\dontrun{
 moths <- read.service(21247, dec = ",")
 
 dataset1 <- as.traitdata(moths, taxa = "species", traits = c(body_mass =
@@ -30,5 +31,5 @@ dataset1 <- as.traitdata(moths, taxa = "species", traits = c(body_mass =
   keep = c(locationID = "plot"))
 
 dataset1Std <- standardize.exploratories(dataset1)
-
+}
 }

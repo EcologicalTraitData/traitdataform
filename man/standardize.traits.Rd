@@ -9,39 +9,37 @@ standardize.traits(x, thesaurus, rename = NULL, categories = c("No", "Yes"),
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
-containing at least the columns \code{traitValue}.}
+containing at least the column `scientificName.}
 
 \item{thesaurus}{an object of class 'thesaurus' (as returned by
 \code{as.thesaurus()}).}
 
-\item{rename}{character vector of same length and order as
-\code{levels(x$traitName)}. Will superimpose names of traits to match thesaurus
-input names. (see Details)}
+\item{rename}{a named vector to map user-provided names to thesaurus object
+names (see Details).}
 
-\item{categories}{output target categories for binary/logical traits
-harmonization if \code{output} is not set to 'logical'.}
+\item{categories}{target categories for binary/logical traits harmonization.}
 
-\item{output}{a switch to set the desired output format. Defaults to
-"logical", but can be "character", "binary" or "factor".}
-}
-\value{
-Adds harmonized columns to the traitdata object, including
-\itemize{
-\item unit conversion
-\item factor level harmonization
-\item global or dataset-specific identifier for trait definitions
-}
-
-The lookup table of trait definitions (Thesaurus) is attached to the output
-object as an attribute and can be accessed by calling
-\code{attributes(<output>)$thesaurus}.
+\item{output}{}
 }
 \description{
 Adds columns to a traitdata table with standardized trait names
 and relates them to globally unique identifiers via URIs. Optionally
 converts units of values and renames factor levels into accepted terms.
 }
+\details{
+The function matches the trait names provided in 'traitName' to the
+traits provided in the thesaurus (in field 'trait'). Matching must be exact
+(case sensitive). Fuzzy matching may be provided in a later version of the
+package.
+
+The function parameter 'rename' should be provided to map trait names where
+user-provided names and thesaurus names are different. In this case, rename
+should be a named vector with the target names used in the thesaurus as
+names, and the original names as provided in 'traitName' as value. E.g.
+\code{renam = c()}
+}
 \examples{
+
 
 data(carabids)
 
@@ -67,5 +65,45 @@ metafemur_length = as.trait("metafemur_length", expectedUnit = "mm", valueType =
 )
 
 dataset1Std <- standardize.traits(dataset1, thesaurus = traitlist)
+
+
+
+## Example: matching of original names to thesaurus
+
+dataset2 <- as.traitdata(heteroptera_raw, 
+  taxa = "SpeciesID", 
+  traits = c("Body_length", "Antenna_Seg1", "Antenna_Seg2",
+    "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
+  units = "mm", 
+  keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
+  metadata = list(
+    bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+    license = "http://creativecommons.org/publicdomain/zero/1.0/"
+    )
+)
+
+dataset2 <- mutate.traitdata(dataset2, antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 )
+
+
+traits2 <- as.thesaurus(
+ body_length = as.trait("body_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+ antenna_length = as.trait("antenna_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
+ metafemur_length = as.trait("metafemur_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
+)
+
+dataset2Std <- standardize.traits(dataset2, 
+    thesaurus = traits2, 
+    rename = c(Body_length = "body_length", 
+               antenna_length = "antenna_length", 
+               Hind.Femur_length = "metafemur_length"
+               )
+    )
+
 
 }

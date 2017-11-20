@@ -8,9 +8,9 @@ standardize(x, ..., verbose = NULL, warnings = NULL)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
-containing at least the columns \code{traitValue}.}
+containing at least the column `scientificName.}
 
-\item{...}{}
+\item{...}{parameters as described for \code{standardize.traits()} and \code{standardize.taxonomy()}.}
 
 \item{verbose}{has currently no effect.}
 }

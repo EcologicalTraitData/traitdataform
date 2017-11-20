@@ -41,6 +41,10 @@ given reflect the different dimensions of the trait measurement. If
 \code{measurement} remains blank, sequential identifiers will be auto-generated
 for each measured value.}
 
+\item{units}{a single character string or named vector giving the units that
+apply to the traits. If only one unit type is given, it will be applied to
+all traits.}
+
 \item{keep}{a vector or named vector containing the names of the input
 columns to be kept in the output. Vector names will be used to rename the
 columns. It is recommended to use accepted column names of the traitdata
@@ -113,6 +117,8 @@ dataset2 <- as.traitdata(heteroptera_raw,
   units = "mm", 
   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
   metadata = list(
+    author = "Gossner MM, Simons NK, Höck L and Weisser WW",
+    datasetName = "Morphometric traits Heteroptera", 
     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
     )

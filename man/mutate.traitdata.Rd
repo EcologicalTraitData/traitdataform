@@ -21,8 +21,14 @@ This function allows to transform, factorize, or combine trait measurements
 into compound measurements or update factor levels into binaries.
 }
 \details{
-Note that units will not be maintained or refined. They can be
-assigned later through the \code{thesaurus()} function.
+Note that units for numerical traits will not be maintained or
+computed (e.g. for ratios). They should be assigned later through the
+\code{thesaurus()} function.
+
+It is advised to mutate traits before applying \code{standardize.traits()}! If
+the mutate function is applied to a standardised dataset, the new trait
+will not be mapped automatically to the provided thesaurus. (automated
+re-mapping might be added in later versions of the package.)
 }
 \examples{
 
@@ -37,6 +43,17 @@ dataset3 <- as.traitdata(arthropodtraits,
 head(dataset3)
 
 updated <- mutate.traitdata(dataset3, predator = Feeding_guild == "c" )
-head(updated)
+head(updated[updated$traitName == "predator",])
 levels(updated$traitName)
+
+
+## 
+
+
+updated <- mutate.traitdata(dataset2, 
+                            Body_shape = Body_length/Body_width, 
+                            Body_volume = Body_length*Body_width*Body_height,
+                            Wingload = Wing_length*Wing_width/Body_volume)
+
+head(updated[updated$traitName \%in\% c("Body_shape", "Body_volume", "Wingload"),])
 }

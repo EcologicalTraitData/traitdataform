@@ -11,13 +11,16 @@ as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
   author = NA, ...)
 }
 \arguments{
-\item{trait}{A character string, providing an intuitive, human-readable trait name.}
+\item{trait}{A character string, providing an intuitive, human-readable trait
+name.}
 
-\item{identifier}{Unique identifier for the trait, ideally unique and stable URI which identify the source of the trait definition.}
+\item{identifier}{Unique identifier for the trait, ideally unique and stable
+URI which identify the source of the trait definition.}
 
 \item{broaderTerm}{One or several terms that enclose the trait definition.}
 
-\item{narrowerTerm}{One or several terms that are enclosed by the trait definition.}
+\item{narrowerTerm}{One or several terms that are enclosed by the trait
+definition.}
 
 \item{expectedUnit}{the unit expected for measurement entries.}
 
@@ -25,15 +28,17 @@ as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
 
 \item{minAllowedValue}{A lower boundary for accepted numerical values.}
 
-\item{factorLevels}{A comma separated list of terms comprising the constrained vocabulary for categorical traits or ordinal binary traits.}
+\item{factorLevels}{A comma separated list of terms comprising the
+constrained vocabulary for categorical traits or ordinal binary traits.}
 
-\item{valueType}{the type of trait values. Possible entries are 'numeric', 'integer', 'categorical', 'logical', or 'character'.}
+\item{valueType}{the type of trait values. Possible entries are 'numeric',
+'integer', 'categorical', 'logical', or 'character'.}
 
-\item{traitDescription}{A short, unambiguous definition of the trait. May refer to a method of measurement.}
+\item{traitDescription}{A short, unambiguous definition of the trait. May
+refer to a method of measurement.}
 
-\item{comments}{Details and Examples for clarification of the trait definition.}
-
-\item{source}{}
+\item{comments}{Details and Examples for clarification of the trait
+definition.}
 
 \item{version}{}
 
@@ -42,12 +47,17 @@ as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
 \item{...}{}
 }
 \description{
-Creating an object containing a standardised trait definition according to the Ecological Traitdata Standard. Parameters correspond to the definition at http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri.
+Creating an object containing a standardised trait definition according to
+the Ecological Traitdata Standard. Parameters correspond to the definition at
+\url{http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri}.
 }
 \examples{
 
 body_length <- as.trait("body_length", expectedUnit = "mm", valueType = "numeric", 
-  Identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
-  traitDescription = "The known longest dimension of the physical structure of organisms", relationSource = "Maggenti and Maggenti, 2005", broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_dimension")
+  identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
+  traitDescription = "The known longest dimension of the physical structure of organisms",
+  relationSource = "Maggenti and Maggenti, 2005", 
+  broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_dimension"
+  )
 
 }

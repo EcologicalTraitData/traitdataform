@@ -15,13 +15,27 @@ dataset-level information.}
 
 \item{datasetID}{a vector of the same length as number of objects. If \code{NULL}
 (default), object names will be returned as ID.}
+
+\item{drop}{FALSE by default. If true, columns that are not present in all
+datasets will be dropped.}
 }
 \description{
-Function to append objects of class 'traitdata' to each other.
+Method for function \code{rbind()} to append objects of class 'traitdata' to each
+other.
+}
+\details{
+Metadata are ideally already included in the datasets as attributes
+(see \code{?as.traitdata}). The function \code{rbind.traitdata()} takes a list of
+lists as its  metadata argument. The outer list must have the same length as
+the provided objects to combine, with each entry containing objects
+according to the terms of the Ecological Traitdata Standard
+(http://ecologicaltraitdata.github.io/ETS/#metadata-vocabulary).
+
+A lookup table for dataset details will be appended as an attribute to the
+output dataset, linked to each entry via the field \code{datasetID}. It can be
+accessed by calling \code{attributes(<dataset>)$datasets}.
 }
 \examples{
-
-library(traitdataform)
 
 data(carabids)
 
@@ -29,7 +43,7 @@ dataset1 <- as.traitdata(carabids,
   taxa = "name_correct", 
   traits = c("body_length", "antenna_length", "metafemur_length"),
   units = "mm",
-  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  keep = c(datasetID = "source_measurement", measurementRemarks = "note"), 
   metadata = list(
     bibliographicCitation = attributes(carabids)$citeAs,
     author = "Fons van der Plas", 
@@ -37,26 +51,60 @@ dataset1 <- as.traitdata(carabids,
     )
 )
 
+
+traits1 <- as.thesaurus(
+ body_length = as.trait("body_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+ antenna_length = as.trait("antenna_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
+ metafemur_length = as.trait("metafemur_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
+)
+
+dataset1Std <- standardize.traits(dataset1, thesaurus = traits1)
+
 # occurrence table: 
 
 data(heteroptera_raw)
 
 dataset2 <- as.traitdata(heteroptera_raw, 
   taxa = "SpeciesID", 
-  traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
-    "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
-    "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Front.Tibia_length",
-    "Mid.Tibia_length", "Hind.Tibia_length", "Front.Femur_length",
-    "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
-    "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
+  traits = c("Body_length", "Antenna_Seg1", "Antenna_Seg2",
+    "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
   units = "mm", 
-  keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
+  keep = c(sex = "Sex", references = "Source", lifeStage = "Wing_development"),
   metadata = list(
     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+    author = "Martin Gossner",
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
     )
 )
 
+dataset2 <- mutate.traitdata(dataset2, antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 )
 
-database <- rbind(dataset1, dataset2)
+
+traits2 <- as.thesaurus(
+ body_length = as.trait("body_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+ antenna_length = as.trait("antenna_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
+ metafemur_length = as.trait("metafemur_length", 
+   expectedUnit = "mm", valueType = "numeric", 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
+)
+
+dataset2Std <- standardize.traits(dataset2, 
+    thesaurus = traits2, 
+    rename = c(Body_length = "body_length", 
+               antenna_length = "antenna_length", 
+               Hind.Femur_length = "metafemur_length"
+               )
+    )
+
+database <- rbind(dataset1Std, dataset2Std)
 }

@@ -4,9 +4,9 @@
 \alias{standardize.taxonomy}
 \title{Standardize scientific names of species}
 \usage{
-standardize.taxonomy(x, method = get_gbif_taxonomy, update = FALSE,
-  infraspecies = FALSE, fuzzy = FALSE, verbose = TRUE,
-  return = c("taxonID", "scientificNameStd", "order", "taxonRank"), ...)
+standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
+  fuzzy = FALSE, verbose = TRUE, return = c("taxonID",
+  "scientificNameStd", "order", "taxonRank"), ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
@@ -14,9 +14,6 @@ containing at least the column `scientificName.}
 
 \item{method}{not functional. Will allow to chose from different sources of
 taxonomic reference.}
-
-\item{update}{if TRUE, force update of taxonomy, even if attributes already
-contain one. defaults to FALSE.}
 
 \item{infraspecies}{not functional.}
 
@@ -70,9 +67,5 @@ dataset1 <- as.traitdata(carabids,
 )
 
 dataset1Std <- standardize.taxonomy(dataset1)
-
-#update to include more taxon detail
-
-dataset1Std <- standardize.taxonomy(dataset1Std, return = c("author", "genus", "order", "class"))
 
 }
