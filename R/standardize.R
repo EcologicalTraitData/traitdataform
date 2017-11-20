@@ -265,6 +265,8 @@ standardize.traits <- function(x,
  attribs$row.names <- seq_along(out[,1])
  attributes(out) <- attribs
  
+ attr(out, "traits") <- lookup
+ 
  return(out)
 }
 
