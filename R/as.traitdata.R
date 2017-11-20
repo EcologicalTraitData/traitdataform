@@ -223,13 +223,13 @@ as.traitdata <- function(x,
   # set metadata attributes
   
   metadata_template = list(
-    rightsHolder = NA,
-    bibliographicCitation = NA,
-    license = NA,
-    author = NA,
-    datasetID = NA,
-    datasetName = NA,
-    version = NA
+    rightsHolder = NULL,
+    bibliographicCitation = NULL,
+    license = NULL,
+    author = NULL,
+    datasetID = NULL,
+    datasetName = NULL,
+    version = NULL
   )
   
   metadata_out <- lapply(names(metadata_template), function(i) {
@@ -269,36 +269,36 @@ print.traitdata <- function(x) {
     
    for(i in 1:length(attributes(x)$metadata)) {
     
-      if(!is.na(attributes(x)$metadata[[i]]$datasetID)) {
+      if(!is.null(attributes(x)$metadata[[i]]$datasetID)) {
         cat(attributes(x)$metadata[[i]]$datasetID, ": ")
       } else {cat("[1]: ")}
       
        # trait-dataset: datasetname (version) by author 
       
-      if(!is.na(attributes(x)$metadata[[i]]$datasetName)) {
+      if(!is.null(attributes(x)$metadata[[i]]$datasetName)) {
         cat(attributes(x)$metadata[[i]]$datasetName)
       }
-      if(!is.na(attributes(x)$metadata[[i]]$version)) {
+      if(!is.null(attributes(x)$metadata[[i]]$version)) {
         cat(" (", attributes(x)$metadata[[i]]$version, ") ")
       }
-      if(!is.na(attributes(x)$metadata[[i]]$author)) {
+      if(!is.null(attributes(x)$metadata[[i]]$author)) {
         cat(" by", attributes(x)$metadata[[i]]$author,".\n") 
       }
       
       
-      if(!is.na(attributes(x)$metadata[[i]]$bibliographicCitation) |
-           !is.na(attributes(x)$metadata[[i]]$license))  {
+      if(!is.null(attributes(x)$metadata[[i]]$bibliographicCitation) |
+           !is.null(attributes(x)$metadata[[i]]$license))  {
       cat("\n    When using these data must acknowledge the following usage policies: \n")
       }
       
       # cite as: 
-      if(!is.na(attributes(x)$metadata[[i]]$bibliographicCitation)) {
+      if(!is.null(attributes(x)$metadata[[i]]$bibliographicCitation)) {
         
         cat("\n    Cite this trait dataset as: \n")
         print(attributes(x)$metadata[[i]]$bibliographicCitation)
       }
       # published under
-      if(!is.na(attributes(x)$metadata[[i]]$license)) {
+      if(!is.null(attributes(x)$metadata[[i]]$license)) {
         cat("\n    Published under:", attributes(x)$metadata[[i]]$license, "\n\n")
       }
     }
