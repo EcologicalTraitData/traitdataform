@@ -1,14 +1,13 @@
 Package: traitdataform
 Type: Package
 Title: Formatting trait data compliant with the Ecological Traitdata Standard
-Version: 0.1.7
-Date: 2017-07-25
-Author: Florian D. Schneider
-Maintainer: Florian D. Schneider <fd.schneider@senckenberg.de>
+Version: 0.1.8
+Date: 2017-11-20
+Authors@R: person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre"))
 Description: This package assists in handling functional trait data and transferring them into the trait data standard.
 License: MIT
 LazyData: FALSE
-Imports: 
+Imports:
     data.table, 
     reshape, 
     taxize,
@@ -18,7 +17,10 @@ Imports:
     plyr,
     units,
     readxl
+URL: http://fdschneider.github.io/traitdataform, https://github.com/fdschneider/traitdataform
+BugReports: https://github.com/fdschneider/traitdataform/issues 
+VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-VignetteBuilder: 
-    knitr
+Suggests: knitr,
+    rmarkdown

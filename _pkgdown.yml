@@ -10,9 +10,8 @@ reference:
       - standardize.exploratories
       - standardize
       - mutate.traitdata
-      - merge.traitdata
       - rbind.traitdata
-  - title: "Datasets"
+  - title: "Data objects"
     desc: "List of data objects available after calling `data(<nameofdataset>)`."
     contens: 
       - amniota
@@ -26,6 +25,6 @@ reference:
   - title: "Helper functions"
     desc: "Internal functions called by the main functions of the package."
     contents: 
-      - accessBexis
+      - read.service
       - fixlogical
       - get_gbif_taxonomy

@@ -4,9 +4,10 @@
 
 - updated terms to traitdata standard v0.6.
 - datasets are not loaded by default, but wait for a prompt using `data()`. Also added documentation for all datasets and added more datasets.  
-- adding function method `rbind.traitdata()` for merging standardised datasets into a unified table. 
+- adding function method `rbind.traitdata()` for merging standardised datasets into a unified table. includes handling of metadata object in attributes
 - metadata can be stored in the attributes of a dataset and will be preserved when updating the dataset. Information will be handled when merging or combining multiple datasets. 
 - trait thesauri can be added more easily from a data frame or from a list of 'trait' objects. 
+
 
 ## Minor changes
 
