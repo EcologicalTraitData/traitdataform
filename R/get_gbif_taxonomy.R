@@ -5,7 +5,9 @@
 #' @param fuzzy logical. If TRUE, function tries fuzzy matching for species requests. May produce output, if normal matching fails. (not working!)
 #' @param verbose logical. If FALSE, warnings and messages are suppressed.
 #'
-#' @return a data.frame mapping the user supplied names to the accepted taxon names and higher taxonomic information (kingdom, phylum, class, order, family, genus). If 'synonym' is returned as TRUE, the user provided name has been identified as a synonym and was mapped to an accepted name. The field confidence reports the confidence of the matching procedure performed by the function 'get_gbifid_()' of the package 'taxize'. The taxonID is a globally valid URI that links to the taxon description of the GBIF backbone taxonomy.  
+#' @return a data.frame mapping the user supplied names to the accepted taxon names and higher taxonomic information (kingdom, phylum, class, order, family, genus). 
+#' 
+#' @details If 'synonym' is returned as TRUE, the user provided name has been identified as a synonym and was mapped to an accepted name. The field confidence reports the confidence of the matching procedure performed by the function 'get_gbifid_()' of the package 'taxize'. The taxonID is a globally valid URI that links to the taxon description of the GBIF backbone taxonomy.  
 #' 
 #' @import taxize
 #' @import data.table

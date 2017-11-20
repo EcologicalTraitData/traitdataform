@@ -320,6 +320,5 @@
 #' 
 #' @family rawdata
 #' @import readxl
-#' @import curl
 "amphibio"
 
