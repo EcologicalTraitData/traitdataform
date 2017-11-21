@@ -342,3 +342,22 @@
 #' @family rawdata
 "plantsD3"
 
+# -----------------------------------------------------------------------------
+
+#' Fire-related traits for vascular plant species of the Mediterranean Basin (BROT database)
+#' 
+#' @description  Most updated and comprehensive information on fire-related traits for vascular plant species of the Mediterranean Basin.
+#' 
+#' @details Plant trait information is essential for understanding plant evolution, vegetation dynamics and vegetation responses to disturbance and management. Furthermore, in Mediterranean ecosystems, changes in fire regime may be more relevant than direct changes in climatic conditions, making the knowledge of fire-related traits specially relevant. 
+#' 
+#' @source Cite as: 
+#' 
+#'   - Paula, S., Arianoutsou, M., Kazanis, D., Tavsanoglu, Ç., Lloret, F., Buhk, C., Ojeda, F., Luna, B., Moreno, J. M., Rodrigo, A., Espelta, J. M., Palacio, S., Fernández-Santos, B., Fernandes, P. M. and Pausas, J. G. (2009), Fire-related traits for plant species of the Mediterranean Basin. Ecology, 90: 1420. doi:10.1890/08-1309.1
+#'   
+#'   \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
+#'   
+#' @author Paula, S., Arianoutsou, M., Kazanis, D., Tavsanoglu, Ç., Lloret, F., Buhk, C., Ojeda, F., Luna, B., Moreno, J. M., Rodrigo, A., Espelta, J. M., Palacio, S., Fernández-Santos, B., Fernandes, P. M. and Pausas, J. G.
+#' 
+#' @family rawdata
+"plantsD3"
+
