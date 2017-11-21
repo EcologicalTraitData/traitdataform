@@ -40,22 +40,23 @@
 #' @param na.rm logical defaults to `TRUE`. If `FALSE`, all measured Values 
 #'   containing NA will be kept in the output table. This is not reccomended for
 #'   most data.
-#' @param metadata a list of named entries, according to the terms for metadata 
-#'   of the traitdata standard. Metadata will be added as attributes to the data
-#'   table. Possible entries are: `rightsHolder`, `bibliographicCitation`, 
-#'   `license`, `author`, `datasetID`, `datasetName`, `version`. (see 'Details')
+#' @param metadata a list of class metadata, as created by function
+#'   `as.metadata()`. Metadata will be added as attributes to the data table.
+#'   Possible parameters to the function call are: `rightsHolder`,
+#'   `bibliographicCitation`, `license`, `author`, `datasetID`, `datasetName`,
+#'   `version`. (see 'Details')
 #' @param ...
-#'   
-#' @details If `occurrence` is left blank, the script will check for the 
-#'   structure of the input table. If several entries are given for the same 
-#'   taxon, it assumes that input is an occurrence table and assigns 
+#'
+#' @details If `occurrence` is left blank, the script will check for the
+#'   structure of the input table. If several entries are given for the same
+#'   taxon, it assumes that input is an occurrence table and assigns
 #'   identifiers.
-#'   
+#'
 #'   Metadata will be stored as attributes to the data frame and can be accessed
-#'   via `attributes()`. It is not necessary but highly recommended to provide 
-#'   metadata when working with multiple trait data files. When appending 
-#'   datasets using `rbind()`, the metadata will be stored in additional 
-#'   columns.
+#'   via `attributes()`. It is not necessary but highly recommended to provide
+#'   metadata when working with multiple trait data files. When appending
+#'   datasets using `rbind()`, the metadata information will be added as
+#'   additional columns and dataset attribution will be listed in attributes.
 #'   
 #' @export
 #' @import reshape
@@ -70,13 +71,8 @@
 #'   taxa = "name_correct", 
 #'   traits = c("body_length", "antenna_length", "metafemur_length"),
 #'   units = "mm",
-#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
-#'   metadata = list(
-#'     bibliographicCitation = attributes(carabids)$citeAs,
-#'     author = "Fons van der Plas", 
-#'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
-#'     )
-#' )
+#'   keep = c(basisOfRecordDecription = "source_measurement", measurementRemark = "note")
+#'   )
 #' 
 #' # occurrence table: 
 #' 
@@ -92,7 +88,7 @@
 #'     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
 #'   units = "mm", 
 #'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
-#'   metadata = list(
+#'   metadata = as.metadata(s
 #'     author = "Gossner MM, Simons NK, Höck L and Weisser WW",
 #'     datasetName = "Morphometric traits Heteroptera", 
 #'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
@@ -116,15 +112,7 @@ as.traitdata <- function(x,
                          id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
                          mutate = NULL,
                          thesaurus = NULL,
-                         metadata = list(
-                           rightsHolder = NULL,
-                           bibliographicCitation = NULL,
-                           license = NULL,
-                           author = NULL,
-                           datasetID = datasetID,
-                           datasetName = NULL,
-                           version = NULL
-                         ),
+                         metadata = NULL,
                          ...
 ) {
   
@@ -222,28 +210,14 @@ as.traitdata <- function(x,
   
   # set metadata attributes
   
-  metadata_template = list(
-    rightsHolder = NULL,
-    bibliographicCitation = NULL,
-    license = NULL,
-    author = NULL,
-    datasetID = NULL,
-    datasetName = NULL,
-    version = NULL
-  )
+  if("metadata" %in% class(metadata)) {
+      attr(out, "metadata") <- metadata
+  } else {
+      if(!is.null(attributes(x)$metadata) && "metadata" %in% class(attributes(x)$metadata) ) { 
+        attr(out, "metadata") <- attributes(x)$metadata
+      }
+  }
   
-  metadata_out <- lapply(names(metadata_template), function(i) {
-    if (i %in% names(metadata)) metadata[[i]]
-    else metadata_template[[i]]  
-  })
-  names(metadata_out) <- names(metadata_template)
-
-  attr(out, "metadata") <- list(a = metadata_out)
-  names(attributes(out)$metadata) <- input_name
-  
-  #out$metadata[sapply(out$metadata, is.null)] <- NA
-  class(attributes(out)$metadata) <- c("metadata", "list")
-
   class(out) <- c( "traitdata", "data.frame")
   return(out)
   
@@ -256,51 +230,14 @@ print.traitdata <- function(x) {
   n_traits <- length(levels(x$traitName))
   n_taxa <- length(levels(x$scientificName))
   n_measurements <- length(attributes(x)$row.names)
-  
+  metadata <- attributes(x)$metadata
+
   class(x) <- "data.frame"
   print(x)
 
   # dataset summary  
   cat("\nThis trait-dataset contains", n_traits, "traits for", n_taxa, 
-      "taxa (", n_measurements, "measurements in total).\n\n" )
+      "taxa (", n_measurements, "measurements in total).\n" )
   
-  # for each dataset contained (by datasetID) print:
-  if(!is.null(attributes(x)$metadata)) {
-    
-   for(i in 1:length(attributes(x)$metadata)) {
-    
-      if(!is.null(attributes(x)$metadata[[i]]$datasetID)) {
-        cat(attributes(x)$metadata[[i]]$datasetID, ": ")
-      } else {cat("[1]: ")}
-      
-       # trait-dataset: datasetname (version) by author 
-      
-      if(!is.null(attributes(x)$metadata[[i]]$datasetName)) {
-        cat(attributes(x)$metadata[[i]]$datasetName)
-      }
-      if(!is.null(attributes(x)$metadata[[i]]$version)) {
-        cat(" (", attributes(x)$metadata[[i]]$version, ") ")
-      }
-      if(!is.null(attributes(x)$metadata[[i]]$author)) {
-        cat(" by", attributes(x)$metadata[[i]]$author,".\n") 
-      }
-      
-      
-      if(!is.null(attributes(x)$metadata[[i]]$bibliographicCitation) |
-           !is.null(attributes(x)$metadata[[i]]$license))  {
-      cat("\n    When using these data must acknowledge the following usage policies: \n")
-      }
-      
-      # cite as: 
-      if(!is.null(attributes(x)$metadata[[i]]$bibliographicCitation)) {
-        
-        cat("\n    Cite this trait dataset as: \n")
-        print(attributes(x)$metadata[[i]]$bibliographicCitation)
-      }
-      # published under
-      if(!is.null(attributes(x)$metadata[[i]]$license)) {
-        cat("\n    Published under:", attributes(x)$metadata[[i]]$license, "\n\n")
-      }
-    }
-  }
+  print(attributes(x)$metadata)
 }

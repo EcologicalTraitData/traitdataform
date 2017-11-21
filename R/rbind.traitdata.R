@@ -34,7 +34,7 @@
 #'   traits = c("body_length", "antenna_length", "metafemur_length"),
 #'   units = "mm",
 #'   keep = c(datasetID = "source_measurement", measurementRemarks = "note"), 
-#'   metadata = list(
+#'   metadata = as.metadata(
 #'     bibliographicCitation = attributes(carabids)$citeAs,
 #'     author = "Fons van der Plas", 
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
@@ -66,7 +66,7 @@
 #'     "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
 #'   units = "mm", 
 #'   keep = c(sex = "Sex", references = "Source", lifeStage = "Wing_development"),
-#'   metadata = list(
+#'   metadata = as.metadata(
 #'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
 #'     author = "Martin Gossner",
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
@@ -111,58 +111,30 @@ rbind.traitdata <- function(...,
   
   # compose list of input objects
   input <- list(...)
-  names(input) <- input_names
   
+  metadata <- lapply(input, function(x) attributes(x)$metadata)
+  has_metadata <- sapply(input, function(x) !is.null(attributes(x)$metadata))
+  has_id <- sapply(input, function(x) !is.null(attributes(x)$metadata$datasetID))
   
-  # set datasetID according to parameter datasetID
-  if(!is.null(datasetID) && length(datasetID) == length(input) ) {
-    for(i in 1:length(input)) {
-      attributes(input[[i]])$metadata[[1]]$datasetID <- datasetID[i]
-      input[[i]]$datasetID <- input_names[i]
+  #add datasetID value as column in core data,
+    for(i in 1:length(metadata)) {
+      #  get datasetID from metadata, provided vector, or object names (in that order) 
+      if(is.null(metadata[[i]]$datasetID)) {
+        if(!is.null(datasetID) && length(datasetID) == length(input)) {
+          metadata[[i]]$datasetID <- datasetID[i]
+        } else {
+          metadata[[i]]$datasetID <- input_names[[i]]
+        }
       }
-  }  
-  
-  # set datasetID according to metadata entry names
-  if(is.null(datasetID) && !is.null(names(metadata)) && length(metadata) == length(input)) {
-    for(i in 1:length(input)) {
-      attributes(input[[i]])$metadata[[1]]$datasetID <- names(metadata)[i]
-      input[[i]]$datasetID <- input_names[i]
-      }
-  }  
-  
-  # set datasetID according to object names
-  if(is.null(datasetID) && is.null(metadata) && 
-       is.null(unlist(lapply(input, function(x) attributes(x)$metadata[[1]]$datasetID)))) {
-    for(i in 1:length(input)) {
-      attributes(input[[i]])$metadata[[1]]$datasetID <- input_names[i]
-      input[[i]]$datasetID <- input_names[i]
-      }
-  }  
-  
+      input[[i]]$datasetID <- metadata[[i]]$datasetID
+    }
+  names(metadata) <- sapply(metadata, function(x) x$datasetID)
+  names(input) <- sapply(metadata, function(x) x$datasetID)
   
   ##### make metadata lookup table
-  
-  metacolumns <- c("rightsHolder", 
-                   "bibliographicCitation",
-                   "license", 
-                   "datasetID",
-                   "datasetName" , 
-                   "author", 
-                   "version"
-                   )
-  
-  metadata <- lapply(input, function(x) {
-        out <- attributes(x)$metadata[[1]][metacolumns]
-        names(out) <- metacolumns
-        out[sapply(out, is.null)] <- NA
-        class(out) <- c("metadata", "list")
-        return(out)
-        } 
-    )
-  names(metadata) <- input_names
-  
-  attr_table <- do.call(rbind.data.frame, lapply(metadata, function(x) lapply(x, as.character)))[,c("datasetID", "datasetName", "author")]
-  
+
+  attr_table <- do.call(rbind.data.frame, lapply(metadata, function(x) lapply(x[c("datasetID", "datasetName", "author")], function(y) if(is.null(y)) "NA" else y )))
+
   ##### check for compatibility of used terms in datasets
   
   terms_used <- lapply(input, colnames)
