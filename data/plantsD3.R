@@ -7,7 +7,7 @@ attr(plantsD3, 'citeAs') <- utils::bibentry(
   volume = 15,
   number= 3,
   pages = 180-192,
-  author = c(utils::person(given = "Christina", family = "Hintze", email = "tackenberg@bio.uni-frankfurt.de"), utils::as.person("Felix Heydel, Christina Hoppe, Sarah Cunze, Andreas König, Oliver Tackenberg")
+  author = c(utils::person(given = "Oliver", family = "Tackenberg", email = "tackenberg@bio.uni-frankfurt.de"), utils::as.person("Christina Hintze, Felix Heydel, Christina Hoppe, Sarah Cunze, Andreas König, Oliver Tackenberg")
   ),
   year = 2013,
   doi = "https://doi.org/10.1016/j.ppees.2013.02.001"
