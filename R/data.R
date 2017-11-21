@@ -322,3 +322,23 @@
 #' @import readxl
 "amphibio"
 
+# -----------------------------------------------------------------------------
+
+#' D3: The Dispersal and Diaspore Database
+#' 
+#' @description A comprehensive database of natural history traits for amphibians worldwide. 
+#' 
+#' @details Current ecological and evolutionary research are increasingly moving from species- to trait-based approaches because traits provide a stronger link to organism’s function and fitness. Trait databases covering a large number of species are becoming available, but such data remains scarce for certain groups. Amphibians are among the most diverse vertebrate groups on Earth, and constitute an abundant component of major terrestrial and freshwater ecosystems. They are also facing rapid population declines worldwide, which is likely to affect trait composition in local communities, thereby impacting ecosystem processes and services. In this context, we introduce AmphiBIO, a comprehensive database of natural history traits for amphibians worldwide. The database releases information on 17 traits related to ecology, morphology and reproduction features of amphibians. We compiled data from more than 1,500 literature sources, and for more than 6,500 species of all orders (Anura, Caudata and Gymnophiona), 61 families and 531 genera. This database has the potential to allow unprecedented large-scale analyses in ecology, evolution and conservation of amphibians.
+#' 
+#' @source Cite as: 
+#' 
+#'   - Hintze, C., Heydel, F., Hoppe, C., Cunze, S., König, A., & Tackenberg, O. (2013). D3: the dispersal and diaspore database baseline data and statistics on seed dispersal. Perspectives in Plant Ecology Evolution and Systematics, 15(3):180-192.doi: [https://doi.org/10.1016/j.ppees.2013.02.001](http://www.sciencedirect.com/science/article/pii/S1433831913000218?via%3Dihub#sec0110)
+#'   
+#'   \href{https://creativecommons.org/licenses/by-nc-nd/3.0/}{Creative Commons BY-NC-ND 3.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial: You may not use the material for commercial purposes.
+#'   NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.
+#'   
+#' @author Christina Hintze, Felix Heydel, Christina Hoppe, Sarah Cunze, Andreas König and Oliver Tackenberg
+#' 
+#' @family rawdata
+"plantsD3"
+
