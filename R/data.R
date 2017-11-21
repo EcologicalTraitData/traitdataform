@@ -352,12 +352,33 @@
 #' 
 #' @source Cite as: 
 #' 
-#'   - Paula, S., Arianoutsou, M., Kazanis, D., Tavsanoglu, Ç., Lloret, F., Buhk, C., Ojeda, F., Luna, B., Moreno, J. M., Rodrigo, A., Espelta, J. M., Palacio, S., Fernández-Santos, B., Fernandes, P. M. and Pausas, J. G. (2009), Fire-related traits for plant species of the Mediterranean Basin. Ecology, 90: 1420. doi:10.1890/08-1309.1
+#'   - Paula, S., Arianoutsou, M., Kazanis, D., Tavsanoglu, Ç., Lloret, F., Buhk, C., Ojeda, F., Luna, B., Moreno, J. M., Rodrigo, A., Espelta, J. M., Palacio, S., Fernández-Santos, B., Fernandes, P. M. and Pausas, J. G. (2009), Fire-related traits for plant species of the Mediterranean Basin. Ecology, 90: 1420. doi: [10.1890/08-1309.1]
 #'   
 #'   \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
 #'   
 #' @author Paula, S., Arianoutsou, M., Kazanis, D., Tavsanoglu, Ç., Lloret, F., Buhk, C., Ojeda, F., Luna, B., Moreno, J. M., Rodrigo, A., Espelta, J. M., Palacio, S., Fernández-Santos, B., Fernandes, P. M. and Pausas, J. G.
 #' 
 #' @family rawdata
-"plantsD3"
+"plantsFire"
+
+# -----------------------------------------------------------------------------
+
+#' The thermal dependence of biological traits (biotraits)
+#' 
+#' @description  Dataset on how diverse biological rates and times respond to temperature.
+#' 
+#' @details A dataset of 2352 thermal responses for 220 traits for microbes, plants, and animals compiled from 270 published sources. This represents the most diverse and comprehensive thermal response data set ever compiled. The traits in this database span levels of biological organization from internal physiology to species interactions and were measured in marine, freshwater, and terrestrial habitats for 411 species.
+#' 
+#' @source Cite as: 
+#' 
+#'   - Dell, A. I., Pawar, S. and Savage, V. M. (2013), The thermal dependence of biological traits. Ecology, 94: 1205–1206. doi: [10.1890/12-2060.1]
+#'   - I. Dell, Anthony; Pawar, Samraat; M. Savage, Van (2016): Data Paper. Data Paper. Wiley. https://doi.org/10.6084/m9.figshare.3556611.v1 Retrieved: 14:45, Nov 21, 2017 (GMT) 
+#'   
+#'   \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
+#'   
+#' @author Dell, A. I., Pawar, S. and Savage, V. M.
+#' 
+#' @family rawdata
+"biotraits"
+
 
