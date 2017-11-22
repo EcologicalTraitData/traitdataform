@@ -99,26 +99,26 @@
 #' 
 
 as.traitdata <- function(x, 
-                         traits = NULL, # name of column or vector of trait names
-                         taxa, # name of column or vector of species/taxon names
-                         individuals = NULL,  # deprecated/implemented for ambiguity
+                         traits = attributes(x)$traits, # name of column or vector of trait names
+                         taxa = attributes(x)$taxa, # name of column or vector of species/taxon names
+                         individuals = attributes(x)$individuals,  # deprecated/implemented for ambiguity
                          occurrences = individuals,
-                         datasetID = NULL,
-                         measurements = NULL,
-                         units = NULL,
-                         keep = NULL,
+                         datasetID = attributes(x)$datasetID,
+                         measurements = attributes(x)$measurements,
+                         units = attributes(x)$units,
+                         keep = attributes(x)$keep,
                          drop = NULL, 
                          na.rm = TRUE,
                          id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
                          mutate = NULL,
-                         thesaurus = NULL,
-                         metadata = NULL,
+                         thesaurus = attributes(x)$thesaurus,
+                         metadata = attributes(x)$metadata,
                          ...
 ) {
   
   input_name <- deparse(substitute(x))
 
-  if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus)) traits = sapply(thesaurus, function(x) x$traitName)
+  if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus) && is.null(traits)) traits = names(thesaurus)
   
   # rename taxon column into 'scientificName'
   if(length(taxa) == 1 && !is.null(taxa)) colnames(x)[colnames(x) == taxa] <- "scientificName"
@@ -213,9 +213,7 @@ as.traitdata <- function(x,
   if("metadata" %in% class(metadata)) {
       attr(out, "metadata") <- metadata
   } else {
-      if(!is.null(attributes(x)$metadata) && "metadata" %in% class(attributes(x)$metadata) ) { 
-        attr(out, "metadata") <- attributes(x)$metadata
-      }
+      do.call(as.metadata, metadata)
   }
   
   class(out) <- c( "traitdata", "data.frame")
