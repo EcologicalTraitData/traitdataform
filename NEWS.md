@@ -1,3 +1,10 @@
+# traitdataform 0.2.1
+
+- add function `as.metadata()` for templating of metadata into an object class, including method `print.metadata()`
+- update as.traitdata, print.traitdata, rbind.traitdata to make use of `as.metadata` 
+- provide metadata and thesaurus as attributes in data object 'carabids'
+- update `as.traitdata()`: enable forwarding of attributes of input object (for metadata etc. )
+
 # traitdataform 0.2
 
 ## Major changes

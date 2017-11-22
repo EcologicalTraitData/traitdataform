@@ -8,9 +8,7 @@ as.traitdata(x, traits = NULL, taxa, individuals = NULL,
   occurrences = individuals, datasetID = NULL, measurements = NULL,
   units = NULL, keep = NULL, drop = NULL, na.rm = TRUE,
   id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
-  mutate = NULL, thesaurus = NULL, metadata = list(rightsHolder = NULL,
-  bibliographicCitation = NULL, license = NULL, author = NULL, datasetID =
-  datasetID, datasetName = NULL, version = NULL), ...)
+  mutate = NULL, thesaurus = NULL, metadata = NULL, ...)
 }
 \arguments{
 \item{x}{data.frame object, containing at least a column of taxa, and one or
@@ -57,10 +55,11 @@ be removed from the output dataset.}
 containing NA will be kept in the output table. This is not reccomended for
 most data.}
 
-\item{metadata}{a list of named entries, according to the terms for metadata
-of the traitdata standard. Metadata will be added as attributes to the data
-table. Possible entries are: \code{rightsHolder}, \code{bibliographicCitation},
-\code{license}, \code{author}, \code{datasetID}, \code{datasetName}, \code{version}. (see 'Details')}
+\item{metadata}{a list of class metadata, as created by function
+\code{as.metadata()}. Metadata will be added as attributes to the data table.
+Possible parameters to the function call are: \code{rightsHolder},
+\code{bibliographicCitation}, \code{license}, \code{author}, \code{datasetID}, \code{datasetName},
+\code{version}. (see 'Details')}
 
 \item{...}{}
 }
@@ -81,8 +80,8 @@ identifiers.
 Metadata will be stored as attributes to the data frame and can be accessed
 via \code{attributes()}. It is not necessary but highly recommended to provide
 metadata when working with multiple trait data files. When appending
-datasets using \code{rbind()}, the metadata will be stored in additional
-columns.
+datasets using \code{rbind()}, the metadata information will be added as
+additional columns and dataset attribution will be listed in attributes.
 }
 \examples{
 
@@ -94,13 +93,8 @@ dataset1 <- as.traitdata(carabids,
   taxa = "name_correct", 
   traits = c("body_length", "antenna_length", "metafemur_length"),
   units = "mm",
-  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
-  metadata = list(
-    bibliographicCitation = attributes(carabids)$citeAs,
-    author = "Fons van der Plas", 
-    license = "http://creativecommons.org/publicdomain/zero/1.0/"
-    )
-)
+  keep = c(basisOfRecordDecription = "source_measurement", measurementRemark = "note")
+  )
 
 # occurrence table: 
 
@@ -116,7 +110,7 @@ dataset2 <- as.traitdata(heteroptera_raw,
     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
   units = "mm", 
   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
-  metadata = list(
+  metadata = as.metadata(s
     author = "Gossner MM, Simons NK, Höck L and Weisser WW",
     datasetName = "Morphometric traits Heteroptera", 
     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 

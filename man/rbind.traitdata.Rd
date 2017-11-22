@@ -44,7 +44,7 @@ dataset1 <- as.traitdata(carabids,
   traits = c("body_length", "antenna_length", "metafemur_length"),
   units = "mm",
   keep = c(datasetID = "source_measurement", measurementRemarks = "note"), 
-  metadata = list(
+  metadata = as.metadata(
     bibliographicCitation = attributes(carabids)$citeAs,
     author = "Fons van der Plas", 
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
@@ -76,7 +76,7 @@ dataset2 <- as.traitdata(heteroptera_raw,
     "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
   units = "mm", 
   keep = c(sex = "Sex", references = "Source", lifeStage = "Wing_development"),
-  metadata = list(
+  metadata = as.metadata(
     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
     author = "Martin Gossner",
     license = "http://creativecommons.org/publicdomain/zero/1.0/"

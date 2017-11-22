@@ -7,11 +7,11 @@
 \usage{
 read.service(datasetid, user = NULL, pswd = NULL, dec = ".",
   na.strings = "NA", fill = FALSE, sep = "\\t", quote = if
-  (identical(sep, "\\n")) "" else "'\\"")
+  (identical(sep, "\\n")) "" else "'\\"", fileEncoding = "UTF-8")
 
 read.service.blocks(datasetid, user, pswd, dec = ".", na.strings = "NA",
   fill = FALSE, sep = "\\t", quote = if (identical(sep, "\\n")) "" else
-  "'\\"")
+  "'\\"", fileEncoding = "UTF-8")
 }
 \arguments{
 \item{datasetid}{Integer BExIS ID of the requested dataset.}

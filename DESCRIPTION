@@ -1,9 +1,10 @@
 Package: traitdataform
 Type: Package
 Title: Formatting trait data compliant with the Ecological Traitdata Standard
-Version: 0.1.8
-Date: 2017-11-20
-Authors@R: person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre"))
+Version: 0.2.1
+Date: 2017-11-22
+Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre", "aut")), 
+    person("Caterina", "Penone", role = c("ctb")))
 Description: This package assists in handling functional trait data and transferring them into the trait data standard.
 License: MIT
 LazyData: FALSE

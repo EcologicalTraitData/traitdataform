@@ -5,7 +5,7 @@
 \alias{heteroptera_raw}
 \alias{heteroptera}
 \title{Heteroptera morphometry traits}
-\format{An object of class \code{data.frame} with 425 rows and 33 columns.}
+\format{An object of class \code{data.frame} with 425 rows and 34 columns.}
 \source{
 \url{https://figshare.com/articles/Data_Paper_Data_Paper/3561936};
 \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
