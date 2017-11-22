@@ -10,39 +10,37 @@
 #'
 #' @examples
 #' 
-#' as.metadata(
-#'  as.metadata(author = "Fons van der Plas", datasetName = "Carabid traits", datasetID = "carabids"),
-#'  as.metadata(author = "Martin Gossner", datasetName = "Arthropod traits"),
-#'  as.metadata(author = "Martin Gossner", datasetName = "Heteroptera morphometric traits")
-#' )
+#' # set metadata object
+#' a <- as.metadata(author = "Martin Gossner", datasetName = "Heteroptera morphometric traits")
+#' 
+#' # update an existing metadata object
+#' a1 <- as.metadata(datasetID = "heteroptera", template = a)
+#' 
 #' 
 as.metadata <- function(..., 
                     template = list(
+                      datasetID = NULL,
+                      datasetName = NULL,
+                      author = NULL,
                       rightsHolder = NULL,
                       bibliographicCitation = NULL,
                       license = NULL,
-                      author = NULL,
-                      datasetID = NULL,
-                      datasetName = NULL,
-                      version = NULL
+                      version = NULL,
+                      comments = NULL,
+                      description = NULL,
+                      region = NULL
                       )
                     ) {
     
-    if("metadata" %in% class(..1)) {
-      out <- list(...)
+    if("list" %in% class(..1)) {
       
-      names(out) <- seq_along(out)
-      
-      has_id <- sapply(out, function(x) !is.null(x$datasetID) )
-      names(out)[has_id] <- sapply(out, function(x) x$datasetID )[has_id]
-      
-      for(i in (1:length(out))[!has_id]) {
-        out[[i]]$datasetID <- names(out)[i]
+      if("metadata" %in% class(..1)) {
+        do.call(metadata, list(..1, template = template))
+      } else {
+        if("metadata" %in% class(..1[[1]])) {
+          list(...)
+        }  
       }
-       
-      class(out) <- c("metadatalist", "list")
-      return(out)
-      
     } else {
       
       metadata_in <- list(...)
@@ -59,10 +57,6 @@ as.metadata <- function(...,
     }
 }
 
-#' @export
-print.metadatalist <- function(x, ...) {
-  lapply(x, print.metadata)
-}
 
 #' @export
 print.metadata <- function(x, ...) {
