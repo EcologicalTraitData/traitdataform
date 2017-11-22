@@ -6,7 +6,7 @@ carabids <- utils::read.table("http://datadryad.org/bitstream/handle/10255/dryad
                               fileEncoding = "UTF-8"
                               )
 
-attr(carabids, 'metadata') <- as.metadata(
+attr(carabids, 'metadata') <- traitdataform::as.metadata(
       datasetName = "Carabid traits",
       datasetID = "carabids",
       bibliographicCitation =  utils::bibentry(
@@ -18,21 +18,21 @@ attr(carabids, 'metadata') <- as.metadata(
         year = 2017,
         doi = "10.1111/2041-210x.12728"
       ),
-      author = "Fons van der Plas", 
+      author = "Fons van der Plas",
       license = "http://creativecommons.org/publicdomain/zero/1.0/"
        )
 
-attr(carabids, 'thesaurus') <-  as.thesaurus(
-          body_length = as.trait("body_length", 
-                              expectedUnit = "mm", valueType = "numeric", 
-                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
-          antenna_length = as.trait("antenna_length", 
-                              expectedUnit = "mm", valueType = "numeric", 
+attr(carabids, 'thesaurus') <-  traitdataform::as.thesaurus(
+          body_length = traitdataform::as.trait("body_length",
+                              expectedUnit = "mm", valueType = "numeric",
+                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"),
+          antenna_length = traitdataform::as.trait("antenna_length",
+                              expectedUnit = "mm", valueType = "numeric",
                               identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
-          metafemur_length = as.trait("femur_length", 
-                              expectedUnit = "mm", valueType = "numeric", 
+          metafemur_length = traitdataform::as.trait("femur_length",
+                              expectedUnit = "mm", valueType = "numeric",
                               identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"),
-          eyewidth_corr = as.trait("eye_diameter", 
+          eyewidth_corr = traitdataform::as.trait("eye_diameter",
                               expectedUnit = "mm", valueType = "numeric",
                               identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Eye_diameter")
         )

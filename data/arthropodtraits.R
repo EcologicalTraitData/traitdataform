@@ -1,6 +1,9 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-arthropodtraits <- utils::read.csv("http://datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1", sep = "\t")
+arthropodtraits <- utils::read.csv("http://datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1", 
+                                   sep = "\t",
+                                   fileEncoding = "latin1"
+                                   )
 
 attr(arthropodtraits, 'citeAs') <- utils::bibentry(
   bibtype = "Article",

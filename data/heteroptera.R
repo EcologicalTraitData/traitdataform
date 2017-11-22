@@ -1,5 +1,11 @@
+# for roxygen2 documentation please edit file R/data.R!
 
-heteroptera <- utils::read.csv("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraits.txt", sep = "\t", header = TRUE, stringsAsFactors=FALSE, fileEncoding="latin1")
+heteroptera <- utils::read.csv("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraits.txt", 
+                               sep = "\t", header = TRUE, 
+                               stringsAsFactors=FALSE,
+                               fileEncoding = "latin1"
+                               )
+
 attr(heteroptera, 'citeAs') <- utils::bibentry(
   bibtype = "Article",
   title = "Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany",
