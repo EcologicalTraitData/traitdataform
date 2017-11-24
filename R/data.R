@@ -172,7 +172,8 @@
 #'     \item taxa = The taxonomic genus and species designation for the corresponding data entry;
 #'   }
 #'   
-#' @details Studying life-history traits within and across taxonomic
+#'   Description:
+#'   Studying life-history traits within and across taxonomic
 #'   classifications has revealed many interesting and important patterns, but
 #'   this approach to life history requires access to large compilations of data
 #'   containing many different life-history parameters. Currently, life-history
@@ -266,7 +267,7 @@
 
 # ----------------------------------------------------------------------------
 
-#' Mammal diet database
+#' @title Mammal diet database
 #' 
 #' @description A comprehensive global dataset of diet preferences of mammals 
 #'   (‘MammalDIET’). Diet information was digitized from the literature and 
@@ -274,27 +275,77 @@
 #'   extrapolated data cover species-level diet information for >99% of all 
 #'   terrestrial mammals.
 #'   
-#' @source Cite this dataset as:
+#'   @details When using this data, please cite the original publication:
 #'   
-#'   - Kissling, W.D., Dalby, L., Fløjgaard, C., Lenoir, J., Sandel, B., Sandom,
+#'   \itemize{ \item Kissling, W.D., Dalby, L., Fløjgaard, C., Lenoir, J., Sandel, B., Sandom,
 #'   C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological 
 #'   trait datasets: digitalization, extrapolation, and validation of diet 
-#'   preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913–2930. 
-#'   \url{http://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/}
+#'   preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913–2930.}
 #'   
 #'   Additionally, please cite the Dryad data package:
 #'   
-#'   - Kissling WD, Dalby L, Fløjgaard C, Lenoir J, Sandel B, Sandom C, 
+#'   \itemize{ \item Kissling WD, Dalby L, Fløjgaard C, Lenoir J, Sandel B, Sandom C, 
 #'   Trøjelsgaard K, Svenning J-C (2014) Data from: Establishing macroecological
 #'   trait datasets: digitalization, extrapolation, and validation of diet 
-#'   preferences in terrestrial mammals worldwide. Dryad Digital Repository. 
-#'   \url{https://doi.org/10.5061/dryad.6cd0v}
+#'   preferences in terrestrial mammals worldwide. Dryad Digital Repository
+#'   https://doi.org/10.5061/dryad.6cd0v}
 #'   
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
-#'   0}. To the extent possible under law, the authors have waived all copyright
-#'   and related or neighboring rights to this data.
+#'   Column names:
+#'   \itemize{ 
+#'     \item TaxonID = Unique numeric code for each species, starting with 1 and ending with 5364;
+#'     \item Order = The mammal order name of each species, following the IUCN taxonomy (IUCN 2013);
+#'     \item Family = The mammal family name of each species, following the IUCN taxonomy (IUCN 2013);
+#'     \item Genus = The mammal genus name of each species, following the IUCN taxonomy (IUCN 2013);
+#'     \item Species = The mammal species name, following the IUCN taxonomy (IUCN 2013);
+#'     \item Animal = Whether a mammal species eats animals (rank 1–3) or not (rank 0);
+#'     \item Vertebrate = Whether a mammal species eats vertebrates (1-3) or not (0);
+#'     \item Mammal = Whether a mammal species eats other mammals (rank 1–3) or not (rank 0);
+#'     \item Bird = Whether a mammal species eats birds (rank 1–3) or not (rank 0).;
+#'     \item Herptile = Whether a mammal species eats herptiles (amphibians or reptiles) (rank 1–3) or not (rank 0);
+#'     \item Fish = Whether a mammal species eats fish (rank 1–3) or not (rank 0);
+#'     \item Invertebrate = Whether a mammal species eats invertebrates (rank 1–3) or not (rank 0);
+#'     \item Plant = Whether a mammal species eats plants (rank 1–3) or not (rank 0).;
+#'     \item Seed = Whether a mammal species eats seeds (rank 1–3) or not (rank 0);
+#'     \item Fruit = Whether a mammal species eats fleshy fruits (rank 1–3) or not (rank 0);
+#'     \item Nectar = Whether a mammal species eats nectar (rank 1–3) or not (rank 0);
+#'     \item Root = Whether a mammal species eats roots (rank 1–3) or not (rank 0);
+#'     \item Leaf = Whether a mammal species eats leaves (rank 1–3) or not (rank 0);
+#'     \item Woody = Whether a mammal species eats leaves of woody plants (rank 1–3) or not (rank 0). 
+#'     Allows the definition of browsers (as opposed to grazers);
+#'     \item Herbaceous = Whether a mammal species eats leaves of herbaceous plants (rank 1–3) or not (rank 0). 
+#'     Allows the definition of grazers (as opposed to browsers);
+#'     \item Other = Whether a mammal species eats other plant material (rank 1–3) or not (rank 0). 
+#'     Other plant material refers to plant food items that are not covered by the other plant categories 
+#'     (e.g., buds, flowers, pollen, and gum). It also includes fungi and lichens;
+#'     \item TaxonomicNote = Information on synonyms (species, genus, family), i.e., differences in taxonomy between Nowak (1999) and IUCN (2013);
+#'     \item FillCode = Data extrapolation method for species without species-level diet information in Nowak (1999);
+#'     \item TrophicLevel = A classification of species into  three trophic levels. Carnivore (predominantly eating animals); Herbivore (predominantly 
+#'     eating plant material); Omnivore (feeding on both animals and plants); NotAssigned (species which do not fit in any of the previous categories);
+#'     \item MammalEater = Species with mammals as an important diet item;
+#'     \item Insectivore = Species with invertebrates as an important diet item;
+#'     \item Frugivore = Species with fruits as an important diet item;
+#'     \item Granivore = Species with seeds as an important diet item;
+#'     \item Folivore = Species with leaves as an important diet item;
+#'     \item DataSource = Whether data come from Nowak (1999), IUCN (2013), or whether they have been extrapolated;
+#'     \item taxa = Combination of Genus and Species name;
+#'     
+#'     Codes and definitions:
+#'     For Animal, Vertebrate, Mammal, Bird, Herptile, Fish, Invertebrate, Plant, Seed,
+#'     Fruit, Nectar, Root, Leaf, Woody, Herbaceous, Other:
+#'     0 = does not eat x; 
+#'     1 = x is primary food item; 
+#'     2 = x is secondary food item; 
+#'     3 = x is occasional food item
+#'     
+#'     For MammalEater, Insectivore, Frugivore, Granivore, Folivore:
+#'     1 = species with rank 1 in diet category x;
+#'     0 = species without rank 1 in ‘Leaf’
+#'   }
 #'   
-#' @details Ecological trait data are essential for understanding the 
+#'   
+#'         
+#'   Description
+#'   Ecological trait data are essential for understanding the 
 #'   broad-scale distribution of biodiversity and its response to global change.
 #'   For animals, diet represents a fundamental aspect of species’ evolutionary 
 #'   adaptations, ecological and functional roles, and trophic interactions. 
@@ -336,10 +387,13 @@
 #'   digitalization, extrapolation and validation procedures could be 
 #'   transferable to other trait data and taxa.
 #'   
-#' @author [Kissling, W.D.](danielkissling@web.de), Dalby, L., Fløjgaard, C.,
-#'   Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
-#'   
+#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#' \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#' 0}. To the extent possible under law, the authors have waived all copyright
+#' and related or neighboring rights to this data.
+#' 
 #' @family rawdata
+#' 
 "mammaldiet"
 
 # -----------------------------------------------------------------------------
