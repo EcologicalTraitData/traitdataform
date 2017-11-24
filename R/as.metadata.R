@@ -80,7 +80,7 @@ print.metadata <- function(x, ...) {
       
       if(!is.null(x$bibliographicCitation) |
          !is.null(x$license))  {
-        cat("\n    When using these data must acknowledge the following usage policies: \n")
+        cat("\n    When using these data, you must acknowledge the following usage policies: \n")
       }
       
       # cite as: 
