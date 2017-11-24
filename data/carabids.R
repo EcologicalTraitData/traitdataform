@@ -40,5 +40,3 @@ attr(carabids, 'thesaurus') <-  traitdataform::as.thesaurus(
 attr(carabids, 'taxa') <- "name_correct"
 attr(carabids, 'units') <- "mm"
 attr(carabids, 'keep') <-  c(datasetID = "source_measurement", measurementRemarks = "note")
-
-print(attributes(carabids)$metadata)
