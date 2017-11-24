@@ -5,6 +5,9 @@ amniota <- utils::read.csv("http://esapubs.org/archive/ecol/E096/269/Data_Files/
 amniota$taxa <- paste(amniota$genus, amniota$species)
 attr(amniota, 'taxa') <- "taxa"
 
+#replace -999 with NA
+amniota[amniota == -999] <- NA
+
 attr(amniota, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Amnote life-history",
   datasetID = "amniota",
@@ -24,11 +27,11 @@ attr(amniota, 'metadata') <- traitdataform::as.metadata(
 attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   female_maturity_d = traitdataform::as.trait("female_maturity_d",
                                         expectedUnit = "d", valueType = "numeric",
-                                        identifier = NA),
+                                        identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Development"),
   
   litter_or_clutch_size_n = traitdataform::as.trait("litter_or_clutch_size_n",
                                               valueType = "numeric",
-                                              identifier = NA),
+                                              identifier = " 	http://ecologicaltraitdata.github.io/TraitDataList/Reproduction_mode"),
   
   litters_or_clutches_per_y = traitdataform::as.trait("litters_or_clutches_per_y",
                                                     valueType = "numeric",
@@ -40,7 +43,7 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   maximum_longevity_y = traitdataform::as.trait("maximum_longevity_y",
                                               expectedUnit = "a", valueType = "numeric",
-                                              identifier = "http://purl.obolibrary.org/obo/VT_0001661"),
+                                              identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Life_span_potential"),
   
   gestation_d = traitdataform::as.trait("gestation_d",
                                         expectedUnit = "d", valueType = "numeric",
@@ -60,11 +63,11 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   egg_mass_g = traitdataform::as.trait("egg_mass_g",
                                        expectedUnit = "g", valueType = "numeric",
-                                       identifier = "http://purl.obolibrary.org/obo/VT_0001697"),
+                                       identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Egg_biomass"),
   
   incubation_d = traitdataform::as.trait("incubation_d",
                                          expectedUnit = "d", valueType = "numeric",
-                                         identifier = NA),
+                                         identifier = "https://ecologicaltraitdata.github.io/TraitDataList/#egg_development_time"),
   
   fledging_age_d = traitdataform::as.trait("fledging_age_d",
                                          expectedUnit = "d", valueType = "numeric",
@@ -76,7 +79,7 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   male_maturity_d = traitdataform::as.trait("male_maturity_d",
                                         expectedUnit = "d", valueType = "numeric",
-                                        identifier = NA),
+                                        identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Development"),
   
   inter_litter_or_interbirth_interval_y = traitdataform::as.trait("inter_litter_or_interbirth_interval_y",
                                             expectedUnit = "a", valueType = "numeric",
@@ -96,11 +99,11 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   egg_width_mm = traitdataform::as.trait("egg_width_mm",
                                                expectedUnit = "mm", valueType = "numeric",
-                                               identifier = "http://purl.obolibrary.org/obo/VT_0001697"),
+                                               identifier = " 	http://ecologicaltraitdata.github.io/TraitDataList/Egg_size"),
   
   egg_length_mm = traitdataform::as.trait("egg_length_mm",
                                                expectedUnit = "mm", valueType = "numeric",
-                                               identifier = "http://purl.obolibrary.org/obo/VT_0001697"),
+                                               identifier = " 	http://ecologicaltraitdata.github.io/TraitDataList/Egg_size"),
   
   fledging_mass_g = traitdataform::as.trait("fledging_mass_g",
                                                expectedUnit = "g", valueType = "numeric",
