@@ -5,6 +5,9 @@ mammaldiet <- utils::read.csv("http://datadryad.org/bitstream/handle/10255/dryad
                               fileEncoding = "UTF-8"
 )
 
+mammaldiet$taxa <- paste(mammaldiet$Genus, mammaldiet$Species)
+attr(mammaldiet, 'taxa') <- "taxa"
+
 attr(mammaldiet, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Mammal diet database",
   datasetID = "mammaldiet",
