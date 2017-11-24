@@ -4,7 +4,22 @@
 \name{carabids}
 \alias{carabids}
 \title{Carabid morphological traits}
-\format{An object of class \code{data.frame} with 120 rows and 10 columns.}
+\format{A data frame containing following columns:
+\itemize{
+\item name_correct = species name
+\item source_measurement = researcher who performed measurement;
+\item body_length = body length in mm;
+\item antenna_length = antenna length in mm;
+\item metafemur_length = length metafemur in mm;
+\item eyewith_corr = eye width in mm;
+\item note = note;
+\item resid_femur = residual femur length in mm (i.e. residual from
+linear model in which femur length is explained by body length);
+\item resid_eye = residual eye length in mm (i.e. residual from linear
+model in which eye length is explained by body length)
+\item resid_antenna = residual antenna length in mm (i.e. residual
+from linear model in which antenna length is explained by body length)
+}}
 \source{
 \url{http://dx.doi.org/10.5061/dryad.53ds2};
 \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
@@ -30,23 +45,6 @@ Additionally, please cite the Dryad data package:
 \itemize{ \item van der Plas F, van Klink R, Manning P, Olff H, Fischer M
 (2017) Data from: Sensitivity of functional diversity metrics to sampling
 intensity. Dryad Digital Repository. https://doi.org/10.5061/dryad.1fn46 }
-
-Column names:
-\itemize{
-\item name_correct = species name
-\item source_measurement = researcher who performed measurement;
-\item body_length = body length in mm;
-\item antenna_length = antenna length in mm;
-\item metafemur_length = length metafemur in mm;
-\item eyewith_corr = eye width in mm;
-\item note = note;
-\item resid_femur = residual femur length in mm (i.e. residual from
-linear model in which femur length is explained by body length);
-\item resid_eye = residual eye length in mm (i.e. residual from linear
-model in which eye length is explained by body length)
-\item resid_antenna = residual antenna length in mm (i.e. residual
-from linear model in which antenna length is explained by body length)
-}
 }
 \seealso{
 Other rawdata: \code{\link{amniota}},
