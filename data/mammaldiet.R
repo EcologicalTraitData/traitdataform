@@ -6,7 +6,6 @@ mammaldiet <- utils::read.csv("http://datadryad.org/bitstream/handle/10255/dryad
 )
 
 mammaldiet$taxa <- paste(mammaldiet$Genus, mammaldiet$Species)
-attr(mammaldiet, 'taxa') <- "taxa"
 
 attr(mammaldiet, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Mammal diet database",
@@ -50,5 +49,8 @@ attr(mammaldiet, 'thesaurus') <-  traitdataform::as.thesaurus(
   diet_guild_Granivore = traitdataform::as.trait("diet_guild_Granivore", valueType = "logical"),
   diet_guild_Folivore = traitdataform::as.trait("diet_guild_Folivore", valueType = "logical")
 )
+
+attr(mammaldiet, 'taxa') <- "taxa"
+attr(mammaldiet, 'keep') <-  c(datasetID = "DataSource", taxaSynonym = "note")
 
 print(attributes(mammaldiet)$metadata)

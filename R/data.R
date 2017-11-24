@@ -212,19 +212,29 @@
 
 #' PanTHERIA mammal traits
 #' 
-#' @description Here we describe a global species-level data set of key
+#' @description A global species-level data set of key
 #'   life-history, ecological and geographical traits of all known extant and
 #'   recently extinct mammals (PanTHERIA) developed for a number of
 #'   macroecological and macroevolutionary research projects.
 #'   
-#' @author Kate E. Jones, Jon Bielby, Marcel Cardillo, Susanne A. Fritz, Justin
-#'   O'Dell, C. David L. Orme, Kamran Safi, Wes Sechrest, Elizabeth H. Boakes,
-#'   Chris Carbone, Christina Connolly, Michael J. Cutts, Janine K. Foster,
-#'   Richard Grenyer, Michael Habib, Christopher A. Plaster, Samantha A. Price,
-#'   Elizabeth A. Rigby, Janna Rist, Amber Teacher, Olaf R. P. Bininda-Emonds,
-#'   John L. Gittleman, Georgina M. Mace, and Andy Purvis.
+#' @details When using this data, please cite the original publication:
+#'   
+#'   \itemize{ \item E. Jones, Kate; Bielby, Jon; Cardillo, Marcel; A. Fritz, Susanne; O'Dell,
+#'   Justin; David L. Orme, C.; Safi, Kamran; Sechrest, Wes; H. Boakes,
+#'   Elizabeth; Carbone, Chris; Connolly, Christina; Cutts, Michael J.; Foster,
+#'   Janine K.; Grenyer, Richard; Habib, Michael; Plaster, Christopher A.;
+#'   Price, Samantha A.; Rigby, Elizabeth A.; Rist, Janna; Teacher, Amber;
+#'   Bininda-Emonds, Olaf R. P.; Gittleman, John L.; M. Mace, Georgina; Purvis,
+#'   Andy (2016): PanTHERIA: a species-level database of life history, ecology,
+#'   and geography of extant and recently extinct mammals.
+#'   http://esapubs.org/archive/ecol/E090/184/metadata.htm}
+
+#'   
+#'   For column names details, please see original metadata at:
+#'   \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm}
+#'   
 #' 
-#' @details Data were gathered from the literature for 25 types of ecological
+#'   Data were gathered from the literature for 25 types of ecological
 #'   and life history information for any extant or recently extinct species
 #'   within class Mammalia (100740 data lines): 
 #'   
@@ -246,23 +256,12 @@
 #'   see \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm} for further
 #'   information.
 #'   
-#' @source Cite as:
-#'   
-#'   E. Jones, Kate; Bielby, Jon; Cardillo, Marcel; A. Fritz, Susanne; O'Dell,
-#'   Justin; David L. Orme, C.; Safi, Kamran; Sechrest, Wes; H. Boakes,
-#'   Elizabeth; Carbone, Chris; Connolly, Christina; Cutts, Michael J.; Foster,
-#'   Janine K.; Grenyer, Richard; Habib, Michael; Plaster, Christopher A.;
-#'   Price, Samantha A.; Rigby, Elizabeth A.; Rist, Janna; Teacher, Amber;
-#'   Bininda-Emonds, Olaf R. P.; Gittleman, John L.; M. Mace, Georgina; Purvis,
-#'   Andy (2016): PanTHERIA: a species-level database of life history, ecology,
-#'   and geography of extant and recently extinct mammals.
-#'   \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm};
-#'   
+#'   @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
 #'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 #'   
-#' @family rawdata
+#'   @family rawdata
 "pantheria"
 
 # ----------------------------------------------------------------------------

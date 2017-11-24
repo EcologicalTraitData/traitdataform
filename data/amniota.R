@@ -3,7 +3,6 @@ amniota <- utils::read.csv("http://esapubs.org/archive/ecol/E096/269/Data_Files/
                            fileEncoding = "UTF-8")
 
 amniota$taxa <- paste(amniota$genus, amniota$species)
-attr(amniota, 'taxa') <- "taxa"
 
 #replace -999 with NA
 amniota[amniota == -999] <- NA
@@ -31,7 +30,7 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   litter_or_clutch_size_n = traitdataform::as.trait("litter_or_clutch_size_n",
                                               valueType = "numeric",
-                                              identifier = " 	http://ecologicaltraitdata.github.io/TraitDataList/Reproduction_mode"),
+                                              identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Reproduction_mode"),
   
   litters_or_clutches_per_y = traitdataform::as.trait("litters_or_clutches_per_y",
                                                     valueType = "numeric",
@@ -99,11 +98,11 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   egg_width_mm = traitdataform::as.trait("egg_width_mm",
                                                expectedUnit = "mm", valueType = "numeric",
-                                               identifier = " 	http://ecologicaltraitdata.github.io/TraitDataList/Egg_size"),
+                                               identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Egg_size"),
   
   egg_length_mm = traitdataform::as.trait("egg_length_mm",
                                                expectedUnit = "mm", valueType = "numeric",
-                                               identifier = " 	http://ecologicaltraitdata.github.io/TraitDataList/Egg_size"),
+                                               identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Egg_size"),
   
   fledging_mass_g = traitdataform::as.trait("fledging_mass_g",
                                                expectedUnit = "g", valueType = "numeric",
@@ -139,8 +138,11 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   no_sex_maturity_d = traitdataform::as.trait("no_sex_maturity_d",
                                         expectedUnit = "d", valueType = "numeric",
-                                        identifier = NA),
+                                        identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Development"),
 )
+
+attr(amniota, 'taxa') <- "taxa"
+
 
 print(attributes(amniota)$metadata)
 
