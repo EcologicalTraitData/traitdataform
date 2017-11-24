@@ -1,3 +1,8 @@
+# traitdataform 0.2.3
+
+- fixing broken NAMESPACE export
+- update documentation website
+
 # traitdataform 0.2.2
 
 - fix bug in `standardize.taxonomy()`: reset row.names. 

@@ -22,7 +22,7 @@ The package can be installed from Github via the 'devtools' package
 
 ```r
 install.packages('devtools')
-devtools::install_github('fdschneider/traitdataform')
+devtools::install_github('EcologicalTraitData/traitdataform')
 ```
 
 ## Usage
