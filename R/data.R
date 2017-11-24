@@ -123,15 +123,54 @@
 #' @author Nathan P. Myhrvold, Elita Baldridge, Benjamin Chan, Dhileep Sivam,
 #'   Daniel L. Freeman, and S. K. Morgan Ernest
 #'   
-#' @source Cite this dataset as \itemize{ \item P. Myhrvold, Nathan; Baldridge,
+#' @details When using this data, please cite the original publication:
+#' 
+#' \itemize{ \item P. Myhrvold, Nathan; Baldridge,
 #'   Elita; Chan, Benjamin; Sivam, Dhileep; L. Freeman, Daniel; Ernest, S. K.
 #'   Morgan (2016): An amniote life-history database to perform comparative
 #'   analyses with birds, mammals, and reptiles.
 #'   http://esapubs.org/archive/ecol/E096/269/}
 #'   
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
-#'   0}. To the extent possible under law, the authors have waived all copyright
-#'   and related or neighboring rights to this data.
+#'   Column names:
+#'   \itemize{ 
+#'     \item class = The taxonomic class designation for the corresponding data entry;
+#'     \item order = The taxonomic order designation for the corresponding data entry; 
+#'     \item family = The taxonomic family designation for the corresponding data entry; 
+#'     \item genus = The taxonomic genus designation for the corresponding data entry;
+#'     \item species = The taxonomic species designation for the corresponding data entry;
+#'     \item subspecies = The taxonomic subspecies designation for the corresponding data entry;
+#'     \item common_name = The common name for the corresponding data entry;
+#'     \item female_maturity_d = The amount of time it takes for a female individual to reach maturity in days;
+#'     \item litter_or_clutch_size_n = The size of the litter/clutch;
+#'     \item litters_or_clutches_per_y = The number of litters/clutches produced per year;
+#'     \item adult_body_mass_g = The body mass of an adult individual in grams;
+#'     \item maximum_longevity_y = The longest lifespan reported of the species in years;
+#'     \item gestation_d = The time between conception and birth in days;
+#'     \item weaning_d = The amount of time it takes to wean the offspring in days;
+#'     \item birth_or_hatching_weight_g = The weight at birth/hatching in grams;
+#'     \item weaning_weight_g = The weight at weaning in grams;
+#'     \item egg_mass_g = The mass of the egg in grams;
+#'     \item fledging_age_d = The time between when the egg is laid and when it hatches in days;
+#'     \item incubation_d = The time it takes for the bird to be capable of flight (or for some species, leaving the nest) in days;
+#'     \item longevity_y = The lifespan of an individual in years;
+#'     \item male_maturity_d = The amount of time it takes for a male individual to reach maturity in days;
+#'     \item inter_litter_or_interbirth_interval_y = The time between the reproduction cycles in years;
+#'     \item female_body_mass_g = The body mass of a female individual in grams;
+#'     \item male_body_mass_g = The body mass of a male individual in grams;
+#'     \item no_sex_body_mass_g = The body mass of an individual of unreported sex in grams;
+#'     \item egg_width_mm = The width of the egg in millimeters;
+#'     \item egg_length_mm = The length of the egg in millimeters;
+#'     \item fledging_mass_g = The mass of a fledging in grams;
+#'     \item adult_svl_cm = The snout-to-vent length of an adult individual in centimeters;
+#'     \item male_svl_cm = The snout-to-vent length of a male individual in centimeters;
+#'     \item female_svl_cm = The snout-to-vent length of a female individual in centimeters;
+#'     \item birth_or_hatching_svl_cm = The snout-to-vent length of a newly-hatched individual in centimeters;
+#'     \item female_svl_at_maturity_cm = The snout-to-vent length of a female individual at maturity in centimeters;
+#'     \item female_body_mass_at_maturity_g = The body mass of a female individual at maturity in grams;
+#'     \item no_sex_svl_cm = The snout-to-vent length of an individual of unreported sex in centimeters;
+#'     \item no_sex_maturity_d = The amount of time it takes for an individual of unreported sex to reach maturity in days;
+#'     \item taxa = The taxonomic genus and species designation for the corresponding data entry;
+#'   }
 #'   
 #' @details Studying life-history traits within and across taxonomic
 #'   classifications has revealed many interesting and important patterns, but
@@ -159,6 +198,11 @@
 #'   and consolidated database of up to 29 life-history parameters, containing
 #'   at least one life-history parameter for 21 322 species of birds, mammals,
 #'   and reptiles.
+#'   
+#' @source \url{https://doi.org/10.6084/m9.figshare.c.3308127.v1};
+#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#'   0}. To the extent possible under law, the authors have waived all copyright
+#'   and related or neighboring rights to this data.
 #'   
 #' @family rawdata
 "amniota"
