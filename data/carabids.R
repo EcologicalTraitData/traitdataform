@@ -37,4 +37,6 @@ attr(carabids, 'thesaurus') <-  traitdataform::as.thesaurus(
                               identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Eye_diameter")
         )
 
-print(attributes(carabids)$metadata)
+attr(carabids, 'taxa') <- "name_correct"
+attr(carabids, 'units') <- "mm"
+attr(carabids, 'keep') <-  c(datasetID = "source_measurement", measurementRemarks = "note")

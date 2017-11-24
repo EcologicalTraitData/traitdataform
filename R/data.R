@@ -49,8 +49,8 @@
 #'   \itemize{ \item van der Plas F, van Klink R, Manning P, Olff H, Fischer M
 #'   (2017) Data from: Sensitivity of functional diversity metrics to sampling
 #'   intensity. Dryad Digital Repository. https://doi.org/10.5061/dryad.1fn46 }
-#'
-#'   Column names:
+#' 
+#' @format A data frame containing following columns:
 #'   \itemize{ 
 #'     \item name_correct = species name
 #'     \item source_measurement = researcher who performed measurement; 

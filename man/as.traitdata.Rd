@@ -4,11 +4,14 @@
 \alias{as.traitdata}
 \title{Standardize format of traitdata}
 \usage{
-as.traitdata(x, traits = NULL, taxa, individuals = NULL,
-  occurrences = individuals, datasetID = NULL, measurements = NULL,
-  units = NULL, keep = NULL, drop = NULL, na.rm = TRUE,
+as.traitdata(x, traits = attributes(x)$traits, taxa = attributes(x)$taxa,
+  individuals = attributes(x)$individuals, occurrences = individuals,
+  datasetID = attributes(x)$datasetID,
+  measurements = attributes(x)$measurements, units = attributes(x)$units,
+  keep = attributes(x)$keep, drop = NULL, na.rm = TRUE,
   id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
-  mutate = NULL, thesaurus = NULL, metadata = NULL, ...)
+  mutate = NULL, thesaurus = attributes(x)$thesaurus,
+  metadata = attributes(x)$metadata, ...)
 }
 \arguments{
 \item{x}{data.frame object, containing at least a column of taxa, and one or

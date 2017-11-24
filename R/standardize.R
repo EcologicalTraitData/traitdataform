@@ -1,14 +1,12 @@
 #' Standardize scientific names of species
 #' 
-#' @description Adds columns to a traitdata object containing accepted species 
+#' @description Adds columns to a traitdata object containing accepted species
 #'   names and relates to globally unique taxon identifiers via URI.
 #'   
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
 #'   containing at least the column `scientificName.
 #' @param method not functional. Will allow to chose from different sources of 
 #'   taxonomic reference.
-#' @param update if TRUE, force update of taxonomy, even if attributes already
-#'   contain one. defaults to FALSE.
 #' @param infraspecies not functional.
 #' @param fuzzy if set to `FALSE` (default mode), this disables fuzzy matching 
 #'   if problems with ambiguous species names arise.
@@ -57,13 +55,8 @@
 #' 
 #' dataset1Std <- standardize.taxonomy(dataset1)
 #' 
-#' #update to include more taxon detail
-#' 
-#' dataset1Std <- standardize.taxonomy(dataset1Std, return = c("author", "genus", "order", "class"))
-#' 
 standardize.taxonomy <- function(x, 
-                                 method = get_gbif_taxonomy,
-                                 update = FALSE, 
+                                 method = get_gbif_taxonomy, 
                                  infraspecies = FALSE, 
                                  fuzzy = FALSE, 
                                  verbose = TRUE, 
@@ -74,17 +67,8 @@ standardize.taxonomy <- function(x,
                                  ...) {
 
   #if(!"traitdata" %in% class(x)) mapping(x, ...)
-  
-  # check 
-  if(!is.null(attributes(x)$taxonomy) && "taxonomy" %in% class(attributes(x)$taxonomy) && !update) { 
-    temp <-  attributes(x)$taxonomy    
-    # eliminate columns that will be replaced
-    x <- x[,!colnames(x) %in% c(return, "taxonID", "scientificNameStd")]
-  } else {
-    temp <- method(levels(droplevels(x$scientificName)), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
-  } 
-  
-  class(temp) <- c("taxonomy", "data.frame")
+    
+  temp <- method(levels(droplevels(x$scientificName)), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
   
   out <- merge.data.frame(x, temp[, unique(c(return, "taxonID", "scientificNameStd", "scientificName", "warnings"))], by.x = "scientificName", by.y = "scientificName")
   
@@ -96,6 +80,7 @@ standardize.taxonomy <- function(x,
   # keep attributes of x
   attribs <- attributes(x)
   attribs$names <- attributes(out)$names
+  attribs$row.names <- seq_along(out[,1])
   attributes(out) <- attribs
   
   attr(out, "taxonomy") <- temp

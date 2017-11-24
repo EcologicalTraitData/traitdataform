@@ -1,3 +1,13 @@
+# traitdataform 0.2.3
+
+- fixing broken NAMESPACE export
+- update documentation website
+
+# traitdataform 0.2.2
+
+- fix bug in `standardize.taxonomy()`: reset row.names. 
+- update data attributes in dataset `carabids` for handling in `as.traitdata()`.
+
 # traitdataform 0.2.1
 
 - add function `as.metadata()` for templating of metadata into an object class, including method `print.metadata()`
