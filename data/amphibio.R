@@ -128,7 +128,7 @@ attr(amphibio, 'thesaurus') <-  traitdataform::as.thesaurus(
 )
 
 attr(amphibio, 'Species') <- "Species"
-attr(maphivio, "Comment") <- "OBS"
+attr(amphibio, 'keep') <-  c(measurementRemarks = "OBS")
 
 
 print(attributes(amphibio)$metadata)

@@ -51,6 +51,6 @@ attr(mammaldiet, 'thesaurus') <-  traitdataform::as.thesaurus(
 )
 
 attr(mammaldiet, 'taxa') <- "taxa"
-attr(mammaldiet, 'keep') <-  c(datasetID = "DataSource", taxaSynonym = "note")
+attr(mammaldiet, 'keep') <-  c(datasetID = "DataSource", measurementRemarks = "note")
 
 print(attributes(mammaldiet)$metadata)

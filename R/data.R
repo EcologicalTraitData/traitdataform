@@ -470,10 +470,6 @@
 #'  @family rawdata
 #' 
 "amphibio"
-#' 
-#' 
-#' 
-#' 
 
 
 # -----------------------------------------------------------------------------
@@ -534,5 +530,62 @@
 #' 
 #' @family rawdata
 "biotraits"
+
+# -----------------------------------------------------------------------------
+#' @title Passerine morphology
+#' 
+#' @description Passerine morphology: external measurements of approximately one-quarter of passerine bird species.
+#' 
+#' @details When using this data, please cite the original publication:
+#' 
+#' \itemize{ \item Ricklefs, R. E. (2017), Passerine morphology: external measurements of approximately one-quarter of 
+#' passerine bird species. Ecology, 98: 1472. doi:10.1002/ecy.1783}
+#' 
+#' Column names:
+#'   \itemize{ 
+#'     \item Order/Sup = taxonomic Order;
+#'     \item Family = taxonomic Family;
+#'     \item Subfam = taxonomic Subfamily;
+#'     \item Genus = taxonomic Genus;
+#'     \item Species = taxonomic Species;
+#'     \item Length = total length of the specimen, including the bill and tail;
+#'     \item Wing = length of the folded wing, flattened along a stiff ruler, from the wrist to the tip of the longest primary;
+#'     \item Tail = length of the tail from the base of the feathers in the center of the tail to the tip of the longest rectrix;
+#'     \item Tarsus = length of the tarsus;
+#'     \item Toe = length of the middle toe (to the base of the claw);
+#'     \item Bill L = length of the beak: culmen from the tip of the upper mandible to its kinetic hinge at the front of the skull;
+#'     \item Bill W = width of the beak at the kinetic hinge;
+#'     \item Bill D = depth of the beak;
+#'     \item Taxonomy and distributon
+#'     11 columns describing the distributions of species of Passeriformes in each of 11 biogeographic regions are from Edwards’s 
+#'     Coded List of Birds of the World (1974). The biogeographic regions (column names) are HN = Nearctic, N = Neotropics, 
+#'     NI = Neotropical Islands (primarily the West Indies), HP = Palearctic, E = Ethiopian (Africa), 
+#'     EI = African Islands (primarily Madagascar), O = Oriental (southern Asia), OI = Oriental Islands, AU = Australia, 
+#'     AZ = New Zealand, AI = Australasian Islands (including New Guinea and the southern Pacific). 
+#'     Edwards’s checklist is out of date with respect to taxonomy, but provides detailed distributions of the species, whose 
+#'     taxonomy was updated to match the Taxonomy in Flux Checklist. Edwards treats 5999 species of passerine birds, compared to 
+#'     the 6198 species in the TiF checklist;
+#'     \item TIF No. = code from Taxonomy in Flux (TiF) Checklist, Version 2.5, updated August 17, 2009 (http://jboyd.net/Taxo/index.html);
+#'     \item IOC No. = code from Bird List of the International Ornithological Council (IOC), Version 4.4 (http://dx.doi.org/10.14344/IOC.ML.4.4);
+#'     }
+#'     
+#'     Description: A data set including eight measurements of the external morphology of 1642 species, roughly one-quarter of all
+#'     passerine birds (Aves: Order Passeriformes), from all parts of the world, characterizing the relative proportions of the wing, 
+#'     tail, legs, and beak. Specimens were measured opportunistically over the past 40 years in museums in the United States and Europe.
+#'     Numbers of individuals measured per species vary from one to dozens in some cases. Measurements for males and females of sexually 
+#'     size-dimorphic species are presented separately. Taxonomy follows the Taxonomy in Flux (TIF) checklist as well as the World Bird 
+#'     List of the International Ornithological Council. Geographic distributions are summarized from Edwards's Coded List of Birds of 
+#'     the World.
+#'     
+#'     
+#'  @source \url{http://onlinelibrary.wiley.com/doi/10.1002/};
+#' \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#' 0}. To the extent possible under law, the authors have waived all copyright
+#' and related or neighboring rights to this data.
+#'  @family rawdata
+#' 
+"passerine"
+
+
 
 
