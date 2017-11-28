@@ -81,7 +81,7 @@ attr(heteroptera_raw, 'thesaurus') <-  traitdataform::as.thesaurus(
 )
 
 
-attr(heteroptera, 'taxa') <- "SpeciesID"
-attr(heteroptera, 'keep') <-  c(basisOfRecord = "PreservedSpecimen", references="Author", sex="Sex", 
+attr(heteroptera_raw, 'taxa') <- "SpeciesID"
+attr(heteroptera_raw, 'keep') <-  c(basisOfRecord = "PreservedSpecimen", references="Author", sex="Sex", 
                                 references = "Source", measurementRemarks = "Voucher_ID",
                                 measurementID = "ID")
