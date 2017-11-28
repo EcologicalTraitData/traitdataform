@@ -397,27 +397,84 @@
 
 # -----------------------------------------------------------------------------
 
-#' AmphiBIO, a global database for amphibian ecological traits
+#' @title AmphiBIO, a global database for amphibian ecological traits
 #' 
 #' @description A comprehensive database of natural history traits for amphibians worldwide. 
 #' 
-#' @details Current ecological and evolutionary research are increasingly moving from species- to trait-based approaches because traits provide a stronger link to organism’s function and fitness. Trait databases covering a large number of species are becoming available, but such data remains scarce for certain groups. Amphibians are among the most diverse vertebrate groups on Earth, and constitute an abundant component of major terrestrial and freshwater ecosystems. They are also facing rapid population declines worldwide, which is likely to affect trait composition in local communities, thereby impacting ecosystem processes and services. In this context, we introduce AmphiBIO, a comprehensive database of natural history traits for amphibians worldwide. The database releases information on 17 traits related to ecology, morphology and reproduction features of amphibians. We compiled data from more than 1,500 literature sources, and for more than 6,500 species of all orders (Anura, Caudata and Gymnophiona), 61 families and 531 genera. This database has the potential to allow unprecedented large-scale analyses in ecology, evolution and conservation of amphibians.
+#' @details When using this data, please cite the original publication:
 #' 
-#' @source Cite as: 
+#' \itemize{ \item Oliveira, B.F., São-Pedro, V.A., Santos-Barrera, G., Penone, C. & Costa, G.C. (2017). 
+#' AmphiBIO, a global database for amphibian ecological traits. Scientific Data, 4:170123. 
+#' doi: [10.1038/sdata.2017.123](https://www.nature.com/articles/sdata2017123)}
+#'   
+#' Additionally, please cite the data repository on figshare:
+#'   
+#' \itemize{ \item Oliveira, Brunno Freire; São-Pedro, Vinícius Avelar; Santos-Barrera, Georgina; Penone, Caterina; 
+#' C. Costa, Gabriel (2017): AmphiBIO_v1. figshare. https://doi.org/10.6084/m9.figshare.4644424.v5}
 #' 
-#'   - Oliveira, B.F., São-Pedro, V.A., Santos-Barrera, G., Penone, C. & Costa, G.C. (2017). AmphiBIO, a global database for amphibian ecological traits. Scientific Data, 4:170123. doi: [10.1038/sdata.2017.123](https://www.nature.com/articles/sdata2017123)
-#'   
-#'   Please also cite the data repository on figshare: 
-#'   
-#'   - Oliveira, Brunno Freire; São-Pedro, Vinícius Avelar; Santos-Barrera, Georgina; Penone, Caterina; C. Costa, Gabriel (2017): AmphiBIO_v1. figshare. \url{https://doi.org/10.6084/m9.figshare.4644424.v5}
-#'   
-#'   \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
-#'   
-#' @author Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa
+#' Column names:
+#'   \itemize{ 
+#'     \item id = AmphiBIO species’ identification number;
+#'     \item Order = Amphibian Species of the World Order (Frost 2011);
+#'     \item Family = Amphibian Species of the World Family (Frost 2011);
+#'     \item Species = Amphibian Species of the World species scientific name (Frost 2011);
+#'     \item Fos, Ter, Aqua, Herb = Overall vertical foraging stratum classification. 
+#'     4 logical columns: Fos=Fossorial, Ter=Terrestrial, Aqua=Aquatic, Arb=Arboreal.
+#'     Ignores details about seasonal or ontogenetic changes;
+#'     \item Diet = Food items from the eating habits of adults using qualitative dietary categories. Information is based 
+#'     on expert knowledge, direct observation or stomach content examination, as reported in the literature.
+#'     6 logical columns: Leaves, Flowers, Seeds, Fruits, Arthro, Vert;
+#'     \item Diel = Overall diel period as active
+#'     3 logical columns: Diu=Diurnal (i.e., active during the day), Noc=Nocturnal (i.e., active during the night)
+#'     Crepu=Crepuscular (i.e., active during the period immediately after dawn and that immediately before dusk);
+#'     \item Seasonality = Seasonal period as active. Based on the comparison of the precipitation (wet or dry) and temperature 
+#'     (warm or cold) conditions when active in relation to the average climatic conditions over the year. 
+#'     Climatic conditions were obtained from weather stations closer to localities where specimens were collected or to
+#'     field sites reported in publications (available at www.weatherbase.com)
+#'     4 logical columns: Wet_warm, Wet_cold, Dry_warm, Dry_cold;
+#'     \item Body_mass_g = Maximum adult body mass;
+#'     \item Age_at_maturity_min_y = Minimum age at maturation/sexual maturity;
+#'     \item Age_at_maturity_max_y = Maximum age at maturation/sexual maturity;
+#'     \item Body_size_mm = Maximum adult body size. In Anura, body size is reported as snout to vent length (SVL). 
+#'     In Gymnophiona and Caudata, body size is reported as total length (TL);
+#'     \item Size_at_maturity_min_mm = Minimum size at maturation/sexual maturity;
+#'     \item Size_at_maturity_max_mm = Maximum size at maturation/sexual maturity;
+#'     \item Longevity_max_y = Maximum life span;
+#'     \item Litter_size_min_n = Minimum no. of offspring or eggs per clutch;
+#'     \item Litter_size_max_n = Maximum no. of offspring or eggs per clutch;
+#'     \item Reproductive_output_y = Maximum no. reproduction events per year;
+#'     \item Offspring_size_min_mm = Minimum offspring or egg size;
+#'     \item Offspring_size_max_mm = Maximum offspring or egg size;
+#'     \item Breeding strategy = Whether the species reproduce via direct, larval development or is viviparous
+#'     3 logical columns: Dir=Species reproduce via direct development, Lar=Species present larval stages Viv=Species is viviparous;
+#'     \item OBS = Comments
+#'     }
+#'     
+#'     Description: Current ecological and evolutionary research are increasingly moving from species- to trait-based approaches 
+#'     because traits provide a stronger link to organism’s function and fitness. Trait databases covering a large number of 
+#'     species are becoming available, but such data remains scarce for certain groups. Amphibians are among the most diverse 
+#'     vertebrate groups on Earth, and constitute an abundant component of major terrestrial and freshwater ecosystems. They are 
+#'     also facing rapid population declines worldwide, which is likely to affect trait composition in local communities, thereby 
+#'     impacting ecosystem processes and services. In this context, we introduce AmphiBIO, a comprehensive database of natural 
+#'     history traits for amphibians worldwide. The database releases information on 17 traits related to ecology, morphology and 
+#'     reproduction features of amphibians. We compiled data from more than 1,500 literature sources, and for more than 6,500 species 
+#'     of all orders (Anura, Caudata and Gymnophiona), 61 families and 531 genera. This database has the potential to allow unprecedented 
+#'     large-scale analyses in ecology, evolution and conservation of amphibians.
+#'     
+#'     
+#'  @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#'  \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, 
+#'  provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, 
+#'  but not in any way that suggests the licensor endorses you or your use.
 #' 
-#' @family rawdata
-#' @import readxl
+#'  @family rawdata
+#' 
 "amphibio"
+#' 
+#' 
+#' 
+#' 
+
 
 # -----------------------------------------------------------------------------
 

@@ -30,7 +30,7 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   litter_or_clutch_size_n = traitdataform::as.trait("litter_or_clutch_size_n",
                                               valueType = "numeric",
-                                              identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Reproduction_mode"),
+                                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Clutch_length"),
   
   litters_or_clutches_per_y = traitdataform::as.trait("litters_or_clutches_per_y",
                                                     valueType = "numeric",
