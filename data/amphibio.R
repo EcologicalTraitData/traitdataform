@@ -5,11 +5,11 @@ utils::unzip(temp, files = "AmphiBIO_v1.csv", exdir = ".")
 unlink(temp)
 rm(temp)
 
-amphibio <- utils::read.csv("AmphiBIO_v1.csv")
+amphibio <- utils::read.csv("AmphiBIO_v1.csv", fileEncoding = "latin1")
 file.remove("AmphiBIO_v1.csv")
 
 attr(amphibio, 'metadata') <- traitdataform::as.metadata(
-  datasetName = "AmphiBio",
+  datasetName = "AmphiBIO",
   datasetID = "amphibio",
   bibliographicCitation =    utils::bibentry(
     bibtype = "Article",
@@ -127,7 +127,7 @@ attr(amphibio, 'thesaurus') <-  traitdataform::as.thesaurus(
                                 identifier = NA)
 )
 
-attr(amphibio, 'Species') <- "Species"
+attr(amphibio, 'taxa') <- "Species"
 attr(amphibio, 'keep') <-  c(measurementRemarks = "OBS")
 
 

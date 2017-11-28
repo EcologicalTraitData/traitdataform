@@ -26,7 +26,7 @@ author = "Kate E. Jones",
 license = "http://creativecommons.org/publicdomain/zero/1.0/"
 )
 
-attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
+attr(pantheria, 'thesaurus') <-  traitdataform::as.thesaurus(
   X1.1_ActivityCycle = traitdataform::as.trait("X1.1_ActivityCycle", expectedUnit = NA,
                                         identifier = "http://purl.obolibrary.org/obo/VT_0001502",       
                                         valueType = "factor"),

@@ -2,16 +2,16 @@
 temp <- tempfile(fileext = ".zip")
 utils::download.file("http://onlinelibrary.wiley.com/store/10.1002/ecy.1783/asset/supinfo/ecy1783-sup-0002-DataS1.zip?v=1&s=361647dd673d04c9b0838931cda1cf28e1f6eb1f", temp, method = "auto", quiet = TRUE, mode="wb")
 utils::unzip(temp, files = "Measurements of passerine birds.xlsx", exdir = ".")
+
+passerine <- readxl::read_excel("Measurements of passerine birds.xlsx", sheet=1)
+file.remove("Measurements of passerine birds.xlsx")
 unlink(temp)
 rm(temp)
-
-passerine <- readxl::read_excel("Measurements of passerine birds.xlsx")
-file.remove("Measurements of passerine birds.xlsx")
 
 passerine$taxa <- paste(passerine$Genus,passerine$Species)
 
 attr(passerine, 'metadata') <- traitdataform::as.metadata(
-  datasetName = "passerine birds",
+  datasetName = "Passerine morphology",
   datasetID = "passerine",
   bibliographicCitation =  utils::bibentry(
     bibtype = "Article",
@@ -67,4 +67,6 @@ attr(passerine, 'thesaurus') <-  traitdataform::as.thesaurus(
 )
 
 attr(passerine, 'taxa') <- "taxa"
-attr(carabids, 'keep') <-  c(sex ="sex", basisOfRecord = "PreservedSpecimen")
+attr(passerine, 'keep') <-  c(sex ="sex", basisOfRecord = "PreservedSpecimen")
+
+print(attributes(passerine)$metadata)

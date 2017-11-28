@@ -8,7 +8,7 @@ amniota$taxa <- paste(amniota$genus, amniota$species)
 amniota[amniota == -999] <- NA
 
 attr(amniota, 'metadata') <- traitdataform::as.metadata(
-  datasetName = "Amnote life-history",
+  datasetName = "Amniote life-history traits",
   datasetID = "amniota",
   bibliographicCitation =  utils::bibentry(
     bibtype = "Article",
@@ -138,7 +138,7 @@ attr(amniota, 'thesaurus') <-  traitdataform::as.thesaurus(
   
   no_sex_maturity_d = traitdataform::as.trait("no_sex_maturity_d",
                                         expectedUnit = "d", valueType = "numeric",
-                                        identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Development"),
+                                        identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Development")
 )
 
 attr(amniota, 'taxa') <- "taxa"
