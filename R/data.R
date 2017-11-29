@@ -241,8 +241,7 @@
 #'   Habitat Layer; 13. Head-Body Length; 14. Interbirth Interval; 15. Litter
 #'   size; 16. Litters Per Year; 17. Maximum Longevity; 18. Metabolic Rate; 19.
 #'   Migratory Behaviour; 20. Mortality Data;  21. Population Density; 22.
-#'   Ranging Behaviour; 23. Sexual
-#'   Maturity Age; 24. Teat Number; and 25. Weaning Age.
+#'   Ranging Behaviour; 23. Sexual Maturity Age; 24. Teat Number; and 25. Weaning Age.
 #'   
 #'   30 specific variables (see Class IV, Table 1) were extracted from the above
 #'   data types for PanTHERIA from a total of 94729 data lines (before error
