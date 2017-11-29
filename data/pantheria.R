@@ -139,6 +139,7 @@ attr(pantheria, 'thesaurus') <-  traitdataform::as.thesaurus(
 )
 
 attr(pantheria, 'taxa') <- "MSW05_Binomial"
+attr(pantheria, 'taxa') <- (basisOfRecord = "literatureData")
 
   
 print(attributes(pantheria)$metadata)

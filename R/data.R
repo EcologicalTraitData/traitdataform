@@ -1,9 +1,11 @@
 #' Functional Arthropod Traits
 #'
-#' Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
-#' Araneae, occurring in grasslands in Germany.
+#'  @description  Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
+#'  Araneae, occurring in grasslands in Germany.
+#'  
+#'  @author Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
 #'
-#' @details When using this data, please cite the original publication:
+#'  @details When using this data, please cite the original publication:
 #' 
 #'   \itemize{ \item  Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO,
 #'   Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits
@@ -19,11 +21,11 @@
 #'   Araneae, occurring in grasslands in Germany. Dryad Digital Repository.
 #'   http://dx.doi.org/10.5061/dryad.53ds2 }
 #'   
-#' @author Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
+#'   @format For trait definitions and codes please refer to \url{https://www.nature.com/articles/sdata201513/tables/2}
 #' 
-#' @family rawdata
-#' 
-#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#'   @family rawdata
+#'   
+#'   @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
 #'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
@@ -66,6 +68,12 @@
 #'     \item resid_antenna = residual antenna length in mm (i.e. residual 
 #'        from linear model in which antenna length is explained by body length)
 #'   }
+#'   
+#'   Description: information on body size, dispersal ability, feeding guild and specialization (within herbivores), feeding mode, 
+#'   feeding tissue (within herbivorous suckers), plant part (within herbivorous chewers), endophagous lifestyle (within herbivores), 
+#'   and vertical stratum use for 1,230 species of Coleoptera, Hemiptera (Heteroptera, Auchenorrhyncha), Orthoptera (Saltatoria: Ensifera, 
+#'   Caelifera), and Araneae, sampled by sweep-netting between 2008 and 2012. We compiled traits from various literature sources and 
+#'   complemented data from reliable internet sources and the authors’ experience.
 #'
 #' @family rawdata
 #' 
