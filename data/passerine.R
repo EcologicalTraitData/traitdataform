@@ -28,9 +28,9 @@ attr(passerine, 'metadata') <- traitdataform::as.metadata(
 
 attr(passerine, 'thesaurus') <-  traitdataform::as.thesaurus(
   Length = traitdataform::as.trait("Length", expectedUnit = "mm", valueType = "numeric",
-                                   identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Body_length"),
+                                   identifier = "http://ecologicaltraitdata.github.io/TraitDataList/#Body_length"),
   Wing = traitdataform::as.trait("Wing_length", expectedUnit = "mm", valueType = "numeric",
-                                   identifier = "http://ecologicaltraitdata.github.io/TraitDataList/Locomotion_morphology"),
+                                   identifier = "http://ecologicaltraitdata.github.io/TraitDataList/#Locomotion_morphology"),
   Tail = traitdataform::as.trait("Tail_length", expectedUnit = "mm", valueType = "numeric",
                                    identifier = NA),
   Tarsus = traitdataform::as.trait("Tarsus_length", expectedUnit = "mm", valueType = "numeric",
