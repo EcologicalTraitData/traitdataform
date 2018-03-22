@@ -2,6 +2,7 @@ reference:
   - title: "Reading and Writing Data"
     desc: "Functions for reading and writing Spark DataFrames."
     contents:
+      - pulldata
       - as.traitdata
       - as.trait
       - as.thesaurus
