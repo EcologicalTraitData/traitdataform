@@ -1,8 +1,51 @@
-#' Functional Arthropod Traits
+#' Pull trait data from the internet
 #'
-#' Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
+#' This function sources a recipe for extracting public trait data. 
+#' 
+#' @details The package 'traitdataform' comes with a collection of recipes for public trait data. These R-scripts  
+#' 
+#'   1. define how to read the file from an online source, i.e. a URL to a txt, xlsx, or a ZIP archive
+#'   2. assigns metadata attributes about authorship, license and original publication
+#'   3. provide parameters for the standardize() function, i.e. a trait thesaurus, mappings and units. 
+#'  
+#'   New recipes can be suggested as a pull requrest via the package development page (https://github.com/EcologicalTraitData/traitdataform). 
+#'  
+#' @param x The name of the dataset to source. 
+#'
+#' @family rawdata
+#' @export
+#' @author Florian D. Schneider
+#' @examples
+#' 
+#' # to get a list of all available data within the package 
+#' pulldata() 
+#' 
+#' # to import a dataset
+#' pulldata("carabids")
+
+pulldata <- function(x = NULL) {
+  if(is.null(x)) {
+    libpath <- system.file( "extdata", "carabids.R", package="traitdataform")
+    available <- sub(".R", "", dir(sub("carabids.R", "", libpath)))
+    cat("Please choose a trait dataset to import! the following trait datasets are available: \n \t")
+    cat(paste(available, collapse = "\n \t"))
+    cat("\n")
+  } else {
+    source(system.file( "extdata", paste0(x,".R"), package="traitdataform"))
+    cat("The dataset '", x, "' is now available for use! \n", sep = "")
+  }
+}
+
+
+#' @title Functional Arthropod Traits
+#' 
+#' @name arthropodtraits
+#' 
+#' @description Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 #' Araneae, occurring in grasslands in Germany.
 #'
+#' @usage pulldata("arthropodtraits")
+#' 
 #' @details When using this data, please cite the original publication:
 #' 
 #'   \itemize{ \item  Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO,
@@ -27,12 +70,17 @@
 #'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
-"arthropodtraits"
+
+NULL
 
 # ----------------------------------------------------------------
 
 #' @title Carabid morphological traits
 #'
+#' @name carabids
+#' 
+#' @usage pulldata("carabids")
+#' 
 #' @description Average body measures of 120 Carabid species occuring in the Netherlands.
 #'
 #' @author Fons van der Plas, R. van Klink, P. Manning, H. Olff, M. Fischer
@@ -73,7 +121,8 @@
 #'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
-"carabids"
+
+carabids <- NULL
 
 # -------------------------------------------------------------------
 
@@ -81,6 +130,11 @@
 #' 
 #' Morphometric measures of Heteroptera sampled in grasslands across three
 #' regions of Germany.
+#' 
+#' @name heteroptera_raw
+#' 
+#' @usage pulldata("heteroptera_raw")
+#'   pulldata("heteroptera")
 #' 
 #' @author Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 #'   Weisser
@@ -106,16 +160,20 @@
 #'   figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1 }
 #'   
 #' @family rawdata
-"heteroptera_raw"
 
+heteroptera_raw <- NULL
 
 #' @rdname heteroptera_raw
 #' @family rawdata
-"heteroptera"
+#' @name heteroptera
+
+heteroptera <- NULL
 
 # -------------------------------------------------------------------
 
 #' Amniote life-history traits
+#' 
+#' @name amniota
 #' 
 #' @description An amniote life-history database to perform comparative analyses
 #'   with birds, mammals, and reptiles, Ecological Archives E096-269
@@ -161,11 +219,14 @@
 #'   and reptiles.
 #'   
 #' @family rawdata
-"amniota"
+
+amniota <- NULL
 
 # ----------------------------------------------------------------------------
 
 #' PanTHERIA mammal traits
+#' 
+#' @name pantheria
 #' 
 #' @description Here we describe a global species-level data set of key
 #'   life-history, ecological and geographical traits of all known extant and
@@ -218,12 +279,14 @@
 #'   and related or neighboring rights to this data.
 #'   
 #' @family rawdata
-"pantheria"
+
+pantheria <- NULL
 
 # ----------------------------------------------------------------------------
 
 #' Mammal diet database
 #' 
+#' @name mammaldiet
 #' @description A comprehensive global dataset of diet preferences of mammals 
 #'   (‘MammalDIET’). Diet information was digitized from the literature and 
 #'   extrapolated for species with missing information. The original and 
@@ -296,11 +359,14 @@
 #'   Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
 #'   
 #' @family rawdata
-"mammaldiet"
+
+mammaldiet <- NULL
 
 # -----------------------------------------------------------------------------
 
 #' AmphiBIO, a global database for amphibian ecological traits
+#' 
+#' @name amphibio 
 #' 
 #' @description A comprehensive database of natural history traits for amphibians worldwide. 
 #' 
@@ -319,6 +385,6 @@
 #' @author Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa
 #' 
 #' @family rawdata
-#' @import readxl
-"amphibio"
+
+amphibio <- NULL
 
