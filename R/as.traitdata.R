@@ -88,7 +88,7 @@
 #'     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
 #'   units = "mm", 
 #'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
-#'   metadata = as.metadata(s
+#'   metadata = as.metadata(
 #'     author = "Gossner MM, Simons NK, Höck L and Weisser WW",
 #'     datasetName = "Morphometric traits Heteroptera", 
 #'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
@@ -213,7 +213,7 @@ as.traitdata <- function(x,
   if("metadata" %in% class(metadata)) {
       attr(out, "metadata") <- metadata
   } else {
-      do.call(as.metadata, metadata)
+    attr(out, "metadata") <- as.metadata(metadata)
   }
   
   class(out) <- c( "traitdata", "data.frame")
