@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BExIS access over a Webservice — read.service â€¢ traitdataform</title>
+<title>Pull trait data from the internet — pulldata â€¢ traitdataform</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,63 +98,55 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>BExIS access over a Webservice</h1>
+    <h1>Pull trait data from the internet</h1>
     </div>
 
     
-    <p>Read table from a web service. Inherits functionality of <code>read.table()</code>.</p>
+    <p>This function sources a recipe for extracting public trait data.</p>
     
 
-    <pre class="usage"><span class='fu'>read.service</span>(<span class='no'>datasetid</span>, <span class='kw'>user</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pswd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>na.strings</span> <span class='kw'>=</span> <span class='st'>"NA"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='kw'>if</span>
-  (<span class='fu'>identical</span>(<span class='no'>sep</span>, <span class='st'>"\n"</span>)) <span class='st'>""</span> <span class='kw'>else</span> <span class='st'>"'\""</span>, <span class='kw'>fileEncoding</span> <span class='kw'>=</span> <span class='st'>"UTF-8"</span>)
-
-<span class='fu'>read.service.blocks</span>(<span class='no'>datasetid</span>, <span class='no'>user</span>, <span class='no'>pswd</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>na.strings</span> <span class='kw'>=</span> <span class='st'>"NA"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'>identical</span>(<span class='no'>sep</span>, <span class='st'>"\n"</span>)) <span class='st'>""</span> <span class='kw'>else</span>
-  <span class='st'>"'\""</span>, <span class='kw'>fileEncoding</span> <span class='kw'>=</span> <span class='st'>"UTF-8"</span>)</pre>
+    <pre class="usage"><span class='fu'>pulldata</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>datasetid</th>
-      <td><p>Integer BExIS ID of the requested dataset.</p></td>
-    </tr>
-    <tr>
-      <th>user</th>
-      <td><p>User name on BExIS. If not provided, function will prompt input.</p></td>
-    </tr>
-    <tr>
-      <th>pswd</th>
-      <td><p>Password on BExIS. If not provided, function will prompt input.</p></td>
-    </tr>
-    <tr>
-      <th>dec</th>
-      <td><p>the character used in the file for decimal points.</p></td>
-    </tr>
-    <tr>
-      <th>na.strings</th>
-      <td><p>a character vector of strings which are to be interpreted as NA values. Blank fields are also considered to be missing values in logical, integer, numeric and complex fields.</p></td>
-    </tr>
-    <tr>
-      <th>fill</th>
-      <td><p>logical. If TRUE then in case the rows have unequal length, blank fields are implicitly added. See 'Details' of <code>?read.table</code>.</p></td>
-    </tr>
-    <tr>
-      <th>sep</th>
-      <td><p>the field separator character. Values on each line of the file are separated by this character. If sep = "" (the default for read.table) the separator is ‘white space’, that is one or more spaces, tabs, newlines or carriage returns.</p></td>
-    </tr>
-    <tr>
-      <th>quote</th>
-      <td><p>the set of quoting characters. To disable quoting altogether, use quote = "". See scan for the behaviour on quotes embedded in quotes. Quoting is only considered for columns read as character, which is all of them unless colClasses is specified.</p></td>
+      <th>x</th>
+      <td><p>The name of the dataset to source.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>read.service.blocks()</code> returns a data.frame array as a list of data.frames.</p>
+    <p>The package 'traitdataform' comes with a collection of recipes for public trait data. These R-scripts</p><ol>
+<li><p>define how to read the file from an online source, i.e. a URL to a txt, xlsx, or a ZIP archive</p></li>
+<li><p>assigns metadata attributes about authorship, license and original publication</p></li>
+<li><p>provide parameters for the standardize() function, i.e. a trait thesaurus, mappings and units.</p></li>
+</ol>
+    <p>New recipes can be suggested as a pull requrest via the package development page (https://github.com/EcologicalTraitData/traitdataform).</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
+  <code><a href='amphibio.html'>amphibio</a></code>, <code><a href='arthropodtraits.html'>arthropodtraits</a></code>,
+  <code><a href='carabids.html'>carabids</a></code>, <code><a href='heteroptera_raw.html'>heteroptera_raw</a></code>,
+  <code><a href='mammaldiet.html'>mammaldiet</a></code>, <code><a href='pantheria.html'>pantheria</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'># to get a list of all available data within the package </span>
+<span class='fu'>pulldata</span>()</div><div class='output co'>#&gt; Please choose a trait dataset to import! the following trait datasets are available: 
+#&gt;  	amniota
+#&gt;  	amphibio
+#&gt;  	arthropodtraits
+#&gt;  	carabids
+#&gt;  	heteroptera
+#&gt;  	heteroptera_raw
+#&gt;  	mammaldiet
+#&gt;  	pantheria</div><div class='input'>
+<span class='co'># to import a dataset</span>
+<span class='fu'>pulldata</span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; The dataset 'carabids' is now available for use! </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -162,11 +154,15 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     
-Dennis Heimann, Andreas Ostrowski
+Florian D. Schneider
 
   </div>
 </div>

@@ -40,6 +40,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/traitdataform.sync-conflict-20180322-155237-FIZHYXG.html">Package 'traitdataform'</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="news/index.html">News</a>
 </li>
@@ -62,10 +74,8 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    <div id="package-traitdataform---harmonizing-ecological-trait-data-in-r" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#package-traitdataform---harmonizing-ecological-trait-data-in-r" class="anchor"></a>Package ‘traitdataform’ - harmonizing ecological trait data in R</h1></div>
-<p>This package assists in handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation).</p>
+    <section class="level1"><div class="page-header"><h1>Package ‘traitdataform’ - harmonizing ecological trait data in R</h1></div>
+<p>This package assists in handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation).</p>
 <p>There are two major use cases for the package:</p>
 <ul>
 <li>preparation of own trait datasets for upload into public data bases, and</li>
@@ -74,89 +84,66 @@
 <p>The toolset of the package includes</p>
 <ul>
 <li>transforming species-trait-matrix or occurence table data into a unified long-table format</li>
-<li>mapping column names into terms provided in the trait data standard (Schneider et al. 2017)</li>
+<li>mapping column names into terms provided in a standard trait vocabulary</li>
 <li>matching of species names into GBIF Backbone Taxonomy (taxonomic ontology server)</li>
 <li>matching of trait names into a user-provided traitlist, i.e. a thesaurus of traits</li>
 <li>unifying trait values into target unit format and legit factor levels</li>
 <li>saving trait dataset into a desired format using templates (e.g. for BExIS)</li>
 </ul>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<section class="level2"><h2>Installation</h2>
 <p>The package can be installed from Github via the ‘devtools’ package</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'devtools'</span>)
-devtools::<span class="kw">install_github</span>(<span class="st">'EcologicalTraitData/traitdataform'</span>)</code></pre></div>
-</div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw">data</span>(carabids)
-
-thesaurus &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.thesaurus.html">as.thesaurus</a></span>(
-       <span class="dt">body_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"body_length"</span>, 
-         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, 
-         <span class="dt">identifier =</span> <span class="st">"length"</span>
-         ), 
-       <span class="dt">antenna_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"antenna_length"</span>, 
-         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, 
-         <span class="dt">identifier =</span> <span class="st">"antenna"</span>
-         ),
-       <span class="dt">metafemur_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"metafemur_length"</span>, 
-         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, 
-         <span class="dt">identifier =</span> <span class="st">"metafemur"</span>
-         ),
-       <span class="dt">eyewidth =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"eyewidth_corr"</span>, 
-         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, 
-         <span class="dt">identifier =</span> <span class="st">"eyewidth"</span>
-         )
-)
-                          
-traitdataset1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/standardize.html">standardize</a></span>(carabids,
-            <span class="dt">thesaurus =</span> thesaurus,
-            <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,
-            <span class="dt">units =</span> <span class="st">"mm"</span>
-            )</code></pre></div>
-</div>
-<div id="documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'devtools'</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'EcologicalTraitData/traitdataform'</span>)</a></code></pre></div>
+</section><section class="level2"><h2>Usage</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">data</span>(carabids)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">thesaurus &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">       <span class="dt">body_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"body_length"</span>, </a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">         <span class="dt">identifier =</span> <span class="st">"length"</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">         ), </a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">       <span class="dt">antenna_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"antenna_length"</span>, </a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">         <span class="dt">identifier =</span> <span class="st">"antenna"</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">         ),</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">       <span class="dt">metafemur_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"metafemur_length"</span>, </a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">         <span class="dt">identifier =</span> <span class="st">"metafemur"</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">         ),</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">       <span class="dt">eyewidth =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"eyewidth_corr"</span>, </a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">         <span class="dt">identifier =</span> <span class="st">"eyewidth"</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">         )</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">)</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">                          </a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">traitdataset1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/standardize.html">standardize</a></span>(carabids,</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">            <span class="dt">thesaurus =</span> thesaurus,</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">            <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">            <span class="dt">units =</span> <span class="st">"mm"</span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">            )</a></code></pre></div>
+</section><section class="level2"><h2>Documentation</h2>
 <p>A documentation is available online at <a href="http://ecologicaltraitdata.github.io/traitdataform/" class="uri">http://ecologicaltraitdata.github.io/traitdataform/</a> or offline in the package vignette ‘traitdataform’.</p>
-</div>
-<div id="datasets" class="section level2">
-<h2 class="hasAnchor">
-<a href="#datasets" class="anchor"></a>Datasets</h2>
+</section><section class="level2"><h2>Datasets</h2>
 <p>The traitdataform package links to a couple of datasets, which are used for demo purposes in the vignette and documentation, but can be used for research and production use.</p>
 <p>The datasets have been published by their authors under <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a> or <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a> license, which means they can be copied, modified, distributed without asking permission. Attribution must be given according to the dataset license.</p>
 <p>For additional information and interpretation of the data please refer to the help pages of the data objects (e.g. calling <code><a href="reference/carabids.html">?carabids</a></code> in R) and the original data sources given therein.</p>
 <p>If you want further datasources published under Creative Commons Licenses or in the public domain being added to this package, feel free to file a pull-request with a script for download and harmonization in the <code>data/</code> directory and a documentation appended to <code>R/data.R</code>!</p>
-</div>
-<div id="future-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#future-features" class="anchor"></a>Future features</h2>
+</section><section class="level2"><h2>Future features</h2>
 <p>The package is under open source development. You are invited to submit pull-requests with your improvements.</p>
 <p>We are aiming to provide the following features in future iterations of the package:</p>
 <ul>
 <li>extracting trait definitions and hierarchies from semantic ontologies (e.g. from the OWL files or via APIs), to facilitate analysis of comparable traits across taxa.</li>
 <li>automated matching of user-provided trait names against trait definitions in online resources, by looking up traits from published ontologies.</li>
 <li>harmonization of levels of factorial traits via fuzzy matching (requires lookup tables and ontologies providing legit factor levels).</li>
-<li>managing trait databases locally in R by turning the traitdataset objects into lists containing additional linked data (e.g. on occurence level or measurement level, sampling event, taxon etc.).</li>
-<li>saving trait datasets as Darwin Core Archives.</li>
-</ul>
-</div>
-<div id="cite-as" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cite-as" class="anchor"></a>Cite as</h2>
+<li>managing trait databases locally in R by managing relational data (e.g. on occurence level or measurement level, sampling event, taxon etc.) in the data.frame attributes.</li>
+</ul></section><section class="level2"><h2>Cite as</h2>
 <p>Schneider, F.D. (2017) traitdataform - harmonizing ecological trait data in R, v0.2, doi: xxx.xxx, <a href="http://ecologicaltraitdata.github.io/traitdataform" class="uri">http://ecologicaltraitdata.github.io/traitdataform</a></p>
-</div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+</section><section class="level2"><h2>License</h2>
 <p>Copyright (c) 2017 F.D. Schneider, <a href="mailto:florian.dirk.schneider@gmail.com">florian.dirk.schneider@gmail.com</a></p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</section></section>
 </div>
-</div>
-  </div>
 
   <div class="col-md-3" id="sidebar">
     <h2>Links</h2>
@@ -167,7 +154,7 @@ traitdataset1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="http://www.opensource.org/licenses/mit-license.php">MIT</a></p>
+<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Florian D. Schneider <br><small class="roles"> Author, maintainer, author </small> </li>
