@@ -5,7 +5,7 @@
 \alias{heteroptera_raw}
 \alias{heteroptera}
 \title{Heteroptera morphometry traits}
-\format{An object of class \code{data.frame} with 425 rows and 34 columns.}
+\format{An object of class \code{NULL} of length 0.}
 \source{
 \url{https://figshare.com/articles/Data_Paper_Data_Paper/3561936};
 \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
@@ -13,7 +13,8 @@
 and related or neighboring rights to this data.
 }
 \usage{
-heteroptera_raw
+pulldata("heteroptera_raw")
+  pulldata("heteroptera")
 
 heteroptera
 }
@@ -43,12 +44,12 @@ figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1 }
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{arthropodtraits}},
   \code{\link{carabids}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}
+  \code{\link{pantheria}}, \code{\link{pulldata}}
 
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{arthropodtraits}},
   \code{\link{carabids}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}
+  \code{\link{pantheria}}, \code{\link{pulldata}}
 }
 \author{
 Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.

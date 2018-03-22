@@ -4,7 +4,7 @@
 \name{mammaldiet}
 \alias{mammaldiet}
 \title{Mammal diet database}
-\format{An object of class \code{data.frame} with 5364 rows and 30 columns.}
+\format{An object of class \code{NULL} of length 0.}
 \source{
 Cite this dataset as:
 \itemize{
@@ -85,7 +85,7 @@ transferable to other trait data and taxa.
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{arthropodtraits}},
   \code{\link{carabids}}, \code{\link{heteroptera_raw}},
-  \code{\link{pantheria}}
+  \code{\link{pantheria}}, \code{\link{pulldata}}
 }
 \author{
 \href{danielkissling@web.de}{Kissling, W.D.}, Dalby, L., Fløjgaard, C.,

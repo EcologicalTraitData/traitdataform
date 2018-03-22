@@ -37,7 +37,7 @@ accessed by calling \code{attributes(<dataset>)$datasets}.
 }
 \examples{
 
-data(carabids)
+pulldata("carabids")
 
 dataset1 <- as.traitdata(carabids, 
   taxa = "name_correct", 
@@ -68,7 +68,7 @@ dataset1Std <- standardize.traits(dataset1, thesaurus = traits1)
 
 # occurrence table: 
 
-data(heteroptera_raw)
+pulldata("heteroptera_raw")
 
 dataset2 <- as.traitdata(heteroptera_raw, 
   taxa = "SpeciesID", 

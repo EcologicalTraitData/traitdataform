@@ -41,7 +41,7 @@ names, and the original names as provided in 'traitName' as value. E.g.
 \examples{
 
 
-data(carabids)
+pulldata("carabids")
 
 dataset1 <- as.traitdata(carabids, 
   taxa = "name_correct", 
@@ -69,6 +69,8 @@ dataset1Std <- standardize.traits(dataset1, thesaurus = traitlist)
 
 
 ## Example: matching of original names to thesaurus
+
+pulldata("heteroptera_raw")
 
 dataset2 <- as.traitdata(heteroptera_raw, 
   taxa = "SpeciesID", 

@@ -90,7 +90,7 @@ additional columns and dataset attribution will be listed in attributes.
 
 # species-trait matrix: 
 
-data(carabids)
+pulldata(carabids)
 
 dataset1 <- as.traitdata(carabids, 
   taxa = "name_correct", 
@@ -101,7 +101,7 @@ dataset1 <- as.traitdata(carabids,
 
 # occurrence table: 
 
-data(heteroptera_raw)
+pulldata("heteroptera_raw")
 
 dataset2 <- as.traitdata(heteroptera_raw, 
   taxa = "SpeciesID", 
@@ -113,7 +113,7 @@ dataset2 <- as.traitdata(heteroptera_raw,
     "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
   units = "mm", 
   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
-  metadata = as.metadata(s
+  metadata = as.metadata(
     author = "Gossner MM, Simons NK, Höck L and Weisser WW",
     datasetName = "Morphometric traits Heteroptera", 
     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 

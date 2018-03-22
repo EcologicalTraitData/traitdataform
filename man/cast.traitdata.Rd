@@ -27,7 +27,7 @@ For factorial values, the value is accepted if it is equal in all of the input e
 }
 \examples{
 
-data(arthropodtraits)
+pulldata("arthropodtraits")
 head(arthropodtraits)
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",

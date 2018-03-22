@@ -4,7 +4,7 @@
 \name{amphibio}
 \alias{amphibio}
 \title{AmphiBIO, a global database for amphibian ecological traits}
-\format{An object of class \code{data.frame} with 6776 rows and 38 columns.}
+\format{An object of class \code{NULL} of length 0.}
 \source{
 Cite as:
 \itemize{
@@ -31,7 +31,7 @@ Current ecological and evolutionary research are increasingly moving from specie
 Other rawdata: \code{\link{amniota}},
   \code{\link{arthropodtraits}}, \code{\link{carabids}},
   \code{\link{heteroptera_raw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}
+  \code{\link{pantheria}}, \code{\link{pulldata}}
 }
 \author{
 Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa

@@ -4,7 +4,7 @@
 \name{amniota}
 \alias{amniota}
 \title{Amniote life-history traits}
-\format{An object of class \code{data.frame} with 21322 rows and 36 columns.}
+\format{An object of class \code{NULL} of length 0.}
 \source{
 Cite this dataset as \itemize{ \item P. Myhrvold, Nathan; Baldridge,
 Elita; Chan, Benjamin; Sivam, Dhileep; L. Freeman, Daniel; Ernest, S. K.
@@ -55,7 +55,7 @@ and reptiles.
 Other rawdata: \code{\link{amphibio}},
   \code{\link{arthropodtraits}}, \code{\link{carabids}},
   \code{\link{heteroptera_raw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}
+  \code{\link{pantheria}}, \code{\link{pulldata}}
 }
 \author{
 Nathan P. Myhrvold, Elita Baldridge, Benjamin Chan, Dhileep Sivam,

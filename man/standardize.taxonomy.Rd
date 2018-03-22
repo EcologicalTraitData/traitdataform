@@ -52,7 +52,7 @@ enable a choice of a taxonomic reference.
 \examples{
 
 
-data(carabids)
+pulldata("carabids")
 
 dataset1 <- as.traitdata(carabids, 
   taxa = "name_correct", 

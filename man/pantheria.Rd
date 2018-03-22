@@ -4,7 +4,7 @@
 \name{pantheria}
 \alias{pantheria}
 \title{PanTHERIA mammal traits}
-\format{An object of class \code{data.frame} with 5416 rows and 55 columns.}
+\format{An object of class \code{NULL} of length 0.}
 \source{
 Cite as:
 
@@ -59,7 +59,7 @@ information.
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{arthropodtraits}},
   \code{\link{carabids}}, \code{\link{heteroptera_raw}},
-  \code{\link{mammaldiet}}
+  \code{\link{mammaldiet}}, \code{\link{pulldata}}
 }
 \author{
 Kate E. Jones, Jon Bielby, Marcel Cardillo, Susanne A. Fritz, Justin
