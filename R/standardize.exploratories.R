@@ -40,6 +40,7 @@ standardize.exploratories <- function(x,
                         plots = "locationID",
                         user = NULL,
                         pswd = NULL,
+                        getdata = !is.null(user),
                         fillall = TRUE, 
                         ..., 
                         verbose = NULL,
@@ -47,42 +48,79 @@ standardize.exploratories <- function(x,
   
   if("data.frame" %in% class(x) && ! "traitdata" %in% class(x) ) x <- as.traitdata(x,...)
   
-  if(is.null(user)) user <- readline("BExIS user name: ") 
-  if(is.null(pswd)) pswd <- getPass::getPass("BExIS password: ", noblank = FALSE)
+  if(getdata) {
+    
+    if(is.null(user)) user <- readline("BExIS user name: ") 
+    if(is.null(pswd)) pswd <- getPass::getPass("BExIS password: ", noblank = FALSE)
   
-  #basic <- read.service(1000, user = user, pswd = pswd) # trying to access open data with rounded location data; but no webservice is supported.
-  basic_ep <- read.service(20826, user = user, pswd = pswd)
-  gridplots <- read.service(20907, user = user, pswd = pswd)
+    #basic <- read.service(1000, user = user, pswd = pswd) # trying to access open data with rounded location data; but no webservice is supported.
+    basic_ep <- read.service(20826, user = user, pswd = pswd)
+    gridplots <- read.service(20907, user = user, pswd = pswd)
   
-  rm(user, pswd)
+    rm(user, pswd)
+    
+    
+    BEplots <- merge(subset(gridplots, select= c("Plot_ID", 
+                                                 "Plotlevel", 
+                                                 "Exploratory", 
+                                                 "Landuse", 
+                                                 "Longitude_Dec_Plotcenter", 
+                                                 "Latitude_Dec_Plotcenter")
+    ),
+    subset(basic_ep, select = c("EP_PlotID", 
+                                "PlotID", 
+                                "VIP", 
+                                "MIP", 
+                                "LocalName", 
+                                "SoilTypeWRB", 
+                                "Elevation")
+    ), 
+    by.x = "Plot_ID", by.y = "PlotID", all.x = TRUE)
+    
+    names(BEplots) <- c("Plot_ID", "Plotlevel", "Exploratory", "BEType", 
+                        "decimalLongitude", "decimalLatitude", "EP_PlotID", 
+                        "VIP", "MIP", "verbatimLocality", "SoilTypeWRB", 
+                        "elevation")
+    
+    
+  }
+
+    
+  if(all(levels(x[,plots]) %in% BEplots$EP_PlotID0)) {
+    temp <- subset(BEplots, EP_PlotID0 %in% x[,plots])
+    temp$BEPlotID <- temp$EP_PlotID
+    
+    levels(x[,plots]) <- BEplots$EP_PlotID[match(x[,plots], BEplots$EP_PlotID0)]
+    
+  }
   
-  EP_valid <- levels(basic_ep$EP_PlotID)
-  Region_valid <- c("HAI", "ALB", "SCH")
+  if(all(levels(x[,plots]) %in% BEplots$EP_PlotID)) {
+    temp <- subset(BEplots, EP_PlotID %in% x[,plots]) 
+    temp$BEPlotID <- temp$EP_PlotID
+
+  }
   
-  request <- unique(x[,plots])
+  if(all(levels(x[,plots]) %in% BEplots$Plot_ID)) {
+    temp <- subset(BEplots, Plot_ID %in% x[,plots])
+    temp$BEPlotID <- temp$Plot_ID
+  } 
   
-  GP_vec <- basic_ep$PlotID[match(request, EP_valid)] 
-  temp <- gridplots[match(GP_vec, gridplots$Plot_ID) , c("Plot_ID", "Exploratory", "Landuse", "Longitude_Dec_Plotcenter", "Latitude_Dec_Plotcenter")]
-  temp$ExploratoriesPlotID <- request
-  temp$OriginExploratories <- TRUE
-  temp$habitat <- c("forest", "grassland")[temp$Landuse]
-  temp$elevation <-  as.numeric(sub(",", ".", basic_ep$Elevation[match(request, basic_ep$EP_PlotID)]))
+  temp$OriginBE <- TRUE
+  temp$habitat <- c("forest", "grassland")[temp$BEType]
   temp$geodeticDatum <- "WGS84"
-  temp$verbatimLocality <- basic_ep$LocalName[match(request, basic_ep$EP_PlotID)]
   temp$country <- "Germany"
   temp$countryCode <- "DE"
   
-
-  names(temp)[c(4:5,3)] <- c("decimalLongitude", "decimalLatitude", "ExploType")  
   
-  
-  out <- merge(x, subset(temp, select = -c(Plot_ID)), by.x = plots, by.y = "ExploratoriesPlotID")
-  names(out)[1] <- "ExploratoriesPlotID"
+  out <- merge.data.frame(x, subset(temp, select = c(-Plot_ID, -Plotlevel, -EP_PlotID, -VIP, -MIP, -SoilTypeWRB, -EP_PlotID0)), 
+               by.x = plots, by.y = "BEPlotID")
+  names(out)[1] <- "BEPlotID"
   
   if(fillall) {
     # add all glossary terms to table and fill empty ones with NA
     
-  glossarynames <- as.data.frame(t(data.frame(glossary$columnName, row.names = glossary$columnName)))[0,]
+  colnames <- glossary$columnName[glossary$Namespace != "Traitlist"]
+  glossarynames <- as.data.frame(t(data.frame(colnames, row.names = colnames)))[0,]
   out <- data.table::rbindlist(list(glossarynames, out), fill = TRUE)
   
   } else {
