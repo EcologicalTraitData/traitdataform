@@ -23,11 +23,11 @@
 #'   accessed by calling `attributes(<dataset>)$datasets`.
 #'  
 #' @export
-#' @import data.table
+#' @importFrom data.table rbindlist as.data.table
 #'  
 #' @examples
 #' 
-#' data(carabids)
+#' pulldata("carabids")
 #' 
 #' dataset1 <- as.traitdata(carabids, 
 #'   taxa = "name_correct", 
@@ -58,7 +58,7 @@
 #' 
 #' # occurrence table: 
 #' 
-#' data(heteroptera_raw)
+#' pulldata("heteroptera_raw")
 #' 
 #' dataset2 <- as.traitdata(heteroptera_raw, 
 #'   taxa = "SpeciesID", 

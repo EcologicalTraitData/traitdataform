@@ -20,10 +20,12 @@
 #'   re-mapping might be added in later versions of the package.)
 #'   
 #' @export
+#' @importFrom dplyr mutate
+#' @import plyr
 #' 
 #' @examples
 #' 
-#' data(arthropodtraits)
+#' pulldata("arthropodtraits")
 #' dataset3 <- as.traitdata(arthropodtraits,
 #'                          taxa = "SpeciesID",
 #'                          traits = c("Body_Size", "Dispersal_ability", "Feeding_guild","Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use", "Stratum_use_short"), 

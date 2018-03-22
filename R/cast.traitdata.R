@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' 
-#' data(arthropodtraits)
+#' pulldata("arthropodtraits")
 #' head(arthropodtraits)
 #' dataset3 <- as.traitdata(arthropodtraits,
 #'                          taxa = "SpeciesID",

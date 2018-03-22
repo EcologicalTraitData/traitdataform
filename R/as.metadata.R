@@ -16,7 +16,7 @@
 #' # update an existing metadata object
 #' a1 <- as.metadata(datasetID = "heteroptera", template = a)
 #' 
-#' 
+
 as.metadata <- function(..., 
                     template = list(
                       datasetID = NULL,

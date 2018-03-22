@@ -9,8 +9,8 @@
 #' 
 #' @details If 'synonym' is returned as TRUE, the user provided name has been identified as a synonym and was mapped to an accepted name. The field confidence reports the confidence of the matching procedure performed by the function 'get_gbifid_()' of the package 'taxize'. The taxonID is a globally valid URI that links to the taxon description of the GBIF backbone taxonomy.  
 #' 
-#' @import taxize
-#' @import data.table
+#' @import taxize 
+#' @importFrom data.table rbindlist
 #' @export
 #'
 #' @examples

@@ -39,7 +39,7 @@
 #' @examples 
 #' 
 #' 
-#' data(carabids)
+#' pulldata("carabids")
 #' 
 #' dataset1 <- as.traitdata(carabids, 
 #'   taxa = "name_correct", 
@@ -121,7 +121,7 @@ standardize.taxonomy <- function(x,
 #' @examples 
 #' 
 #' 
-#' data(carabids)
+#' pulldata("carabids")
 #' 
 #' dataset1 <- as.traitdata(carabids, 
 #'   taxa = "name_correct", 
@@ -149,6 +149,8 @@ standardize.taxonomy <- function(x,
 #' 
 #' 
 #' ## Example: matching of original names to thesaurus
+#' 
+#' pulldata("heteroptera_raw")
 #' 
 #' dataset2 <- as.traitdata(heteroptera_raw, 
 #'   taxa = "SpeciesID", 

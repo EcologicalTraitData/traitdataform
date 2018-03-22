@@ -59,13 +59,13 @@
 #'   additional columns and dataset attribution will be listed in attributes.
 #'   
 #' @export
-#' @import reshape
+#' @importFrom reshape melt
 #'   
 #' @examples 
 #' 
 #' # species-trait matrix: 
 #' 
-#' data(carabids)
+#' pulldata(carabids)
 #' 
 #' dataset1 <- as.traitdata(carabids, 
 #'   taxa = "name_correct", 
@@ -76,7 +76,7 @@
 #' 
 #' # occurrence table: 
 #' 
-#' data(heteroptera_raw)
+#' pulldata("heteroptera_raw")
 #' 
 #' dataset2 <- as.traitdata(heteroptera_raw, 
 #'   taxa = "SpeciesID", 
@@ -213,7 +213,7 @@ as.traitdata <- function(x,
   if("metadata" %in% class(metadata)) {
       attr(out, "metadata") <- metadata
   } else {
-    attr(out, "metadata") <- traitdataform:::as.metadata(metadata)
+    attr(out, "metadata") <- traitdataform::as.metadata(metadata)
   }
   
   class(out) <- c( "traitdata", "data.frame")

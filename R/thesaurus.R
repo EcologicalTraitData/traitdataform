@@ -17,7 +17,7 @@
 #'   to apply unit conversion and factor level harmonization.
 #'   
 #' @export
-#' @import plyr
+#' @importFrom reshape rename
 #' 
 #' @examples
 #' 
@@ -63,7 +63,7 @@ as.thesaurus <- function(...,
                          ) {
   if( "data.frame" %in% class(..1)) {
     input <- ..1
-    if(!is.null(replace)) input <- plyr::rename(input, replace)
+    if(!is.null(replace)) input <- reshape::rename(input, replace)
     out <- lapply(split(input, f = input$trait, drop= TRUE), function(y) do.call(as.trait, y))
     
   }
