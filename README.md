@@ -10,7 +10,7 @@ There are two major use cases for the package:
 The toolset of the package includes
 
 - transforming species-trait-matrix or occurence table data into a unified long-table format
-- mapping column names into terms provided in the trait data standard (Schneider et al. 2017)
+- mapping column names into terms provided in a standard trait vocabulary
 - matching of species names into GBIF Backbone Taxonomy (taxonomic ontology server)
 - matching of trait names into a user-provided traitlist, i.e. a thesaurus of traits
 - unifying trait values into target unit format and legit factor levels
@@ -80,8 +80,7 @@ We are aiming to provide the following features in future iterations of the pack
 - extracting trait definitions and hierarchies from semantic ontologies (e.g. from the OWL files or via APIs), to facilitate analysis of comparable traits across taxa. 
 - automated matching of user-provided trait names against trait definitions in online resources, by looking up traits from published ontologies.
 - harmonization of levels of factorial traits via fuzzy matching (requires lookup tables and ontologies providing legit factor levels). 
-- managing trait databases locally in R by turning the traitdataset objects into lists containing additional linked data (e.g. on occurence level or measurement level, sampling event,  taxon etc.). 
-- saving trait datasets as Darwin Core Archives. 
+- managing trait databases locally in R by managing relational data (e.g. on occurence level or measurement level, sampling event,  taxon etc.) in the data.frame attributes. 
 
 ## Cite as
 
