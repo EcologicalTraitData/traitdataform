@@ -57,20 +57,24 @@
 #' 
 standardize.taxonomy <- function(x, 
                                  method = get_gbif_taxonomy, 
-                                 infraspecies = FALSE, 
-                                 fuzzy = FALSE, 
-                                 verbose = TRUE, 
-                                 return = c("taxonID", 
-                                            "scientificNameStd", 
-                                            "order", 
-                                            "taxonRank"), 
+                                 subspecies = TRUE, 
+                                 fuzzy = TRUE, 
+                                 verbose = FALSE, 
+                                 return = c("kingdom",
+                                            "phylum",
+                                            "class",
+                                            "order",
+                                            "family"
+                                            ), 
                                  ...) {
 
   #if(!"traitdata" %in% class(x)) mapping(x, ...)
     
-  temp <- method(levels(droplevels(x$scientificName)), infraspecies = infraspecies, fuzzy = fuzzy, verbose = verbose)
+  temp <- method(levels(droplevels(x$scientificName)), subspecies = subspecies, fuzzy = fuzzy, verbose = verbose)
   
-  out <- merge.data.frame(x, temp[, unique(c(return, "taxonID", "scientificNameStd", "scientificName", "warnings"))], by.x = "scientificName", by.y = "scientificName")
+  out <- merge.data.frame(x, temp[, unique(c( "taxonID", "scientificNameStd", "scientificName",
+                                              "taxonRank", "warnings", return))], 
+                          by.x = "scientificName", by.y = "scientificName")
   
   #TODO: produce warning for unmatched names!
   
