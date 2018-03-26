@@ -1,3 +1,15 @@
+# traitdataform 0.2.5
+
+- fix export of get_gbif_taxonomy() 
+- handle subspecies and superspecies cases
+- handle warnings in taxon mapping output
+- update documentation on taxon mapping
+
+# traitdataform 0.2.4
+
+- fix export of `standardize.exploratories()` to include all columns by default. 
+- start fixing install warnings 
+
 # traitdataform 0.2.3
 
 - fixing broken NAMESPACE export
