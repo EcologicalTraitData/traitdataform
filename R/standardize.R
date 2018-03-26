@@ -1,58 +1,62 @@
 #' Standardize scientific names of species
-#' 
+#'
 #' @description Adds columns to a traitdata object containing accepted species
 #'   names and relates to globally unique taxon identifiers via URI.
-#'   
+#'
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
 #'   containing at least the column `scientificName.
-#' @param method not functional. Will allow to chose from different sources of 
+#' @param method only option is `get_gbif_taxonomy`. In principle, takes any
+#'   function that maps the species names in x to produce a taxonomy lookup
+#'   table (i.e. mapping user-provided `scientificName` to `taxonID` and other
+#'   taxon-level information). Will allow to chose from different sources of
 #'   taxonomic reference.
-#' @param infraspecies not functional.
-#' @param fuzzy if set to `FALSE` (default mode), this disables fuzzy matching 
-#'   if problems with ambiguous species names arise.
+#' @param subspecies logical. If TRUE (default), the given name is resolved to
+#'   subspecies epithet, otherwise it will be mapped to species level.
+#' @param fuzzy if set to `FALSE` (default mode), this disables fuzzy matching
+#'   if problems with ambiguous species names arise. (see `?get_gbif_testing()`)
 #' @param verbose has currently no effect.
-#' @param return a character vector containing the informatoin that should be 
-#'   extracted into the output. Valid entries are the column names returned by 
+#' @param return a character vector containing the informatoin that should be
+#'   extracted into the output. Valid entries are the column names returned by
 #'   function `get_gbif_taxonomy()`. See 'Details'.
-#'   
-#' @details Taxonomic standardisation is an enormous challenge for biodiversity 
-#'   data management and research. Constant changes in species and higher taxa, 
-#'   refinements of phylogenetic trees and changing attribution to original 
-#'   authors, moving species into other genera or difficulties to place species 
-#'   into the Linean nomenclature results in highly fluctuent taxonomic 
+#'
+#' @details Taxonomic standardisation is an enormous challenge for biodiversity
+#'   data management and research. Constant changes in species and higher taxa,
+#'   refinements of phylogenetic trees and changing attribution to original
+#'   authors, moving species into other genera or difficulties to place species
+#'   into the Linean nomenclature results in highly fluctuent taxonomic
 #'   definitions.
-#'   
+#'
 #'   As a consequence, there is not one reference for accepted species names and
-#'   dependin on the field of resaerch and taxonomic focus other authorities 
+#'   dependin on the field of resaerch and taxonomic focus other authorities
 #'   will be employed.
-#'   
-#'   For reasons of simplicity and because of its high coverage of taxa, the 
-#'   function `standardize.taxonomy()` uses the GBIF Backbone Taxonomy as its 
-#'   reference system and resolves all provided species names to the accepted 
-#'   name according to GBIF (resolving misspellings and synonyms in the 
-#'   process). We invite pull requests to make this function more general and 
+#'
+#'   For reasons of simplicity and because of its high coverage of taxa, the
+#'   function `standardize.taxonomy()` uses the GBIF Backbone Taxonomy as its
+#'   reference system and resolves all provided species names to the accepted
+#'   name according to GBIF (resolving misspellings and synonyms in the
+#'   process). We invite pull requests to make this function more general and
 #'   enable a choice of a taxonomic reference.
-#'   
+#'
 #' @export
-#' 
-#' 
-#' @examples 
-#' 
-#' 
+#'
+#'
+#' @examples
+#'
+#'
 #' pulldata("carabids")
-#' 
-#' dataset1 <- as.traitdata(carabids, 
-#'   taxa = "name_correct", 
+#'
+#' dataset1 <- as.traitdata(carabids,
+#'   taxa = "name_correct",
 #'   traits = c("body_length", "antenna_length", "metafemur_length"),
 #'   units = "mm",
-#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"),
 #'   metadata = list(
 #'     bibliographicCitation = attributes(carabids)$citeAs,
-#'     author = "Fons van der Plas", 
+#'     author = "Fons van der Plas",
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
-#' 
+#'
 #' dataset1Std <- standardize.taxonomy(dataset1)
 #' 
 standardize.taxonomy <- function(x, 
