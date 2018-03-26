@@ -4,21 +4,25 @@
 \alias{standardize.taxonomy}
 \title{Standardize scientific names of species}
 \usage{
-standardize.taxonomy(x, method = get_gbif_taxonomy, infraspecies = FALSE,
-  fuzzy = FALSE, verbose = TRUE, return = c("taxonID",
-  "scientificNameStd", "order", "taxonRank"), ...)
+standardize.taxonomy(x, method = get_gbif_taxonomy, subspecies = TRUE,
+  fuzzy = TRUE, verbose = FALSE, return = c("kingdom", "phylum", "class",
+  "order", "family"), ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
 containing at least the column `scientificName.}
 
-\item{method}{not functional. Will allow to chose from different sources of
+\item{method}{only option is \code{get_gbif_taxonomy}. In principle, takes any
+function that maps the species names in x to produce a taxonomy lookup
+table (i.e. mapping user-provided \code{scientificName} to \code{taxonID} and other
+taxon-level information). Will allow to chose from different sources of
 taxonomic reference.}
 
-\item{infraspecies}{not functional.}
+\item{subspecies}{logical. If TRUE (default), the given name is resolved to
+subspecies epithet, otherwise it will be mapped to species level.}
 
 \item{fuzzy}{if set to \code{FALSE} (default mode), this disables fuzzy matching
-if problems with ambiguous species names arise.}
+if problems with ambiguous species names arise. (see \code{?get_gbif_testing()})}
 
 \item{verbose}{has currently no effect.}
 
@@ -54,14 +58,14 @@ enable a choice of a taxonomic reference.
 
 pulldata("carabids")
 
-dataset1 <- as.traitdata(carabids, 
-  taxa = "name_correct", 
+dataset1 <- as.traitdata(carabids,
+  taxa = "name_correct",
   traits = c("body_length", "antenna_length", "metafemur_length"),
   units = "mm",
-  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  keep = c(datasetID = "source_measurement", measurementRemark = "note"),
   metadata = list(
     bibliographicCitation = attributes(carabids)$citeAs,
-    author = "Fons van der Plas", 
+    author = "Fons van der Plas",
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
     )
 )

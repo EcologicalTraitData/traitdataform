@@ -4,28 +4,62 @@
 \alias{get_gbif_taxonomy}
 \title{Get accepted canonical names and taxonomy for a given species name}
 \usage{
-get_gbif_taxonomy(x, infraspecies = FALSE, fuzzy = TRUE, verbose = TRUE)
+get_gbif_taxonomy(x, subspecies = TRUE, verbose = FALSE, fuzzy = FALSE,
+  resolve_synonyms = TRUE)
 }
 \arguments{
 \item{x}{a character string or vector of species names.}
 
-\item{infraspecies}{logical. If TRUE, the given name is resolved to infraspecies taxon, i.e. subspecies names will not be pooled (not working!)}
+\item{subspecies}{logical. If TRUE (default), the given name is resolved to
+subspecies epithet, otherwise it will be mapped to species level.}
 
-\item{fuzzy}{logical. If TRUE, function tries fuzzy matching for species requests. May produce output, if normal matching fails. (not working!)}
+\item{verbose}{logical. If FALSE (default), warnings and messages are
+suppressed.}
 
-\item{verbose}{logical. If FALSE, warnings and messages are suppressed.}
+\item{fuzzy}{logical. If FALSE (default), names are only resolved to exactly
+matching taxa on GBIF taxonomy service. Setting to TRUE may produce matches
+when failing otherwise.}
+
+\item{resolve_synonyms}{logical. If TRUE (default), user provided synonyms
+are mapped to the accepted names on GBIF taxonomy service.}
 }
 \value{
-a data.frame mapping the user supplied names to the accepted taxon names and higher taxonomic information (kingdom, phylum, class, order, family, genus).
+a data.frame mapping the user supplied names to the accepted taxon
+names and higher taxonomic information (kingdom, phylum, class, order,
+family, genus).
 }
 \description{
-Get accepted canonical names and taxonomy for a given species name
+The function maps user provided names to accepted species names.
 }
 \details{
-If 'synonym' is returned as TRUE, the user provided name has been identified as a synonym and was mapped to an accepted name. The field confidence reports the confidence of the matching procedure performed by the function 'get_gbifid_()' of the package 'taxize'. The taxonID is a globally valid URI that links to the taxon description of the GBIF backbone taxonomy.
+The function relies on package 'taxize' by Scott Chamberlain. It
+uses the spell-checking and fuzzy matching algorithms provided by Global
+Names Resolver (\code{taxize::gnr_resolve()}) and forwards synonyms to the
+accepted names as provided by GBIF Backbone Taxonomy
+(\code{taxize::get_gbif_id_()}).
+
+If 'synonym' is returned as TRUE, the user provided name has been
+identified as a synonym and was mapped to an accepted name.
+
+The field confidence reports the confidence of the matching procedure
+performed by the function \code{get_gbifid_()} of the package 'taxize'. The
+taxonID is a globally valid URI that links to the taxon description of the
+GBIF backbone taxonomy.
 }
 \examples{
 
-get_gbif_taxonomy(c("Chorthippus albomarginatus", "Chorthippus apricarius", "Chorthippus biguttulus", "Chorthippus dorsatus", "Chorthippus montanus", "Chorthippus parallelus", "Chrysochraon dispar", "Conocephalus dorsalis", "Conocephalus fuscus", "Decticus verrucivorus", "Euthystira brachyptera", "Gomphocerippus rufus", "Gryllus campestris", "Metrioptera roeselii", "Omocestus viridulus", "Phaneroptera falcata", "Platycleis albopunctata", "Spec", "Stenobothrus lineatus", "Stenobothrus stigmaticus", "Stethophyma grossum", "Tetrix kraussi", "Tetrix subulata", "Tetrix tenuicornis", "Tetrix undulata", "Tettigonia cantans", "Tettigonia viridissima"))
+get_gbif_taxonomy(c("Chorthippus albomarginatus", "Chorthippus apricarius",
+  "Chorthippus biguttulus", "Chorthippus dorsatus", "Chorthippus montanus",
+  "Chorthippus parallelus", "Chrysochraon dispar", "Conocephalus dorsalis",
+  "Conocephalus fuscus", "Decticus verrucivorus", "Euthystira brachyptera",
+  "Gomphocerippus rufus", "Gryllus campestris", "Metrioptera roeselii",
+  "Omocestus viridulus", "Phaneroptera falcata", "Platycleis albopunctata",
+  "Spec", "Stenobothrus lineatus", "Stenobothrus stigmaticus",
+  "Stethophyma grossum", "Tetrix kraussi", "Tetrix subulata",
+  "Tetrix tenuicornis", "Tetrix undulata", "Tettigonia cantans",
+  "Tettigonia viridissima")
+  )
 
+get_gbif_taxonomy("Acrocephalus familiaris kingi", subspecies = FALSE)
+get_gbif_taxonomy("Vicia")
 }
