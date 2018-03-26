@@ -63,18 +63,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/traitdataform.sync-conflict-20180322-155237-FIZHYXG.html">Package 'traitdataform'</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -219,21 +207,13 @@ additional columns and dataset attribution will be listed in attributes.</p>
     <pre class="examples"><div class='input'>
 <span class='co'># species-trait matrix: </span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='no'>carabids</span>)</div><div class='output co'>#&gt; Please choose a trait dataset to import! the following trait datasets are available: 
-#&gt;  	amniota
-#&gt;  	amphibio
-#&gt;  	arthropodtraits
-#&gt;  	carabids
-#&gt;  	heteroptera
-#&gt;  	heteroptera_raw
-#&gt;  	mammaldiet
-#&gt;  	pantheria</div><div class='input'>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='no'>carabids</span>)</div><div class='output co'>#&gt; <span class='error'>Error in source(system.file("extdata", paste0(x, ".R"), package = "traitdataform")): cannot coerce type 'closure' to vector of type 'character'</span></div><div class='input'>
 <span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.traitdata</span>(<span class='no'>carabids</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),
   <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
   <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>basisOfRecordDecription</span> <span class='kw'>=</span> <span class='st'>"source_measurement"</span>, <span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"note"</span>)
-  )</div><div class='output co'>#&gt; <span class='error'>Error in `colnames&lt;-`(`*tmp*`, value = character(0)): attempt to set 'colnames' on an object with less than two dimensions</span></div><div class='input'>
+  )</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
 <span class='co'># occurrence table: </span>
 
 <span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; loading dataset 'heteroptera_raw' from original data source! 

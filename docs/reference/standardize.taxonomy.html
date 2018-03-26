@@ -63,18 +63,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/traitdataform.sync-conflict-20180322-155237-FIZHYXG.html">Package 'traitdataform'</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -106,9 +94,9 @@
 names and relates to globally unique taxon identifiers via URI.</p>
     
 
-    <pre class="usage"><span class='fu'>standardize.taxonomy</span>(<span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>get_gbif_taxonomy</span>, <span class='kw'>infraspecies</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"taxonID"</span>,
-  <span class='st'>"scientificNameStd"</span>, <span class='st'>"order"</span>, <span class='st'>"taxonRank"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>standardize.taxonomy</span>(<span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>get_gbif_taxonomy</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>, <span class='st'>"class"</span>,
+  <span class='st'>"order"</span>, <span class='st'>"family"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -120,17 +108,21 @@ containing at least the column `scientificName.</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>not functional. Will allow to chose from different sources of
+      <td><p>only option is <code>get_gbif_taxonomy</code>. In principle, takes any
+function that maps the species names in x to produce a taxonomy lookup
+table (i.e. mapping user-provided <code>scientificName</code> to <code>taxonID</code> and other
+taxon-level information). Will allow to chose from different sources of
 taxonomic reference.</p></td>
     </tr>
     <tr>
-      <th>infraspecies</th>
-      <td><p>not functional.</p></td>
+      <th>subspecies</th>
+      <td><p>logical. If TRUE (default), the given name is resolved to
+subspecies epithet, otherwise it will be mapped to species level.</p></td>
     </tr>
     <tr>
       <th>fuzzy</th>
       <td><p>if set to <code>FALSE</code> (default mode), this disables fuzzy matching
-if problems with ambiguous species names arise.</p></td>
+if problems with ambiguous species names arise. (see <code>?get_gbif_testing()</code>)</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -178,130 +170,7 @@ enable a choice of a taxonomic reference.</p>
     <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     )
 )</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
-<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize.taxonomy</span>(<span class='no'>dataset1</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Abax parallelepipedus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Acupalpus meridianus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum ericeti'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum fuliginosum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum gracile'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum marginatum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum muelleri'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum sexpunctatum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Agonum viduum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara aenea'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara apricaria'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara aulica'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara bifrons'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara brunnea'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara communis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara curta'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara equestris'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara famelica'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara familiaris'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara fulva'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara infima'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara lunicollis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara ovata'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara plebeja'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara quenseli'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara similata'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara spreta'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Amara tibialis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Anchomenus dorsalis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Anisodactylus binotatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Asaphidion flavipes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Badister bullatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion bruxellense'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion guttula'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion lampros'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion nigricorne'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion properans'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion quadrimaculatum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bembidion tetracolum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bradycellus caucasicus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bradycellus harpalinus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bradycellus ruficollis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Bradycellus verbasci'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Broscus cephalotes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus ambiguus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus cinctus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus erratus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus fuscipes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus melanocephalus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus micropterus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Calathus rotundicollis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Carabus arvensis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Carabus cancellatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Carabus granulatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Carabus nemoralis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Carabus nitens'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Carabus problematicus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Cicindela campestris'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Cicindela hybrida'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Clivina fossor'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Cychrus caraboides'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Cymindis macularis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Cymindis vaporariorum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Demetrias atricapillus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Dromius angustus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Dyschirius globosus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Dyschirius politus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus affinis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus anxius'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus distinguendus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus laevipes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus latus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus rubripes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus rufipalpis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus rufipes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus solitaris'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus tardus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Harpalus griseus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Leistus rufomarginatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Leistus terminatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Limodromus assimilis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Platynus assimilis'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Synonym provided! Automatically set to accepted species Name!</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Loricera pilicornis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Masoreus wetterhallii'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Miscodera arctica'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Nebria brevicollis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Nebria salina'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Notiophilus aquaticus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Notiophilus biguttatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Notiophilus germinyi'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Notiophilus rufipes'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Notiophilus substriatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Olisthopus rotundatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Ophonus rufibarbis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Oxypselaphus obscurus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Paradromius linearis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Patrobus atrorufus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Philorhizus melanocephalus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Poecilus cupreus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Poecilus lepidus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Poecilus versicolor'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus diligens'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus melanarius'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus minor'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus niger'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus nigrita'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus oblongopunctatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus rhaeticus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus strenuus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pterostichus vernalis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Stenolophus mixtus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Stenolophus teutonus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Stomis pumicatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Syntomus foveatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Syntomus truncatellus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Synuchus vivalis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Trechus obtusus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Trechus quadristriatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Trichocellus cognatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Dicheirotrichus cognatus'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Synonym provided! Automatically set to accepted species Name!</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Trichocellus placidus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Dicheirotrichus placidus'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Synonym provided! Automatically set to accepted species Name!</span></div><div class='input'>
-</div></pre>
+<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize.taxonomy</span>(<span class='no'>dataset1</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -63,18 +63,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/traitdataform.sync-conflict-20180322-155237-FIZHYXG.html">Package 'traitdataform'</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -102,10 +90,11 @@
     </div>
 
     
-    <p>Get accepted canonical names and taxonomy for a given species name</p>
+    <p>The function maps user provided names to accepted species names.</p>
     
 
-    <pre class="usage"><span class='fu'>get_gbif_taxonomy</span>(<span class='no'>x</span>, <span class='kw'>infraspecies</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_gbif_taxonomy</span>(<span class='no'>x</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -115,87 +104,92 @@
       <td><p>a character string or vector of species names.</p></td>
     </tr>
     <tr>
-      <th>infraspecies</th>
-      <td><p>logical. If TRUE, the given name is resolved to infraspecies taxon, i.e. subspecies names will not be pooled (not working!)</p></td>
-    </tr>
-    <tr>
-      <th>fuzzy</th>
-      <td><p>logical. If TRUE, function tries fuzzy matching for species requests. May produce output, if normal matching fails. (not working!)</p></td>
+      <th>subspecies</th>
+      <td><p>logical. If TRUE (default), the given name is resolved to
+subspecies epithet, otherwise it will be mapped to species level.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>logical. If FALSE, warnings and messages are suppressed.</p></td>
+      <td><p>logical. If FALSE (default), warnings and messages are
+suppressed.</p></td>
+    </tr>
+    <tr>
+      <th>fuzzy</th>
+      <td><p>logical. If FALSE (default), names are only resolved to exactly
+matching taxa on GBIF taxonomy service. Setting to TRUE may produce matches
+when failing otherwise.</p></td>
+    </tr>
+    <tr>
+      <th>resolve_synonyms</th>
+      <td><p>logical. If TRUE (default), user provided synonyms
+are mapped to the accepted names on GBIF taxonomy service.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame mapping the user supplied names to the accepted taxon names and higher taxonomic information (kingdom, phylum, class, order, family, genus).</p>
+    <p>a data.frame mapping the user supplied names to the accepted taxon
+names and higher taxonomic information (kingdom, phylum, class, order,
+family, genus).</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If 'synonym' is returned as TRUE, the user provided name has been identified as a synonym and was mapped to an accepted name. The field confidence reports the confidence of the matching procedure performed by the function 'get_gbifid_()' of the package 'taxize'. The taxonID is a globally valid URI that links to the taxon description of the GBIF backbone taxonomy.</p>
+    <p>The function relies on package 'taxize' by Scott Chamberlain. It
+uses the spell-checking and fuzzy matching algorithms provided by Global
+Names Resolver (<code><a href='http://www.rdocumentation.org/packages/taxize/topics/gnr_resolve'>taxize::gnr_resolve()</a></code>) and forwards synonyms to the
+accepted names as provided by GBIF Backbone Taxonomy
+(<code>taxize::get_gbif_id_()</code>).</p>
+<p>If 'synonym' is returned as TRUE, the user provided name has been
+identified as a synonym and was mapped to an accepted name.</p>
+<p>The field confidence reports the confidence of the matching procedure
+performed by the function <code>get_gbifid_()</code> of the package 'taxize'. The
+taxonID is a globally valid URI that links to the taxon description of the
+GBIF backbone taxonomy.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>get_gbif_taxonomy</span>(<span class='fu'>c</span>(<span class='st'>"Chorthippus albomarginatus"</span>, <span class='st'>"Chorthippus apricarius"</span>, <span class='st'>"Chorthippus biguttulus"</span>, <span class='st'>"Chorthippus dorsatus"</span>, <span class='st'>"Chorthippus montanus"</span>, <span class='st'>"Chorthippus parallelus"</span>, <span class='st'>"Chrysochraon dispar"</span>, <span class='st'>"Conocephalus dorsalis"</span>, <span class='st'>"Conocephalus fuscus"</span>, <span class='st'>"Decticus verrucivorus"</span>, <span class='st'>"Euthystira brachyptera"</span>, <span class='st'>"Gomphocerippus rufus"</span>, <span class='st'>"Gryllus campestris"</span>, <span class='st'>"Metrioptera roeselii"</span>, <span class='st'>"Omocestus viridulus"</span>, <span class='st'>"Phaneroptera falcata"</span>, <span class='st'>"Platycleis albopunctata"</span>, <span class='st'>"Spec"</span>, <span class='st'>"Stenobothrus lineatus"</span>, <span class='st'>"Stenobothrus stigmaticus"</span>, <span class='st'>"Stethophyma grossum"</span>, <span class='st'>"Tetrix kraussi"</span>, <span class='st'>"Tetrix subulata"</span>, <span class='st'>"Tetrix tenuicornis"</span>, <span class='st'>"Tetrix undulata"</span>, <span class='st'>"Tettigonia cantans"</span>, <span class='st'>"Tettigonia viridissima"</span>))</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chorthippus albomarginatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chorthippus apricarius'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chorthippus biguttulus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chorthippus dorsatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chorthippus montanus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pseudochorthippus montanus'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Synonym provided! Automatically set to accepted species Name!</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chorthippus parallelus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Pseudochorthippus parallelus'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Synonym provided! Automatically set to accepted species Name!</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Chrysochraon dispar'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Conocephalus dorsalis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Conocephalus fuscus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Decticus verrucivorus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Euthystira brachyptera'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Gomphocerippus rufus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Gryllus campestris'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Metrioptera roeselii'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Roeseliana roeselii'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Synonym provided! Automatically set to accepted species Name!</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Omocestus viridulus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Phaneroptera falcata'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Platycleis albopunctata'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Stenobothrus lineatus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Stenobothrus stigmaticus'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Stethophyma grossum'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Tetrix kraussi'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Tetrix subulata'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Tetrix tenuicornis'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Tetrix undulata'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Tettigonia cantans'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Tettigonia viridissima'</span></div><div class='output co'>#&gt;                  scientificName synonym            scientificNameStd
-#&gt; 1    Chorthippus albomarginatus   FALSE   Chorthippus albomarginatus
-#&gt; 2        Chorthippus apricarius   FALSE       Chorthippus apricarius
-#&gt; 3        Chorthippus biguttulus   FALSE       Chorthippus biguttulus
-#&gt; 4          Chorthippus dorsatus   FALSE         Chorthippus dorsatus
-#&gt; 5    Pseudochorthippus montanus    TRUE   Pseudochorthippus montanus
-#&gt; 6  Pseudochorthippus parallelus    TRUE Pseudochorthippus parallelus
-#&gt; 7           Chrysochraon dispar   FALSE          Chrysochraon dispar
-#&gt; 8         Conocephalus dorsalis   FALSE        Conocephalus dorsalis
-#&gt; 9           Conocephalus fuscus   FALSE          Conocephalus fuscus
-#&gt; 10        Decticus verrucivorus   FALSE        Decticus verrucivorus
-#&gt; 11       Euthystira brachyptera   FALSE       Euthystira brachyptera
-#&gt; 12         Gomphocerippus rufus   FALSE         Gomphocerippus rufus
-#&gt; 13           Gryllus campestris   FALSE           Gryllus campestris
-#&gt; 14          Roeseliana roeselii    TRUE          Roeseliana roeselii
-#&gt; 15          Omocestus viridulus   FALSE          Omocestus viridulus
-#&gt; 16         Phaneroptera falcata   FALSE         Phaneroptera falcata
-#&gt; 17      Platycleis albopunctata   FALSE      Platycleis albopunctata
-#&gt; 18                         &lt;NA&gt;      NA                         &lt;NA&gt;
-#&gt; 19        Stenobothrus lineatus   FALSE        Stenobothrus lineatus
-#&gt; 20     Stenobothrus stigmaticus   FALSE     Stenobothrus stigmaticus
-#&gt; 21          Stethophyma grossum   FALSE          Stethophyma grossum
-#&gt; 22               Tetrix kraussi   FALSE               Tetrix kraussi
-#&gt; 23              Tetrix subulata   FALSE              Tetrix subulata
-#&gt; 24           Tetrix tenuicornis   FALSE           Tetrix tenuicornis
-#&gt; 25              Tetrix undulata   FALSE              Tetrix undulata
-#&gt; 26           Tettigonia cantans   FALSE           Tettigonia cantans
-#&gt; 27       Tettigonia viridissima   FALSE       Tettigonia viridissima
+<span class='fu'>get_gbif_taxonomy</span>(<span class='fu'>c</span>(<span class='st'>"Chorthippus albomarginatus"</span>, <span class='st'>"Chorthippus apricarius"</span>,
+  <span class='st'>"Chorthippus biguttulus"</span>, <span class='st'>"Chorthippus dorsatus"</span>, <span class='st'>"Chorthippus montanus"</span>,
+  <span class='st'>"Chorthippus parallelus"</span>, <span class='st'>"Chrysochraon dispar"</span>, <span class='st'>"Conocephalus dorsalis"</span>,
+  <span class='st'>"Conocephalus fuscus"</span>, <span class='st'>"Decticus verrucivorus"</span>, <span class='st'>"Euthystira brachyptera"</span>,
+  <span class='st'>"Gomphocerippus rufus"</span>, <span class='st'>"Gryllus campestris"</span>, <span class='st'>"Metrioptera roeselii"</span>,
+  <span class='st'>"Omocestus viridulus"</span>, <span class='st'>"Phaneroptera falcata"</span>, <span class='st'>"Platycleis albopunctata"</span>,
+  <span class='st'>"Spec"</span>, <span class='st'>"Stenobothrus lineatus"</span>, <span class='st'>"Stenobothrus stigmaticus"</span>,
+  <span class='st'>"Stethophyma grossum"</span>, <span class='st'>"Tetrix kraussi"</span>, <span class='st'>"Tetrix subulata"</span>,
+  <span class='st'>"Tetrix tenuicornis"</span>, <span class='st'>"Tetrix undulata"</span>, <span class='st'>"Tettigonia cantans"</span>,
+  <span class='st'>"Tettigonia viridissima"</span>)
+  )</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Retrieving data for taxon 'Pseudochorthippus montanus'</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Retrieving data for taxon 'Pseudochorthippus parallelus'</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Retrieving data for taxon 'Roeseliana roeselii'</span></div><div class='output co'>#&gt;                scientificName synonym            scientificNameStd
+#&gt; 1  Chorthippus albomarginatus   FALSE   Chorthippus albomarginatus
+#&gt; 2      Chorthippus apricarius   FALSE       Chorthippus apricarius
+#&gt; 3      Chorthippus biguttulus   FALSE       Chorthippus biguttulus
+#&gt; 4        Chorthippus dorsatus   FALSE         Chorthippus dorsatus
+#&gt; 5        Chorthippus montanus    TRUE   Pseudochorthippus montanus
+#&gt; 6      Chorthippus parallelus    TRUE Pseudochorthippus parallelus
+#&gt; 7         Chrysochraon dispar   FALSE          Chrysochraon dispar
+#&gt; 8       Conocephalus dorsalis   FALSE        Conocephalus dorsalis
+#&gt; 9         Conocephalus fuscus   FALSE          Conocephalus fuscus
+#&gt; 10      Decticus verrucivorus   FALSE        Decticus verrucivorus
+#&gt; 11     Euthystira brachyptera   FALSE       Euthystira brachyptera
+#&gt; 12       Gomphocerippus rufus   FALSE         Gomphocerippus rufus
+#&gt; 13         Gryllus campestris   FALSE           Gryllus campestris
+#&gt; 14       Metrioptera roeselii    TRUE          Roeseliana roeselii
+#&gt; 15        Omocestus viridulus   FALSE          Omocestus viridulus
+#&gt; 16       Phaneroptera falcata   FALSE         Phaneroptera falcata
+#&gt; 17    Platycleis albopunctata   FALSE      Platycleis albopunctata
+#&gt; 18                       Spec      NA                         &lt;NA&gt;
+#&gt; 19      Stenobothrus lineatus   FALSE        Stenobothrus lineatus
+#&gt; 20   Stenobothrus stigmaticus   FALSE     Stenobothrus stigmaticus
+#&gt; 21        Stethophyma grossum   FALSE          Stethophyma grossum
+#&gt; 22             Tetrix kraussi   FALSE               Tetrix kraussi
+#&gt; 23            Tetrix subulata   FALSE              Tetrix subulata
+#&gt; 24         Tetrix tenuicornis   FALSE           Tetrix tenuicornis
+#&gt; 25            Tetrix undulata   FALSE              Tetrix undulata
+#&gt; 26         Tettigonia cantans   FALSE           Tettigonia cantans
+#&gt; 27     Tettigonia viridissima   FALSE       Tettigonia viridissima
 #&gt;                 author taxonRank confidence  kingdom     phylum   class
 #&gt; 1      (De Geer, 1773)   species         98 Animalia Arthropoda Insecta
 #&gt; 2     (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
@@ -280,63 +274,41 @@
 #&gt; 25 http://www.gbif.org/species/1681247
 #&gt; 26 http://www.gbif.org/species/8347376
 #&gt; 27 http://www.gbif.org/species/1692898
-#&gt;                                                           warnings
-#&gt; 1                                                                 
-#&gt; 2                                                                 
-#&gt; 3                                                                 
-#&gt; 4                                                                 
-#&gt; 5  ; Synonym provided! Automatically set to accepted species Name!
-#&gt; 6  ; Synonym provided! Automatically set to accepted species Name!
-#&gt; 7                                                                 
-#&gt; 8                                                                 
-#&gt; 9                                                                 
-#&gt; 10                                                                
-#&gt; 11                                                                
-#&gt; 12                                                                
-#&gt; 13                                                                
-#&gt; 14 ; Synonym provided! Automatically set to accepted species Name!
-#&gt; 15                                                                
-#&gt; 16                                                                
-#&gt; 17                                                                
-#&gt; 18                               ; No matching species name found!
-#&gt; 19                                                                
-#&gt; 20                                                                
-#&gt; 21                                                                
-#&gt; 22                                                                
-#&gt; 23                                                                
-#&gt; 24                                                                
-#&gt; 25                                                                
-#&gt; 26                                                                
-#&gt; 27                                                                
-#&gt;        user_supplied_name
-#&gt; 1                    &lt;NA&gt;
-#&gt; 2                    &lt;NA&gt;
-#&gt; 3                    &lt;NA&gt;
-#&gt; 4                    &lt;NA&gt;
-#&gt; 5    Chorthippus montanus
-#&gt; 6  Chorthippus parallelus
-#&gt; 7                    &lt;NA&gt;
-#&gt; 8                    &lt;NA&gt;
-#&gt; 9                    &lt;NA&gt;
-#&gt; 10                   &lt;NA&gt;
-#&gt; 11                   &lt;NA&gt;
-#&gt; 12                   &lt;NA&gt;
-#&gt; 13                   &lt;NA&gt;
-#&gt; 14   Metrioptera roeselii
-#&gt; 15                   &lt;NA&gt;
-#&gt; 16                   &lt;NA&gt;
-#&gt; 17                   &lt;NA&gt;
-#&gt; 18                   Spec
-#&gt; 19                   &lt;NA&gt;
-#&gt; 20                   &lt;NA&gt;
-#&gt; 21                   &lt;NA&gt;
-#&gt; 22                   &lt;NA&gt;
-#&gt; 23                   &lt;NA&gt;
-#&gt; 24                   &lt;NA&gt;
-#&gt; 25                   &lt;NA&gt;
-#&gt; 26                   &lt;NA&gt;
-#&gt; 27                   &lt;NA&gt;</div><div class='input'>
-</div></pre>
+#&gt;                                                                   warnings
+#&gt; 1                                                                         
+#&gt; 2                                                                         
+#&gt; 3                                                                         
+#&gt; 4                                                                         
+#&gt; 5   A synonym was provided! Automatically mapped to accepted species name!
+#&gt; 6   A synonym was provided! Automatically mapped to accepted species name!
+#&gt; 7                                                                         
+#&gt; 8                                                                         
+#&gt; 9                                                                         
+#&gt; 10                                                                        
+#&gt; 11                                                                        
+#&gt; 12                                                                        
+#&gt; 13                                                                        
+#&gt; 14  A synonym was provided! Automatically mapped to accepted species name!
+#&gt; 15                                                                        
+#&gt; 16                                                                        
+#&gt; 17                                                                        
+#&gt; 18                                         No matching species name found!
+#&gt; 19                                                                        
+#&gt; 20                                                                        
+#&gt; 21                                                                        
+#&gt; 22                                                                        
+#&gt; 23                                                                        
+#&gt; 24                                                                        
+#&gt; 25                                                                        
+#&gt; 26                                                                        
+#&gt; 27                                                                        </div><div class='input'>
+<span class='fu'>get_gbif_taxonomy</span>(<span class='st'>"Acrocephalus familiaris kingi"</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Retrieving data for taxon 'oofnj NA'</span></div><div class='output co'>#&gt; <span class='error'>Error in data.frame(scientificName = x[i], synonym = synonym_i, scientificNameStd = temp[[i]]$canonicalname,     author = sub(paste0(temp[[i]]$canonicalname, " "), "", temp[[i]]$scientificname),     taxonRank = temp[[i]]$rank, confidence = temp[[i]]$confidence,     kingdom = if (is.null(temp[[i]]$kingdom)) NA else temp[[i]]$kingdom,     phylum = if (is.null(temp[[i]]$phylum)) NA else temp[[i]]$phylum,     class = if (is.null(temp[[i]]$class)) NA else temp[[i]]$class,     order = if (is.null(temp[[i]]$order)) NA else temp[[i]]$order,     family = if (is.null(temp[[i]]$family)) NA else temp[[i]]$family,     genus = if (is.null(temp[[i]]$genus)) NA else temp[[i]]$genus,     taxonomy = "GBIF Backbone Taxonomy", taxonID = paste0("http://www.gbif.org/species/",         temp[[i]]$usagekey, ""), warnings = warning_i): arguments imply differing number of rows: 1, 0</span></div><div class='input'><span class='fu'>get_gbif_taxonomy</span>(<span class='st'>"Vicia"</span>)</div><div class='output co'>#&gt;   scientificName synonym scientificNameStd author taxonRank confidence kingdom
+#&gt; 1          Vicia   FALSE             Vicia     L.     genus         94 Plantae
+#&gt;         phylum         class   order   family genus               taxonomy
+#&gt; 1 Tracheophyta Magnoliopsida Fabales Fabaceae Vicia GBIF Backbone Taxonomy
+#&gt;                               taxonID warnings
+#&gt; 1 http://www.gbif.org/species/2974751         </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
