@@ -31,8 +31,8 @@ carabids <- read.table("../../data/carabid traits final.txt", header = TRUE)
 As explained in Schneider et al. XX, most trait data are stored in one of the following formats:
 
 - **species-trait matrix** :  a single account of a trait value for each species (in rows) for a couple of different traits (in columns). No replicates of species are reported. This is the most likely format for literature data, where aggregate measurements or facts for entire species have been collated into a single lookup table. 
-- **occurrence table** :  In case of measured data, authors may report multiple raw measurements of different traits (in columns) taken from a single occurrence of a species, i.e. an individual specimen (in rows). Repeated measures of the same trait might also be included as columns or pooled into average values. This is valuable for investigations of intra-specific variation, and also leaves space for filtering by cofactors or analysing trait response along environmental gradients.
-- **measurement longtable** : For a standardisation of trait data for use in online databases, we propose a measurement longtable format, where each row comprises the reporting of a single measurement or fact, linked to a trait definition as well as a valid taxon name, and optionally to other layers of information. This data format is more predictable in terms of columns and thus easiert to merge with other datasets. 
+- **occurrence wide table** :  In case of measured data, authors may report multiple raw measurements of different traits (in columns) taken from a single occurrence of a species, i.e. an individual specimen (in rows). Repeated measures of the same trait might also be included as columns or pooled into average values. This is valuable for investigations of intra-specific variation, and also leaves space for filtering by cofactors or analysing trait response along environmental gradients.
+- **measurement long table** : For a standardisation of trait data for use in online databases, we propose a measurement long table format, where each row comprises the reporting of a single measurement or fact, linked to a trait definition as well as a valid taxon name, and optionally to other layers of information. This data format is more predictable in terms of columns and thus easiert to merge with other datasets. 
 
 In all cases, additional information on the reported value may be stored in further colums (e.g. the unit in which a value is reported or the literature source for this measurement or fact), or in a separate data sheet linked via identifiers for trait, taxon, occurrence or sampling/measurement event. Examples below will explain how these information can be added to the main data sheet.
 
@@ -40,7 +40,7 @@ The function `as.traitdata()` provided in the package assist in transferring any
 
 ```{r, warning=FALSE}
 library(traitdataform)
-data(carabids)
+pulldata("carabids")
 
 dataset1 <- as.traitdata(carabids, 
                          taxa = "name_correct",
@@ -59,7 +59,7 @@ Note that in the output table the columns have been named after the traitdata st
 In case of occurrence table data, an occurrenceID is provided automatically, or can be provided by the author using the parameter `occurrences` (as a column name or a vector of occurrence IDs).
 
 ```{r}
-data(heteroptera_raw)
+pulldata("heteroptera_raw")
 dataset2 <- as.traitdata(heteroptera_raw,
               traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
                          "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1",
@@ -87,7 +87,7 @@ This can be done for all traits in a single stroke (if all reported values refer
 The syntax for this uses the parameter `units`, which takes a single character string, or a vector of character strings, containing valid entries as expected  by the package 'units' (Pebesma et al. 2016, https://github.com/edzer/units/, v0.4-5, Examples are 'mm', 'm2' or 'm^2', 'm/s'). 
 
 ```{r}
-data(carabids)
+pulldata("carabids")
 dataset1 <- as.traitdata(carabids, 
                          taxa = "name_correct",
                          traits = c("body_length", 
@@ -102,7 +102,7 @@ head(dataset1)
 
 A character vector should have the same length as the provided vector of trait names (in parameter `traits`), or otherwise should be a named vector of the form `c(trait1 = "mm", trait2 = "mm2")`, where only the traits provided will receive units while the others will remain blank. 
 ```{r}
-data(arthropodtraits)
+pulldata("arthropodtraits")
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",
                          traits = c("Body_Size", "Dispersal_ability", "Feeding_guild",
@@ -114,7 +114,7 @@ dataset3 <- as.traitdata(arthropodtraits,
 )
 head(dataset3)
 
-data(heteroptera)
+pulldata("heteroptera")
 dataset4 <- as.traitdata(heteroptera,
               traits = c("Body_length", "Body_volume", "Rel_wing_length", 
                          "Hind.Femur_shape", "Rel_Hind.Femur_length", 
@@ -170,7 +170,7 @@ The parameter `keep` allows you to specify which columns contain valuable inform
 
 
 ```{r}
-data(heteroptera_raw)
+pulldata("heteroptera_raw")
 dataset2 <- as.traitdata(heteroptera_raw,
               traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
                          "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1",
@@ -328,7 +328,7 @@ This reference file should contain at least the following columns:
   - for *categorical traits* of kind 'factor' or 'integer', the field `factorLevels` should contain a list the valid factorial traits separated by semicolon. In case of ordinal traits, the order must be precisely corresponding to the number of possible integer values. 
 - `comments` may contain examples and clarifications
 
-The trait thesaurus can be created from a data.frame using the function `as.thesaurus()`. The parameter `replace` can be used for fixing column names to the expected names outlined above (see function `plyr::rename()` of the plyr package). 
+The trait thesaurus can be created from a data.frame using the function `as.thesaurus()`. The parameter `replace` can be used for fixing column names to the expected names outlined above (see function `reshape::rename()` of the plyr package). 
 
 ```{r, eval = FALSE}
 
@@ -444,7 +444,7 @@ The function will handle metadata information on the dataset level as described 
 
 ```{r}
 
-data(carabids)
+pulldata("carabids")
 
 dataset1 <- as.traitdata(carabids,
   taxa = "name_correct",
@@ -458,7 +458,7 @@ dataset1 <- as.traitdata(carabids,
     )
 )
 
-data(heteroptera_raw)
+pulldata("heteroptera_raw")
 
 dataset2 <- as.traitdata(heteroptera_raw,
   taxa = "SpeciesID",
