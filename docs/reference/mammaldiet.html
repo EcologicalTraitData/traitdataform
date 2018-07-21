@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mammal diet database — mammaldiet â€¢ traitdataform</title>
+<title>Mammal diet database â€” mammaldiet â€¢ traitdataform</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Mammal diet database â€” mammaldiet" />
+
+<meta property="og:description" content="A comprehensive global dataset of diet preferences of mammals
+(â€˜MammalDIETâ€™). Diet information was digitized from the literature and
+extrapolated for species with missing information. The original and
+extrapolated data cover species-level diet information for &amp;gt;99
+terrestrial mammals." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">traitdataform</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">traitdataform</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -58,13 +78,13 @@
   </a>
 </li>
 <li>
-  <a href="../articles/traitdataform.html">Get Started</a>
+  <a href="../articles/traitdataform.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -76,6 +96,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -83,19 +104,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mammal diet database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/fdschneider/traitdataform/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>mammaldiet.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>A comprehensive global dataset of diet preferences of mammals
-(‘MammalDIET’). Diet information was digitized from the literature and
+(â€˜MammalDIETâ€™). Diet information was digitized from the literature and
 extrapolated for species with missing information. The original and
 extrapolated data cover species-level diet information for &gt;99<!-- % of all -->
 terrestrial mammals.</p>
     
+    </div>
 
     <pre class="usage"><span class='no'>mammaldiet</span></pre>
         
@@ -106,19 +131,20 @@ terrestrial mammals.</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>Cite this dataset as:</p><ul>
-<li><p>Kissling, W.D., Dalby, L., Fløjgaard, C., Lenoir, J., Sandel, B., Sandom,
-C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological
+<li><p>Kissling, W.D., Dalby, L., FlÃ¸jgaard, C., Lenoir, J., Sandel, B., Sandom,
+C., TrÃ¸jelsgaard, K., Svenning, J. (2014). Establishing macroecological
 trait datasets: digitalization, extrapolation, and validation of diet
-preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913–2930.
+preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913â€“2930.
 <a href='http://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/'>http://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/</a></p></li>
 </ul>
     <p>Additionally, please cite the Dryad data package:</p><ul>
-<li><p>Kissling WD, Dalby L, Fløjgaard C, Lenoir J, Sandel B, Sandom C,
-Trøjelsgaard K, Svenning J-C (2014) Data from: Establishing macroecological
+<li><p>Kissling WD, Dalby L, FlÃ¸jgaard C, Lenoir J, Sandel B, Sandom C,
+TrÃ¸jelsgaard K, Svenning J-C (2014) Data from: Establishing macroecological
 trait datasets: digitalization, extrapolation, and validation of diet
 preferences in terrestrial mammals worldwide. Dryad Digital Repository.
 <a href='https://doi.org/10.5061/dryad.6cd0v'>https://doi.org/10.5061/dryad.6cd0v</a></p></li>
-</ul><p><a href='http://creativecommons.org/publicdomain/zero/1.0/'>Creative Commons
+</ul>
+    <p><a href='http://creativecommons.org/publicdomain/zero/1.0/'>Creative Commons
 0</a>. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.</p>
     
@@ -126,12 +152,12 @@ and related or neighboring rights to this data.</p>
 
     <p>Ecological trait data are essential for understanding the
 broad-scale distribution of biodiversity and its response to global change.
-For animals, diet represents a fundamental aspect of species’ evolutionary
+For animals, diet represents a fundamental aspect of speciesâ€™ evolutionary
 adaptations, ecological and functional roles, and trophic interactions.
 However, the importance of diet for macroevolutionary and macroecological
 dynamics remains little explored, partly because of the lack of
 comprehensive trait datasets. We compiled and evaluated a comprehensive
-global dataset of diet preferences of mammals (“MammalDIET”). Diet
+global dataset of diet preferences of mammals (â€œMammalDIETâ€). Diet
 information was digitized from two global and cladewide data sources and
 errors of data entry by multiple data recorders were assessed. We then
 developed a hierarchical extrapolation procedure to fill-in diet
@@ -153,8 +179,8 @@ extrapolated from genus-level diet information (48<!-- % of all terrestrial -->
 mammal species), and only rarely from other species within the same genus
 (6<!-- %) or from family level (8%). Internal and external validation showed -->
 that: (1) extrapolations were most reliable for primary food items; (2)
-several diet categories (“Animal,” “Mammal,” “Invertebrate,” “Plant,”
-“Seed,” “Fruit,” and “Leaf”) had high proportions of correctly predicted
+several diet categories (â€œAnimal,â€ â€œMammal,â€ â€œInvertebrate,â€ â€œPlant,â€
+â€œSeed,â€ â€œFruit,â€ and â€œLeafâ€) had high proportions of correctly predicted
 diet ranks; and (3) the potential of correctly extrapolating specific diet
 categories varied both within and among clades. Global maps of species
 richness and proportion showed congruence among trophic levels, but also
@@ -168,10 +194,10 @@ transferable to other trait data and taxa.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
+    <div class='dont-index'><p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
   <code><a href='amphibio.html'>amphibio</a></code>, <code><a href='arthropodtraits.html'>arthropodtraits</a></code>,
   <code><a href='carabids.html'>carabids</a></code>, <code><a href='heteroptera_raw.html'>heteroptera_raw</a></code>,
-  <code><a href='pantheria.html'>pantheria</a></code>, <code><a href='pulldata.html'>pulldata</a></code></p>
+  <code><a href='pantheria.html'>pantheria</a></code>, <code><a href='pulldata.html'>pulldata</a></code></p></div>
     
 
   </div>
@@ -190,8 +216,8 @@ transferable to other trait data and taxa.</p>
 
     <h2>Author</h2>
     
-<a href='danielkissling@web.de'>Kissling, W.D.</a>, Dalby, L., Fløjgaard, C.,
-Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
+<a href='danielkissling@web.de'>Kissling, W.D.</a>, Dalby, L., FlÃ¸jgaard, C.,
+Lenoir, J., Sandel, B., Sandom, C., TrÃ¸jelsgaard, K., Svenning, J.
 
   </div>
 </div>
@@ -202,11 +228,14 @@ Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

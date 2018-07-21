@@ -1,4 +1,5 @@
-# traitdataform 0.2.6
+
+# traitdataform 0.2.6 
 
 - fix function mutate.traitdata() (remove method dependency to dplyr)
 - update documentation for as.trait()

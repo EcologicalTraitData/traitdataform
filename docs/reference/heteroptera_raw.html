@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Heteroptera morphometry traits � heteroptera_raw • traitdataform</title>
+<title>Heteroptera morphometry traits — heteroptera_raw • traitdataform</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,30 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Heteroptera morphometry traits — heteroptera_raw" />
+
+<meta property="og:description" content="The data sets comprise morphometric trait data of species that
+were sampled and measured within the a subproject of the Biodiversity
+Exploratories Project (Fischer et al. 2010) which focuses on the  effect of
+land use on arthropod community composition and related processes in three
+regions of Germany (Gossner et al. 2014, Simons et al. 2014, Simons et al.
+2015)." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +64,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">traitdataform</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">traitdataform</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -58,13 +79,13 @@
   </a>
 </li>
 <li>
-  <a href="../articles/traitdataform.html">Get Started</a>
+  <a href="../articles/traitdataform.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -76,6 +97,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -83,12 +105,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Heteroptera morphometry traits</h1>
+    <small class="dont-index">Source: <a href='https://github.com/fdschneider/traitdataform/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>heteroptera_raw.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The data sets comprise morphometric trait data of species that
 were sampled and measured within the a subproject of the Biodiversity
@@ -97,6 +122,7 @@ land use on arthropod community composition and related processes in three
 regions of Germany (Gossner et al. 2014, Simons et al. 2014, Simons et al.
 2015).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)
   <span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera"</span>)
@@ -126,21 +152,21 @@ compiled species-trait matrix.</p>
 regions of Germany.</p>
 <p>Cite this dataset as:</p><ul>
 <li><p>M. Gossner, Martin; K. Simons,
-Nadja; H�ck, Leonhard; W. Weisser, Wolfgang (2016): Morphometric measures
+Nadja; Höck, Leonhard; W. Weisser, Wolfgang (2016): Morphometric measures
 of Heteroptera sampled in grasslands across three regions of Germany.
 figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
+    <div class='dont-index'><p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
   <code><a href='amphibio.html'>amphibio</a></code>, <code><a href='arthropodtraits.html'>arthropodtraits</a></code>,
   <code><a href='carabids.html'>carabids</a></code>, <code><a href='mammaldiet.html'>mammaldiet</a></code>,
   <code><a href='pantheria.html'>pantheria</a></code>, <code><a href='pulldata.html'>pulldata</a></code></p>
 <p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
   <code><a href='amphibio.html'>amphibio</a></code>, <code><a href='arthropodtraits.html'>arthropodtraits</a></code>,
   <code><a href='carabids.html'>carabids</a></code>, <code><a href='mammaldiet.html'>mammaldiet</a></code>,
-  <code><a href='pantheria.html'>pantheria</a></code>, <code><a href='pulldata.html'>pulldata</a></code></p>
+  <code><a href='pantheria.html'>pantheria</a></code>, <code><a href='pulldata.html'>pulldata</a></code></p></div>
     
 
   </div>
@@ -161,7 +187,7 @@ figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1</p></li>
 
     <h2>Author</h2>
     
-Martin M. Gossner , Nadja K. Simons, Leonhard H�ck, Wolfgang W.
+Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 Weisser
 
   </div>
@@ -173,11 +199,14 @@ Weisser
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
