@@ -1,3 +1,9 @@
+# traitdataform 0.2.6
+
+- fix function mutate.traitdata() (remove method dependency to dplyr)
+- update documentation for as.trait()
+- successful build of vignette
+
 # traitdataform 0.2.5
 
 - fix export of get_gbif_taxonomy() 
