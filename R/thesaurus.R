@@ -83,11 +83,11 @@ print.thesaurus <- function(x) {
 }
 
 #' Create a trait definition
-#' 
+#'
 #' Creating an object containing a standardised trait definition according to
 #' the Ecological Traitdata Standard. Parameters correspond to the definition at
 #' \url{http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri}.
-#' 
+#'
 #' @param trait A character string, providing an intuitive, human-readable trait
 #'   name.
 #' @param identifier Unique identifier for the trait, ideally unique and stable
@@ -106,20 +106,23 @@ print.thesaurus <- function(x) {
 #'   constrained vocabulary for categorical traits or ordinal binary traits.
 #' @param valueType the type of trait values. Possible entries are 'numeric',
 #'   'integer', 'categorical', 'logical', or 'character'.
-#' @param source
-#' @param relationSource
-#' @param version 
-#' @param author 
-#' @param ... 
+#' @param relationSource A character string providing a full bibliographic
+#'   reference to the trait definition (giving title, author, year and
+#'   publication).
+#' @param version A character string containing the version number of the
+#'   referenced definition (e.g. "v1.2"), if applicable.
+#' @param author A character string or object of class 'person' (as created by
+#'   `as.person()`) attributing the author(s) of the trait definition.
+#' @param ...
 #'
 #' @export
 #'
 #' @examples
-#' 
-#' body_length <- as.trait("body_length", expectedUnit = "mm", valueType = "numeric", 
-#'   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
+#'
+#' body_length <- as.trait("body_length", expectedUnit = "mm", valueType = "numeric",
+#'   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length",
 #'   traitDescription = "The known longest dimension of the physical structure of organisms",
-#'   relationSource = "Maggenti and Maggenti, 2005", 
+#'   relationSource = "Maggenti and Maggenti, 2005",
 #'   broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_dimension"
 #'   )
 #' 
@@ -136,7 +139,6 @@ as.trait <- function(
   traitDescription = NA,
   comments = NA,
   relationSource = NA,
-  source = NA,
   version = NA,
   author = NA,
   ...
@@ -153,7 +155,6 @@ as.trait <- function(
               traitDescription = traitDescription,
               comments = comments,
               relationSource = relationSource,
-              source = source,
               version = version,
               author = author
               )
