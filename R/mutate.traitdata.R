@@ -19,9 +19,8 @@
 #'   will not be mapped automatically to the provided thesaurus. (automated
 #'   re-mapping might be added in later versions of the package.)
 #'   
-#' @export
-#' @importFrom dplyr mutate
-#' @import plyr
+#' @export mutate.traitdata
+#' @importFrom reshape melt
 #' 
 #' @examples
 #' 
@@ -49,7 +48,6 @@
 #'                             Wingload = Wing_length*Wing_width/Body_volume)
 #' 
 #' head(updated[updated$traitName %in% c("Body_shape", "Body_volume", "Wingload"),])
-
 
 mutate.traitdata <- function(.data, 
                              ...
