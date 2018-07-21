@@ -7,8 +7,7 @@
 as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
   expectedUnit = NA, maxAllowedValue = NA, minAllowedValue = NA,
   factorLevels = NA, valueType = NA, traitDescription = NA,
-  comments = NA, relationSource = NA, source = NA, version = NA,
-  author = NA, ...)
+  comments = NA, relationSource = NA, version = NA, author = NA, ...)
 }
 \arguments{
 \item{trait}{A character string, providing an intuitive, human-readable trait
@@ -40,9 +39,15 @@ refer to a method of measurement.}
 \item{comments}{Details and Examples for clarification of the trait
 definition.}
 
-\item{version}{}
+\item{relationSource}{A character string providing a full bibliographic
+reference to the trait definition (giving title, author, year and
+publication).}
 
-\item{author}{}
+\item{version}{A character string containing the version number of the
+referenced definition (e.g. "v1.2"), if applicable.}
+
+\item{author}{A character string or object of class 'person' (as created by
+\code{as.person()}) attributing the author(s) of the trait definition.}
 
 \item{...}{}
 }
@@ -53,10 +58,10 @@ the Ecological Traitdata Standard. Parameters correspond to the definition at
 }
 \examples{
 
-body_length <- as.trait("body_length", expectedUnit = "mm", valueType = "numeric", 
-  identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
+body_length <- as.trait("body_length", expectedUnit = "mm", valueType = "numeric",
+  identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length",
   traitDescription = "The known longest dimension of the physical structure of organisms",
-  relationSource = "Maggenti and Maggenti, 2005", 
+  relationSource = "Maggenti and Maggenti, 2005",
   broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_dimension"
   )
 

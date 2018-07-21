@@ -4,7 +4,7 @@
 \alias{mutate.traitdata}
 \title{Mutate traits within a traitdata object.}
 \usage{
-\method{mutate}{traitdata}(.data, ...)
+mutate.traitdata(.data, ...)
 }
 \arguments{
 \item{.data}{the traitdata object to transform}
