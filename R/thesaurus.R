@@ -40,7 +40,8 @@
 #'   trait = c("body_length", "antenna_length", "metafemur_length", "eyewidth_corr"),
 #'   expectedUnit = "mm",
 #'   valueType = "numeric",
-#'   traitDescription = c("body length in mm", "length of antenna in mm", "length of metafemur in mm", "eye width in mm"), 
+#'   traitDescription = c("body length in mm", "length of antenna in mm", 
+#'                               "length of metafemur in mm", "eye width in mm"), 
 #'   identifier = c("http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
 #'     "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length", 
 #'     "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length", 
@@ -49,9 +50,10 @@
 #' )
 #' )
 #' 
-#' # provide traitlist from remote archive with renaming
+#' # provide traitlist from remote archive with renaming  
+#' # (pulls from https://github.com/EcologicalTraitData/TraitDataList)
 #' 
-#' traits1 <- as.thesaurus(read.csv("https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"), 
+#' traits1 <- as.thesaurus(read.csv("https://git.io/fpsj5"), 
 #' replace = c(traitID = "identifier", 
 #'             traitName = "trait",
 #'             traitUnit = "expectedUnit",
@@ -77,7 +79,7 @@ as.thesaurus <- function(...,
 }
 
 #' @export
-print.thesaurus <- function(x) {
+print.thesaurus <- function(x, ...) {
   out <- do.call(rbind, lapply(x,data.frame))
   print(out)
 }
@@ -113,7 +115,7 @@ print.thesaurus <- function(x) {
 #'   referenced definition (e.g. "v1.2"), if applicable.
 #' @param author A character string or object of class 'person' (as created by
 #'   `as.person()`) attributing the author(s) of the trait definition.
-#' @param ...
+#' @param ... other arguments, passed on to print function. 
 #'
 #' @export
 #'
@@ -163,11 +165,12 @@ as.trait <- function(
 }
 
 #' @export
-print.trait <- function(x) {
+print.trait <- function(x, ...) {
   out <- do.call(rbind, lapply(x,data.frame))
   print(out)
 }
 
+#ToDo: clean print function showing name, definition, URI, and if applicable: factor levels, units, broader and narrower term, as well as comments
 
 #print.trait <- function(x) {
 #  cat("traitName:")

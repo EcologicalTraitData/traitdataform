@@ -7,7 +7,8 @@
 #'   Information System (BExIS)!
 #'
 #' @param x A traitdata table of class 'traitdata'.
-#' @param plots Name of column containing the plot IDs. Must match the Exploratories EP_PlotID scheme (e.g. AEG1, AEG12, HEW21, ...).
+#' @param plots Name of column containing the plot IDs. Must match the
+#'   Exploratories EP_PlotID scheme (e.g. AEG1, AEG12, HEW21, ...).
 #' @param ... If input is a rawdata table of type species-trait matrix or
 #'   occurence table (wide table) then provide parameters according to
 #'   `as.traitdata()`.
@@ -15,16 +16,21 @@
 #'   (BExIS, https://www.bexis.uni-jena.de); required for download of exact
 #'   geolocation.
 #' @param pswd password for above request. Will be prompted for if not provided.
+#' @param getdata logical; if `FALSE` it suppresses the extraction of location
+#'   data from BExIS, and will not ask for user credentials. Instead, public
+#'   data of less precision will be used.
 #' @param fillall if TRUE (default), the output will contain all terms suggested
 #'   by the glossary and fill empty columns with NA. This is required for an
 #'   upload of the data to BExIS.
+#' @param verbose logical; if `FALSE` all messages will be suppressed. 
+#'
 #'
 #' @return std
 #' @export
 #'
 #' @import getPass
-#' @examples
-#'
+#' @examples 
+#' 
 #' \dontrun{
 #' moths <- read.service(21247, dec = ",")
 #'
@@ -43,8 +49,9 @@ standardize.exploratories <- function(x,
                         getdata = !is.null(user),
                         fillall = TRUE, 
                         ..., 
-                        verbose = NULL,
-                        warnings = NULL) {
+                        verbose = NULL) {
+  
+  EP_PlotID = EP_PlotID0 = MIP = Plot_ID = Plotlevel = SoilTypeWRB = VIP = MIP = NULL 
   
   if("data.frame" %in% class(x) && ! "traitdata" %in% class(x) ) x <- as.traitdata(x,...)
   

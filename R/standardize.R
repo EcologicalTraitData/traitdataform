@@ -14,10 +14,12 @@
 #'   subspecies epithet, otherwise it will be mapped to species level.
 #' @param fuzzy if set to `FALSE` (default mode), this disables fuzzy matching
 #'   if problems with ambiguous species names arise. (see `?get_gbif_testing()`)
-#' @param verbose has currently no effect.
+#' @param verbose not implemented. If 'FALSE' all messages are suppressed. 
 #' @param return a character vector containing the informatoin that should be
 #'   extracted into the output. Valid entries are the column names returned by
 #'   function `get_gbif_taxonomy()`. See 'Details'.
+#' @param ... parameters to be ignored, forwarded from wrapper function
+#'   `standardize()`.
 #'
 #' @details Taxonomic standardisation is an enormous challenge for biodiversity
 #'   data management and research. Constant changes in species and higher taxa,
@@ -110,7 +112,8 @@ standardize.taxonomy <- function(x,
 #' @param rename a named vector to map user-provided names to thesaurus object
 #'   names (see Details).
 #' @param categories target categories for binary/logical traits harmonization.
-#' @param output
+#' @param output behaviour of `fixlogical()`. see [fixlogical()].
+#' @param ... parameters to be ignored, forwarded from wrapper function `standardize()`.
 #'   
 #' @import units
 #' @export
@@ -124,7 +127,7 @@ standardize.taxonomy <- function(x,
 #'   user-provided names and thesaurus names are different. In this case, rename
 #'   should be a named vector with the target names used in the thesaurus as
 #'   names, and the original names as provided in 'traitName' as value. E.g.
-#'   `renam = c()`
+#'   `rename = c()`
 #'   
 #' @examples 
 #' 
@@ -172,7 +175,9 @@ standardize.taxonomy <- function(x,
 #'     )
 #' )
 #' 
-#' dataset2 <- mutate.traitdata(dataset2, antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 )
+#' dataset2 <- mutate.traitdata(dataset2, 
+#'    antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 
+#'    )
 #' 
 #' 
 #' traits2 <- as.thesaurus(
@@ -198,14 +203,18 @@ standardize.taxonomy <- function(x,
 #' 
 
 standardize.traits <- function(x,
-                               thesaurus, 
+                               thesaurus = attributes(x)$thesaurus,
                                rename = NULL,
                                categories = c("No", "Yes"), 
                                output = "logical",
                                ...
                                ) {
   
+  traitNameStd = NULL # reserving variable for subsetting (to avoid nots in R CHECK)
+  
   x$traitNameStd <- x$traitName
+  
+  if(!"thesaurus" %in% class(thesaurus)) as.thesaurus(thesaurus)
   
   # build lookup data.frame from thesaurus object
   lookup <- do.call(rbind, lapply(thesaurus,data.frame))
@@ -223,7 +232,7 @@ standardize.traits <- function(x,
   
   ## if thesaurus provides user name
   if(is.null(rename) && length(thesaurus) == length(levels(x$traitName)) && !is.null(names(thesaurus))) { 
-    levels(x$traitNameStd) <- names(thesaurus)[match(levels(x$traitName), names(thesaurus) )] 
+    levels(x$traitNameStd) <- lookup$trait[match(levels(x$traitName), names(thesaurus) )] 
   }
   
   # merge lookup table into original data frame based on user provided trait name mapping
@@ -242,9 +251,10 @@ standardize.traits <- function(x,
  
   for(i in traits) { # iterate over all trait categories (by user provided names)
    
-   # harmonize logical values
-   if(length(lookup[lookup$trait == i,]$valueType) == 1 ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
-     if(lookup[lookup$trait == i,]$valueType == "logical") {
+   #if(length(lookup[lookup$trait == i,]$valueType) == 1 ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
+    
+    # harmonize logical values
+    if(lookup[lookup$trait == i,]$valueType == "logical") {
        templist <- split(out, f = out$traitNameStd) 
        out[out$traitNameStd == i,"traitValueStd"] <- fixlogical(templist[[i]]$traitValue, output = output, categories = categories)
      }
@@ -254,7 +264,6 @@ standardize.traits <- function(x,
        subset(out, traitNameStd == i)$traitValueStd 
        
      } ## end of factor level harmonization
-     
      
      ## unit conversion:
      if(lookup[lookup$trait == i,]$valueType == "numeric") {
@@ -268,8 +277,9 @@ standardize.traits <- function(x,
          unit_original <- as.character(levels(unit_original))
          unit_target <- as.character(levels(unit_target))
          
+         ## OLDMETHOD: did not handle squares and operations
          # extract original value
-         value_original <- subset(out, traitNameStd == i)$traitValue * units::ud_units[[unit_original]]
+         value_original <- subset(out, traitNameStd == i)$traitValue * units::parse_unit(unit_original)
          
          # create vector with standardized value and write into output
          value_standardized <- value_original
@@ -285,7 +295,7 @@ standardize.traits <- function(x,
          # convert value in standardized value and write into output
          for(j in seq_along(value_original))  {
            
-           value_original_j <- value_original[j] * units::ud_units[[unit_original[j]]] 
+           value_original_j <- value_original[j] * units::parse_unit(unit_original[j]) 
            
            value_standardized_j <- value_original_j
            units(value_standardized_j) <- units::parse_unit(unit_target[j])
@@ -298,7 +308,7 @@ standardize.traits <- function(x,
      
    }
    
- }
+ #}
   
  # sort columns according to glossary of terms
  out <- out[, order(match(names(out), glossary$columnName) )]
@@ -328,10 +338,8 @@ standardize.traits <- function(x,
 #' @export
 #' 
 standardize <- function(x,
-                        ..., 
-                        verbose = NULL,
-                        warnings = NULL) {
-  
+                        ...) {
+    
                           if("data.frame" %in% class(x) && ! "traitdata" %in% class(x) ) x <- as.traitdata(x,...)
                           x <- standardize.taxonomy(x, ...)
                           x <- standardize.traits(x, ...)
