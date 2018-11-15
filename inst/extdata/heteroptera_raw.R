@@ -1,9 +1,7 @@
 # for roxygen2 documentation please edit file R/data.R!
 
 heteroptera_raw <- utils::read.table("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
-                                     sep = "\t", header = TRUE,
-                                     #colClasses = c(Center_Sampling_region = "NULL"),
-                                     fill = TRUE
+                                     sep = "\t", header = TRUE, fill = TRUE
                                      )
 
 # clarify file encodings for columns with umlauts:
@@ -22,7 +20,7 @@ attr(heteroptera_raw, 'metadata') <- traitdataform::as.metadata(
     volume = 96,
     issue = 4,
     pages = 1154,
-    author = c(utils::as.person("Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W. Weisser")),
+    author = c(utils::as.person("Martin M. Gossner , Nadja K. Simons, Leonhard Hoeck, Wolfgang W. Weisser")),
     year = 2015,
     doi = "10.1890/14-2159.1"
   ),

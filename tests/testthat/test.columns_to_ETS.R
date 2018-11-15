@@ -40,15 +40,15 @@ test_that("reformat species data, with trait columns provided as attributes", {
 })
 
  
-test_that("reformat observation data, with trait columns provided as attributes", {
-
-dd2 <- as.traitdata(heteroptera_raw)
-
-expect_length(dd2$scientificName, 9386)
-expect_length(dd2[1,], 10)
-expect_s3_class(dd2, "traitdata")
-
-})
+# test_that("reformat observation data, with trait columns provided as attributes", {
+# 
+# dd2 <- as.traitdata(heteroptera_raw)
+# 
+# expect_length(dd2$scientificName, 9386)
+# expect_length(dd2[1,], 10)
+# expect_s3_class(dd2, "traitdata")
+# 
+# })
 
 test_that("reformat, with trait columns provided as thesaurus", {
   
