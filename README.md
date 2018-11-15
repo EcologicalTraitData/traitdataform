@@ -1,4 +1,6 @@
-# Package 'traitdataform' - harmonizing ecological trait data in R
+# Package 'traitdataform': harmonizing ecological trait data in R
+
+[![Build Status](https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master)](https://travis-ci.com/EcologicalTraitData/traitdataform)
 
 This package assists in handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation). 
 
