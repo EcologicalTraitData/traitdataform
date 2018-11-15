@@ -1,3 +1,6 @@
+^docs$
+^draft$
+^data_test$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$

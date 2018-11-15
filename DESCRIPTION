@@ -5,8 +5,10 @@ Version: 0.2.6
 Date: 2018-07-21
 Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre", "aut")), person("Caterina", "Penone", role = c("ctb")))
 Description: This package assists in handling functional trait data and transferring them into the trait data standard.
-License: MIT
+License: MIT + file LICENSE
 LazyData: TRUE
+Depends:
+    R (>= 2.10)
 Imports:
     data.table, 
     reshape, 
@@ -20,7 +22,10 @@ Imports:
 URL: http://fdschneider.github.io/traitdataform, https://github.com/fdschneider/traitdataform
 BugReports: https://github.com/fdschneider/traitdataform/issues 
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Suggests: knitr,
-    rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
