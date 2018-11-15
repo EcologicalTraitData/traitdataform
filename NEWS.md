@@ -1,3 +1,8 @@
+# traitdataform 0.3.0
+
+- solve all errors, warnings and notes on R CHECK
+- complete man pages  
+- fix matching bug for get_gbif_taxonomy()
 
 # traitdataform 0.2.6 
 

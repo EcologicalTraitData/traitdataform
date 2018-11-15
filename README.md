@@ -84,11 +84,11 @@ We are aiming to provide the following features in future iterations of the pack
 
 ## Cite as
 
-Schneider, F.D. (2017) traitdataform - harmonizing ecological trait data in R, v0.2, doi: xxx.xxx, http://ecologicaltraitdata.github.io/traitdataform
+Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.3, doi: xxx.xxx, http://ecologicaltraitdata.github.io/traitdataform
 
 ## License
 
-Copyright (c) 2017 F.D. Schneider, florian.dirk.schneider@gmail.com
+Copyright (c) 2018 F.D. Schneider, florian.dirk.schneider@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
