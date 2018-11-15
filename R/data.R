@@ -32,7 +32,7 @@ pulldata <- function(x = NULL) {
     cat("\n")
   } else {
     source(system.file( "extdata", paste0(x,".R"), package="traitdataform"))
-    cat("The dataset '", x, "' is now available for use! \n", sep = "")
+    message(paste0("The dataset '", x, "' is now available for use! \n"))
   }
 }
 
@@ -43,8 +43,6 @@ pulldata <- function(x = NULL) {
 #' 
 #' @description Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 #' Araneae, occurring in grasslands in Germany.
-#'
-#' @usage pulldata("arthropodtraits")
 #' 
 #' @details When using this data, please cite the original publication:
 #' 
@@ -78,8 +76,6 @@ NULL
 #' @title Carabid morphological traits
 #'
 #' @name carabids
-#' 
-#' @usage pulldata("carabids")
 #' 
 #' @description Average body measures of 120 Carabid species occuring in the Netherlands.
 #'
@@ -132,10 +128,7 @@ carabids <- NULL
 #' regions of Germany.
 #' 
 #' @name heteroptera_raw
-#' 
-#' @usage pulldata("heteroptera_raw")
-#'   pulldata("heteroptera")
-#' 
+#'  
 #' @author Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 #'   Weisser
 #'   

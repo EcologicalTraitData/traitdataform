@@ -35,7 +35,7 @@ as.metadata <- function(...,
     if("list" %in% class(..1)) {
       
       if("metadata" %in% class(..1)) {
-        do.call(metadata, list(..1, template = template))
+        do.call(as.metadata, list(..1, template = template))
       } else {
         if("metadata" %in% class(..1[[1]])) {
           list(...)

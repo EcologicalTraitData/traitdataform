@@ -49,10 +49,11 @@
 #'   "Tettigonia viridissima")
 #'   )
 #'
-#' get_gbif_taxonomy("Acrocephalus familiaris kingi", subspecies = FALSE)
 #' get_gbif_taxonomy("Vicia")
 
 get_gbif_taxonomy <- function(x, subspecies = TRUE, verbose = FALSE, fuzzy  = FALSE, resolve_synonyms = TRUE) {
+  
+  matchtype = status = NULL
   
   # spellchecking: resolve all names using data source 11 (GBIF Backbone Taxonomy)
   resolved <- taxize::gnr_resolve(x,
@@ -65,7 +66,7 @@ get_gbif_taxonomy <- function(x, subspecies = TRUE, verbose = FALSE, fuzzy  = FA
   resolved$matched_name2[resolved$matched_name2 == "" | nchar(gsub(" ","",resolved$matched_name2)) <= 1 ] <- NA
   
   # map resolved names to gbif taxonomy server
-  temp <- taxize::get_gbifid_(resolved$matched_name2, verbose = verbose)
+  temp <- taxize::get_gbifid_(resolved$matched_name2, messages = verbose)
 
   for(i in 1:length(temp)) {
     
@@ -78,12 +79,14 @@ get_gbif_taxonomy <- function(x, subspecies = TRUE, verbose = FALSE, fuzzy  = FA
     # 0. produce warning for bad name resolution
     if(resolved$score[i] < 0.75) warning_i = paste("low name resolution, e.g. due to misspelled name. please check!")
     
-    # 1. remap to accepted species name, if no synonyms are accepted.   
+    # 1. remap to higher taxon, if no exact and accepted match is found ( even a synonym match)
+    #if(any(temp[[i]]$status == "ACCEPTED" & temp[[i]]$matchtype != "FUZZY" & temp[[i]]$matchtype != "EXACT"))
     
-    if(resolve_synonyms && all(temp[[i]]$status[temp[[i]]$matchtype == "EXACT" ] == "SYNONYM" )) {
+    # 1. remap to accepted species name, if no synonyms are accepted.   
+    if(resolve_synonyms && all(temp[[i]]$status[temp[[i]]$matchtype == "EXACT" ] %in% c("SYNONYM", "DOUBTFUL") )) {
       
-      temp[i] <- taxize::get_gbifid_(temp[[i]]$species[which.max(temp[[i]]$confidence)], verbose = verbose)
-      warning_i <- paste(warning_i, "A synonym was provided! Automatically mapped to accepted species name!")
+      temp[i] <- taxize::get_gbifid_(temp[[i]]$species[which.max(temp[[i]]$confidence)], messages = verbose)
+      warning_i <- paste(warning_i, "A synonym was mapped to the accepted taxon concept!")
       synonym_i = TRUE
     }
     
@@ -95,7 +98,7 @@ get_gbif_taxonomy <- function(x, subspecies = TRUE, verbose = FALSE, fuzzy  = FA
     if(!subspecies && match(temp[[i]]$rank, rankorder) > 7) {
       
       if(length(strsplit(as.character(temp[[i]]$canonicalname), " ")[[1]]) > 2) {
-        temp[i] <- get_gbifid_(paste(strsplit(as.character(out$scientificName), " ")[[1]][1:2], collapse = " "), verbose = verbose)
+        temp[i] <- taxize::get_gbifid_(paste(strsplit(as.character(out$scientificName), " ")[[1]][1:2], collapse = " "), messages = verbose)
         
         warning_i<- paste(warning_i, "provided subspecies name has been remapped to species!", sep = " ") 
       } else {
@@ -114,8 +117,18 @@ get_gbif_taxonomy <- function(x, subspecies = TRUE, verbose = FALSE, fuzzy  = FA
         warning_i <- paste(warning_i,"No matching species name found!")
       }
     } else {
-      temp[[i]] <- subset(temp[[i]], matchtype == "EXACT" & status == "ACCEPTED")
-      temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
+      if(!any(temp[[i]]$status == "ACCEPTED")) {
+        
+        temp[[i]] <- subset(temp[[i]], matchtype == "EXACT")
+        temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
+        warning_i <- paste(warning_i, " No accepted species name was found! the mapped name is labelled '",temp[[i]]$status, "' in GBIF." , sep = "")
+        
+      } else {
+        
+        temp[[i]] <- subset(temp[[i]], matchtype == "EXACT" & status == "ACCEPTED")
+        temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
+        #warning_i <- paste(warning_i, "Automatically mapped to accepted species name!", sep = " ")
+      }
       
     }
     
@@ -158,7 +171,7 @@ get_gbif_taxonomy <- function(x, subspecies = TRUE, verbose = FALSE, fuzzy  = FA
   } 
     
   
-  out <- rbindlist(temp, fill = TRUE)
+  out <- data.table::rbindlist(temp, fill = TRUE)
   
   class(out) <- c("data.frame", "taxonomy")
   
