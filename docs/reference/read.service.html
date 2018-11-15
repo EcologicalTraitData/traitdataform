@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -118,9 +118,9 @@
   <span class='kw'>na.strings</span> <span class='kw'>=</span> <span class='st'>"NA"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='kw'>if</span>
   (<span class='fu'>identical</span>(<span class='no'>sep</span>, <span class='st'>"\n"</span>)) <span class='st'>""</span> <span class='kw'>else</span> <span class='st'>"'\""</span>, <span class='kw'>fileEncoding</span> <span class='kw'>=</span> <span class='st'>"UTF-8"</span>)
 
-<span class='fu'>read.service.blocks</span>(<span class='no'>datasetid</span>, <span class='no'>user</span>, <span class='no'>pswd</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>na.strings</span> <span class='kw'>=</span> <span class='st'>"NA"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'>identical</span>(<span class='no'>sep</span>, <span class='st'>"\n"</span>)) <span class='st'>""</span> <span class='kw'>else</span>
-  <span class='st'>"'\""</span>, <span class='kw'>fileEncoding</span> <span class='kw'>=</span> <span class='st'>"UTF-8"</span>)</pre>
+<span class='fu'>read.service.blocks</span>(<span class='no'>datasetid</span>, <span class='no'>user</span>, <span class='no'>pswd</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>na.strings</span> <span class='kw'>=</span> <span class='st'>"NA"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\t"</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='kw'>if</span>
+  (<span class='fu'>identical</span>(<span class='no'>sep</span>, <span class='st'>"\n"</span>)) <span class='st'>""</span> <span class='kw'>else</span> <span class='st'>"'\""</span>, <span class='kw'>fileEncoding</span> <span class='kw'>=</span> <span class='st'>"UTF-8"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +156,10 @@
     <tr>
       <th>quote</th>
       <td><p>the set of quoting characters. To disable quoting altogether, use quote = "". See scan for the behaviour on quotes embedded in quotes. Quoting is only considered for columns read as character, which is all of them unless colClasses is specified.</p></td>
+    </tr>
+    <tr>
+      <th>fileEncoding</th>
+      <td><p>character string: if non-empty declares the encoding to be used on a file (not a connection) so the character data can be re-encoded as they are written. See <code><a href='http://www.rdocumentation.org/packages/base/topics/connections'>base::file()</a></code>.</p></td>
     </tr>
     </table>
     

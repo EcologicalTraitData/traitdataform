@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Cast long-table trait data into wide-table format — cast.traitdata" />
 
-<meta property="og:description" content="Function to reformat trait data from the long-table into a matrix/wide-table or occurrence table format." />
+<meta property="og:description" content="Function to reformat trait data from the long-table into a matrix/wide-table
+or occurrence table format." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -61,7 +62,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -110,7 +111,8 @@
 
     <div class="ref-description">
     
-    <p>Function to reformat trait data from the long-table into a matrix/wide-table or occurrence table format.</p>
+    <p>Function to reformat trait data from the long-table into a matrix/wide-table
+or occurrence table format.</p>
     
     </div>
 
@@ -135,25 +137,28 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a wide-table data.frame object containing all taxa (and other differentiating parameters) in rows and all traits (extracted from column 'traitName') in columns.</p>
+    <p>a wide-table data.frame object containing all taxa (and other
+differentiating parameters) in rows and all traits (extracted from column
+'traitName') in columns.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The wide-table will be composed while preserving the detail given in the dataset (occurrence level or taxa level). The cells  will be filled with the values from 'traitValue'.</p>
-<p>If taxa should be summarized, provide function for summarizing in parameter 'summarize'. This can be any function that takes a vector and returns a single value for <strong>both numerical and factorial/character input vectors!</strong>. The default for numerical values is to return an arithmetric mean while including any outliers.
-For factorial values, the value is accepted if it is equal in all of the input entries. Otherwise NA is returned. For heterogeneous factorial or character input, user action is required for homogenizing the data before calling <code>cast.traitdata()</code>.</p>
+    <p>The wide-table will be composed while preserving the detail given in
+the dataset (occurrence level or taxa level). The cells  will be filled
+with the values from 'traitValue'.</p>
+<p>If taxa should be summarized, provide function for summarizing in parameter
+'summarize'. This can be any function that takes a vector and returns a
+single value for <strong>both numerical and factorial/character input vectors!</strong>.
+The default for numerical values is to return an arithmetric mean while
+including any outliers. For factorial values, the value is accepted if it
+is equal in all of the input entries. Otherwise NA is returned. For
+heterogeneous factorial or character input, user action is required for
+homogenizing the data before calling <code>cast.traitdata()</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"arthropodtraits"</span>)</div><div class='output co'>#&gt; loading dataset 'arthropodtraits' from original data source! 
-#&gt;  When using this data, please cite the original publication: 
-#&gt; Gossner MM, Simons NK, Achtziger R, Blick T, Dorow W, Dziock F, Köhler
-#&gt; F, Rabitsch W and Weisser WW (2015). "A summary of eight traits of
-#&gt; Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands
-#&gt; in Germany." _Scientific Data_, *2*, pp. 150013. doi:
-#&gt; 10.1038/sdata.2015.13 (URL: http://doi.org/10.1038/sdata.2015.13).
-#&gt; The dataset 'arthropodtraits' is now available for use! </div><div class='input'><span class='fu'>head</span>(<span class='no'>arthropodtraits</span>)</div><div class='output co'>#&gt;     Order     Suborder       Family            SpeciesID             Author
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"arthropodtraits"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'arthropodtraits' is now available for use! </span></div><div class='input'><span class='fu'>head</span>(<span class='no'>arthropodtraits</span>)</div><div class='output co'>#&gt;     Order     Suborder       Family            SpeciesID             Author
 #&gt; 1 Araneae Labidognatha Anyphaenidae Anyphaena accentuata (Walckenaer, 1802)
 #&gt; 2 Araneae Labidognatha    Araneidae Aculepeira ceropegia   Walckenaer, 1802
 #&gt; 3 Araneae Labidognatha    Araneidae     Agalenatea redii    (Scopoli, 1763)
@@ -182,10 +187,17 @@ For factorial values, the value is accepted if it is equal in all of the input e
 #&gt; 5                  &lt;NA&gt;       (h)-t                 u       
 #&gt; 6                  &lt;NA&gt;       (h)-t                 u       </div><div class='input'><span class='no'>dataset3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>arthropodtraits</span>,
                          <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
-                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>, <span class='st'>"Feeding_guild"</span>,<span class='st'>"Feeding_guild_short"</span>, <span class='st'>"Feeding_mode"</span>, <span class='st'>"Feeding_specialization"</span>, <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>, <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>, <span class='st'>"Stratum_use_short"</span>),
+                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>,
+                               <span class='st'>"Feeding_guild"</span>,<span class='st'>"Feeding_guild_short"</span>,
+                               <span class='st'>"Feeding_mode"</span>, <span class='st'>"Feeding_specialization"</span>,
+                               <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>,
+                               <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>,
+                               <span class='st'>"Stratum_use_short"</span>),
                          <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>Body_Size</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>Dispersal_ability</span> <span class='kw'>=</span> <span class='st'>"unitless"</span>),
                          <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"Remark"</span>),
-                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>)
+                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>list</span>(
+                            <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
+                            )
 )</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>dataset3</span>)</div><div class='output co'>#&gt;         scientificName traitName traitValue traitUnit measurementID
 #&gt; 1 Anyphaena accentuata Body_Size       6.25        mm             1
 #&gt; 2 Aculepeira ceropegia Body_Size         11        mm             2

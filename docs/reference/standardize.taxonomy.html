@@ -62,7 +62,7 @@ names and relates to globally unique taxon identifiers via URI." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -117,8 +117,8 @@ names and relates to globally unique taxon identifiers via URI.</p>
     </div>
 
     <pre class="usage"><span class='fu'>standardize.taxonomy</span>(<span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>get_gbif_taxonomy</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>, <span class='st'>"class"</span>,
-  <span class='st'>"order"</span>, <span class='st'>"family"</span>), <span class='no'>...</span>)</pre>
+  <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>,
+  <span class='st'>"class"</span>, <span class='st'>"order"</span>, <span class='st'>"family"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,13 +148,18 @@ if problems with ambiguous species names arise. (see <code>?get_gbif_testing()</
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>has currently no effect.</p></td>
+      <td><p>not implemented. If 'FALSE' all messages are suppressed.</p></td>
     </tr>
     <tr>
       <th>return</th>
       <td><p>a character vector containing the informatoin that should be
 extracted into the output. Valid entries are the column names returned by
 function <code><a href='get_gbif_taxonomy.html'>get_gbif_taxonomy()</a></code>. See 'Details'.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>parameters to be ignored, forwarded from wrapper function
+<code><a href='standardize.html'>standardize()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -180,7 +185,7 @@ enable a choice of a taxonomic reference.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; The dataset 'carabids' is now available for use! </div><div class='input'>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'carabids' is now available for use! </span></div><div class='input'>
 <span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>carabids</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),

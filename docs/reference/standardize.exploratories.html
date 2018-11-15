@@ -64,7 +64,7 @@ Information System (BExIS)!" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -121,8 +121,8 @@ Information System (BExIS)!</p>
     </div>
 
     <pre class="usage"><span class='fu'>standardize.exploratories</span>(<span class='no'>x</span>, <span class='kw'>plots</span> <span class='kw'>=</span> <span class='st'>"locationID"</span>, <span class='kw'>user</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pswd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>getdata</span> <span class='kw'>=</span> !<span class='fu'>is.null</span>(<span class='no'>user</span>), <span class='kw'>template</span> <span class='kw'>=</span> <span class='st'>"BExIS"</span>,
-  <span class='kw'>fillall</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>warnings</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>pswd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>getdata</span> <span class='kw'>=</span> !<span class='fu'>is.null</span>(<span class='no'>user</span>), <span class='kw'>fillall</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,7 +133,8 @@ Information System (BExIS)!</p>
     </tr>
     <tr>
       <th>plots</th>
-      <td><p>Name of column containing the plot IDs. Must match the Exploratories EP_PlotID scheme (e.g. AEG1, AEG12, HEW21, ...).</p></td>
+      <td><p>Name of column containing the plot IDs. Must match the
+Exploratories EP_PlotID scheme (e.g. AEG1, AEG12, HEW21, ...).</p></td>
     </tr>
     <tr>
       <th>user</th>
@@ -146,6 +147,12 @@ geolocation.</p></td>
       <td><p>password for above request. Will be prompted for if not provided.</p></td>
     </tr>
     <tr>
+      <th>getdata</th>
+      <td><p>logical; if <code>FALSE</code> it suppresses the extraction of location
+data from BExIS, and will not ask for user credentials. Instead, public
+data of less precision will be used.</p></td>
+    </tr>
+    <tr>
       <th>fillall</th>
       <td><p>if TRUE (default), the output will contain all terms suggested
 by the glossary and fill empty columns with NA. This is required for an
@@ -156,6 +163,10 @@ upload of the data to BExIS.</p></td>
       <td><p>If input is a rawdata table of type species-trait matrix or
 occurence table (wide table) then provide parameters according to
 <code><a href='as.traitdata.html'>as.traitdata()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical; if <code>FALSE</code> all messages will be suppressed.</p></td>
     </tr>
     </table>
     

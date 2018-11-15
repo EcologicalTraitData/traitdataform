@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standardise logical variables — fixlogical • traitdataform</title>
+<title>Ecological Trait-data Standard vocabulary (ETS) — glossary • traitdataform</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Standardise logical variables — fixlogical" />
+<meta property="og:title" content="Ecological Trait-data Standard vocabulary (ETS) — glossary" />
 
-<meta property="og:description" content="Standardise logical variables" />
+<meta property="og:description" content="The terms and concepts as defined by the ETS (https://terminologies.gfbio.org/terms/ets/pages/)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,63 +103,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standardise logical variables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/fdschneider/traitdataform/blob/master/R/fixlogical.R'><code>R/fixlogical.R</code></a></small>
-    <div class="hidden name"><code>fixlogical.Rd</code></div>
+    <h1>Ecological Trait-data Standard vocabulary (ETS)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/fdschneider/traitdataform/blob/master/R/glossary.R'><code>R/glossary.R</code></a></small>
+    <div class="hidden name"><code>glossary.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Standardise logical variables</p>
+    <p>The terms and concepts as defined by the ETS (https://terminologies.gfbio.org/terms/ets/pages/)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>fixlogical</span>(<span class='no'>x</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"logical"</span>, <span class='kw'>categories</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>a vector of two different types of entries (can be of type factor, integer, logical, or character).</p></td>
-    </tr>
-    <tr>
-      <th>output</th>
-      <td><p>a switch to set the desired output format. Defaults to "logical", but can be "character", "binary" or "factor".</p></td>
-    </tr>
-    <tr>
-      <th>categories</th>
-      <td><p>output target categories for binary/logical traits harmonization if <code>output</code> is not set to 'logical'.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='no'>glossary</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A vector of harmonized logical values.</p>
+    <p>An object of class <code>data.frame</code> with 95 rows and 13 columns.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='fu'>sample</span>(<span class='fu'>c</span>(<span class='st'>"ja"</span>, <span class='st'>"nein"</span>), <span class='fl'>10</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fl'>0</span>:<span class='fl'>1</span>, <span class='fl'>20</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>c</span>(<span class='st'>"Y"</span>, <span class='st'>"N"</span>), <span class='fl'>13</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>d</span>[<span class='fu'>c</span>(<span class='fl'>3</span>,<span class='fl'>7</span>)] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
-<span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>), <span class='fl'>18</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>fixlogical</span>(<span class='fu'>c</span>(<span class='no'>e</span>,<span class='no'>d</span>))</div><div class='output co'>#&gt;  [1] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE
-#&gt; [13] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE    NA FALSE  TRUE  TRUE
-#&gt; [25]    NA FALSE  TRUE  TRUE FALSE  TRUE FALSE</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#format">Format</a></li>
+          </ul>
 
   </div>
 </div>

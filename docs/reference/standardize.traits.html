@@ -63,7 +63,7 @@ converts units of values and renames factor levels into accepted terms." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -118,8 +118,9 @@ converts units of values and renames factor levels into accepted terms.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>standardize.traits</span>(<span class='no'>x</span>, <span class='no'>thesaurus</span>, <span class='kw'>rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>categories</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>),
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"logical"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>standardize.traits</span>(<span class='no'>x</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>thesaurus</span>,
+  <span class='kw'>rename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>categories</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>), <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"logical"</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,7 +146,11 @@ names (see Details).</p></td>
     </tr>
     <tr>
       <th>output</th>
-      <td></td>
+      <td><p>behaviour of <code><a href='fixlogical.html'>fixlogical()</a></code>. see <code><a href='fixlogical.html'>fixlogical()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>parameters to be ignored, forwarded from wrapper function <code><a href='standardize.html'>standardize()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -159,13 +164,13 @@ package.</p>
 user-provided names and thesaurus names are different. In this case, rename
 should be a named vector with the target names used in the thesaurus as
 names, and the original names as provided in 'traitName' as value. E.g.
-<code>renam = c()</code></p>
+<code>rename = c()</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; The dataset 'carabids' is now available for use! </div><div class='input'>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'carabids' is now available for use! </span></div><div class='input'>
 <span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>carabids</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),
@@ -186,18 +191,12 @@ names, and the original names as provided in 'traitName' as value. E.g.
    <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)
 )
 
-<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize.traits</span>(<span class='no'>dataset1</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traitlist</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!</span></div><div class='input'>
+<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize.traits</span>(<span class='no'>dataset1</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traitlist</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='input'>
 
 
 <span class='co'>## Example: matching of original names to thesaurus</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; loading dataset 'heteroptera_raw' from original data source! 
-#&gt;  When using this data, please cite the original publication: 
-#&gt; Gossner MM, Simons NK, Höck L and Weisser WW (2015). "Morphometric
-#&gt; measures of Heteroptera sampled in grasslands across three regions of
-#&gt; Germany." _Ecology_, *96*, pp. 1154. doi: 10.1890/14-2159.1 (URL:
-#&gt; http://doi.org/10.1890/14-2159.1).
-#&gt; The dataset 'heteroptera_raw' is now available for use! </div><div class='input'>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'heteroptera_raw' is now available for use! </span></div><div class='input'>
 <span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>heteroptera_raw</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Body_length"</span>, <span class='st'>"Antenna_Seg1"</span>, <span class='st'>"Antenna_Seg2"</span>,
@@ -208,8 +207,11 @@ names, and the original names as provided in 'traitName' as value. E.g.
     <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>heteroptera_raw</span>)$<span class='no'>citeAs</span>,
     <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     )
-)</div><div class='output co'>#&gt; <span class='message'>it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. </span></div><div class='input'>
-<span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate.traitdata.html'>mutate.traitdata</a></span>(<span class='no'>dataset2</span>, <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='no'>Antenna_Seg1</span> + <span class='no'>Antenna_Seg2</span> + <span class='no'>Antenna_Seg3</span> + <span class='no'>Antenna_Seg4</span> + <span class='no'>Antenna_Seg3</span> )
+)
+
+<span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate.traitdata.html'>mutate.traitdata</a></span>(<span class='no'>dataset2</span>,
+   <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='no'>Antenna_Seg1</span> + <span class='no'>Antenna_Seg2</span> + <span class='no'>Antenna_Seg3</span> + <span class='no'>Antenna_Seg4</span> + <span class='no'>Antenna_Seg3</span>
+   )
 
 
 <span class='no'>traits2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.thesaurus.html'>as.thesaurus</a></span>(
@@ -230,7 +232,7 @@ names, and the original names as provided in 'traitName' as value. E.g.
                <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='st'>"antenna_length"</span>,
                <span class='kw'>Hind.Femur_length</span> <span class='kw'>=</span> <span class='st'>"metafemur_length"</span>
                )
-    )</div><div class='output co'>#&gt; <span class='warning'>Warning: trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!</span></div><div class='input'>
+    )</div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='input'>
 
 </div></pre>
   </div>

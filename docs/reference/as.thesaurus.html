@@ -62,7 +62,7 @@ traits within function standardize.traits()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -167,7 +167,8 @@ to apply unit conversion and factor level harmonization.</p>
   <span class='kw'>trait</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>, <span class='st'>"eyewidth_corr"</span>),
   <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
   <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
-  <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"body length in mm"</span>, <span class='st'>"length of antenna in mm"</span>, <span class='st'>"length of metafemur in mm"</span>, <span class='st'>"eye width in mm"</span>),
+  <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"body length in mm"</span>, <span class='st'>"length of antenna in mm"</span>,
+                              <span class='st'>"length of metafemur in mm"</span>, <span class='st'>"eye width in mm"</span>),
   <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>,
     <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span>,
     <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>,
@@ -204,9 +205,10 @@ to apply unit conversion and factor level harmonization.</p>
 #&gt; body_length          NA
 #&gt; eyewidth_corr        NA
 #&gt; metafemur_length     NA</div><div class='input'>
-<span class='co'># provide traitlist from remote archive with renaming</span>
+<span class='co'># provide traitlist from remote archive with renaming  </span>
+<span class='co'># (pulls from https://github.com/EcologicalTraitData/TraitDataList)</span>
 
-<span class='no'>traits1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.thesaurus</span>(<span class='fu'>read.csv</span>(<span class='st'>"https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"</span>),
+<span class='no'>traits1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.thesaurus</span>(<span class='fu'>read.csv</span>(<span class='st'>"https://git.io/fpsj5"</span>),
 <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>traitID</span> <span class='kw'>=</span> <span class='st'>"identifier"</span>,
             <span class='kw'>traitName</span> <span class='kw'>=</span> <span class='st'>"trait"</span>,
             <span class='kw'>traitUnit</span> <span class='kw'>=</span> <span class='st'>"expectedUnit"</span>,

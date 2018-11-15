@@ -62,7 +62,7 @@ into compound measurements or update factor levels into binaries." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -150,19 +150,19 @@ re-mapping might be added in later versions of the package.)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"arthropodtraits"</span>)</div><div class='output co'>#&gt; loading dataset 'arthropodtraits' from original data source! 
-#&gt;  When using this data, please cite the original publication: 
-#&gt; Gossner MM, Simons NK, Achtziger R, Blick T, Dorow W, Dziock F, Köhler
-#&gt; F, Rabitsch W and Weisser WW (2015). "A summary of eight traits of
-#&gt; Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands
-#&gt; in Germany." _Scientific Data_, *2*, pp. 150013. doi:
-#&gt; 10.1038/sdata.2015.13 (URL: http://doi.org/10.1038/sdata.2015.13).
-#&gt; The dataset 'arthropodtraits' is now available for use! </div><div class='input'><span class='no'>dataset3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>arthropodtraits</span>,
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"arthropodtraits"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'arthropodtraits' is now available for use! </span></div><div class='input'><span class='no'>dataset3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>arthropodtraits</span>,
                          <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
-                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>, <span class='st'>"Feeding_guild"</span>,<span class='st'>"Feeding_guild_short"</span>, <span class='st'>"Feeding_mode"</span>, <span class='st'>"Feeding_specialization"</span>, <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>, <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>, <span class='st'>"Stratum_use_short"</span>),
+                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>,
+                            <span class='st'>"Feeding_guild"</span>,<span class='st'>"Feeding_guild_short"</span>,
+                            <span class='st'>"Feeding_mode"</span>, <span class='st'>"Feeding_specialization"</span>,
+                            <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>,
+                            <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>,
+                            <span class='st'>"Stratum_use_short"</span>),
                          <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>Body_Size</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>Dispersal_ability</span> <span class='kw'>=</span> <span class='st'>"unitless"</span>),
                          <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"Remark"</span>),
-                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>)
+                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>list</span>(
+                            <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
+                            )
 )</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>dataset3</span>)</div><div class='output co'>#&gt;         scientificName traitName traitValue traitUnit measurementID
 #&gt; 1 Anyphaena accentuata Body_Size       6.25        mm             1
 #&gt; 2 Aculepeira ceropegia Body_Size         11        mm             2
@@ -204,17 +204,58 @@ re-mapping might be added in later versions of the package.)</p>
 
 <span class='co'>## </span>
 
-
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'heteroptera_raw' is now available for use! </span></div><div class='input'><span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>heteroptera_raw</span>,
+                        <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
+                                  <span class='st'>"Thorax_width"</span>, <span class='st'>"Head_width"</span>, <span class='st'>"Eye_width"</span>, <span class='st'>"Antenna_Seg1"</span>,
+                                   <span class='st'>"Antenna_Seg2"</span>, <span class='st'>"Antenna_Seg3"</span>, <span class='st'>"Antenna_Seg4"</span>, <span class='st'>"Antenna_Seg5"</span>,
+                                   <span class='st'>"Front.Tibia_length"</span>, <span class='st'>"Mid.Tibia_length"</span>, <span class='st'>"Hind.Tibia_length"</span>,
+                                   <span class='st'>"Front.Femur_length"</span>, <span class='st'>"Hind.Femur_length"</span>, <span class='st'>"Front.Femur_width"</span>,
+                                   <span class='st'>"Hind.Femur_width"</span>, <span class='st'>"Rostrum_length"</span>, <span class='st'>"Rostrum_width"</span>,
+                                   <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_width"</span>),
+                        <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
+                        <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='st'>"ID"</span>
+)
 <span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset2</span>,
                             <span class='kw'>Body_shape</span> <span class='kw'>=</span> <span class='no'>Body_length</span>/<span class='no'>Body_width</span>,
                             <span class='kw'>Body_volume</span> <span class='kw'>=</span> <span class='no'>Body_length</span>*<span class='no'>Body_width</span>*<span class='no'>Body_height</span>,
-                            <span class='kw'>Wingload</span> <span class='kw'>=</span> <span class='no'>Wing_length</span>*<span class='no'>Wing_width</span>/<span class='no'>Body_volume</span>)</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(.data): Objekt 'dataset2' nicht gefunden</span></div><div class='input'>
-<span class='fu'>head</span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"Body_shape"</span>, <span class='st'>"Body_volume"</span>, <span class='st'>"Wingload"</span>),])</div><div class='output co'>#&gt; [1] scientificName    traitName         traitValue        traitUnit        
-#&gt; [5] measurementID     measurementRemark
-#&gt; &lt;0 Zeilen&gt; (oder row.names mit Länge 0)
+                            <span class='kw'>Wingload</span> <span class='kw'>=</span> <span class='no'>Wing_length</span>*<span class='no'>Wing_width</span>/<span class='no'>Body_volume</span>)
+
+<span class='fu'>head</span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"Body_shape"</span>, <span class='st'>"Body_volume"</span>, <span class='st'>"Wingload"</span>),])</div><div class='output co'>#&gt;        scientificName  traitName traitValue traitUnit measurementID
+#&gt; 9387 Acalypta nigrina Body_shape   2.043478      &lt;NA&gt;          &lt;NA&gt;
+#&gt; 9388 Acalypta nigrina Body_shape   1.721311      &lt;NA&gt;          &lt;NA&gt;
+#&gt; 9389 Acalypta nigrina Body_shape   2.028037      &lt;NA&gt;          &lt;NA&gt;
+#&gt; 9390 Acalypta nigrina Body_shape   2.067308      &lt;NA&gt;          &lt;NA&gt;
+#&gt; 9391 Acalypta parvula Body_shape   2.243902      &lt;NA&gt;          &lt;NA&gt;
+#&gt; 9392 Acalypta parvula Body_shape   1.885417      &lt;NA&gt;          &lt;NA&gt;
+#&gt;      occurrenceID           basisOfRecordDescription
+#&gt; 9387            1 Zoological State Collection Munich
+#&gt; 9388            2 Zoological State Collection Munich
+#&gt; 9389            3 Zoological State Collection Munich
+#&gt; 9390            4 Zoological State Collection Munich
+#&gt; 9391            5 Zoological State Collection Munich
+#&gt; 9392            6 Zoological State Collection Munich
+#&gt;                                        references sex  verbatimLocality
+#&gt; 9387      Treuchtlingen_leg.Seidenstücker_21.5.48   f 48°57’ N 10°55’ E
+#&gt; 9388            Nürnberg_leg.Seidenstücker_9.7.44   f 49°27’ N 11°05’ E
+#&gt; 9389 Gunzenshausen_Mfr._leg.Seidenstücker_15.4.58   m 49°07’ N 10°45’ E
+#&gt; 9390            Nürnberg_leg.Seidenstücker_9.7.44   m 49°27’ N 11°05’ E
+#&gt; 9391                Nürnberg_Seidenstücker_4.8.45   f 49°27’ N 11°05’ E
+#&gt; 9392               Erlangen_Seidenstücker_30.9.40   f 49°36’ N 11°00’ E
 #&gt; 
-#&gt; This trait-dataset contains 12 traits for 1230 taxa ( 0 measurements in total).
-#&gt; NULL</div></pre>
+#&gt; This trait-dataset contains 26 traits for 179 taxa ( 6 measurements in total).
+#&gt; 
+#&gt;  heteroptera : Heteroptera morphometry traits by Martin M. Gossner .
+#&gt; 
+#&gt;     When using these data, you must acknowledge the following usage policies: 
+#&gt; 
+#&gt;     Cite this trait dataset as: 
+#&gt; Gossner MM, Simons NK, HÃ¶ck L, Weisser WW (2015). "Morphometric
+#&gt; measures of Heteroptera sampled in grasslands across three regions of
+#&gt; Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:
+#&gt; http://doi.org/10.1890/14-2159.1).
+#&gt; 
+#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

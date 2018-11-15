@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -114,8 +114,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_gbif_taxonomy</span>(<span class='no'>x</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_gbif_taxonomy</span>(<span class='no'>x</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,16 +198,15 @@ GBIF backbone taxonomy.</p>
 #&gt; 15        Omocestus viridulus   FALSE          Omocestus viridulus
 #&gt; 16       Phaneroptera falcata   FALSE         Phaneroptera falcata
 #&gt; 17    Platycleis albopunctata   FALSE      Platycleis albopunctata
-#&gt; 18                       Spec      NA                         &lt;NA&gt;
-#&gt; 19      Stenobothrus lineatus   FALSE        Stenobothrus lineatus
-#&gt; 20   Stenobothrus stigmaticus   FALSE     Stenobothrus stigmaticus
-#&gt; 21        Stethophyma grossum   FALSE          Stethophyma grossum
-#&gt; 22             Tetrix kraussi   FALSE               Tetrix kraussi
-#&gt; 23            Tetrix subulata   FALSE              Tetrix subulata
-#&gt; 24         Tetrix tenuicornis   FALSE           Tetrix tenuicornis
-#&gt; 25            Tetrix undulata   FALSE              Tetrix undulata
-#&gt; 26         Tettigonia cantans   FALSE           Tettigonia cantans
-#&gt; 27     Tettigonia viridissima   FALSE       Tettigonia viridissima
+#&gt; 18                       Spec   FALSE        Stenobothrus lineatus
+#&gt; 19      Stenobothrus lineatus   FALSE     Stenobothrus stigmaticus
+#&gt; 20   Stenobothrus stigmaticus   FALSE          Stethophyma grossum
+#&gt; 21        Stethophyma grossum   FALSE               Tetrix kraussi
+#&gt; 22             Tetrix kraussi   FALSE              Tetrix subulata
+#&gt; 23            Tetrix subulata   FALSE           Tetrix tenuicornis
+#&gt; 24         Tetrix tenuicornis   FALSE              Tetrix undulata
+#&gt; 25            Tetrix undulata   FALSE           Tettigonia cantans
+#&gt; 26         Tettigonia cantans   FALSE       Tettigonia viridissima
 #&gt;                 author taxonRank confidence  kingdom     phylum   class
 #&gt; 1      (De Geer, 1773)   species         98 Animalia Arthropoda Insecta
 #&gt; 2     (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
@@ -226,16 +225,15 @@ GBIF backbone taxonomy.</p>
 #&gt; 15    (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
 #&gt; 16        (Poda, 1761)   species         98 Animalia Arthropoda Insecta
 #&gt; 17       (Goeze, 1778)   species         98 Animalia Arthropoda Insecta
-#&gt; 18                &lt;NA&gt;      &lt;NA&gt;         NA     &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;
-#&gt; 19      (Panzer, 1796)   species         98 Animalia Arthropoda Insecta
-#&gt; 20      (Rambur, 1838)   species         98 Animalia Arthropoda Insecta
-#&gt; 21    (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
-#&gt; 22        Saulcy, 1888   species         98 Animalia Arthropoda Insecta
-#&gt; 23    (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
-#&gt; 24    (Sahlberg, 1891)   species         98 Animalia Arthropoda Insecta
-#&gt; 25     (Sowerby, 1806)   species         98 Animalia Arthropoda Insecta
-#&gt; 26     (Fuessly, 1775)   species         97 Animalia Arthropoda Insecta
-#&gt; 27    (Linnaeus, 1758)   species         97 Animalia Arthropoda Insecta
+#&gt; 18      (Panzer, 1796)   species         98 Animalia Arthropoda Insecta
+#&gt; 19      (Rambur, 1838)   species         98 Animalia Arthropoda Insecta
+#&gt; 20    (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
+#&gt; 21        Saulcy, 1888   species         98 Animalia Arthropoda Insecta
+#&gt; 22    (Linnaeus, 1758)   species         98 Animalia Arthropoda Insecta
+#&gt; 23    (Sahlberg, 1891)   species         98 Animalia Arthropoda Insecta
+#&gt; 24     (Sowerby, 1806)   species         98 Animalia Arthropoda Insecta
+#&gt; 25     (Fuessly, 1775)   species         97 Animalia Arthropoda Insecta
+#&gt; 26    (Linnaeus, 1758)   species         97 Animalia Arthropoda Insecta
 #&gt;         order        family             genus               taxonomy
 #&gt; 1  Orthoptera     Acrididae       Chorthippus GBIF Backbone Taxonomy
 #&gt; 2  Orthoptera     Acrididae       Chorthippus GBIF Backbone Taxonomy
@@ -254,16 +252,15 @@ GBIF backbone taxonomy.</p>
 #&gt; 15 Orthoptera     Acrididae         Omocestus GBIF Backbone Taxonomy
 #&gt; 16 Orthoptera Tettigoniidae      Phaneroptera GBIF Backbone Taxonomy
 #&gt; 17 Orthoptera Tettigoniidae        Platycleis GBIF Backbone Taxonomy
-#&gt; 18       &lt;NA&gt;          &lt;NA&gt;              &lt;NA&gt;                   &lt;NA&gt;
+#&gt; 18 Orthoptera     Acrididae      Stenobothrus GBIF Backbone Taxonomy
 #&gt; 19 Orthoptera     Acrididae      Stenobothrus GBIF Backbone Taxonomy
-#&gt; 20 Orthoptera     Acrididae      Stenobothrus GBIF Backbone Taxonomy
-#&gt; 21 Orthoptera     Acrididae       Stethophyma GBIF Backbone Taxonomy
+#&gt; 20 Orthoptera     Acrididae       Stethophyma GBIF Backbone Taxonomy
+#&gt; 21 Orthoptera    Tetrigidae            Tetrix GBIF Backbone Taxonomy
 #&gt; 22 Orthoptera    Tetrigidae            Tetrix GBIF Backbone Taxonomy
 #&gt; 23 Orthoptera    Tetrigidae            Tetrix GBIF Backbone Taxonomy
 #&gt; 24 Orthoptera    Tetrigidae            Tetrix GBIF Backbone Taxonomy
-#&gt; 25 Orthoptera    Tetrigidae            Tetrix GBIF Backbone Taxonomy
+#&gt; 25 Orthoptera Tettigoniidae        Tettigonia GBIF Backbone Taxonomy
 #&gt; 26 Orthoptera Tettigoniidae        Tettigonia GBIF Backbone Taxonomy
-#&gt; 27 Orthoptera Tettigoniidae        Tettigonia GBIF Backbone Taxonomy
 #&gt;                                taxonID
 #&gt; 1  http://www.gbif.org/species/1708567
 #&gt; 2  http://www.gbif.org/species/1708601
@@ -282,45 +279,43 @@ GBIF backbone taxonomy.</p>
 #&gt; 15 http://www.gbif.org/species/1710755
 #&gt; 16 http://www.gbif.org/species/1686243
 #&gt; 17 http://www.gbif.org/species/1685298
-#&gt; 18                                &lt;NA&gt;
-#&gt; 19 http://www.gbif.org/species/1710962
-#&gt; 20 http://www.gbif.org/species/1710986
-#&gt; 21 http://www.gbif.org/species/1711091
-#&gt; 22 http://www.gbif.org/species/9055856
-#&gt; 23 http://www.gbif.org/species/1681124
-#&gt; 24 http://www.gbif.org/species/1681181
-#&gt; 25 http://www.gbif.org/species/1681247
-#&gt; 26 http://www.gbif.org/species/8347376
-#&gt; 27 http://www.gbif.org/species/1692898
-#&gt;                                                                   warnings
-#&gt; 1                                                                         
-#&gt; 2                                                                         
-#&gt; 3                                                                         
-#&gt; 4                                                                         
-#&gt; 5   A synonym was provided! Automatically mapped to accepted species name!
-#&gt; 6   A synonym was provided! Automatically mapped to accepted species name!
-#&gt; 7                                                                         
-#&gt; 8                                                                         
-#&gt; 9                                                                         
-#&gt; 10                                                                        
-#&gt; 11                                                                        
-#&gt; 12                                                                        
-#&gt; 13                                                                        
-#&gt; 14  A synonym was provided! Automatically mapped to accepted species name!
-#&gt; 15                                                                        
-#&gt; 16                                                                        
-#&gt; 17                                                                        
-#&gt; 18                                         No matching species name found!
-#&gt; 19                                                                        
-#&gt; 20                                                                        
-#&gt; 21                                                                        
-#&gt; 22                                                                        
-#&gt; 23                                                                        
-#&gt; 24                                                                        
-#&gt; 25                                                                        
-#&gt; 26                                                                        
-#&gt; 27                                                                        </div><div class='input'>
-<span class='fu'>get_gbif_taxonomy</span>(<span class='st'>"Acrocephalus familiaris kingi"</span>, <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in strsplit(as.character(out$scientificName), " "): Objekt 'out' nicht gefunden</span></div><div class='input'><span class='fu'>get_gbif_taxonomy</span>(<span class='st'>"Vicia"</span>)</div><div class='output co'>#&gt;   scientificName synonym scientificNameStd author taxonRank confidence kingdom
+#&gt; 18 http://www.gbif.org/species/1710962
+#&gt; 19 http://www.gbif.org/species/1710986
+#&gt; 20 http://www.gbif.org/species/1711091
+#&gt; 21 http://www.gbif.org/species/9055856
+#&gt; 22 http://www.gbif.org/species/1681124
+#&gt; 23 http://www.gbif.org/species/1681181
+#&gt; 24 http://www.gbif.org/species/1681247
+#&gt; 25 http://www.gbif.org/species/8347376
+#&gt; 26 http://www.gbif.org/species/1692898
+#&gt;                                                warnings
+#&gt; 1                                                      
+#&gt; 2                                                      
+#&gt; 3                                                      
+#&gt; 4                                                      
+#&gt; 5   A synonym was mapped to the accepted taxon concept!
+#&gt; 6   A synonym was mapped to the accepted taxon concept!
+#&gt; 7                                                      
+#&gt; 8                                                      
+#&gt; 9                                                      
+#&gt; 10                                                     
+#&gt; 11                                                     
+#&gt; 12                                                     
+#&gt; 13                                                     
+#&gt; 14  A synonym was mapped to the accepted taxon concept!
+#&gt; 15                                                     
+#&gt; 16                                                     
+#&gt; 17                                                     
+#&gt; 18                                                     
+#&gt; 19                                                     
+#&gt; 20                                                     
+#&gt; 21                                                     
+#&gt; 22                                                     
+#&gt; 23                                                     
+#&gt; 24                                                     
+#&gt; 25                                                     
+#&gt; 26                                                     </div><div class='input'>
+<span class='fu'>get_gbif_taxonomy</span>(<span class='st'>"Vicia"</span>)</div><div class='output co'>#&gt;   scientificName synonym scientificNameStd author taxonRank confidence kingdom
 #&gt; 1          Vicia   FALSE             Vicia     L.     genus         94 Plantae
 #&gt;         phylum         class   order   family genus               taxonomy
 #&gt; 1 Tracheophyta Magnoliopsida Fabales Fabaceae Vicia GBIF Backbone Taxonomy
