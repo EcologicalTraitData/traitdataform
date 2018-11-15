@@ -4,8 +4,9 @@
 \alias{standardize.traits}
 \title{Standardize trait names and harmonize measured values and reported facts}
 \usage{
-standardize.traits(x, thesaurus, rename = NULL, categories = c("No", "Yes"),
-  output = "logical", ...)
+standardize.traits(x, thesaurus = attributes(x)$thesaurus,
+  rename = NULL, categories = c("No", "Yes"), output = "logical",
+  ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
@@ -19,7 +20,9 @@ names (see Details).}
 
 \item{categories}{target categories for binary/logical traits harmonization.}
 
-\item{output}{}
+\item{output}{behaviour of \code{fixlogical()}. see \code{\link[=fixlogical]{fixlogical()}}.}
+
+\item{...}{parameters to be ignored, forwarded from wrapper function \code{standardize()}.}
 }
 \description{
 Adds columns to a traitdata table with standardized trait names
@@ -36,7 +39,7 @@ The function parameter 'rename' should be provided to map trait names where
 user-provided names and thesaurus names are different. In this case, rename
 should be a named vector with the target names used in the thesaurus as
 names, and the original names as provided in 'traitName' as value. E.g.
-\code{renam = c()}
+\code{rename = c()}
 }
 \examples{
 
@@ -84,7 +87,9 @@ dataset2 <- as.traitdata(heteroptera_raw,
     )
 )
 
-dataset2 <- mutate.traitdata(dataset2, antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 )
+dataset2 <- mutate.traitdata(dataset2, 
+   antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 
+   )
 
 
 traits2 <- as.thesaurus(

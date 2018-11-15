@@ -27,7 +27,7 @@ from linear model in which antenna length is explained by body length)
 and related or neighboring rights to this data.
 }
 \usage{
-pulldata("carabids")
+carabids
 }
 \description{
 Average body measures of 120 Carabid species occuring in the Netherlands.
@@ -55,4 +55,5 @@ Other rawdata: \code{\link{amniota}},
 \author{
 Fons van der Plas, R. van Klink, P. Manning, H. Olff, M. Fischer
 }
+\concept{rawdata}
 \keyword{datasets}

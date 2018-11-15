@@ -7,7 +7,8 @@
 as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
   expectedUnit = NA, maxAllowedValue = NA, minAllowedValue = NA,
   factorLevels = NA, valueType = NA, traitDescription = NA,
-  comments = NA, relationSource = NA, version = NA, author = NA, ...)
+  comments = NA, relationSource = NA, version = NA, author = NA,
+  ...)
 }
 \arguments{
 \item{trait}{A character string, providing an intuitive, human-readable trait
@@ -49,7 +50,7 @@ referenced definition (e.g. "v1.2"), if applicable.}
 \item{author}{A character string or object of class 'person' (as created by
 \code{as.person()}) attributing the author(s) of the trait definition.}
 
-\item{...}{}
+\item{...}{other arguments, passed on to print function.}
 }
 \description{
 Creating an object containing a standardised trait definition according to

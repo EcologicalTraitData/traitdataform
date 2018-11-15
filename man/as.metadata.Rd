@@ -4,9 +4,10 @@
 \alias{as.metadata}
 \title{Create metadata for trait dataset}
 \usage{
-as.metadata(..., template = list(datasetID = NULL, datasetName = NULL, author
-  = NULL, rightsHolder = NULL, bibliographicCitation = NULL, license = NULL,
-  version = NULL, comments = NULL, description = NULL, region = NULL))
+as.metadata(..., template = list(datasetID = NULL, datasetName = NULL,
+  author = NULL, rightsHolder = NULL, bibliographicCitation = NULL, license
+  = NULL, version = NULL, comments = NULL, description = NULL, region =
+  NULL))
 }
 \arguments{
 \item{...}{named objects of any class. Names must be the same as given by template or they will be ignored when producing the metadata object.}

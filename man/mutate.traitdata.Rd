@@ -35,10 +35,17 @@ re-mapping might be added in later versions of the package.)
 pulldata("arthropodtraits")
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",
-                         traits = c("Body_Size", "Dispersal_ability", "Feeding_guild","Feeding_guild_short", "Feeding_mode", "Feeding_specialization", "Feeding_tissue", "Feeding_plant_part", "Endophagous_lifestyle", "Stratum_use", "Stratum_use_short"), 
+                         traits = c("Body_Size", "Dispersal_ability", 
+                            "Feeding_guild","Feeding_guild_short", 
+                            "Feeding_mode", "Feeding_specialization", 
+                            "Feeding_tissue", "Feeding_plant_part", 
+                            "Endophagous_lifestyle", "Stratum_use", 
+                            "Stratum_use_short"), 
                          units = c(Body_Size = "mm", Dispersal_ability = "unitless"),
                          keep = c(measurementRemark = "Remark"),
-                         metadata = list(license = "http://creativecommons.org/publicdomain/zero/1.0/")
+                         metadata = list(
+                            license = "http://creativecommons.org/publicdomain/zero/1.0/"
+                            )
 )
 head(dataset3)
 
@@ -49,7 +56,18 @@ levels(updated$traitName)
 
 ## 
 
-
+pulldata("heteroptera_raw")
+dataset2 <- as.traitdata(heteroptera_raw,
+                        traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
+                                  "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1",
+                                   "Antenna_Seg2", "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5",
+                                   "Front.Tibia_length", "Mid.Tibia_length", "Hind.Tibia_length",
+                                   "Front.Femur_length", "Hind.Femur_length", "Front.Femur_width",
+                                   "Hind.Femur_width", "Rostrum_length", "Rostrum_width", 
+                                   "Wing_length", "Wing_width"),
+                        taxa = "SpeciesID",
+                        occurrences = "ID"
+)
 updated <- mutate.traitdata(dataset2, 
                             Body_shape = Body_length/Body_width, 
                             Body_volume = Body_length*Body_width*Body_height,

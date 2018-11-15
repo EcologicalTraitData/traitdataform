@@ -5,8 +5,8 @@
 \title{Standardize scientific names of species}
 \usage{
 standardize.taxonomy(x, method = get_gbif_taxonomy, subspecies = TRUE,
-  fuzzy = TRUE, verbose = FALSE, return = c("kingdom", "phylum", "class",
-  "order", "family"), ...)
+  fuzzy = TRUE, verbose = FALSE, return = c("kingdom", "phylum",
+  "class", "order", "family"), ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
@@ -24,11 +24,14 @@ subspecies epithet, otherwise it will be mapped to species level.}
 \item{fuzzy}{if set to \code{FALSE} (default mode), this disables fuzzy matching
 if problems with ambiguous species names arise. (see \code{?get_gbif_testing()})}
 
-\item{verbose}{has currently no effect.}
+\item{verbose}{not implemented. If 'FALSE' all messages are suppressed.}
 
 \item{return}{a character vector containing the informatoin that should be
 extracted into the output. Valid entries are the column names returned by
 function \code{get_gbif_taxonomy()}. See 'Details'.}
+
+\item{...}{parameters to be ignored, forwarded from wrapper function
+\code{standardize()}.}
 }
 \description{
 Adds columns to a traitdata object containing accepted species

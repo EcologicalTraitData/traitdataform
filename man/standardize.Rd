@@ -4,15 +4,13 @@
 \alias{standardize}
 \title{Standardize trait datasets}
 \usage{
-standardize(x, ..., verbose = NULL, warnings = NULL)
+standardize(x, ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
 containing at least the column `scientificName.}
 
 \item{...}{parameters as described for \code{standardize.traits()} and \code{standardize.taxonomy()}.}
-
-\item{verbose}{has currently no effect.}
 }
 \description{
 wrapper that applies \code{standardize.taxonomy()} and

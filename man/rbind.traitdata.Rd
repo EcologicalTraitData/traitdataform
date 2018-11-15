@@ -83,7 +83,9 @@ dataset2 <- as.traitdata(heteroptera_raw,
     )
 )
 
-dataset2 <- mutate.traitdata(dataset2, antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 )
+dataset2 <- mutate.traitdata(dataset2, 
+  antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 
+  )
 
 
 traits2 <- as.thesaurus(

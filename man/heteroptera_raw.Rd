@@ -13,8 +13,7 @@
 and related or neighboring rights to this data.
 }
 \usage{
-pulldata("heteroptera_raw")
-  pulldata("heteroptera")
+heteroptera_raw
 
 heteroptera
 }
@@ -55,4 +54,5 @@ Other rawdata: \code{\link{amniota}},
 Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 Weisser
 }
+\concept{rawdata}
 \keyword{datasets}

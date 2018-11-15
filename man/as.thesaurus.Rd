@@ -48,7 +48,8 @@ as.thesaurus(data.frame(
   trait = c("body_length", "antenna_length", "metafemur_length", "eyewidth_corr"),
   expectedUnit = "mm",
   valueType = "numeric",
-  traitDescription = c("body length in mm", "length of antenna in mm", "length of metafemur in mm", "eye width in mm"), 
+  traitDescription = c("body length in mm", "length of antenna in mm", 
+                              "length of metafemur in mm", "eye width in mm"), 
   identifier = c("http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length", 
     "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length", 
     "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length", 
@@ -57,9 +58,10 @@ as.thesaurus(data.frame(
 )
 )
 
-# provide traitlist from remote archive with renaming
+# provide traitlist from remote archive with renaming  
+# (pulls from https://github.com/EcologicalTraitData/TraitDataList)
 
-traits1 <- as.thesaurus(read.csv("https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"), 
+traits1 <- as.thesaurus(read.csv("https://git.io/fpsj5"), 
 replace = c(traitID = "identifier", 
             traitName = "trait",
             traitUnit = "expectedUnit",

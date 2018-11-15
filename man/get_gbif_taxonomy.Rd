@@ -4,8 +4,8 @@
 \alias{get_gbif_taxonomy}
 \title{Get accepted canonical names and taxonomy for a given species name}
 \usage{
-get_gbif_taxonomy(x, subspecies = TRUE, verbose = FALSE, fuzzy = FALSE,
-  resolve_synonyms = TRUE)
+get_gbif_taxonomy(x, subspecies = TRUE, verbose = FALSE,
+  fuzzy = FALSE, resolve_synonyms = TRUE)
 }
 \arguments{
 \item{x}{a character string or vector of species names.}
@@ -60,6 +60,5 @@ get_gbif_taxonomy(c("Chorthippus albomarginatus", "Chorthippus apricarius",
   "Tettigonia viridissima")
   )
 
-get_gbif_taxonomy("Acrocephalus familiaris kingi", subspecies = FALSE)
 get_gbif_taxonomy("Vicia")
 }

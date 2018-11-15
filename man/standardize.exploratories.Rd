@@ -5,19 +5,24 @@
 \title{Standardize Georeference from Biodiversity Exploratories Plot ID}
 \usage{
 standardize.exploratories(x, plots = "locationID", user = NULL,
-  pswd = NULL, getdata = !is.null(user), template = "BExIS",
-  fillall = TRUE, ..., verbose = NULL, warnings = NULL)
+  pswd = NULL, getdata = !is.null(user), fillall = TRUE, ...,
+  verbose = NULL)
 }
 \arguments{
 \item{x}{A traitdata table of class 'traitdata'.}
 
-\item{plots}{Name of column containing the plot IDs. Must match the Exploratories EP_PlotID scheme (e.g. AEG1, AEG12, HEW21, ...).}
+\item{plots}{Name of column containing the plot IDs. Must match the
+Exploratories EP_PlotID scheme (e.g. AEG1, AEG12, HEW21, ...).}
 
 \item{user}{User name for Biodiversity Exploratories Information System
 (BExIS, https://www.bexis.uni-jena.de); required for download of exact
 geolocation.}
 
 \item{pswd}{password for above request. Will be prompted for if not provided.}
+
+\item{getdata}{logical; if \code{FALSE} it suppresses the extraction of location
+data from BExIS, and will not ask for user credentials. Instead, public
+data of less precision will be used.}
 
 \item{fillall}{if TRUE (default), the output will contain all terms suggested
 by the glossary and fill empty columns with NA. This is required for an
@@ -26,6 +31,8 @@ upload of the data to BExIS.}
 \item{...}{If input is a rawdata table of type species-trait matrix or
 occurence table (wide table) then provide parameters according to
 \code{as.traitdata()}.}
+
+\item{verbose}{logical; if \code{FALSE} all messages will be suppressed.}
 }
 \value{
 std

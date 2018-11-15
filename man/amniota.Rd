@@ -61,4 +61,5 @@ Other rawdata: \code{\link{amphibio}},
 Nathan P. Myhrvold, Elita Baldridge, Benjamin Chan, Dhileep Sivam,
 Daniel L. Freeman, and S. K. Morgan Ernest
 }
+\concept{rawdata}
 \keyword{datasets}
