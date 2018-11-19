@@ -114,7 +114,7 @@ as.traitdata <- function(x,
                          measurements = attributes(x)$measurements,
                          units = attributes(x)$units,
                          keep = attributes(x)$keep,
-                         drop = NULL, 
+                         drop = attributes(x)$drop, 
                          na.rm = TRUE,
                          id.vars = names(x)[names(x) %in% keep & !names(x) %in% drop],
                          thesaurus = attributes(x)$thesaurus,
@@ -134,14 +134,19 @@ as.traitdata <- function(x,
   if(!is.null(occurrences) && length(occurrences) == 1) { 
       colnames(x)[colnames(x) == occurrences] <- "occurrenceID" 
       x$occurrenceID <- paste(datasetID, x$occurrenceID, sep = "")
+      message("Input is taken to be an observation -- trait matrix \n(i.e. with individual specimens per row and multiple trait measurements in columns). \nIf this is not the case, please provide parameters! ")
+      
     } else {
+      
       if(!is.null(occurrences) && length(occurrences) == length(x$scientificName) ) {
             x$occurrenceID <- paste(datasetID, occurrences, sep = "")
       }
+      
       if(is.null(occurrences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
         message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
         occurrences <- seq_along(x$scientificName)
         x$occurrenceID <- paste(datasetID, occurrences, sep = "")
+        
       }
       if(is.null(occurrences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
         message("Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!")
@@ -158,6 +163,7 @@ as.traitdata <- function(x,
   
   if(length(traits) == 1 && !is.null(traits)) {
     colnames(x)[colnames(x) == traits] <- "traitName"
+    out <- x
   }
   
   # produce out while respecting id.vars to keep and drop
@@ -171,17 +177,20 @@ as.traitdata <- function(x,
                                      c("measurementID")[!is.null(measurements)], 
                                      id.vars),
                          na.rm = na.rm
-    )
+                        )
     #rename value column in "traitValue"
     names(out)[names(out) == "value"] <- "traitValue"
     
   } else { 
-    cat("not")
-    out <- subset(x, select = c("scientificName", 
+    
+    out <- subset.data.frame(x, 
+                             subset = rep_len(TRUE, nrow(x)),
+                             select = c("scientificName", 
                                 c("occurrenceID")[!is.null(occurrences)],
                                 c("measurementID")[!is.null(measurements)], 
                                 traits, 
-                                id.vars))
+                                id.vars)
+                             )
     
     # if only one trait is wrapped (rename value column)
     
@@ -206,7 +215,7 @@ as.traitdata <- function(x,
       out$traitUnit <- as.factor(match(out$traitName, names(units))) 
       levels(out$traitUnit) <- units
     }
-    if(length(units) == (length(traits)*length(x$scientificName))) {
+    if(length(units) == ( length(traits) * length(x$scientificName) )) {
       out$traitUnit <- as.factor(units)
     }
   } 
