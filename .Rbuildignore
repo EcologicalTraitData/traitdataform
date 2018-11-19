@@ -1,6 +1,9 @@
+^CODE_OF_CONDUCT\.md$
+^codemeta\.json$
 ^docs$
 ^draft$
 ^data_test$
+^.travis.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
