@@ -2,7 +2,6 @@ context("trait data structure")
 library(traitdataform)
 
 pulldata('arthropodtraits')
-pulldata('heteroptera_raw')
 
 test_that("keep matrix structure", {
   
@@ -41,12 +40,14 @@ test_that("reformat species data, with trait columns provided as attributes", {
 
  
 # test_that("reformat observation data, with trait columns provided as attributes", {
+#   
+#   pulldata('heteroptera_raw')
+#   
+#   dd2 <- as.traitdata(heteroptera_raw)
 # 
-# dd2 <- as.traitdata(heteroptera_raw)
-# 
-# expect_length(dd2$scientificName, 9386)
-# expect_length(dd2[1,], 10)
-# expect_s3_class(dd2, "traitdata")
+#   expect_length(dd2$scientificName, 9386)
+#   expect_length(dd2[1,], 10)
+#   expect_s3_class(dd2, "traitdata")
 # 
 # })
 
