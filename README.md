@@ -1,8 +1,9 @@
 # Package 'traitdataform': harmonizing ecological trait data in R
 
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Build Status](https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master)](https://travis-ci.com/EcologicalTraitData/traitdataform)
 
-This package assists in handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation). 
+Assistance for handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation). 
 
 There are two major use cases for the package: 
 
@@ -26,12 +27,15 @@ The package can be installed from Github via the 'devtools' package
 install.packages('devtools')
 devtools::install_github('EcologicalTraitData/traitdataform')
 ```
+## System requirements 
+
+The package requires the [udunits library](https://www.unidata.ucar.edu/software/udunits/) for unit conversion to be installed. It should install automatically, but if the package installation throws an error, it might need manual installation (see [this thread for help](https://github.com/r-quantities/units/issues/1)).  
 
 ## Usage
 
 ```r
 
-data(carabids)
+pulldata("carabids")
 
 thesaurus <- as.thesaurus(
        body_length = as.trait("body_length", 
@@ -73,6 +77,13 @@ For additional information and interpretation of the data please refer to the he
 
 If you want  further datasources published under Creative Commons Licenses or in the public domain being added to this package, feel free to file a pull-request with a script for download and harmonization in the `data/` directory and a documentation appended to `R/data.R`! 
 
+
+## Contributing
+
+The package invites any contributions e.g. minor fixes and spell-checks, improving interoperability with data and other packages or software for trait-data handling. Please see [the Contributing Guidelines](CONTRIBUTING.md) for details.
+
+Please note that the 'traitdataform' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
 ## Future features
 
 The package is under open source development. You are invited to submit pull-requests with your improvements. 
@@ -86,7 +97,7 @@ We are aiming to provide the following features in future iterations of the pack
 
 ## Cite as
 
-Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.3, doi: xxx.xxx, http://ecologicaltraitdata.github.io/traitdataform
+Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.3.0, doi: xxx.xxx, http://ecologicaltraitdata.github.io/traitdataform
 
 ## License
 
