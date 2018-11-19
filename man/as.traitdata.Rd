@@ -9,8 +9,9 @@ as.traitdata(x, traits = attributes(x)$traits,
   datasetID = attributes(x)$datasetID,
   measurements = attributes(x)$measurements,
   units = attributes(x)$units, keep = attributes(x)$keep,
-  drop = NULL, na.rm = TRUE, id.vars = names(x)[names(x) \%in\% keep
-  & !names(x) \%in\% drop], thesaurus = attributes(x)$thesaurus,
+  drop = attributes(x)$drop, na.rm = TRUE,
+  id.vars = names(x)[names(x) \%in\% keep & !names(x) \%in\% drop],
+  thesaurus = attributes(x)$thesaurus,
   metadata = attributes(x)$metadata, longtable = TRUE, ...)
 }
 \arguments{
