@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AmphiBIO, a global database for amphibian ecological traits — amphibio • traitdataform</title>
+<title>Package 'traitdataform': harmonizing ecological trait data in R — traitdataform-package • traitdataform</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="AmphiBIO, a global database for amphibian ecological traits — amphibio" />
+<meta property="og:title" content="Package 'traitdataform': harmonizing ecological trait data in R — traitdataform-package" />
 
-<meta property="og:description" content="A comprehensive database of natural history traits for amphibians worldwide." />
+<meta property="og:description" content="This package assists in handling functional trait data and transferring them
+into the Trait Data Standard (Schneider et al. in preparation)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,43 +104,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AmphiBIO, a global database for amphibian ecological traits</h1>
-    <small class="dont-index">Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>amphibio.Rd</code></div>
+    <h1>Package 'traitdataform': harmonizing ecological trait data in R</h1>
+    <small class="dont-index">Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/R/traitdataform-package.R'><code>R/traitdataform-package.R</code></a></small>
+    <div class="hidden name"><code>traitdataform-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A comprehensive database of natural history traits for amphibians worldwide.</p>
+    <p>This package assists in handling functional trait data and transferring them
+into the Trait Data Standard (Schneider et al. in preparation).</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>amphibio</span></pre>
         
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>NULL</code> of length 0.</p>
-    
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>Cite as:</p><ul>
-<li><p>Oliveira, B.F., São-Pedro, V.A., Santos-Barrera, G., Penone, C. &amp; Costa, G.C. (2017). AmphiBIO, a global database for amphibian ecological traits. Scientific Data, 4:170123. doi: <a href='https://www.nature.com/articles/sdata2017123'>10.1038/sdata.2017.123</a></p></li>
-</ul>
-    <p>Please also cite the data repository on figshare:</p><ul>
-<li><p>Oliveira, Brunno Freire; São-Pedro, Vinícius Avelar; Santos-Barrera, Georgina; Penone, Caterina; C. Costa, Gabriel (2017): AmphiBIO_v1. figshare. <a href='https://doi.org/10.6084/m9.figshare.4644424.v5'>https://doi.org/10.6084/m9.figshare.4644424.v5</a></p></li>
-</ul>
-    <p><a href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons BY 4.0</a>. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Current ecological and evolutionary research are increasingly moving from species- to trait-based approaches because traits provide a stronger link to organism’s function and fitness. Trait databases covering a large number of species are becoming available, but such data remains scarce for certain groups. Amphibians are among the most diverse vertebrate groups on Earth, and constitute an abundant component of major terrestrial and freshwater ecosystems. They are also facing rapid population declines worldwide, which is likely to affect trait composition in local communities, thereby impacting ecosystem processes and services. In this context, we introduce AmphiBIO, a comprehensive database of natural history traits for amphibians worldwide. The database releases information on 17 traits related to ecology, morphology and reproduction features of amphibians. We compiled data from more than 1,500 literature sources, and for more than 6,500 species of all orders (Anura, Caudata and Gymnophiona), 61 families and 531 genera. This database has the potential to allow unprecedented large-scale analyses in ecology, evolution and conservation of amphibians.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other rawdata: <code><a href='amniota.html'>amniota</a></code>,
-  <code><a href='arthropodtraits.html'>arthropodtraits</a></code>, <code><a href='carabids.html'>carabids</a></code>,
-  <code><a href='heteroptera_raw.html'>heteroptera_raw</a></code>, <code><a href='mammaldiet.html'>mammaldiet</a></code>,
-  <code><a href='pantheria.html'>pantheria</a></code>, <code><a href='pulldata.html'>pulldata</a></code></p></div>
+    <p>There are two major use cases for the package:</p><ul>
+<li><p>preparation of own trait datasets for upload into public data bases, and</p></li>
+<li><p>harmonizing trait datasets from different sources by moulding them into a
+unified format.</p></li>
+</ul>
+    <p>The toolset of the package includes</p><ul>
+<li><p>transforming species-trait-matrix or occurence table data into a unified
+long-table format</p></li>
+<li><p>mapping column names into terms provided in a standard trait vocabulary</p></li>
+<li><p>matching of species names into GBIF Backbone Taxonomy (taxonomic ontology
+server)</p></li>
+<li><p>matching of trait names into a user-provided traitlist, i.e. a thesaurus
+of traits</p></li>
+<li><p>unifying trait values into target unit format and legit factor levels</p></li>
+<li><p>saving trait dataset into a desired format using templates (e.g. for BExIS)</p></li>
+</ul>
     
 
   </div>
@@ -147,18 +142,8 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
-
-    <h2>Author</h2>
-    
-Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa
 
   </div>
 </div>

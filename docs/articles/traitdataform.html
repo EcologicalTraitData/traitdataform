@@ -53,7 +53,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/fdschneider/traitdataform">
+  <a href="https://github.com/EcologicalTraitData/traitdataform">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -73,9 +73,9 @@
       <h1>Package ‘traitdataform’</h1>
                         <h4 class="author">Florian D. Schneider</h4>
             
-            <h4 class="date">2018-11-15</h4>
+            <h4 class="date">2018-11-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/fdschneider/traitdataform/blob/master/vignettes/traitdataform.Rmd"><code>vignettes/traitdataform.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/EcologicalTraitData/traitdataform/blob/master/vignettes/traitdataform.Rmd"><code>vignettes/traitdataform.Rmd</code></a></small>
       <div class="hidden name"><code>traitdataform.Rmd</code></div>
 
     </div>
@@ -160,10 +160,12 @@
 <a class="sourceLine" id="cb10-8" data-line-number="8">                         <span class="st">"Wing_length"</span>, <span class="st">"Wing_width"</span>),</a>
 <a class="sourceLine" id="cb10-9" data-line-number="9">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
 <a class="sourceLine" id="cb10-10" data-line-number="10">              <span class="dt">occurrences =</span> <span class="st">"ID"</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11">              )</a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co"># show different trait measurements for same occurrence/individual</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="kw">subset</span>(dataset2, occurrenceID <span class="op">==</span><span class="st"> "5"</span> ) </a></code></pre></div>
+<a class="sourceLine" id="cb10-11" data-line-number="11">              )</a></code></pre></div>
+<pre><code>## Input is taken to be an observation -- trait matrix 
+## (i.e. with individual specimens per row and multiple trait measurements in columns). 
+## If this is not the case, please provide parameters!</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># show different trait measurements for same occurrence/individual</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">subset</span>(dataset2, occurrenceID <span class="op">==</span><span class="st"> "5"</span> ) </a></code></pre></div>
 <pre><code>##        scientificName          traitName traitValue traitUnit
 ## 5    Acalypta parvula        Body_length       1.84        mm
 ## 430  Acalypta parvula         Body_width       0.82        mm
@@ -242,18 +244,18 @@
 <p>For a standardisation of quantitative trait data, the unit of measurement is essential. Often, this information is kept in the metadata descriptions. But for a standardised table containing measurements from different sources, this information should always accompany the measurement value. A common way to provide the unit is adding another column to your original data table containing the unit in an unambiguous format. The function <code>as.traittable()</code> assists in adding the units via its parameter <code>units</code>.</p>
 <p>This can be done for all traits in a single stroke (if all reported values refer to the same unit) or to each trait specifically (if they used different measuremnt units or if the table comprises a mixture of quantitative and qualitative traits).</p>
 <p>The syntax for this uses the parameter <code>units</code>, which takes a single character string, or a vector of character strings, containing valid entries as expected by the package ‘units’ (Pebesma et al. 2016, <a href="https://github.com/edzer/units/" class="uri">https://github.com/edzer/units/</a>, v0.4-5, Examples are ‘mm’, ‘m2’ or ‘m^2’, ‘m/s’).</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"carabids"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"carabids"</span>)</a></code></pre></div>
 <pre><code>## The dataset 'carabids' is now available for use!</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">dataset1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(carabids, </a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">                         <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">                         <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"body_length"</span>, </a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">                                    <span class="st">"antenna_length"</span>, </a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">                                    <span class="st">"metafemur_length"</span>, </a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">                                    <span class="st">"eyewidth_corr"</span>),</a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">                         <span class="dt">units =</span> <span class="st">"mm"</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">                         )</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">dataset1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(carabids, </a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">                         <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">                         <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"body_length"</span>, </a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">                                    <span class="st">"antenna_length"</span>, </a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">                                    <span class="st">"metafemur_length"</span>, </a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">                                    <span class="st">"eyewidth_corr"</span>),</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">                         <span class="dt">units =</span> <span class="st">"mm"</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">                         )</a></code></pre></div>
 <pre><code>## Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">head</span>(dataset1)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">head</span>(dataset1)</a></code></pre></div>
 <pre><code>##          scientificName   traitName traitValue traitUnit measurementID
 ## 1 Abax_parallelepipedus body_length  15.846561        mm             1
 ## 2  Acupalpus_meridianus body_length   2.670000        mm             2
@@ -284,19 +286,19 @@
 ## 
 ##     Published under: http://creativecommons.org/publicdomain/zero/1.0/</code></pre>
 <p>A character vector should have the same length as the provided vector of trait names (in parameter <code>traits</code>), or otherwise should be a named vector of the form <code>c(trait1 = "mm", trait2 = "mm2")</code>, where only the traits provided will receive units while the others will remain blank.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"arthropodtraits"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"arthropodtraits"</span>)</a></code></pre></div>
 <pre><code>## The dataset 'arthropodtraits' is now available for use!</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">dataset3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(arthropodtraits,</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">                         <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">                         <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_Size"</span>, <span class="st">"Dispersal_ability"</span>, <span class="st">"Feeding_guild"</span>,</a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">                                    <span class="st">"Feeding_mode"</span>, <span class="st">"Feeding_specialization"</span>, </a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">                                    <span class="st">"Feeding_tissue"</span>, <span class="st">"Feeding_plant_part"</span>,</a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">                                    <span class="st">"Endophagous_lifestyle"</span>, <span class="st">"Stratum_use"</span>,</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">                                    <span class="st">"Stratum_use_short"</span>), </a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">                         <span class="dt">units =</span> <span class="kw">c</span>(<span class="dt">Body_Size =</span> <span class="st">"mm"</span>, <span class="dt">Dispersal_ability =</span> <span class="st">"unitless"</span>)</a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">dataset3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(arthropodtraits,</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">                         <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">                         <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_Size"</span>, <span class="st">"Dispersal_ability"</span>, <span class="st">"Feeding_guild"</span>,</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">                                    <span class="st">"Feeding_mode"</span>, <span class="st">"Feeding_specialization"</span>, </a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">                                    <span class="st">"Feeding_tissue"</span>, <span class="st">"Feeding_plant_part"</span>,</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">                                    <span class="st">"Endophagous_lifestyle"</span>, <span class="st">"Stratum_use"</span>,</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">                                    <span class="st">"Stratum_use_short"</span>), </a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">                         <span class="dt">units =</span> <span class="kw">c</span>(<span class="dt">Body_Size =</span> <span class="st">"mm"</span>, <span class="dt">Dispersal_ability =</span> <span class="st">"unitless"</span>)</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9">)</a></code></pre></div>
 <pre><code>## Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">head</span>(dataset3)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">head</span>(dataset3)</a></code></pre></div>
 <pre><code>##         scientificName traitName traitValue traitUnit measurementID
 ## 1 Anyphaena accentuata Body_Size       6.25        mm             1
 ## 2 Aculepeira ceropegia Body_Size         11        mm             2
@@ -326,7 +328,7 @@
 ## 10.1038/sdata.2015.13 (URL: http://doi.org/10.1038/sdata.2015.13).
 ## 
 ##     Published under: http://creativecommons.org/publicdomain/zero/1.0/</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"heteroptera"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"heteroptera"</span>)</a></code></pre></div>
 <pre><code>## loading dataset 'heteroptera' from original data source! 
 ##  When using this data, please cite the original publication: 
 ## Gossner MM, Simons NK, HÃ¶ck L, Weisser WW (2015). "Morphometric
@@ -334,17 +336,17 @@
 ## of Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:
 ## http://doi.org/10.1890/14-2159.1).</code></pre>
 <pre><code>## The dataset 'heteroptera' is now available for use!</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">dataset4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera,</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">              <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_length"</span>, <span class="st">"Body_volume"</span>, <span class="st">"Rel_wing_length"</span>, </a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">                         <span class="st">"Hind.Femur_shape"</span>, <span class="st">"Rel_Hind.Femur_length"</span>, </a>
-<a class="sourceLine" id="cb27-4" data-line-number="4">                         <span class="st">"Rel_Rostrum_length"</span>, <span class="st">"Front.Femur_shape"</span>, </a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">                         <span class="st">"Body_shape"</span>, <span class="st">"Rel_eye_size"</span>, <span class="st">"Rel_Antenna_length"</span></a>
-<a class="sourceLine" id="cb27-6" data-line-number="6">                         ),</a>
-<a class="sourceLine" id="cb27-7" data-line-number="7">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
-<a class="sourceLine" id="cb27-8" data-line-number="8">              <span class="dt">units =</span> <span class="kw">c</span>(<span class="st">"mm"</span>, <span class="st">"mm3"</span>, <span class="kw">rep</span>(<span class="st">"unitless"</span>, <span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb27-9" data-line-number="9">              )</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">dataset4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera,</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">              <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_length"</span>, <span class="st">"Body_volume"</span>, <span class="st">"Rel_wing_length"</span>, </a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">                         <span class="st">"Hind.Femur_shape"</span>, <span class="st">"Rel_Hind.Femur_length"</span>, </a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">                         <span class="st">"Rel_Rostrum_length"</span>, <span class="st">"Front.Femur_shape"</span>, </a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">                         <span class="st">"Body_shape"</span>, <span class="st">"Rel_eye_size"</span>, <span class="st">"Rel_Antenna_length"</span></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">                         ),</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
+<a class="sourceLine" id="cb29-8" data-line-number="8">              <span class="dt">units =</span> <span class="kw">c</span>(<span class="st">"mm"</span>, <span class="st">"mm3"</span>, <span class="kw">rep</span>(<span class="st">"unitless"</span>, <span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb29-9" data-line-number="9">              )</a></code></pre></div>
 <pre><code>## Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">head</span>(dataset4) </a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">head</span>(dataset4) </a></code></pre></div>
 <pre><code>##                 scientificName   traitName traitValue traitUnit
 ## 1             Acalypta nigrina Body_length       2.19        mm
 ## 2             Acalypta parvula Body_length       1.73        mm
@@ -372,43 +374,45 @@
 <p>This may not be useful if the numeric levels correspond to fine grained distinctions that cannot be translated into short factor levels.</p>
 <p>A translation into factorials is even ill-adviced if factor levels are ordinal, i.e. they correspond to a sequence of logically ordered levels and the ordering would be lost by translating into factorials: The traitdata object will not keep ordinal level definitions of the original R data.frame. In this case, integer numerical values are best to describe the relational structure of the factor levels.</p>
 <p>Please don’t forget to provide a definition of factor levels in the metadata description of variables or in an accompanying dataset containing trait definitions.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">updated &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mutate.traitdata.html">mutate.traitdata</a></span>(dataset3, </a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">                            <span class="dt">predator =</span> Feeding_guild <span class="op">==</span><span class="st"> "c"</span>, </a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">                            <span class="dt">Feeding_specialization =</span> <span class="kw">factor</span>(Feeding_specialization, </a>
-<a class="sourceLine" id="cb31-4" data-line-number="4">                                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">"m"</span>,<span class="st">"o"</span>, <span class="st">"p"</span>), </a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">                                            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">"monophagous"</span>, <span class="st">"oligophagous"</span>,</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">                                                       <span class="st">"polyphagous"</span>)</a>
-<a class="sourceLine" id="cb31-7" data-line-number="7">                                            ),</a>
-<a class="sourceLine" id="cb31-8" data-line-number="8">                            <span class="dt">Stratum_use =</span> <span class="kw">factor</span>(Stratum_use_short, </a>
-<a class="sourceLine" id="cb31-9" data-line-number="9">                                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">"s"</span>,<span class="st">"g"</span>, <span class="st">"h"</span>, <span class="st">"t"</span>), </a>
-<a class="sourceLine" id="cb31-10" data-line-number="10">                                                 <span class="dt">ordered =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb31-11" data-line-number="11">                                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">"soil"</span>,<span class="st">"ground"</span>,<span class="st">"herb"</span>,<span class="st">"shrub"</span>)</a>
-<a class="sourceLine" id="cb31-12" data-line-number="12">                                                 )</a>
-<a class="sourceLine" id="cb31-13" data-line-number="13">                            )</a>
-<a class="sourceLine" id="cb31-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb31-15" data-line-number="15"><span class="kw">head</span>(<span class="kw">subset</span>(updated, traitName <span class="op">==</span><span class="st"> "Stratum_use"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">updated &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mutate.traitdata.html">mutate.traitdata</a></span>(dataset3, </a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">                            <span class="dt">predator =</span> Feeding_guild <span class="op">==</span><span class="st"> "c"</span>, </a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">                            <span class="dt">Feeding_specialization =</span> <span class="kw">factor</span>(Feeding_specialization, </a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">                                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">"m"</span>,<span class="st">"o"</span>, <span class="st">"p"</span>), </a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">                                            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">"monophagous"</span>, <span class="st">"oligophagous"</span>,</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">                                                       <span class="st">"polyphagous"</span>)</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">                                            ),</a>
+<a class="sourceLine" id="cb33-8" data-line-number="8">                            <span class="dt">Stratum_use =</span> <span class="kw">factor</span>(Stratum_use_short, </a>
+<a class="sourceLine" id="cb33-9" data-line-number="9">                                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">"s"</span>,<span class="st">"g"</span>, <span class="st">"h"</span>, <span class="st">"t"</span>), </a>
+<a class="sourceLine" id="cb33-10" data-line-number="10">                                                 <span class="dt">ordered =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb33-11" data-line-number="11">                                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">"soil"</span>,<span class="st">"ground"</span>,<span class="st">"herb"</span>,<span class="st">"shrub"</span>)</a>
+<a class="sourceLine" id="cb33-12" data-line-number="12">                                                 )</a>
+<a class="sourceLine" id="cb33-13" data-line-number="13">                            )</a>
+<a class="sourceLine" id="cb33-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb33-15" data-line-number="15"><span class="kw">head</span>(<span class="kw">subset</span>(updated, traitName <span class="op">==</span><span class="st"> "Stratum_use"</span>))</a></code></pre></div>
 </div>
 <div id="case-example-keep-additional-data-columns" class="section level2">
 <h2 class="hasAnchor">
 <a href="#case-example-keep-additional-data-columns" class="anchor"></a>case example: keep additional data columns</h2>
 <p>The raw data might contain further information on the specimen or the trait measurement itself in further data columns that are valuable for later analysis. This can be for instance data about the sex or developmental stage of the individual, the sampling or preservation method of the specimen, or the conditions under which the measurement was taken.</p>
 <p>The parameter <code>keep</code> allows you to specify which columns contain valuable information as a character vector. As a negative version of <code>keep</code>, specifying <code>drop</code> would allow you to name the columns that are not valueable, while all others will be kept. Not specifying <code>keep</code> or <code>drop</code> will result in dropping all columns except the core measurement and identifier columns.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"heteroptera_raw"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"heteroptera_raw"</span>)</a></code></pre></div>
 <pre><code>## The dataset 'heteroptera_raw' is now available for use!</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">dataset2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera_raw,</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">              <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">                         <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>,</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">                         <span class="st">"Antenna_Seg2"</span>, <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>,</a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">                         <span class="st">"Front.Tibia_length"</span>, <span class="st">"Mid.Tibia_length"</span>, <span class="st">"Hind.Tibia_length"</span>,</a>
-<a class="sourceLine" id="cb34-6" data-line-number="6">                         <span class="st">"Front.Femur_length"</span>, <span class="st">"Hind.Femur_length"</span>, <span class="st">"Front.Femur_width"</span>,</a>
-<a class="sourceLine" id="cb34-7" data-line-number="7">                         <span class="st">"Hind.Femur_width"</span>, <span class="st">"Rostrum_length"</span>, <span class="st">"Rostrum_width"</span>, </a>
-<a class="sourceLine" id="cb34-8" data-line-number="8">                         <span class="st">"Wing_length"</span>, <span class="st">"Wing_width"</span>),</a>
-<a class="sourceLine" id="cb34-9" data-line-number="9">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
-<a class="sourceLine" id="cb34-10" data-line-number="10">              <span class="dt">occurrences =</span> <span class="st">"ID"</span>,</a>
-<a class="sourceLine" id="cb34-11" data-line-number="11">              <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">"Sex"</span>)</a>
-<a class="sourceLine" id="cb34-12" data-line-number="12">              )</a>
-<a class="sourceLine" id="cb34-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb34-14" data-line-number="14"><span class="kw">head</span>(dataset2) </a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">dataset2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera_raw,</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">              <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">                         <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>,</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">                         <span class="st">"Antenna_Seg2"</span>, <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>,</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">                         <span class="st">"Front.Tibia_length"</span>, <span class="st">"Mid.Tibia_length"</span>, <span class="st">"Hind.Tibia_length"</span>,</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">                         <span class="st">"Front.Femur_length"</span>, <span class="st">"Hind.Femur_length"</span>, <span class="st">"Front.Femur_width"</span>,</a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">                         <span class="st">"Hind.Femur_width"</span>, <span class="st">"Rostrum_length"</span>, <span class="st">"Rostrum_width"</span>, </a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">                         <span class="st">"Wing_length"</span>, <span class="st">"Wing_width"</span>),</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
+<a class="sourceLine" id="cb36-10" data-line-number="10">              <span class="dt">occurrences =</span> <span class="st">"ID"</span>,</a>
+<a class="sourceLine" id="cb36-11" data-line-number="11">              <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">"Sex"</span>)</a>
+<a class="sourceLine" id="cb36-12" data-line-number="12">              )</a></code></pre></div>
+<pre><code>## Input is taken to be an observation -- trait matrix 
+## (i.e. with individual specimens per row and multiple trait measurements in columns). 
+## If this is not the case, please provide parameters!</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">head</span>(dataset2) </a></code></pre></div>
 <pre><code>##     scientificName   traitName traitValue traitUnit measurementID
 ## 1 Acalypta nigrina Body_length       2.35        mm             1
 ## 2 Acalypta nigrina Body_length       2.10        mm             2
@@ -431,22 +435,22 @@
 ##     When using these data, you must acknowledge the following usage policies: 
 ## 
 ##     Cite this trait dataset as: 
-## Gossner MM, Simons NK, HÃ¶ck L, Weisser WW (2015). "Morphometric
+## Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric
 ## measures of Heteroptera sampled in grasslands across three regions
 ## of Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:
 ## http://doi.org/10.1890/14-2159.1).
 ## 
 ##     Published under: http://creativecommons.org/publicdomain/zero/1.0/</code></pre>
 <p>The traitdata standard (whitepaper) suggests standard names for many of these extra information, which might fall into the domain of the extensions for occurrence or measurementOrFact (see below). We highly reccomend mapping the columns provided into these standard names by using the rename feature of the <code><a href="../reference/as.traitdata.html">as.traitdata()</a></code> function. This is simply acheived by providing a named vector for <code>keep</code> that uses the compatible column names as vector names.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">dataset1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(carabids, </a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">                         <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">                         <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"body_length"</span>, <span class="st">"antenna_length"</span>, </a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">                                    <span class="st">"metafemur_length"</span>),</a>
-<a class="sourceLine" id="cb36-5" data-line-number="5">                         <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">                         <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">measurementDeterminedBy =</span> <span class="st">"source_measurement"</span>)</a>
-<a class="sourceLine" id="cb36-7" data-line-number="7">                         )</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">dataset1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(carabids, </a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">                         <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">                         <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"body_length"</span>, <span class="st">"antenna_length"</span>, </a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">                                    <span class="st">"metafemur_length"</span>),</a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">                         <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">                         <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">measurementDeterminedBy =</span> <span class="st">"source_measurement"</span>)</a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">                         )</a></code></pre></div>
 <pre><code>## Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">head</span>(dataset1)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">head</span>(dataset1)</a></code></pre></div>
 <pre><code>##          scientificName   traitName traitValue traitUnit measurementID
 ## 1 Abax_parallelepipedus body_length  15.846561        mm             1
 ## 2  Acupalpus_meridianus body_length   2.670000        mm             2
@@ -513,12 +517,12 @@
 <a href="#case-example-mutate-original-columns-into-derived-values" class="anchor"></a>case example: mutate original columns into derived values</h2>
 <p>Many traits comprise compound measures of multiple traits, such as length-mass ratios or morphometric indices. Other traits must be refined in terms of factor levels, or reduced to binary trait values. While many of these tasks can be achieved on the raw data using base functions like <code>transform()</code>, <code>factor()</code> or <code>match()</code> or the <code>mutate()</code> function provided by the package ‘plyr’.</p>
 <p>The function <code><a href="../reference/mutate.traitdata.html">mutate.traitdata()</a></code> performs these tasks (working as a wrapper to <code><a href="http://www.rdocumentation.org/packages/plyr/topics/mutate">plyr::mutate()</a></code>).</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">updated &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mutate.traitdata.html">mutate.traitdata</a></span>(dataset2, </a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">                            <span class="dt">Body_shape =</span> Body_length<span class="op">/</span>Body_width, </a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">                            <span class="dt">Body_volume =</span> Body_length<span class="op">*</span>Body_width<span class="op">*</span>Body_height,</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">                            <span class="dt">Wingload =</span> Wing_length<span class="op">*</span>Wing_width<span class="op">/</span>Body_volume)</a>
-<a class="sourceLine" id="cb40-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="kw">head</span>(updated[updated<span class="op">$</span>traitName <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Body_shape"</span>, <span class="st">"Body_volume"</span>, <span class="st">"Wingload"</span>),])</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">updated &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mutate.traitdata.html">mutate.traitdata</a></span>(dataset2, </a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">                            <span class="dt">Body_shape =</span> Body_length<span class="op">/</span>Body_width, </a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">                            <span class="dt">Body_volume =</span> Body_length<span class="op">*</span>Body_width<span class="op">*</span>Body_height,</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">                            <span class="dt">Wingload =</span> Wing_length<span class="op">*</span>Wing_width<span class="op">/</span>Body_volume)</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="kw">head</span>(updated[updated<span class="op">$</span>traitName <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Body_shape"</span>, <span class="st">"Body_volume"</span>, <span class="st">"Wingload"</span>),])</a></code></pre></div>
 <pre><code>##        scientificName  traitName traitValue traitUnit measurementID
 ## 9387 Acalypta nigrina Body_shape   2.043478      &lt;NA&gt;          &lt;NA&gt;
 ## 9388 Acalypta nigrina Body_shape   1.721311      &lt;NA&gt;          &lt;NA&gt;
@@ -541,7 +545,7 @@
 ##     When using these data, you must acknowledge the following usage policies: 
 ## 
 ##     Cite this trait dataset as: 
-## Gossner MM, Simons NK, HÃ¶ck L, Weisser WW (2015). "Morphometric
+## Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric
 ## measures of Heteroptera sampled in grasslands across three regions
 ## of Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:
 ## http://doi.org/10.1890/14-2159.1).
@@ -562,8 +566,8 @@
 <p>If further layers of taxonomic information are desired as an output, the function takes the parameter <code>return</code>, which by default contains <code>c("taxonID", "scientificNameStd", "order", "taxonRank")</code>. Other specifications can be added here.</p>
 <p>Note that for this to work, <code>scientificName</code> must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright).</p>
 <p>Note also, that taxon name mapping requires an internet connection and might take some time, depending on the length of your species list.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">dataset1Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.taxonomy.html">standardize.taxonomy</a></span>(dataset1)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">head</span>(dataset1Std)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">dataset1Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.taxonomy.html">standardize.taxonomy</a></span>(dataset1)</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">head</span>(dataset1Std)</a></code></pre></div>
 <pre><code>##          scientificName        traitName traitValue traitUnit
 ## 1 Abax_parallelepipedus   antenna_length   8.518519        mm
 ## 2 Abax_parallelepipedus metafemur_length   5.608466        mm
@@ -619,20 +623,20 @@
 <a href="#refer-to-an-existing-trait-ontology" class="anchor"></a>refer to an existing trait ontology</h3>
 <p>A couple of trait ontologies do exist, e.g. the TOP Thesaurus of plant traits (used by TRY) or Gramene.org offer definitions of plant traits via an API. For soil invertebrates, the T-SITA thesaurus offers a set of traits relevant for this organism group. To date, no script for a systematic access of these ontologies can be provided here. Thus, the key information must be provided manually as an own data object in R.</p>
 <p>This procedure is only recommended if <em>all</em> of the traits reported in your dataset refer to a definition in an online thesaurus.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">traits1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span>(<span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">                      <span class="dt">trait =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">                        <span class="st">"body_length"</span>, </a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">                        <span class="st">"antenna_length"</span>,</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">                        <span class="st">"metafemur_length"</span></a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">                        ),</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7">                      <span class="dt">identifier =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb44-8" data-line-number="8">                        <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>,</a>
-<a class="sourceLine" id="cb44-9" data-line-number="9">                        <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span>,</a>
-<a class="sourceLine" id="cb44-10" data-line-number="10">                        <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span></a>
-<a class="sourceLine" id="cb44-11" data-line-number="11">                        ), </a>
-<a class="sourceLine" id="cb44-12" data-line-number="12">                      <span class="dt">valueType =</span> <span class="kw">c</span>(<span class="st">"numeric"</span>),</a>
-<a class="sourceLine" id="cb44-13" data-line-number="13">                      <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>)</a>
-<a class="sourceLine" id="cb44-14" data-line-number="14">)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">traits1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span>(<span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">                      <span class="dt">trait =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">                        <span class="st">"body_length"</span>, </a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">                        <span class="st">"antenna_length"</span>,</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">                        <span class="st">"metafemur_length"</span></a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">                        ),</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">                      <span class="dt">identifier =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">                        <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>,</a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">                        <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span>,</a>
+<a class="sourceLine" id="cb48-10" data-line-number="10">                        <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span></a>
+<a class="sourceLine" id="cb48-11" data-line-number="11">                        ), </a>
+<a class="sourceLine" id="cb48-12" data-line-number="12">                      <span class="dt">valueType =</span> <span class="kw">c</span>(<span class="st">"numeric"</span>),</a>
+<a class="sourceLine" id="cb48-13" data-line-number="13">                      <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>)</a>
+<a class="sourceLine" id="cb48-14" data-line-number="14">)</a></code></pre></div>
 <p>We highly encourage the implementation of open online resources for these glossaries (e.g. via APIs), which would allow a looking up existing trait definitions programmatically, and match user provided names to accepted trait names via fuzzy matching.</p>
 </div>
 <div id="refer-to-an-own-trait-thesaurus" class="section level3">
@@ -659,34 +663,34 @@
 <code>comments</code> may contain examples and clarifications</li>
 </ul>
 <p>The trait thesaurus can be created from a data.frame using the function <code><a href="../reference/as.thesaurus.html">as.thesaurus()</a></code>. The parameter <code>replace</code> can be used for fixing column names to the expected names outlined above (see function <code><a href="http://www.rdocumentation.org/packages/reshape/topics/rename-au">reshape::rename()</a></code> of the plyr package).</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">traits1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">     <span class="kw">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"</span>), </a>
-<a class="sourceLine" id="cb45-3" data-line-number="3">     <span class="dt">replace =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4">       <span class="dt">traitID =</span> <span class="st">"identifier"</span>, </a>
-<a class="sourceLine" id="cb45-5" data-line-number="5">       <span class="dt">traitName =</span> <span class="st">"trait"</span>,</a>
-<a class="sourceLine" id="cb45-6" data-line-number="6">       <span class="dt">traitUnit =</span> <span class="st">"expectedUnit"</span>,</a>
-<a class="sourceLine" id="cb45-7" data-line-number="7">       <span class="dt">Comments =</span> <span class="st">"comments"</span></a>
-<a class="sourceLine" id="cb45-8" data-line-number="8">       ) </a>
-<a class="sourceLine" id="cb45-9" data-line-number="9"> )</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">traits1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">     <span class="kw">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/EcologicalTraitData/TraitDataList/master/traitdatastandard_traitlist.csv"</span>), </a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">     <span class="dt">replace =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">       <span class="dt">traitID =</span> <span class="st">"identifier"</span>, </a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">       <span class="dt">traitName =</span> <span class="st">"trait"</span>,</a>
+<a class="sourceLine" id="cb49-6" data-line-number="6">       <span class="dt">traitUnit =</span> <span class="st">"expectedUnit"</span>,</a>
+<a class="sourceLine" id="cb49-7" data-line-number="7">       <span class="dt">Comments =</span> <span class="st">"comments"</span></a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">       ) </a>
+<a class="sourceLine" id="cb49-9" data-line-number="9"> )</a></code></pre></div>
 <p>In R, the thesaurus can be created manually by providing objects of class ‘trait’ for the function <code><a href="../reference/as.thesaurus.html">as.thesaurus()</a></code> which will be used to create a valid data frame. This is especially useful if your data comprise only a small number of traits. Using the <code><a href="../reference/as.trait.html">as.trait()</a></code> syntax may allow a more flexible trait definition and an ensures compliance with the terms of the traitdata standard outlined above. It also allows building a library of trait definitions where single traits can be reused in multiple projects.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">traits1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">   <span class="dt">body_length =</span> <span class="kw"><a href="../reference/as.trait.html">as.trait</a></span>(<span class="st">"body_length"</span>, </a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">     <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, <span class="dt">valueType =</span> <span class="st">"numeric"</span>, </a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">     <span class="dt">identifier =</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>), </a>
-<a class="sourceLine" id="cb46-5" data-line-number="5">   <span class="dt">antenna_length =</span> <span class="kw"><a href="../reference/as.trait.html">as.trait</a></span>(<span class="st">"antenna_length"</span>, </a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">     <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, <span class="dt">valueType =</span> <span class="st">"numeric"</span>, </a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">     <span class="dt">identifier =</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span>),</a>
-<a class="sourceLine" id="cb46-8" data-line-number="8">   <span class="dt">metafemur_length =</span> <span class="kw"><a href="../reference/as.trait.html">as.trait</a></span>(<span class="st">"metafemur_length"</span>, </a>
-<a class="sourceLine" id="cb46-9" data-line-number="9">     <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, <span class="dt">valueType =</span> <span class="st">"numeric"</span>, </a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">     <span class="dt">identifier =</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)</a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">traits1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">   <span class="dt">body_length =</span> <span class="kw"><a href="../reference/as.trait.html">as.trait</a></span>(<span class="st">"body_length"</span>, </a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">     <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, <span class="dt">valueType =</span> <span class="st">"numeric"</span>, </a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">     <span class="dt">identifier =</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>), </a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">   <span class="dt">antenna_length =</span> <span class="kw"><a href="../reference/as.trait.html">as.trait</a></span>(<span class="st">"antenna_length"</span>, </a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">     <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, <span class="dt">valueType =</span> <span class="st">"numeric"</span>, </a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">     <span class="dt">identifier =</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span>),</a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">   <span class="dt">metafemur_length =</span> <span class="kw"><a href="../reference/as.trait.html">as.trait</a></span>(<span class="st">"metafemur_length"</span>, </a>
+<a class="sourceLine" id="cb50-9" data-line-number="9">     <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, <span class="dt">valueType =</span> <span class="st">"numeric"</span>, </a>
+<a class="sourceLine" id="cb50-10" data-line-number="10">     <span class="dt">identifier =</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)</a>
+<a class="sourceLine" id="cb50-11" data-line-number="11">)</a></code></pre></div>
 </div>
 <div id="standardise-trait-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#standardise-trait-data" class="anchor"></a>standardise trait data</h3>
 <p>The function <code><a href="../reference/standardize.traits.html">standardize.traits()</a></code> now finally has all it needs to complete its job.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.traits.html">standardize.traits</a></span>(dataset1Std, traits1)</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">head</span>(dataset1final)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.traits.html">standardize.traits</a></span>(dataset1Std, traits1)</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw">head</span>(dataset1final)</a></code></pre></div>
 <pre><code>##          scientificName      traitName
 ## 1 Abax_parallelepipedus antenna_length
 ## 2    Leistus_terminatus antenna_length
@@ -760,30 +764,30 @@
 <a href="#georeference-standardization-for-biodiversity-exploratories" class="anchor"></a>georeference standardization for Biodiversity Exploratories</h2>
 <p>The traitdata standard has been developed within the Biodiversity Exploratories project (DFG ) which is a long-term assessment of plant and animal communities in three regions across Germany starting in 2008. Trait data extracted from one of the 300 project plots can be georeferenced using the function <code><a href="../reference/standardize.exploratories.html">standardize.exploratories()</a></code>.</p>
 <p>To access the high-resolution location data, credentials to BEXIS will be requested. If credentials are incorrect or missing, only low-resolution geolocation can be extracted.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="co"># dataset by Jule Mangels et al. </span></a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb49-3" data-line-number="3">moths &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read.service.html">read.service</a></span>(<span class="dv">21247</span>, <span class="dt">dec =</span> <span class="st">","</span>) </a>
-<a class="sourceLine" id="cb49-4" data-line-number="4"> </a>
-<a class="sourceLine" id="cb49-5" data-line-number="5">dataset5 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(moths, <span class="dt">taxa =</span> <span class="st">"species"</span>, <span class="dt">traits =</span> <span class="kw">c</span>(<span class="dt">body_mass =</span></a>
-<a class="sourceLine" id="cb49-6" data-line-number="6">     <span class="st">"weight"</span>, <span class="dt">wing_length =</span> <span class="st">"wing_length"</span>, <span class="dt">wing_width =</span> <span class="st">"wing_width"</span>, <span class="dt">wing_area =</span></a>
-<a class="sourceLine" id="cb49-7" data-line-number="7">     <span class="st">"wing_area"</span>, <span class="dt">wing_loading =</span> <span class="st">"wing_loading"</span>),</a>
-<a class="sourceLine" id="cb49-8" data-line-number="8">   <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">locationID =</span> <span class="st">"plot"</span>))</a>
-<a class="sourceLine" id="cb49-9" data-line-number="9"> </a>
-<a class="sourceLine" id="cb49-10" data-line-number="10">dataset5Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.exploratories.html">standardize.exploratories</a></span>(dataset1)</a>
-<a class="sourceLine" id="cb49-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb49-12" data-line-number="12"><span class="kw">head</span>(dataset5Std)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># dataset by Jule Mangels et al. </span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">moths &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read.service.html">read.service</a></span>(<span class="dv">21247</span>, <span class="dt">dec =</span> <span class="st">","</span>) </a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb53-5" data-line-number="5">dataset5 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(moths, <span class="dt">taxa =</span> <span class="st">"species"</span>, <span class="dt">traits =</span> <span class="kw">c</span>(<span class="dt">body_mass =</span></a>
+<a class="sourceLine" id="cb53-6" data-line-number="6">     <span class="st">"weight"</span>, <span class="dt">wing_length =</span> <span class="st">"wing_length"</span>, <span class="dt">wing_width =</span> <span class="st">"wing_width"</span>, <span class="dt">wing_area =</span></a>
+<a class="sourceLine" id="cb53-7" data-line-number="7">     <span class="st">"wing_area"</span>, <span class="dt">wing_loading =</span> <span class="st">"wing_loading"</span>),</a>
+<a class="sourceLine" id="cb53-8" data-line-number="8">   <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">locationID =</span> <span class="st">"plot"</span>))</a>
+<a class="sourceLine" id="cb53-9" data-line-number="9"> </a>
+<a class="sourceLine" id="cb53-10" data-line-number="10">dataset5Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.exploratories.html">standardize.exploratories</a></span>(dataset1)</a>
+<a class="sourceLine" id="cb53-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb53-12" data-line-number="12"><span class="kw">head</span>(dataset5Std)</a></code></pre></div>
 </div>
 <div id="single-stroke-standardization" class="section level2">
 <h2 class="hasAnchor">
 <a href="#single-stroke-standardization" class="anchor"></a>single stroke standardization</h2>
 <p>The functions described here are applied sequentially. The output of the first step can be piped into the second step, etc.</p>
 <p>To make things even simpler, the functions for format conversion and standardization are wrapped into one named <code><a href="../reference/standardize.html">standardize()</a></code>. Therefore it is possible to run the functions in a single handed way, if all necessary parameters for the intermediate steps are provided. A single call will do, taking all the optional parameters described above.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.html">standardize</a></span>(carabids,</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2">            <span class="dt">thesaurus =</span> traits1,</a>
-<a class="sourceLine" id="cb50-3" data-line-number="3">            <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
-<a class="sourceLine" id="cb50-4" data-line-number="4">            <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
-<a class="sourceLine" id="cb50-5" data-line-number="5">            <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">measurementDeterminedBy =</span> <span class="st">"source_measurement"</span>)</a>
-<a class="sourceLine" id="cb50-6" data-line-number="6">            )</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.html">standardize</a></span>(carabids,</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">            <span class="dt">thesaurus =</span> traits1,</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3">            <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
+<a class="sourceLine" id="cb54-4" data-line-number="4">            <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
+<a class="sourceLine" id="cb54-5" data-line-number="5">            <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">measurementDeterminedBy =</span> <span class="st">"source_measurement"</span>)</a>
+<a class="sourceLine" id="cb54-6" data-line-number="6">            )</a></code></pre></div>
 </div>
 </div>
 <div id="working-with-trait-datasets" class="section level1">
@@ -798,48 +802,50 @@
 <li>No unified trait list or taxon reference exists for the heterogeneous data assembled of different sources (e.g. because spanning many different taxa): Apply standardization to different reference systems before merging the datasets.</li>
 </ul>
 <p>The function call will append the data tables while merging the common columns and maintaining columns that are not present in all datasets (this might produce lots of NA). The column <code>datasetID</code> will be added to keep track of the origin of the data. By default this column will contain the object names of the original datasets, but it can be replaced by more meaningful IDs using the parameter <code>datasetID</code>.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">newdata &lt;-<span class="st"> </span><span class="kw">rbind</span>(dataset1Std, dataset3, </a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">                <span class="dt">datasetID =</span> <span class="kw">c</span>(<span class="st">"carabids"</span>, <span class="st">"arthropodtraits"</span>)</a>
-<a class="sourceLine" id="cb51-3" data-line-number="3">              )</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">newdata &lt;-<span class="st"> </span><span class="kw">rbind</span>(dataset1Std, dataset3, </a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">                <span class="dt">datasetID =</span> <span class="kw">c</span>(<span class="st">"carabids"</span>, <span class="st">"arthropodtraits"</span>)</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">              )</a></code></pre></div>
 <pre><code>## Warning in rbind(deparse.level, ...): There seems to be no overlap in trait names of the provided datasets. 
 ##            It is recommended to map 'traitNameStd' of each dataset to the same thesaurus or ontology!</code></pre>
 <pre><code>## Warning in rbind(deparse.level, ...): There seems to be no overlap in taxon names of the provided datasets. 
 ##             It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!</code></pre>
 <p>Note that the package provides a method for the base function <code>rbind()</code>. Documentation can be accessed via <code><a href="../reference/rbind.traitdata.html">?rbind.traitdata</a></code>.</p>
 <p>The function will handle metadata information on the dataset level as described in the section ‘Metadata’ of the Traitdata Standard (e.g. <code>author</code> or <code>bibliographicCitation</code>) and add a column ‘datasetID’ as well as ‘datasetName’ and ‘author’ if those are provided in the attributes of the input objects. This can be achieved by using the metadata parameter of <code><a href="../reference/as.traitdata.html">as.traitdata()</a></code>.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"carabids"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"carabids"</span>)</a></code></pre></div>
 <pre><code>## The dataset 'carabids' is now available for use!</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">dataset1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(carabids,</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">  <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
-<a class="sourceLine" id="cb56-3" data-line-number="3">  <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"body_length"</span>, <span class="st">"antenna_length"</span>, <span class="st">"metafemur_length"</span>),</a>
-<a class="sourceLine" id="cb56-4" data-line-number="4">  <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
-<a class="sourceLine" id="cb56-5" data-line-number="5">  <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">datasetID =</span> <span class="st">"source_measurement"</span>, <span class="dt">measurementRemark =</span> <span class="st">"note"</span>),</a>
-<a class="sourceLine" id="cb56-6" data-line-number="6">  <span class="dt">metadata =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb56-7" data-line-number="7">    <span class="dt">bibliographicCitation =</span> <span class="kw">attributes</span>(carabids)<span class="op">$</span>citeAs,</a>
-<a class="sourceLine" id="cb56-8" data-line-number="8">    <span class="dt">author =</span> <span class="st">"Fons van der Plas"</span>,</a>
-<a class="sourceLine" id="cb56-9" data-line-number="9">    <span class="dt">license =</span> <span class="st">"http://creativecommons.org/publicdomain/zero/1.0/"</span></a>
-<a class="sourceLine" id="cb56-10" data-line-number="10">    )</a>
-<a class="sourceLine" id="cb56-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">dataset1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(carabids,</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">  <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">  <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"body_length"</span>, <span class="st">"antenna_length"</span>, <span class="st">"metafemur_length"</span>),</a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">  <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
+<a class="sourceLine" id="cb60-5" data-line-number="5">  <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">datasetID =</span> <span class="st">"source_measurement"</span>, <span class="dt">measurementRemark =</span> <span class="st">"note"</span>),</a>
+<a class="sourceLine" id="cb60-6" data-line-number="6">  <span class="dt">metadata =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb60-7" data-line-number="7">    <span class="dt">bibliographicCitation =</span> <span class="kw">attributes</span>(carabids)<span class="op">$</span>citeAs,</a>
+<a class="sourceLine" id="cb60-8" data-line-number="8">    <span class="dt">author =</span> <span class="st">"Fons van der Plas"</span>,</a>
+<a class="sourceLine" id="cb60-9" data-line-number="9">    <span class="dt">license =</span> <span class="st">"http://creativecommons.org/publicdomain/zero/1.0/"</span></a>
+<a class="sourceLine" id="cb60-10" data-line-number="10">    )</a>
+<a class="sourceLine" id="cb60-11" data-line-number="11">)</a></code></pre></div>
 <pre><code>## Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"heteroptera_raw"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw"><a href="../reference/pulldata.html">pulldata</a></span>(<span class="st">"heteroptera_raw"</span>)</a></code></pre></div>
 <pre><code>## The dataset 'heteroptera_raw' is now available for use!</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">dataset2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera_raw,</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">  <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">  <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,</a>
-<a class="sourceLine" id="cb60-4" data-line-number="4">    <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>, <span class="st">"Antenna_Seg2"</span>,</a>
-<a class="sourceLine" id="cb60-5" data-line-number="5">    <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>, <span class="st">"Front.Tibia_length"</span>,</a>
-<a class="sourceLine" id="cb60-6" data-line-number="6">    <span class="st">"Mid.Tibia_length"</span>, <span class="st">"Hind.Tibia_length"</span>, <span class="st">"Front.Femur_length"</span>,</a>
-<a class="sourceLine" id="cb60-7" data-line-number="7">    <span class="st">"Hind.Femur_length"</span>, <span class="st">"Front.Femur_width"</span>, <span class="st">"Hind.Femur_width"</span>,</a>
-<a class="sourceLine" id="cb60-8" data-line-number="8">    <span class="st">"Rostrum_length"</span>, <span class="st">"Rostrum_width"</span>, <span class="st">"Wing_length"</span>, <span class="st">"Wing_widt"</span>),</a>
-<a class="sourceLine" id="cb60-9" data-line-number="9">  <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
-<a class="sourceLine" id="cb60-10" data-line-number="10">  <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">sex =</span> <span class="st">"Sex"</span>, <span class="dt">references =</span> <span class="st">"Source"</span>, <span class="dt">lifestage =</span> <span class="st">"Wing_development"</span>),</a>
-<a class="sourceLine" id="cb60-11" data-line-number="11">  <span class="dt">metadata =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb60-12" data-line-number="12">    <span class="dt">bibliographicCitation =</span> <span class="kw">attributes</span>(heteroptera_raw)<span class="op">$</span>citeAs,</a>
-<a class="sourceLine" id="cb60-13" data-line-number="13">    <span class="dt">license =</span> <span class="st">"http://creativecommons.org/publicdomain/zero/1.0/"</span></a>
-<a class="sourceLine" id="cb60-14" data-line-number="14">    )</a>
-<a class="sourceLine" id="cb60-15" data-line-number="15">)</a>
-<a class="sourceLine" id="cb60-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb60-17" data-line-number="17">database &lt;-<span class="st"> </span><span class="kw">rbind</span>(dataset1, dataset2)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">dataset2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera_raw,</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2">  <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">  <span class="dt">traits =</span> <span class="kw">c</span>(<span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4">    <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>, <span class="st">"Antenna_Seg2"</span>,</a>
+<a class="sourceLine" id="cb64-5" data-line-number="5">    <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>, <span class="st">"Front.Tibia_length"</span>,</a>
+<a class="sourceLine" id="cb64-6" data-line-number="6">    <span class="st">"Mid.Tibia_length"</span>, <span class="st">"Hind.Tibia_length"</span>, <span class="st">"Front.Femur_length"</span>,</a>
+<a class="sourceLine" id="cb64-7" data-line-number="7">    <span class="st">"Hind.Femur_length"</span>, <span class="st">"Front.Femur_width"</span>, <span class="st">"Hind.Femur_width"</span>,</a>
+<a class="sourceLine" id="cb64-8" data-line-number="8">    <span class="st">"Rostrum_length"</span>, <span class="st">"Rostrum_width"</span>, <span class="st">"Wing_length"</span>, <span class="st">"Wing_widt"</span>),</a>
+<a class="sourceLine" id="cb64-9" data-line-number="9">  <span class="dt">units =</span> <span class="st">"mm"</span>,</a>
+<a class="sourceLine" id="cb64-10" data-line-number="10">  <span class="dt">keep =</span> <span class="kw">c</span>(<span class="dt">sex =</span> <span class="st">"Sex"</span>, <span class="dt">references =</span> <span class="st">"Source"</span>, <span class="dt">lifestage =</span> <span class="st">"Wing_development"</span>),</a>
+<a class="sourceLine" id="cb64-11" data-line-number="11">  <span class="dt">metadata =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb64-12" data-line-number="12">    <span class="dt">bibliographicCitation =</span> <span class="kw">attributes</span>(heteroptera_raw)<span class="op">$</span>citeAs,</a>
+<a class="sourceLine" id="cb64-13" data-line-number="13">    <span class="dt">license =</span> <span class="st">"http://creativecommons.org/publicdomain/zero/1.0/"</span></a>
+<a class="sourceLine" id="cb64-14" data-line-number="14">    )</a>
+<a class="sourceLine" id="cb64-15" data-line-number="15">)</a></code></pre></div>
+<pre><code>## Input is taken to be an observation -- trait matrix 
+## (i.e. with individual specimens per row and multiple trait measurements in columns). 
+## If this is not the case, please provide parameters!</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">database &lt;-<span class="st"> </span><span class="kw">rbind</span>(dataset1, dataset2)</a></code></pre></div>
 <pre><code>## Warning in rbind(deparse.level, ...): There seems to be no overlap in trait names of the provided datasets. 
 ##            It is recommended to map 'traitNameStd' of each dataset to the same thesaurus or ontology!</code></pre>
 <pre><code>## Warning in rbind(deparse.level, ...): There seems to be no overlap in taxon names of the provided datasets. 
@@ -850,13 +856,13 @@
 <h2 class="hasAnchor">
 <a href="#add-data-layers" class="anchor"></a>add data layers</h2>
 <p>When storing data, it might be advised to externalise repetitive entries in a separate datasheet and link to it via datasetID. In R, you can use the function <code>merge()</code> to map metadata information from a second data table into the core data table based on the datasetID.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co">#example for adding metadata as a table</span></a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="co">#example for adding metadata as a table</span></a></code></pre></div>
 </div>
 <div id="compile-aggregate-values" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compile-aggregate-values" class="anchor"></a>compile aggregate values</h2>
 <p>The function <code><a href="../reference/cast.traitdata.html">cast.traitdata()</a></code> rearranges the long-table format into the more intuitive wide-table or matrix format. This can be used to preview complex datasets or to perform calculations on multivariate values.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">head</span>(dataset3)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">head</span>(dataset3)</a></code></pre></div>
 <pre><code>##         scientificName traitName traitValue traitUnit measurementID
 ## 1 Anyphaena accentuata Body_Size       6.25        mm             1
 ## 2 Aculepeira ceropegia Body_Size         11        mm             2
@@ -886,9 +892,9 @@
 ## 10.1038/sdata.2015.13 (URL: http://doi.org/10.1038/sdata.2015.13).
 ## 
 ##     Published under: http://creativecommons.org/publicdomain/zero/1.0/</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">dataset3wide &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cast.traitdata.html">cast.traitdata</a></span>(dataset3)</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="kw">head</span>(dataset3wide)</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">dataset3wide &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cast.traitdata.html">cast.traitdata</a></span>(dataset3)</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="kw">head</span>(dataset3wide)</a></code></pre></div>
 <pre><code>##              scientificName measurementRemarks Body_Size Dispersal_ability
 ## 1          Acalypta nigrina                          2.6              0.25
 ## 2          Acalypta parvula                            2              0.25

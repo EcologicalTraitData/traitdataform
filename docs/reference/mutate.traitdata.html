@@ -87,7 +87,7 @@ into compound measurements or update factor levels into binaries." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/fdschneider/traitdataform">
+  <a href="https://github.com/EcologicalTraitData/traitdataform">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -105,7 +105,7 @@ into compound measurements or update factor levels into binaries." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Mutate traits within a traitdata object.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/fdschneider/traitdataform/blob/master/R/mutate.traitdata.R'><code>R/mutate.traitdata.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/R/mutate.traitdata.R'><code>R/mutate.traitdata.R</code></a></small>
     <div class="hidden name"><code>mutate.traitdata.Rd</code></div>
     </div>
 
@@ -214,8 +214,9 @@ re-mapping might be added in later versions of the package.)</p>
                                    <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_width"</span>),
                         <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
                         <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='st'>"ID"</span>
-)
-<span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset2</span>,
+)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be an observation -- trait matrix </span>
+#&gt; <span class='message'>(i.e. with individual specimens per row and multiple trait measurements in columns). </span>
+#&gt; <span class='message'>If this is not the case, please provide parameters! </span></div><div class='input'><span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset2</span>,
                             <span class='kw'>Body_shape</span> <span class='kw'>=</span> <span class='no'>Body_length</span>/<span class='no'>Body_width</span>,
                             <span class='kw'>Body_volume</span> <span class='kw'>=</span> <span class='no'>Body_length</span>*<span class='no'>Body_width</span>*<span class='no'>Body_height</span>,
                             <span class='kw'>Wingload</span> <span class='kw'>=</span> <span class='no'>Wing_length</span>*<span class='no'>Wing_width</span>/<span class='no'>Body_volume</span>)
@@ -249,7 +250,7 @@ re-mapping might be added in later versions of the package.)</p>
 #&gt;     When using these data, you must acknowledge the following usage policies: 
 #&gt; 
 #&gt;     Cite this trait dataset as: 
-#&gt; Gossner MM, Simons NK, HÃ¶ck L, Weisser WW (2015). "Morphometric
+#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric
 #&gt; measures of Heteroptera sampled in grasslands across three regions of
 #&gt; Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:
 #&gt; http://doi.org/10.1890/14-2159.1).

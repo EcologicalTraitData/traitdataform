@@ -91,7 +91,7 @@ created." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/fdschneider/traitdataform">
+  <a href="https://github.com/EcologicalTraitData/traitdataform">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -109,7 +109,7 @@ created." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Standardize format of traitdata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/fdschneider/traitdataform/blob/master/R/as.traitdata.R'><code>R/as.traitdata.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/R/as.traitdata.R'><code>R/as.traitdata.R</code></a></small>
     <div class="hidden name"><code>as.traitdata.Rd</code></div>
     </div>
 
@@ -129,8 +129,9 @@ created.</p>
   <span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>datasetID</span>,
   <span class='kw'>measurements</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>measurements</span>,
   <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>units</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>keep</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>id.vars</span> <span class='kw'>=</span> <span class='fu'>names</span>(<span class='no'>x</span>)[<span class='fu'>names</span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>keep</span>
-  <span class='kw'>&amp;</span> !<span class='fu'>names</span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>drop</span>], <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>thesaurus</span>,
+  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>drop</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>id.vars</span> <span class='kw'>=</span> <span class='fu'>names</span>(<span class='no'>x</span>)[<span class='fu'>names</span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>keep</span> <span class='kw'>&amp;</span> !<span class='fu'>names</span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>drop</span>],
+  <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>thesaurus</span>,
   <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>x</span>)$<span class='no'>metadata</span>, <span class='kw'>longtable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -273,7 +274,11 @@ additional columns and dataset attribution will be listed in attributes.</p>
     <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='fu'>attributes</span>(<span class='no'>heteroptera_raw</span>)$<span class='no'>citeAs</span>,
     <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     )
-)</div></pre>
+)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be an observation -- trait matrix </span>
+#&gt; <span class='message'>(i.e. with individual specimens per row and multiple trait measurements in columns). </span>
+#&gt; <span class='message'>If this is not the case, please provide parameters! </span></div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
