@@ -4,8 +4,9 @@
 \alias{get_gbif_taxonomy}
 \title{Get accepted canonical names and taxonomy for a given species name}
 \usage{
-get_gbif_taxonomy(x, subspecies = TRUE, verbose = FALSE,
-  fuzzy = FALSE, resolve_synonyms = TRUE)
+get_gbif_taxonomy(x, subspecies = TRUE, higherrank = FALSE,
+  verbose = FALSE, fuzzy = TRUE, conf_threshold = 90,
+  resolve_synonyms = TRUE)
 }
 \arguments{
 \item{x}{a character string or vector of species names.}
@@ -13,12 +14,19 @@ get_gbif_taxonomy(x, subspecies = TRUE, verbose = FALSE,
 \item{subspecies}{logical. If TRUE (default), the given name is resolved to
 subspecies epithet, otherwise it will be mapped to species level.}
 
+\item{higherrank}{logical. If FALSE (default), it will not allow remapping of
+unknown species names to higher taxon ranks (e.g. genus).}
+
 \item{verbose}{logical. If FALSE (default), warnings and messages are
 suppressed.}
 
 \item{fuzzy}{logical. If FALSE (default), names are only resolved to exactly
 matching taxa on GBIF taxonomy service. Setting to TRUE may produce matches
 when failing otherwise.}
+
+\item{conf_threshold}{numerical, ranging from 0 to 100 (default value = 90).
+Defines the confidence level of the request to be accepted. To cover for
+misspellings and errors, could go as low as 50.}
 
 \item{resolve_synonyms}{logical. If TRUE (default), user provided synonyms
 are mapped to the accepted names on GBIF taxonomy service.}
