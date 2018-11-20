@@ -1,3 +1,10 @@
+# traitdataform 0.3.1
+
+- clean rewrite of get_gbif_taxonomy()
+- test_that implementation
+- Travis CI implementation 
+- add Code of Conduct and CONTRIBUTING
+
 # traitdataform 0.3.0
 
 - solve all errors, warnings and notes on R CHECK

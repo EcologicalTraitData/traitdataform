@@ -4,3 +4,9 @@ addons:
   apt:
     packages:
       - libudunits2-dev 
+os:
+- linux
+- osx
+r:
+- release
+- devel

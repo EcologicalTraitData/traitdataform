@@ -1,4 +1,7 @@
+^\.travis\.yml$
 ^CODE_OF_CONDUCT\.md$
+^CONTRIBuTING\.md$
+^cran-comments\.md$
 ^codemeta\.json$
 ^docs$
 ^draft$
