@@ -124,34 +124,37 @@ as.traitdata <- function(x,
 ) {
   
   input_name <- deparse(substitute(x))
-
-  if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus) && is.null(traits)) traits = names(thesaurus)
+  
+  if(is.null(thesaurus) && is.null(traits)) stop("Not able to identify structure of data! Please provide column(s) with trait values in argument 'traits' or as an object of class 'thesaurus' in argument 'thesaurus'!")
+  
+  if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus) && is.null(traits)) traits <- names(thesaurus)
   
   # rename taxon column into 'scientificName'
   if(length(taxa) == 1 && !is.null(taxa)) colnames(x)[colnames(x) == taxa] <- "scientificName"
 
-  # check for occurrence table format & add occurrence ID 
+  
+  if(is.null(occurrences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
+    message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
+    occurrences <- seq_along(x$scientificName)
+    x$occurrenceID <- paste(datasetID, occurrences, sep = "")
+  }
+  
+  if(is.null(occurrences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
+    message("Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!")
+  }
+  
+  # if occurrences has a single character string, take this as column name for occurrence IDs 
   if(!is.null(occurrences) && length(occurrences) == 1) { 
       colnames(x)[colnames(x) == occurrences] <- "occurrenceID" 
       x$occurrenceID <- paste(datasetID, x$occurrenceID, sep = "")
-      message("Input is taken to be an observation -- trait matrix \n(i.e. with individual specimens per row and multiple trait measurements in columns). \nIf this is not the case, please provide parameters! ")
+      message("Input is taken to be an occurrence table/an observation -- trait matrix \n(i.e. with individual specimens per row and multiple trait measurements in columns). \nIf this is not the case, please provide parameters! ")
       
-    } else {
-      
-      if(!is.null(occurrences) && length(occurrences) == length(x$scientificName) ) {
-            x$occurrenceID <- paste(datasetID, occurrences, sep = "")
-      }
-      
-      if(is.null(occurrences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
-        message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
-        occurrences <- seq_along(x$scientificName)
-        x$occurrenceID <- paste(datasetID, occurrences, sep = "")
-        
-      }
-      if(is.null(occurrences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
-        message("Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!")
-      }
-    }
+  } 
+  
+  # check for occurrence table format & add occurrence ID 
+  #if(!is.null(occurrences) && length(occurrences) == length(x$scientificName) ) {
+  #  x$occurrenceID <- paste(datasetID, occurrences, sep = "")
+  #}
   
   # add measurementID, if measurement table or multivariate table is given
   # TODO add condition: question if multiple traits are defined (multivariate measurement?)
@@ -181,7 +184,9 @@ as.traitdata <- function(x,
     #rename value column in "traitValue"
     names(out)[names(out) == "value"] <- "traitValue"
     
-  } else { 
+  } 
+  
+  if(length(traits) > 1 & !longtable) { 
     
     out <- subset.data.frame(x, 
                              subset = rep_len(TRUE, nrow(x)),
@@ -191,16 +196,19 @@ as.traitdata <- function(x,
                                 traits, 
                                 id.vars)
                              )
-    
-    # if only one trait is wrapped (rename value column)
-    
-    if(length(traits) == 1) {   colnames(out)[colnames(out) == traits] <- "traitValue"
-                                out$traitName <- traits
-    } else {    
-      message("data were not converted to longtable!")   
-    }
+    message("data were not converted to longtable!")   
     
   }
+  
+    # if only one trait is wrapped (rename value column)
+  
+  if(length(traits) == 1) {   
+    out <- 
+    colnames(out)[colnames(out) == traits] <- "traitValue"
+                                out$traitName <- traits
+  } 
+    
+  
   
   # add measurement ID 
   if(is.null(measurements) && !"measurementID" %in% colnames(out)) {
