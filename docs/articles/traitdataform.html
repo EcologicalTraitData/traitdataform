@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.1</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
       <h1>Package ‘traitdataform’</h1>
                         <h4 class="author">Florian D. Schneider</h4>
             
-            <h4 class="date">2018-11-19</h4>
+            <h4 class="date">2018-11-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EcologicalTraitData/traitdataform/blob/master/vignettes/traitdataform.Rmd"><code>vignettes/traitdataform.Rmd</code></a></small>
       <div class="hidden name"><code>traitdataform.Rmd</code></div>
@@ -161,7 +161,7 @@
 <a class="sourceLine" id="cb10-9" data-line-number="9">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
 <a class="sourceLine" id="cb10-10" data-line-number="10">              <span class="dt">occurrences =</span> <span class="st">"ID"</span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11">              )</a></code></pre></div>
-<pre><code>## Input is taken to be an observation -- trait matrix 
+<pre><code>## Input is taken to be an occurrence table/an observation -- trait matrix 
 ## (i.e. with individual specimens per row and multiple trait measurements in columns). 
 ## If this is not the case, please provide parameters!</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># show different trait measurements for same occurrence/individual</span></a>
@@ -409,7 +409,7 @@
 <a class="sourceLine" id="cb36-10" data-line-number="10">              <span class="dt">occurrences =</span> <span class="st">"ID"</span>,</a>
 <a class="sourceLine" id="cb36-11" data-line-number="11">              <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">"Sex"</span>)</a>
 <a class="sourceLine" id="cb36-12" data-line-number="12">              )</a></code></pre></div>
-<pre><code>## Input is taken to be an observation -- trait matrix 
+<pre><code>## Input is taken to be an occurrence table/an observation -- trait matrix 
 ## (i.e. with individual specimens per row and multiple trait measurements in columns). 
 ## If this is not the case, please provide parameters!</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">head</span>(dataset2) </a></code></pre></div>
@@ -569,19 +569,19 @@
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">dataset1Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.taxonomy.html">standardize.taxonomy</a></span>(dataset1)</a>
 <a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">head</span>(dataset1Std)</a></code></pre></div>
 <pre><code>##          scientificName        traitName traitValue traitUnit
-## 1 Abax_parallelepipedus   antenna_length   8.518519        mm
-## 2 Abax_parallelepipedus metafemur_length   5.608466        mm
-## 3 Abax_parallelepipedus      body_length  15.846561        mm
-## 4  Acupalpus_meridianus      body_length   2.670000        mm
+## 1 Abax_parallelepipedus      body_length  15.846561        mm
+## 2 Abax_parallelepipedus   antenna_length   8.518519        mm
+## 3 Abax_parallelepipedus metafemur_length   5.608466        mm
+## 4  Acupalpus_meridianus   antenna_length   0.700000        mm
 ## 5  Acupalpus_meridianus metafemur_length   0.750000        mm
-## 6  Acupalpus_meridianus   antenna_length   0.700000        mm
+## 6  Acupalpus_meridianus      body_length   2.670000        mm
 ##       scientificNameStd                             taxonID measurementID
-## 1 Abax parallelepipedus http://www.gbif.org/species/5754772           121
-## 2 Abax parallelepipedus http://www.gbif.org/species/5754772           241
-## 3 Abax parallelepipedus http://www.gbif.org/species/5754772             1
-## 4  Acupalpus meridianus http://www.gbif.org/species/1037633             2
+## 1 Abax parallelepipedus http://www.gbif.org/species/5754772             1
+## 2 Abax parallelepipedus http://www.gbif.org/species/5754772           121
+## 3 Abax parallelepipedus http://www.gbif.org/species/5754772           241
+## 4  Acupalpus meridianus http://www.gbif.org/species/1037633           122
 ## 5  Acupalpus meridianus http://www.gbif.org/species/1037633           242
-## 6  Acupalpus meridianus http://www.gbif.org/species/1037633           122
+## 6  Acupalpus meridianus http://www.gbif.org/species/1037633             2
 ##   warnings taxonRank  kingdom     phylum   class      order    family
 ## 1            species Animalia Arthropoda Insecta Coleoptera Carabidae
 ## 2            species Animalia Arthropoda Insecta Coleoptera Carabidae
@@ -691,46 +691,46 @@
 <p>The function <code><a href="../reference/standardize.traits.html">standardize.traits()</a></code> now finally has all it needs to complete its job.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize.traits.html">standardize.traits</a></span>(dataset1Std, traits1)</a>
 <a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw">head</span>(dataset1final)</a></code></pre></div>
-<pre><code>##          scientificName      traitName
-## 1 Abax_parallelepipedus antenna_length
-## 2    Leistus_terminatus antenna_length
-## 3      Amara_familiaris antenna_length
-## 4        Amara_tibialis antenna_length
-## 5        Amara_communis antenna_length
-## 6  Acupalpus_meridianus antenna_length
-##                                                          traitID
-## 1 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length
-## 2 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length
-## 3 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length
-## 4 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length
-## 5 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length
-## 6 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length
-##   traitValue traitUnit     scientificNameStd   traitNameStd traitValueStd
-## 1   8.518519        mm Abax parallelepipedus antenna_length      8.518519
-## 2   4.060000        mm    Platynus assimilis antenna_length      4.060000
-## 3   2.620000        mm      Amara familiaris antenna_length      2.620000
-## 4   1.875000        mm        Amara tibialis antenna_length      1.875000
-## 5   2.820000        mm        Amara communis antenna_length      2.820000
-## 6   0.700000        mm  Acupalpus meridianus antenna_length      0.700000
-##   traitUnitStd                             taxonID measurementID
-## 1           mm http://www.gbif.org/species/5754772           121
-## 2           mm http://www.gbif.org/species/8137203           199
-## 3           mm http://www.gbif.org/species/1035195           139
-## 4           mm http://www.gbif.org/species/8600499           148
-## 5           mm http://www.gbif.org/species/4472849           135
-## 6           mm http://www.gbif.org/species/1037633           122
+<pre><code>##           scientificName   traitName
+## 1  Abax_parallelepipedus body_length
+## 2          Amara_brunnea body_length
+## 3   Limodromus_assimilis body_length
+## 4      Carabus_nemoralis body_length
+## 5 Bradycellus_ruficollis body_length
+## 6   Acupalpus_meridianus body_length
+##                                                       traitID traitValue
+## 1 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length  15.846561
+## 2 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   5.000000
+## 3 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   8.981481
+## 4 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length  18.450000
+## 5 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   2.880000
+## 6 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   2.670000
+##   traitUnit      scientificNameStd traitNameStd traitValueStd traitUnitStd
+## 1        mm  Abax parallelepipedus  body_length     15.846561           mm
+## 2        mm          Amara brunnea  body_length      5.000000           mm
+## 3        mm     Platynus assimilis  body_length      8.981481           mm
+## 4        mm      Carabus nemoralis  body_length     18.450000           mm
+## 5        mm Bradycellus ruficollis  body_length      2.880000           mm
+## 6        mm   Acupalpus meridianus  body_length      2.670000           mm
+##                               taxonID measurementID
+## 1 http://www.gbif.org/species/5754772             1
+## 2 http://www.gbif.org/species/9102035            14
+## 3 http://www.gbif.org/species/8137203            80
+## 4 http://www.gbif.org/species/8056040            55
+## 5 http://www.gbif.org/species/5755986            42
+## 6 http://www.gbif.org/species/1037633             2
 ##                                               warnings taxonRank  kingdom
 ## 1                                                        species Animalia
-## 2  A synonym was mapped to the accepted taxon concept!   species Animalia
-## 3                                                        species Animalia
+## 2                                                        species Animalia
+## 3  A synonym was mapped to the accepted taxon concept!   species Animalia
 ## 4                                                        species Animalia
 ## 5                                                        species Animalia
 ## 6                                                        species Animalia
 ##       phylum   class      order    family measurementDeterminedBy
 ## 1 Arthropoda Insecta Coleoptera Carabidae                   klink
-## 2 Arthropoda Insecta Coleoptera Carabidae                  ribera
-## 3 Arthropoda Insecta Coleoptera Carabidae                  ribera
-## 4 Arthropoda Insecta Coleoptera Carabidae                   klink
+## 2 Arthropoda Insecta Coleoptera Carabidae                   klink
+## 3 Arthropoda Insecta Coleoptera Carabidae                   klink
+## 4 Arthropoda Insecta Coleoptera Carabidae                  ribera
 ## 5 Arthropoda Insecta Coleoptera Carabidae                  ribera
 ## 6 Arthropoda Insecta Coleoptera Carabidae                WOODCOCK
 ## 
@@ -842,7 +842,7 @@
 <a class="sourceLine" id="cb64-13" data-line-number="13">    <span class="dt">license =</span> <span class="st">"http://creativecommons.org/publicdomain/zero/1.0/"</span></a>
 <a class="sourceLine" id="cb64-14" data-line-number="14">    )</a>
 <a class="sourceLine" id="cb64-15" data-line-number="15">)</a></code></pre></div>
-<pre><code>## Input is taken to be an observation -- trait matrix 
+<pre><code>## Input is taken to be an occurrence table/an observation -- trait matrix 
 ## (i.e. with individual specimens per row and multiple trait measurements in columns). 
 ## If this is not the case, please provide parameters!</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">database &lt;-<span class="st"> </span><span class="kw">rbind</span>(dataset1, dataset2)</a></code></pre></div>
