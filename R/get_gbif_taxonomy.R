@@ -5,13 +5,18 @@
 #' @param x a character string or vector of species names.
 #' @param subspecies logical. If TRUE (default), the given name is resolved to
 #'   subspecies epithet, otherwise it will be mapped to species level.
-#' @param resolve_synonyms logical. If TRUE (default), user provided synonyms
-#'   are mapped to the accepted names on GBIF taxonomy service.
+#' @param higherrank logical. If FALSE (default), it will not allow remapping of
+#'   unknown species names to higher taxon ranks (e.g. genus).
+#' @param verbose logical. If FALSE (default), warnings and messages are
+#'   suppressed.
 #' @param fuzzy logical. If FALSE (default), names are only resolved to exactly
 #'   matching taxa on GBIF taxonomy service. Setting to TRUE may produce matches
 #'   when failing otherwise.
-#' @param verbose logical. If FALSE (default), warnings and messages are
-#'   suppressed.
+#' @param conf_threshold numerical, ranging from 0 to 100 (default value = 90).
+#'   Defines the confidence level of the request to be accepted. To cover for
+#'   misspellings and errors, could go as low as 50.
+#' @param resolve_synonyms logical. If TRUE (default), user provided synonyms
+#'   are mapped to the accepted names on GBIF taxonomy service.
 #'
 #' @return a data.frame mapping the user supplied names to the accepted taxon
 #'   names and higher taxonomic information (kingdom, phylum, class, order,
@@ -103,11 +108,15 @@ get_gbif_taxonomy <- function(x,
     
     # remove all synonyms, if accepted exact match is found
     
-    if(any(temp[[i]]$status == "ACCEPTED" & temp[[i]]$matchtype == "EXACT")) {
+    if(any(temp[[i]]$status == "ACCEPTED")) {
       
-      temp[[i]] <- subset(temp[[i]], matchtype == "EXACT" & status == "ACCEPTED")
+      temp[[i]] <- subset(temp[[i]], status == "ACCEPTED")
       temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
       #warning_i <- paste(warning_i, "Automatically mapped to accepted species name!", sep = " ")
+      if(nrow(temp[[i]]) > 1) {
+        temp[[i]] <- temp[[i]][1,]
+        warning_i <- paste(warning_i, "Selected first of multiple equally ranked concepts!")
+      }
     }
     
     
@@ -115,12 +124,30 @@ get_gbif_taxonomy <- function(x,
      
     if(!any(temp[[i]]$status == "ACCEPTED") & any(temp[[i]]$status == "SYNONYM")) {
       if(resolve_synonyms) {
-
+          keep <- temp[i]
           temp[i] <- taxize::get_gbifid_(temp[[i]]$species[which.max(temp[[i]]$confidence)], messages = verbose)
-          temp[[i]] <- subset(temp[[i]], matchtype == "EXACT" & status == "ACCEPTED")
-          temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
-          warning_i <- paste(warning_i, "A synonym was mapped to the accepted species concept!", sep = " ")
-          synonym_i = TRUE
+          if(any(temp[[i]]$status == "ACCEPTED")) {
+          
+            temp[[i]] <- subset(temp[[i]], matchtype == "EXACT" & status == "ACCEPTED")
+            temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
+            if(nrow(temp[[i]]) > 1) {
+              temp[[i]] <- temp[[i]][1,]
+              warning_i <- paste(warning_i, "Selected first of multiple equally ranked concepts!")
+            }
+            warning_i <- paste(warning_i, "A synonym was mapped to the accepted species concept!", sep = " ")
+            synonym_i = TRUE
+            
+          } else {
+            temp[i] <- keep
+            temp[[i]] <- subset(temp[[i]], matchtype == "EXACT")
+            temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
+            warning_i <- paste(warning_i, "A synonym was found but is not labelled 'ACCEPTED'. Clarification required!", sep = " ")
+            if(nrow(temp[[i]]) > 1) {
+              temp[[i]] <- temp[[i]][1,]
+              warning_i <- paste(warning_i, "Selected first of multiple equally ranked concepts!")
+            }
+            
+          }
       
       } else {
         
@@ -131,6 +158,22 @@ get_gbif_taxonomy <- function(x,
       }
     }
       
+    # check for doubtful status 
+    
+    if(all(temp[[i]]$status == "DOUBTFUL")) {
+      
+      temp[[i]] <- subset(temp[[i]], status == "DOUBTFUL")
+      warning_i <- paste(warning_i, "Mapped concept is labelled DOUBTFUL!")
+      
+      temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
+      #warning_i <- paste(warning_i, "Automatically mapped to accepted species name!", sep = " ")
+      if(nrow(temp[[i]]) > 1) {
+        temp[[i]] <- temp[[i]][1,]        
+        warning_i <- paste(warning_i, "Selected first of multiple equally ranked concepts!")
+      }
+    }
+    
+    
     # 3. check rankorder of result
   
     rankorder <- c("kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies")
@@ -192,7 +235,7 @@ get_gbif_taxonomy <- function(x,
     if(verbose & nchar(warning_i) >= 1) warning(warning_i)
   }
   
-
+  #compile output data.frame 
   
   out <- data.table::rbindlist(temp, fill = TRUE)
   
