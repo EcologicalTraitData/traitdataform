@@ -1,7 +1,9 @@
 # Package 'traitdataform': harmonizing ecological trait data in R
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) 
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip) 
 [![Build Status](https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master)](https://travis-ci.com/EcologicalTraitData/traitdataform)
+
 
 Assistance for handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation). 
 
