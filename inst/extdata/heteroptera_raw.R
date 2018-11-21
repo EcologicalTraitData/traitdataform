@@ -1,8 +1,8 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-heteroptera_raw <- utils::read.table(url("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt"), 
-                                     sep = "\t", header = TRUE, fill = TRUE,  
-                                     fileEncoding =  "windows-1252" # "UTF-8" #  "latin-1" #
+heteroptera_raw <- utils::read.table("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
+                                     sep = "\t", header = TRUE, fill = TRUE,
+                                     fileEncoding = "windows-1252"
                                      )
 
 # clarify file encodings for columns with special characters:
