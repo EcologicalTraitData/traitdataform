@@ -1,12 +1,11 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-carabids <- utils::read.table("http://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt", 
+carabids <- utils::read.csv(url("http://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt?sequence=1"), 
                               sep = "\t", 
-                              header = TRUE,
                               fileEncoding = "UTF-8"
                               )
 
-attr(carabids, 'metadata') <- traitdataform:::as.metadata(
+attr(carabids, 'metadata') <- traitdataform::as.metadata(
       datasetName = "Carabid traits",
       datasetID = "carabids",
       bibliographicCitation =  utils::bibentry(
@@ -22,7 +21,7 @@ attr(carabids, 'metadata') <- traitdataform:::as.metadata(
       license = "http://creativecommons.org/publicdomain/zero/1.0/"
        )
 
-attr(carabids, 'thesaurus') <-  traitdataform::as.thesaurus(
+attr(carabids, 'thesaurus') <-  traitdataform:::as.thesaurus(
           body_length = traitdataform:::as.trait("body_length",
                               expectedUnit = "mm", valueType = "numeric",
                               identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"),
@@ -39,4 +38,4 @@ attr(carabids, 'thesaurus') <-  traitdataform::as.thesaurus(
 
 attr(carabids, 'taxa') <- "name_correct"
 attr(carabids, 'units') <- "mm"
-attr(carabids, 'keep') <-  c(datasetID = "source_measurement", measurementRemarks = "note")
+attr(carabids, 'keep') <-  c(measurementDeterminedBy = "source_measurement", measurementRemarks = "note")
