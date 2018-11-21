@@ -4,7 +4,7 @@ This is the first submission of the 'traitdataform' package.
 
 * local Windows 10 install, R version 3.5.1 (2018-07-02)
 * Ubuntu 14.04.5 LTS (on travis-ci), R version 3.5.1 (2017-01-27)
-* Mac OS (on travis-ci)
+* Mac OS X 10.13.3 (on travis-ci)
 
 ## R CMD check results
 
