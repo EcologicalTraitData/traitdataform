@@ -4,6 +4,23 @@ heteroptera_raw <-  utils:::read.csv("https://ndownloader.figshare.com/files/563
                                     stringsAsFactors=TRUE,
                                     fileEncoding = "windows-1252")
 
+# heteroptera_raw <- utils::read.table("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
+#                                      sep = "\t", header = TRUE, fill = TRUE,
+#                                      fileEncoding = "windows-1252"
+#                                      )
+
+# clarify file encodings for columns with special characters:
+#heteroptera_raw$Center_Sampling_region <- iconv(heteroptera_raw$Center_Sampling_region, from = "windows-1252", to = "UTF-8")
+#heteroptera_raw$Author <- iconv(heteroptera_raw$Author, to = "UTF-8")
+#heteroptera_raw$Voucher_ID <- iconv(heteroptera_raw$Voucher_ID, to = "UTF-8")
+#heteroptera_raw$Source <- as.factor(iconv(heteroptera_raw$Source, to = "UTF-8"))
+
+
+# heteroptera_raw <- data.frame()
+# heteroptera_raw <- readr::read_delim("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
+#                  delim = "\t",  locale = readr:::locale(encoding = "windows-1252"))
+# heteroptera_raw <- as.data.frame(heteroptera_raw)
+
 
 attr(heteroptera_raw, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Heteroptera morphometry traits",
