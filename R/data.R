@@ -24,16 +24,19 @@
 #' pulldata("carabids")
 
 pulldata <- function(x = NULL) {
-  if(is.null(x)) {
-    libpath <- system.file( "extdata", "carabids.R", package="traitdataform")
-    available <- sub(".R", "", dir(sub("carabids.R", "", libpath)))
+  
+  libpath <- system.file( "extdata", "carabids.R", package="traitdataform")
+  available <- sub(".R", "", dir(sub("carabids.R", "", libpath)))
+  
+  if(is.null(x) || !x %in% available) {
     cat("Please choose a trait dataset to import! the following trait datasets are available: \n \t")
     cat(paste(available, collapse = "\n \t"))
     cat("\n")
   } else {
     source(system.file( "extdata", paste0(x,".R"), package="traitdataform"))
     message(paste0("The dataset '", x, "' is now available for use! \n"))
-  }
+  } 
+    
 }
 
 
@@ -118,7 +121,7 @@ NULL
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 
-carabids <- NULL
+NULL
 
 # -------------------------------------------------------------------
 
@@ -154,13 +157,13 @@ carabids <- NULL
 #'   
 #' @family rawdata
 
-heteroptera_raw <- NULL
+NULL
 
 #' @rdname heteroptera_raw
 #' @family rawdata
 #' @name heteroptera
 
-heteroptera <- NULL
+NULL
 
 # -------------------------------------------------------------------
 
@@ -213,7 +216,7 @@ heteroptera <- NULL
 #'   
 #' @family rawdata
 
-amniota <- NULL
+NULL
 
 # ----------------------------------------------------------------------------
 
@@ -273,7 +276,7 @@ amniota <- NULL
 #'   
 #' @family rawdata
 
-pantheria <- NULL
+NULL
 
 # ----------------------------------------------------------------------------
 
@@ -353,7 +356,7 @@ pantheria <- NULL
 #'   
 #' @family rawdata
 
-mammaldiet <- NULL
+NULL
 
 # -----------------------------------------------------------------------------
 
@@ -379,5 +382,5 @@ mammaldiet <- NULL
 #' 
 #' @family rawdata
 
-amphibio <- NULL
+NULL
 
