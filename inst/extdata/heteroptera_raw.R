@@ -1,15 +1,9 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-heteroptera_raw <- utils::read.table("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
-                                     sep = "\t", header = TRUE, fill = TRUE,
-                                     fileEncoding = "windows-1252"
-                                     )
+heteroptera_raw <-  utils:::read.csv("https://ndownloader.figshare.com/files/5633883", sep = "\t",
+                                    stringsAsFactors=TRUE,
+                                    fileEncoding = "windows-1252")
 
-# clarify file encodings for columns with special characters:
-heteroptera_raw$Center_Sampling_region <- iconv(heteroptera_raw$Center_Sampling_region, from = "windows-1252", to = "UTF-8")
-heteroptera_raw$Author <- iconv(heteroptera_raw$Author, to = "UTF-8")
-heteroptera_raw$Voucher_ID <- iconv(heteroptera_raw$Voucher_ID, to = "UTF-8")
-heteroptera_raw$Source <- as.factor(iconv(heteroptera_raw$Source, to = "UTF-8"))
 
 attr(heteroptera_raw, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Heteroptera morphometry traits",
@@ -30,29 +24,29 @@ attr(heteroptera_raw, 'metadata') <- traitdataform::as.metadata(
 )
 
 
-attr(heteroptera_raw, 'thesaurus') <-  traitdataform::as.thesaurus(
-  Body_length = traitdataform:::as.trait("Body_length",
+attr(heteroptera_raw, 'thesaurus') <-  traitdataform:::as.thesaurus(
+  Body_length = traitdataform::as.trait("Body_length",
                                          expectedUnit = "mm", valueType = "numeric",
                                          traitDescription = "From the tip of the head to the end of the abdomen"),
-  Body_width = traitdataform:::as.trait("Body_width",
+  Body_width = traitdataform::as.trait("Body_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Widest part of the body"),
-  Body_height = traitdataform:::as.trait("Body_height",
+  Body_height = traitdataform::as.trait("Body_height",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Thickest part of the body"),
-  Thorax_length = traitdataform:::as.trait("Thorax_length",
+  Thorax_length = traitdataform::as.trait("Thorax_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Longest part of the pronotum"),
-  Thorax_width = traitdataform:::as.trait("Thorax_width",
+  Thorax_width = traitdataform::as.trait("Thorax_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Widest part of the pronotum"),
-  Head_width = traitdataform:::as.trait("Head_width",
+  Head_width = traitdataform::as.trait("Head_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Widest part of the head including eyes"),
-  Eye_width = traitdataform:::as.trait("Eye_width",
+  Eye_width = traitdataform::as.trait("Eye_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Widest part of the left eye"),
-  Antenna_Seg1 = traitdataform::as.trait("Antenna_Seg1", 
+  Antenna_Seg1 = traitdataform::as.trait("Antenna_Seg1",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of first antenna segment",
                                         broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
@@ -60,23 +54,23 @@ attr(heteroptera_raw, 'thesaurus') <-  traitdataform::as.thesaurus(
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of second antenna segment",
                                         broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
-  Antenna_Seg3 = traitdataform::as.trait("Antenna_Seg3", 
+  Antenna_Seg3 = traitdataform::as.trait("Antenna_Seg3",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of third antenna segment",
                                         broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
-  Antenna_Seg4 = traitdataform::as.trait("Antenna_Seg4", 
+  Antenna_Seg4 = traitdataform::as.trait("Antenna_Seg4",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of fourth antenna segment",
                                         broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
-  Antenna_Seg5 = traitdataform::as.trait("Antenna_Seg5", 
+  Antenna_Seg5 = traitdataform::as.trait("Antenna_Seg5",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of fifth antenna segment (only Pentatomoidea)",
                                         broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
-  Front.Tibia_length = traitdataform::as.trait("Front.Tibia_length", 
+  Front.Tibia_length = traitdataform::as.trait("Front.Tibia_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the tibia of the foreleg"
                                                ),
-  Mid.Tibia_length = traitdataform::as.trait("Mid.Tibia_length", 
+  Mid.Tibia_length = traitdataform::as.trait("Mid.Tibia_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the tibia of the mid leg",
                                         broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Tibia_length"),
@@ -84,40 +78,38 @@ attr(heteroptera_raw, 'thesaurus') <-  traitdataform::as.thesaurus(
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the tibia of the hind leg",
                                         broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Tibia_length"),
-  Front.Femur_length = traitdataform::as.trait("Front.Femur_length", 
+  Front.Femur_length = traitdataform::as.trait("Front.Femur_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the femur of the foreleg",
                                         broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"),
-  Hind.Femur_length = traitdataform::as.trait("Hind.Femur_length", 
+  Hind.Femur_length = traitdataform::as.trait("Hind.Femur_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the femur of the hind leg",
                                         broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"),
-  Front.Femur_width = traitdataform::as.trait("Front.Femur_width", 
+  Front.Femur_width = traitdataform::as.trait("Front.Femur_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Width of the femur of the foreleg"
                                         ),
-  Hind.Femur_width = traitdataform::as.trait("Hind.Femur_width", 
+  Hind.Femur_width = traitdataform::as.trait("Hind.Femur_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Width of the femur of the hind leg"),
-  Rostrum_length = traitdataform::as.trait("Rostrum_length", 
+  Rostrum_length = traitdataform::as.trait("Rostrum_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the rostrum including all segments"
                                         ),
-  Rostrum_width = traitdataform::as.trait("Rostrum_width", 
+  Rostrum_width = traitdataform::as.trait("Rostrum_width",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Widest part of the rostrum"
                                         ),
-  Wing_length = traitdataform::as.trait("Wing_length", 
+  Wing_length = traitdataform::as.trait("Wing_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Longest part of the forewing",
                                         broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Wing"),
-  Wing_width = traitdataform::as.trait("Wing_width", 
+  Wing_width = traitdataform::as.trait("Wing_width",
                                        expectedUnit = "mm", valueType = "numeric",
                                        traitDescription = "Widest part of the forewing",
                                        broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Wing")
 )
-
-
 
 attr(heteroptera_raw, 'taxa') <- "SpeciesID"
 attr(heteroptera_raw, 'units') <- "mm"
