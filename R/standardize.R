@@ -78,7 +78,7 @@ standardize_taxa <- function(x,
   #if(!"traitdata" %in% class(x)) x <- as.traitdata(x, ...)
     
   # call method to handle name mapping
-  temp <- do.call(method, c(list(levels(droplevels(x$scientificName))), method_options))
+  temp <- do.call(method, c(list(levels(droplevels(as.factor(x$scientificName)))), method_options))
   
   # merge simplified output into input table
   out <- merge.data.frame(x, temp[, unique(c( "taxonID", "scientificNameStd", "scientificName",
@@ -103,9 +103,11 @@ standardize_taxa <- function(x,
 }
 
 #' @export
+#' 
 standardise_taxa <- standardize_taxa
 
 #' @export
+#' 
 standardize.taxonomy <- standardize_taxa
 
 
@@ -189,31 +191,40 @@ standardize.taxonomy <- standardize_taxa
 #'     )
 #' )
 #' 
-#' dataset2 <- mutate.traitdata(dataset2, 
-#'    antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 
-#'    )
-#' 
 #' 
 #' traits2 <- as.thesaurus(
-#'  body_length = as.trait("body_length", 
-#'    expectedUnit = "mm", valueType = "numeric", 
-#'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
-#'  antenna_length = as.trait("antenna_length", 
-#'    expectedUnit = "mm", valueType = "numeric", 
-#'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
-#'  metafemur_length = as.trait("metafemur_length", 
-#'    expectedUnit = "mm", valueType = "numeric", 
-#'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
-#')
+#'     Body_length = as.trait("Body_length",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "From the tip of the head to the end of the abdomen"),
+#'     Antenna_Seg1 = as.trait("Antenna_Seg1",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "Length of first antenna segment",
+#'             broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+#'     Antenna_Seg2 = as.trait("Antenna_Seg2",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "Length of second antenna segment",
+#'             broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+#'     Antenna_Seg3 = as.trait("Antenna_Seg3",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "Length of third antenna segment",
+#'             broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+#'     Antenna_Seg4 = as.trait("Antenna_Seg4",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "Length of fourth antenna segment",
+#'             broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+#'     Antenna_Seg5 = as.trait("Antenna_Seg5",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "Length of fifth antenna segment (only Pentatomoidea)",
+#'             broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+#'     Hind.Femur_length = as.trait("Hind.Femur_length",
+#'             expectedUnit = "mm", valueType = "numeric",
+#'             traitDescription = "Length of the femur of the hind leg",
+#'             broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
+#'     )
 #'
 #' dataset2Std <- standardize_traits(dataset2, 
-#'     thesaurus = traits2, 
-#'     rename = c(Body_length = "body_length", 
-#'                antenna_length = "antenna_length", 
-#'                Hind.Femur_length = "metafemur_length"
-#'                )
+#'     thesaurus = traits2
 #'     )
-#' 
 #' 
 standardize_traits <- function(x,
                                thesaurus = attributes(x)$thesaurus,
@@ -261,11 +272,21 @@ standardize_traits <- function(x,
   out$traitValueStd <- NA
  
   traits <- levels(out$traitNameStd) #levels(lookup$trait) #
- 
+  
   for(i in traits) { # iterate over all trait categories (by user provided names)
    
    #if(length(lookup[lookup$trait == i,]$valueType) == 1 ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
     
+    
+    # TODO: add check of value type if none is provided
+    # if(is.na(lookup[lookup$trait == i,]$valueType)) {
+    # 
+    #   guessed_type <- typeof(templist[[i]]$traitValue)
+    #   
+    #   warning("no value type has been provided. I take trait", i, "to be ", guessed_type)
+    # }
+    
+  
     # harmonize logical values
     if(lookup[lookup$trait == i,]$valueType == "logical") {
        templist <- split(out, f = out$traitNameStd) 
@@ -292,11 +313,11 @@ standardize_traits <- function(x,
          
          ## OLDMETHOD: did not handle squares and operations
          # extract original value
-         value_original <- subset(out, traitNameStd == i)$traitValue * units::parse_unit(unit_original)
+         value_original <- subset(out, traitNameStd == i)$traitValue * units::as_units(unit_original)
          
          # create vector with standardized value and write into output
          value_standardized <- value_original
-         units(value_standardized) <- units::parse_unit(unit_target)
+         units(value_standardized) <- units::as_units(unit_target)
          out[out$traitNameStd == i, "traitValueStd"] <- value_standardized
          
          
@@ -350,7 +371,9 @@ standardize.traits <- standardize_traits
 #' 
 #' @description wrapper that applies `standardize.taxonomy()` and
 #'   `standardize.traits()` in one go.
-#' 
+#'   
+#' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
+#'   containing at least the column `scientificName.
 #' @param ... parameters as described for `standardize.traits()` and `standardize.taxonomy()`.
 #' 
 #' @inheritParams standardize.traits 
