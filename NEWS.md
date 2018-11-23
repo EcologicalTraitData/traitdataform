@@ -1,3 +1,9 @@
+# traitdataform 0.3.3
+
+- rename and update standardize_taxa() <- standardize.taxonomy()
+- rename standardize_traits() <- standardize.traits()
+- fix environment issues with pulldata()
+
 # traitdataform 0.3.1
 
 - clean rewrite of get_gbif_taxonomy()
