@@ -7,12 +7,14 @@
 standardize(x, ...)
 }
 \arguments{
-\item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
-containing at least the column `scientificName.}
-
 \item{...}{parameters as described for \code{standardize.traits()} and \code{standardize.taxonomy()}.}
 }
 \description{
 wrapper that applies \code{standardize.taxonomy()} and
 \code{standardize.traits()} in one go.
 }
+\seealso{
+Other standardize: \code{\link{standardize_taxa}},
+  \code{\link{standardize_traits}}
+}
+\concept{standardize}
