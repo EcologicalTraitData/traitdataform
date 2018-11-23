@@ -133,14 +133,15 @@ as.trait <- function(
   identifier = NA,
   broaderTerm = NA,
   narrowerTerm = NA,
+  relatedTerm = NA,
+  valueType = NA,
   expectedUnit = NA,
+  factorLevels = NA,
   maxAllowedValue = NA,
   minAllowedValue = NA,
-  factorLevels = NA,
-  valueType = NA,
   traitDescription = NA,
   comments = NA,
-  relationSource = NA,
+  source = NA,
   version = NA,
   author = NA,
   ...
@@ -149,14 +150,15 @@ as.trait <- function(
               identifier = identifier,
               broaderTerm = broaderTerm,
               narrowerTerm = narrowerTerm,
+              relatedTerm = relatedTerm,
+              valueType = valueType,
               expectedUnit = expectedUnit,
+              factorLevels = factorLevels,
               maxAllowedValue = maxAllowedValue,
               minAllowedValue = minAllowedValue,
-              factorLevels = factorLevels,
-              valueType = valueType,
               traitDescription = traitDescription,
               comments = comments,
-              relationSource = relationSource,
+              source = source,
               version = version,
               author = author
               )
@@ -166,12 +168,16 @@ as.trait <- function(
 
 #' @export
 print.trait <- function(x, ...) {
-  out <- do.call(rbind, lapply(x,data.frame))
-  print(out)
+
+  cat("\n", x$trait, "\t:\n\n")
+  if(!is.na(x$traitDescription)) cat("\tDefined as:", gsub('(.{1,50})(\\s|$)', '\\1\n\t\t\t', x$traitDescription), "\n" )
+  if(!is.na(x$broaderTerm)) cat("\tBroader term: ", x$broaderTerm, "\n") 
+  if(!is.na(x$narrowerTerm)) cat("\tNarrower term: ", x$broaderTerm, "\n")
+  if(!is.na(x$relatedTerm)) cat("\tRelated term: ", x$relatedTerm, "\n") 
+  if(!is.na(x$valueType)) cat("\tValue type: ", x$valueType, "\n") 
+  if(!is.na(x$expectedUnit)) cat("\tExpected unit: ", x$expectedUnit, "\n") 
+  if(!all(is.na(x$factorLevels))) {cat("\tExpected categories: "); cat(x$factorLevels, sep = "; "); cat("\n") } 
+  if(!is.na(x$comments)) cat("\n\t(", gsub('(.{1,50})(\\s|$)', '\\1\n\t\t\t', x$comments), ")\n") 
+  if(!is.na(x$identifier)) cat( "\n\t", x$identifier)
+  cat("\n")
 }
-
-#ToDo: clean print function showing name, definition, URI, and if applicable: factor levels, units, broader and narrower term, as well as comments
-
-#print.trait <- function(x) {
-#  cat("traitName:")
-#}
