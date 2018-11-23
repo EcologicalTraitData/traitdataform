@@ -3,10 +3,11 @@ context("get gbif taxonomy")
 library(traitdataform)
 
 
+pulldata("carabids")
+pulldata("arthropodtraits")
+
 test_that("gbif taxonomy reachable", {
-  pulldata("carabids")
-  pulldata("arthropodtraits")
-  #expect_known_hash(get_gbif_taxonomy(as.character(carabids$name_correct[1:12])), hash = 'c8f437ad70')
+  expect_known_hash(get_gbif_taxonomy(as.character(carabids$name_correct[1:12])), hash = '22e476b7d0')
   expect_known_hash(get_gbif_taxonomy(as.character(arthropodtraits$SpeciesID[1:12])), hash = '74f9a02a12')
 })
 
@@ -24,14 +25,15 @@ test_that("mapping synonyms", {
   expect_true(get_gbif_taxonomy("Trichocellus_cognatus")$scientificNameStd == "Dicheirotrichus cognatus")
   expect_true(get_gbif_taxonomy("Trichocellus_placidus")$scientificNameStd == "Dicheirotrichus placidus")
   expect_true(get_gbif_taxonomy("Styloctetor stativus")$scientificNameStd == "Styloctetor compar")
-  
+  expect_true(get_gbif_taxonomy("Gymnetron melanarium")$scientificNameStd == "Gymnetron melanarius")
+  expect_true(get_gbif_taxonomy( "Aspidapion radiolus")$scientificNameStd == "Aspidapion radiolus")
   })
 
 
 test_that("mapping doubtful taxa", {
   expect_match(get_gbif_taxonomy("Rhynchaenus fagi")$warnings, "DOUBTFUL")
   expect_match(get_gbif_taxonomy("Rhynchaenus lonicerae")$warnings, "DOUBTFUL")
-  expect_match(get_gbif_taxonomy("Scolytus intricatus")$warnings, "ACCEPTED")
+  expect_match(get_gbif_taxonomy("Scolytus intricatus")$warnings, "equally ranked")
   expect_match(get_gbif_taxonomy("Tychius meliloti")$warnings, "DOUBTFUL")
   })
 
@@ -47,19 +49,22 @@ test_that("mapping lower or higher taxa", {
   })
 
 test_that("not matching", {
-  expect_true(get_gbif_taxonomy("No_species")$warnings == " Lower confidence threshold might yield results.")
-  expect_true(get_gbif_taxonomy("raoi_sdoi")$warnings == "No matching species concept! Lower confidence threshold might yield results.")
+  expect_true(get_gbif_taxonomy("No_species")$warnings == " No match! Check spelling or lower confidence threshold!")
+  expect_true(get_gbif_taxonomy("raoi_sdoi")$warnings == "No matching species concept! No match! Check spelling or lower confidence threshold!")
 })
 
 
 test_that("big data handling", {
-  skip_on_cran() 
-  
+  skip_on_cran()
+
   pulldata("carabids")
-  #expect_known_hash(get_gbif_taxonomy(levels(carabids$name_correct)), hash = '8b82d2ee6b')
-  
+  expect_known_hash(get_gbif_taxonomy(levels(carabids$name_correct)), hash = 'eb733fb9e4')
+
   pulldata("heteroptera_raw")
-  #expect_known_hash(get_gbif_taxonomy(levels(heteroptera_raw$SpeciesID)), hash = 'b505673cd7')
-  
-  
-}) 
+  expect_known_hash(get_gbif_taxonomy(levels(heteroptera_raw$SpeciesID)), hash = '437706b346')
+
+#  pulldata("arthropodtraits")
+#  expect_known_hash(get_gbif_taxonomy(levels(arthropodtraits$SpeciesID)), hash = '2efcaaa0e1')
+
+
+})

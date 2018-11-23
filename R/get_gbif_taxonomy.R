@@ -101,7 +101,7 @@ get_gbif_taxonomy <- function(x,
       temp[[i]] <- subset(temp[[i]], confidence >= conf_threshold)
       if(nrow(temp[[i]]) == 0) {
         temp[[i]] <- data.frame(scientificName = x[i], matchtype = "NONE", status = "NA", rank = "species")
-        warning_i <- paste(warning_i, "Lower confidence threshold might yield results.")
+        warning_i <- paste(warning_i, "No match! Check spelling or lower confidence threshold!")
       }
     }
     
@@ -126,7 +126,7 @@ get_gbif_taxonomy <- function(x,
       if(resolve_synonyms) {
           keep <- temp[i]
           temp[i] <- taxize::get_gbifid_(temp[[i]]$species[which.max(temp[[i]]$confidence)], messages = verbose)
-          if(any(temp[[i]]$status == "ACCEPTED")) {
+          if(temp[[i]][1,]$status == "ACCEPTED") {
           
             temp[[i]] <- subset(temp[[i]], matchtype == "EXACT" & status == "ACCEPTED")
             temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
@@ -138,15 +138,13 @@ get_gbif_taxonomy <- function(x,
             synonym_i = TRUE
             
           } else {
+            status <- temp[[i]][1,]$status
             temp[i] <- keep
-            temp[[i]] <- subset(temp[[i]], matchtype == "EXACT")
-            temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
-            warning_i <- paste(warning_i, "A synonym was found but is not labelled 'ACCEPTED'. Clarification required!", sep = " ")
             if(nrow(temp[[i]]) > 1) {
               temp[[i]] <- temp[[i]][1,]
               warning_i <- paste(warning_i, "Selected first of multiple equally ranked concepts!")
             }
-            
+            warning_i <- paste0(warning_i, " Resolved synonym '", temp[[i]]$species,"' is labelled '", status, "'. Clarification required!" )
           }
       
       } else {
@@ -163,7 +161,7 @@ get_gbif_taxonomy <- function(x,
     if(all(temp[[i]]$status == "DOUBTFUL")) {
       
       temp[[i]] <- subset(temp[[i]], status == "DOUBTFUL")
-      warning_i <- paste(warning_i, "Mapped concept is labelled DOUBTFUL!")
+      warning_i <- paste(warning_i, "Mapped concept is labelled 'DOUBTFUL'!")
       
       temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
       #warning_i <- paste(warning_i, "Automatically mapped to accepted species name!", sep = " ")
