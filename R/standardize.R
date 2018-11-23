@@ -102,10 +102,10 @@ standardize_taxa <- function(x,
   return(out)
 }
 
-# ' @export
+#' @export
 standardise_taxa <- standardize_taxa
 
-# ' @export
+#' @export
 standardize.taxonomy <- standardize_taxa
 
 
@@ -215,7 +215,6 @@ standardize.taxonomy <- standardize_taxa
 #'     )
 #' 
 #' 
-
 standardize_traits <- function(x,
                                thesaurus = attributes(x)$thesaurus,
                                rename = NULL,
