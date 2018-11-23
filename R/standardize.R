@@ -5,16 +5,13 @@
 #'
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
 #'   containing at least the column `scientificName.
-#' @param method only option is `get_gbif_taxonomy`. In principle, takes any
-#'   function that maps the species names in x to produce a taxonomy lookup
-#'   table (i.e. mapping user-provided `scientificName` to `taxonID` and other
-#'   taxon-level information). Will allow to chose from different sources of
-#'   taxonomic reference.
-#' @param subspecies logical. If TRUE (default), the given name is resolved to
-#'   subspecies epithet, otherwise it will be mapped to species level.
-#' @param fuzzy if set to `FALSE` (default mode), this disables fuzzy matching
-#'   if problems with ambiguous species names arise. (see `?get_gbif_testing()`)
-#' @param verbose not implemented. If 'FALSE' all messages are suppressed. 
+#' @param method default option is `get_gbif_taxonomy`. In principle, takes any
+#'   function that takes a vector of species names as input to produce a
+#'   taxonomy lookup table (i.e. mapping user-provided `scientificName` to
+#'   `taxonID` and other taxon-level information). Will allow to chose from
+#'   different sources of taxonomic reference.
+#' @param method_options a name vector of arguments to be passed on to `method`.
+#'   See [get_gbif_taxonomy] for options.
 #' @param return a character vector containing the informatoin that should be
 #'   extracted into the output. Valid entries are the column names returned by
 #'   function `get_gbif_taxonomy()`. See 'Details'.
@@ -40,10 +37,11 @@
 #'   enable a choice of a taxonomic reference.
 #'
 #' @export
+#' @family standardize
+#' @aliases standardize.taxonomy standardise_taxa
 #'
 #'
 #' @examples
-#'
 #'
 #' pulldata("carabids")
 #'
@@ -59,13 +57,16 @@
 #'     )
 #' )
 #'
-#' dataset1Std <- standardize.taxonomy(dataset1)
+#' dataset1Std <- standardize_taxa(dataset1)
 #' 
-standardize.taxonomy <- function(x, 
+standardize_taxa <- function(x, 
                                  method = get_gbif_taxonomy, 
-                                 subspecies = TRUE, 
-                                 fuzzy = TRUE, 
-                                 verbose = FALSE, 
+                                 method_options = c(subspecies = TRUE, 
+                                    higherrank = FALSE, 
+                                    verbose = FALSE, 
+                                    fuzzy  = TRUE, 
+                                    conf_threshold = 90,
+                                    resolve_synonyms = TRUE),
                                  return = c("kingdom",
                                             "phylum",
                                             "class",
@@ -74,10 +75,12 @@ standardize.taxonomy <- function(x,
                                             ), 
                                  ...) {
 
-  #if(!"traitdata" %in% class(x)) mapping(x, ...)
+  #if(!"traitdata" %in% class(x)) x <- as.traitdata(x, ...)
     
-  temp <- method(levels(droplevels(x$scientificName)), subspecies = subspecies, fuzzy = fuzzy, verbose = verbose)
+  # call method to handle name mapping
+  temp <- do.call(method, c(list(levels(droplevels(x$scientificName))), method_options))
   
+  # merge simplified output into input table
   out <- merge.data.frame(x, temp[, unique(c( "taxonID", "scientificNameStd", "scientificName",
                                               "taxonRank", "warnings", return))], 
                           by.x = "scientificName", by.y = "scientificName")
@@ -93,10 +96,18 @@ standardize.taxonomy <- function(x,
   attribs$row.names <- seq_along(out[,1])
   attributes(out) <- attribs
   
+  # write taxonomy table to attributes
   attr(out, "taxonomy") <- temp
   
   return(out)
 }
+
+# ' @export
+standardise_taxa <- standardize_taxa
+
+# ' @export
+standardize.taxonomy <- standardize_taxa
+
 
 
 #' Standardize trait names and harmonize measured values and reported facts
@@ -117,6 +128,7 @@ standardize.taxonomy <- function(x,
 #'   
 #' @import units
 #' @export
+#' @family standardize
 #' 
 #' @details The function matches the trait names provided in 'traitName' to the
 #'   traits provided in the thesaurus (in field 'trait'). Matching must be exact
@@ -129,6 +141,8 @@ standardize.taxonomy <- function(x,
 #'   names, and the original names as provided in 'traitName' as value. E.g.
 #'   `rename = c()`
 #'   
+#' @aliases standardise_traits standardize.traits
+#' @family standardize
 #' @examples 
 #' 
 #' 
@@ -155,7 +169,7 @@ standardize.taxonomy <- function(x,
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #' )
 #' 
-#' dataset1Std <- standardize.traits(dataset1, thesaurus = traitlist)
+#' dataset1Std <- standardize_traits(dataset1, thesaurus = traitlist)
 #' 
 #' 
 #' 
@@ -192,7 +206,7 @@ standardize.taxonomy <- function(x,
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #')
 #'
-#' dataset2Std <- standardize.traits(dataset2, 
+#' dataset2Std <- standardize_traits(dataset2, 
 #'     thesaurus = traits2, 
 #'     rename = c(Body_length = "body_length", 
 #'                antenna_length = "antenna_length", 
@@ -202,7 +216,7 @@ standardize.taxonomy <- function(x,
 #' 
 #' 
 
-standardize.traits <- function(x,
+standardize_traits <- function(x,
                                thesaurus = attributes(x)$thesaurus,
                                rename = NULL,
                                categories = c("No", "Yes"), 
@@ -324,6 +338,14 @@ standardize.traits <- function(x,
  return(out)
 }
 
+#' @export
+#' 
+standardise_traits <- standardize_traits
+
+#' @export
+#' 
+standardize.traits <- standardize_traits
+
 
 #' Standardize trait datasets
 #' 
@@ -336,6 +358,8 @@ standardize.traits <- function(x,
 #' @inheritParams standardize.taxonomy
 #' 
 #' @export
+#' 
+#' @family standardize
 #' 
 standardize <- function(x,
                         ...) {
