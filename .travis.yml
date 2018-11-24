@@ -6,6 +6,7 @@ addons:
       - libudunits2-dev 
 os:
 - linux
+- osx
 r:
 - release
 - devel
