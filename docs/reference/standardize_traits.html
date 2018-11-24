@@ -63,7 +63,7 @@ converts units of values and renames factor levels into accepted terms." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
       </span>
     </div>
 
@@ -198,7 +198,8 @@ names, and the original names as provided in 'traitName' as value. E.g.
    <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)
 )
 
-<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize_traits</span>(<span class='no'>dataset1</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traitlist</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='input'>
+<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize_traits</span>(<span class='no'>dataset1</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traitlist</span>)
+
 
 
 <span class='co'>## Example: matching of original names to thesaurus</span>
@@ -217,32 +218,40 @@ names, and the original names as provided in 'traitName' as value. E.g.
 )</div><div class='output co'>#&gt; <span class='message'>Input is taken to be an occurrence table/an observation -- trait matrix </span>
 #&gt; <span class='message'>(i.e. with individual specimens per row and multiple trait measurements in columns). </span>
 #&gt; <span class='message'>If this is not the case, please provide parameters! </span></div><div class='input'>
-<span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mutate.traitdata.html'>mutate.traitdata</a></span>(<span class='no'>dataset2</span>,
-   <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='no'>Antenna_Seg1</span> + <span class='no'>Antenna_Seg2</span> + <span class='no'>Antenna_Seg3</span> + <span class='no'>Antenna_Seg4</span> + <span class='no'>Antenna_Seg3</span>
-   )
-
 
 <span class='no'>traits2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.thesaurus.html'>as.thesaurus</a></span>(
- <span class='kw'>body_length</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"body_length"</span>,
-   <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
-   <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>),
- <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"antenna_length"</span>,
-   <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
-   <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span>),
- <span class='kw'>metafemur_length</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"metafemur_length"</span>,
-   <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
-   <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)
-)
+    <span class='kw'>Body_length</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Body_length"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"From the tip of the head to the end of the abdomen"</span>),
+    <span class='kw'>Antenna_Seg1</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Antenna_Seg1"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"Length of first antenna segment"</span>,
+            <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='st'>"http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"</span>),
+    <span class='kw'>Antenna_Seg2</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Antenna_Seg2"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"Length of second antenna segment"</span>,
+            <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='st'>"http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"</span>),
+    <span class='kw'>Antenna_Seg3</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Antenna_Seg3"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"Length of third antenna segment"</span>,
+            <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='st'>"http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"</span>),
+    <span class='kw'>Antenna_Seg4</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Antenna_Seg4"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"Length of fourth antenna segment"</span>,
+            <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='st'>"http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"</span>),
+    <span class='kw'>Antenna_Seg5</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Antenna_Seg5"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"Length of fifth antenna segment (only Pentatomoidea)"</span>,
+            <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='st'>"http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"</span>),
+    <span class='kw'>Hind.Femur_length</span> <span class='kw'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span>(<span class='st'>"Hind.Femur_length"</span>,
+            <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>,
+            <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='st'>"Length of the femur of the hind leg"</span>,
+            <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)
+    )
 
 <span class='no'>dataset2Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize_traits</span>(<span class='no'>dataset2</span>,
-    <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traits2</span>,
-    <span class='kw'>rename</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>Body_length</span> <span class='kw'>=</span> <span class='st'>"body_length"</span>,
-               <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='st'>"antenna_length"</span>,
-               <span class='kw'>Hind.Femur_length</span> <span class='kw'>=</span> <span class='st'>"metafemur_length"</span>
-               )
-    )</div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='input'>
-
-</div></pre>
+    <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traits2</span>
+    )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

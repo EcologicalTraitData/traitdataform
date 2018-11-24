@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
       <h1>Package ‘traitdataform’</h1>
                         <h4 class="author">Florian D. Schneider</h4>
             
-            <h4 class="date">2018-11-23</h4>
+            <h4 class="date">2018-11-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EcologicalTraitData/traitdataform/blob/master/vignettes/traitdataform.Rmd"><code>vignettes/traitdataform.Rmd</code></a></small>
       <div class="hidden name"><code>traitdataform.Rmd</code></div>
@@ -362,7 +362,7 @@
 ## 5             5
 ## 6             6
 ## 
-## This trait-dataset contains 10 traits for 0 taxa ( 6 measurements in total).
+## This trait-dataset contains 10 traits for 179 taxa ( 6 measurements in total).
 ## 
 ## [ ] :</code></pre>
 <p>Logical or factorial traits ususally don’t come with a unit. In mixed data, the field should specify as empty, <code>""</code> or as<code>NA</code>.</p>
@@ -562,11 +562,11 @@
 <div id="taxon-name-standardisation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#taxon-name-standardisation" class="anchor"></a>taxon name standardisation</h2>
-<p>For taxon name standardisation, the function <code><a href="../reference/standardize_taxa.html">standardize.taxonomy()</a></code> makes use of fuzzy matching algorithms provided by the package ‘taxize’ to match the entries of column <code>scientificName</code> against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column <code>scientificNameStd</code>. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.</p>
+<p>For taxon name standardisation, the function <code><a href="../reference/standardize_taxa.html">standardize_taxa()</a></code> makes use of fuzzy matching algorithms provided by the package ‘taxize’ to match the entries of column <code>scientificName</code> against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column <code>scientificNameStd</code>. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.</p>
 <p>If further layers of taxonomic information are desired as an output, the function takes the parameter <code>return</code>, which by default contains <code>c("taxonID", "scientificNameStd", "order", "taxonRank")</code>. Other specifications can be added here.</p>
 <p>Note that for this to work, <code>scientificName</code> must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright).</p>
 <p>Note also, that taxon name mapping requires an internet connection and might take some time, depending on the length of your species list.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">dataset1Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize_taxa.html">standardize.taxonomy</a></span>(dataset1)</a>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">dataset1Std &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize_taxa.html">standardize_taxa</a></span>(dataset1)</a>
 <a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">head</span>(dataset1Std)</a></code></pre></div>
 <pre><code>##          scientificName        traitName traitValue traitUnit
 ## 1 Abax_parallelepipedus      body_length  15.846561        mm
@@ -617,7 +617,7 @@
 <a href="#trait-name-and-value-standardisation" class="anchor"></a>trait name and value standardisation</h2>
 <p>Due to the heterogeneity of approaches and research questions related to trait-based research, a universal trait definition standard does not exist at the time of writing this. Therefore it is difficult to assign globally unique identifiers that provide a reference to an unambiguous definition. Some databases offer a list of traits in some way or another, e.g. as a datasheet of in-text table, but few offer a stable URI reference or an API. Exceptions are the Gramene Ontology, which offers trait definitions for crop plants, and the TOP thesaurus for plant traits (<a href="http://top-thesaurus.org" class="uri">http://top-thesaurus.org</a>), which is rather comprehensive, but does not provide easy means of referencing. Many such trait ontologies are currently under construction for different animal phyla.</p>
 <p>For most cases, you would instead refer to an own lookup table, a so called thesaurus of traits, using dataset specific identifiers. The thesaurus may also be part of your metadata accompanying the trait dataset.</p>
-<p>To transfer the user provided traits and trait values into standardised values, the function <code><a href="../reference/standardize_traits.html">standardize.traits()</a></code> merges the data table with a reference table of trait definitions to produce values of a compliant format.</p>
+<p>To transfer the user provided traits and trait values into standardised values, the function <code><a href="../reference/standardize_traits.html">standardize_traits()</a></code> merges the data table with a reference table of trait definitions to produce values of a compliant format.</p>
 <div id="refer-to-an-existing-trait-ontology" class="section level3">
 <h3 class="hasAnchor">
 <a href="#refer-to-an-existing-trait-ontology" class="anchor"></a>refer to an existing trait ontology</h3>
@@ -688,8 +688,8 @@
 <div id="standardise-trait-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#standardise-trait-data" class="anchor"></a>standardise trait data</h3>
-<p>The function <code><a href="../reference/standardize_traits.html">standardize.traits()</a></code> now finally has all it needs to complete its job.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize_traits.html">standardize.traits</a></span>(dataset1Std, traits1)</a>
+<p>The function <code><a href="../reference/standardize_traits.html">standardize_traits()</a></code> now finally has all it needs to complete its job.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">dataset1final &lt;-<span class="st"> </span><span class="kw"><a href="../reference/standardize_traits.html">standardize_traits</a></span>(dataset1Std, traits1)</a>
 <a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw">head</span>(dataset1final)</a></code></pre></div>
 <pre><code>##           scientificName   traitName
 ## 1  Abax_parallelepipedus body_length

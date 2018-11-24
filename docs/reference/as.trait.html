@@ -63,7 +63,7 @@ http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
       </span>
     </div>
 
@@ -119,10 +119,10 @@ the Ecological Traitdata Standard. Parameters correspond to the definition at
     </div>
 
     <pre class="usage"><span class='fu'>as.trait</span>(<span class='no'>trait</span>, <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>broaderTerm</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>narrowerTerm</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>maxAllowedValue</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>minAllowedValue</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>factorLevels</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>comments</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>relationSource</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>author</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='no'>...</span>)</pre>
+  <span class='kw'>relatedTerm</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>valueType</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>expectedUnit</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>factorLevels</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>maxAllowedValue</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>minAllowedValue</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>traitDescription</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>comments</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>author</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,8 +147,18 @@ URI which identify the source of the trait definition.</p></td>
 definition.</p></td>
     </tr>
     <tr>
+      <th>valueType</th>
+      <td><p>the type of trait values. Possible entries are 'numeric',
+'integer', 'categorical', 'logical', or 'character'.</p></td>
+    </tr>
+    <tr>
       <th>expectedUnit</th>
       <td><p>the unit expected for measurement entries.</p></td>
+    </tr>
+    <tr>
+      <th>factorLevels</th>
+      <td><p>A comma separated list of terms comprising the
+constrained vocabulary for categorical traits or ordinal binary traits.</p></td>
     </tr>
     <tr>
       <th>maxAllowedValue</th>
@@ -159,16 +169,6 @@ definition.</p></td>
       <td><p>A lower boundary for accepted numerical values.</p></td>
     </tr>
     <tr>
-      <th>factorLevels</th>
-      <td><p>A comma separated list of terms comprising the
-constrained vocabulary for categorical traits or ordinal binary traits.</p></td>
-    </tr>
-    <tr>
-      <th>valueType</th>
-      <td><p>the type of trait values. Possible entries are 'numeric',
-'integer', 'categorical', 'logical', or 'character'.</p></td>
-    </tr>
-    <tr>
       <th>traitDescription</th>
       <td><p>A short, unambiguous definition of the trait. May
 refer to a method of measurement.</p></td>
@@ -177,12 +177,6 @@ refer to a method of measurement.</p></td>
       <th>comments</th>
       <td><p>Details and Examples for clarification of the trait
 definition.</p></td>
-    </tr>
-    <tr>
-      <th>relationSource</th>
-      <td><p>A character string providing a full bibliographic
-reference to the trait definition (giving title, author, year and
-publication).</p></td>
     </tr>
     <tr>
       <th>version</th>
@@ -197,6 +191,12 @@ referenced definition (e.g. "v1.2"), if applicable.</p></td>
     <tr>
       <th>...</th>
       <td><p>other arguments, passed on to print function.</p></td>
+    </tr>
+    <tr>
+      <th>relationSource</th>
+      <td><p>A character string providing a full bibliographic
+reference to the trait definition (giving title, author, year and
+publication).</p></td>
     </tr>
     </table>
     

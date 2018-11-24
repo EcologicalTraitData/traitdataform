@@ -62,7 +62,7 @@ other." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
       </span>
     </div>
 
@@ -184,7 +184,8 @@ accessed by calling <code>attributes(&lt;dataset&gt;)$datasets</code>.</p>
    <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span>)
 )
 
-<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='standardize_traits.html'>standardize.traits</a></span>(<span class='no'>dataset1</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traits1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='input'>
+<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='standardize_traits.html'>standardize.traits</a></span>(<span class='no'>dataset1</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traits1</span>)
+
 <span class='co'># occurrence table: </span>
 
 <span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'heteroptera_raw' is now available for use! </span></div><div class='input'>
@@ -225,7 +226,8 @@ accessed by calling <code>attributes(&lt;dataset&gt;)$datasets</code>.</p>
                <span class='kw'>antenna_length</span> <span class='kw'>=</span> <span class='st'>"antenna_length"</span>,
                <span class='kw'>Hind.Femur_length</span> <span class='kw'>=</span> <span class='st'>"metafemur_length"</span>
                )
-    )</div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='output co'>#&gt; <span class='warning'>Warning: parse_unit() is deprecated. Please use as_units()</span></div><div class='input'>
+    )
+
 <span class='no'>database</span> <span class='kw'>&lt;-</span> <span class='fu'>rbind</span>(<span class='no'>dataset1Std</span>, <span class='no'>dataset2Std</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: There seems to be no overlap in taxon names of the provided datasets. </span>
 #&gt; <span class='warning'>            It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!</span></div></pre>
   </div>
