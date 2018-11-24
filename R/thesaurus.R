@@ -95,12 +95,14 @@ print.thesaurus <- function(x, ...) {
 #'   name.
 #' @param identifier Unique identifier for the trait, ideally unique and stable
 #'   URI which identify the source of the trait definition.
+#' @param broaderTerm One or several terms that enclose the trait definition.
+#' @param narrowerTerm One or several terms that are enclosed by the trait
+#'   definition.
+#' @param relatedTerm One or several terms that are related to this term
+#'   (ideally given as URI).
 #' @param traitDescription A short, unambiguous definition of the trait. May
 #'   refer to a method of measurement.
 #' @param comments Details and Examples for clarification of the trait
-#'   definition.
-#' @param broaderTerm One or several terms that enclose the trait definition.
-#' @param narrowerTerm One or several terms that are enclosed by the trait
 #'   definition.
 #' @param expectedUnit the unit expected for measurement entries.
 #' @param maxAllowedValue An upper boundary for accepted numerical values.
@@ -109,14 +111,14 @@ print.thesaurus <- function(x, ...) {
 #'   constrained vocabulary for categorical traits or ordinal binary traits.
 #' @param valueType the type of trait values. Possible entries are 'numeric',
 #'   'integer', 'categorical', 'logical', or 'character'.
-#' @param relationSource A character string providing a full bibliographic
+#' @param source A character string providing a full bibliographic
 #'   reference to the trait definition (giving title, author, year and
 #'   publication).
 #' @param version A character string containing the version number of the
 #'   referenced definition (e.g. "v1.2"), if applicable.
 #' @param author A character string or object of class 'person' (as created by
 #'   `as.person()`) attributing the author(s) of the trait definition.
-#' @param ... other arguments, passed on to print function. 
+#' @param ... other arguments, passed on to print function.
 #'
 #' @export
 #'
