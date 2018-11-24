@@ -281,7 +281,7 @@ standardize_traits <- function(x,
  
   out$traitValueStd <- NA
  
-  traits <- levels(out$traitNameStd) #levels(lookup$trait) #
+  traits <- levels(droplevels(out$traitNameStd)) #levels(lookup$trait) #
   
   for(i in traits) { # iterate over all trait categories (by user provided names)
    
