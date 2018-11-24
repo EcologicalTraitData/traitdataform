@@ -64,7 +64,7 @@ test_that("mapping of traits based on thesaurus works", {
    dataset2Std <- standardize_traits(dataset2, 
                                 thesaurus = traits2
                                 )
-   expect_equal(dim(dataset2Std), c(2586,13))
+   expect_equal(dim(dataset2Std), c(2586,14))
 })
 
 
