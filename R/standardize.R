@@ -241,7 +241,17 @@ standardize_traits <- function(x,
   if(!"thesaurus" %in% class(thesaurus)) as.thesaurus(thesaurus)
   
   # build lookup data.frame from thesaurus object
-  lookup <- do.call(rbind, lapply(thesaurus,data.frame))
+  
+  factorLevels <- lapply(thesaurus, function(x) x$factorLevel)
+  
+  for(i in 1:length(thesaurus)) {
+    if(thesaurus[[i]]$valueType == "factor" & length(thesaurus[[i]]$factorLevels) > 1) {
+      thesaurus[[i]]$factorLevels <- paste(paste(names(thesaurus[[i]][]$factorLevels), "=", thesaurus[[i]][]$factorLevels), collapse = "; ")
+    }
+  }
+  
+  lookup <- do.call(rbind, lapply(thesaurus, data.frame))
+  
  
   # if no identifier is provided, set integer values
   if(is.null(levels(lookup$identifier))) lookup$identifier <- as.factor(seq_along(lookup$trait))
@@ -294,8 +304,14 @@ standardize_traits <- function(x,
      }
      
      ## factor level harmonization
-     if(lookup[lookup$trait == i,]$valueType == "categorical") { 
-       subset(out, traitNameStd == i)$traitValueStd 
+     if(lookup[lookup$trait == i,]$valueType %in% c("factor", "categorical")) { 
+       
+       value_original <- as.factor(subset(out, traitNameStd == i)$traitValue)
+       #TODO: check if factor level clustering occurs, and harmonize, if switch is set for it
+       #value_standardized <- refinr::key_collision_merge(as.character(value_original))
+       
+       #TODO: remap factor levels according to user provided mapping (e.g. c("f", "female", "xy") all resolve to "f") 
+       #out[out$traitNameStd == i, "traitValueStd"] <- value_standardized
        
      } ## end of factor level harmonization
      
@@ -313,7 +329,7 @@ standardize_traits <- function(x,
          
          ## OLDMETHOD: did not handle squares and operations
          # extract original value
-         value_original <- subset(out, traitNameStd == i)$traitValue * units::as_units(unit_original)
+         value_original <- as.numeric(subset(out, traitNameStd == i)$traitValue) * units::as_units(unit_original)
          
          # create vector with standardized value and write into output
          value_standardized <- value_original
