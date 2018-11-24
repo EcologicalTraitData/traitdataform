@@ -22,6 +22,9 @@ URI which identify the source of the trait definition.}
 \item{narrowerTerm}{One or several terms that are enclosed by the trait
 definition.}
 
+\item{relatedTerm}{One or several terms that are related to this term
+(ideally given as URI).}
+
 \item{valueType}{the type of trait values. Possible entries are 'numeric',
 'integer', 'categorical', 'logical', or 'character'.}
 
@@ -40,6 +43,10 @@ refer to a method of measurement.}
 \item{comments}{Details and Examples for clarification of the trait
 definition.}
 
+\item{source}{A character string providing a full bibliographic
+reference to the trait definition (giving title, author, year and
+publication).}
+
 \item{version}{A character string containing the version number of the
 referenced definition (e.g. "v1.2"), if applicable.}
 
@@ -47,10 +54,6 @@ referenced definition (e.g. "v1.2"), if applicable.}
 \code{as.person()}) attributing the author(s) of the trait definition.}
 
 \item{...}{other arguments, passed on to print function.}
-
-\item{relationSource}{A character string providing a full bibliographic
-reference to the trait definition (giving title, author, year and
-publication).}
 }
 \description{
 Creating an object containing a standardised trait definition according to
