@@ -80,8 +80,9 @@ as.thesaurus <- function(...,
 
 #' @export
 print.thesaurus <- function(x, ...) {
-  out <- do.call(rbind, lapply(x,data.frame))
-  print(out)
+  lapply(x, print)
+  #out <- do.call(rbind, lapply(x,data.frame))
+  #print(out)
 }
 
 #' Create a trait definition
