@@ -40,7 +40,7 @@ test_that("reformat species data, with trait columns provided as attributes", {
   expect_message(as.traitdata(arthropodtraits), "Input is taken to be a species -- trait matrix")
   dd1 <- as.traitdata(arthropodtraits)
   
-  expect_true(arthropodtraits[1065,"Author"] == "(Herrich-Schäffer, 1841)")
+  expect_true(arthropodtraits[1065,"Author"] == iconv("(Herrich-Schäffer, 1841)", to = "UTF-8"))
   
   expect_length(dd1$scientificName,10238)
   expect_length(dd1[1,], 5)
@@ -55,7 +55,7 @@ test_that("reformat observation data, with trait columns provided as attributes"
   expect_true(exists("heteroptera_raw"))
   
   expect_true(heteroptera_raw[1,6] == "(Fallen, 1807)")
-  expect_true(heteroptera_raw[13,6] == "(Herrich-Schäffer, 1841)")
+  expect_true(heteroptera_raw[13,6] == iconv("(Herrich-Schäffer, 1841)", to = "UTF-8"))
   
   expect_false(is.null(attributes(heteroptera_raw)$taxa))
   expect_true(attributes(heteroptera_raw)$taxa == "SpeciesID")
