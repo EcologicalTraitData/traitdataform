@@ -2,7 +2,7 @@
 
 arthropodtraits <- utils::read.csv(url("http://datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1"), 
                                    sep = "\t",
-                                   fileEncoding = "latin1"
+                                   fileEncoding = "latin2"
 )
 
 attr(arthropodtraits, 'metadata') <- traitdataform::as.metadata(
