@@ -262,7 +262,7 @@ Step 1 and 2 produced a tidy and correctly formatted version of your own trait d
 
 ## taxon name standardisation
 
-For taxon name standardisation, the function `standardize.taxonomy()` makes use of fuzzy matching algorithms provided by the package 'taxize' to match the entries of column `scientificName` against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column `scientificNameStd`. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
+For taxon name standardisation, the function `standardize_taxa()` makes use of fuzzy matching algorithms provided by the package 'taxize' to match the entries of column `scientificName` against the GBIF Backbone Taxonomy (taxize v). The result is written into a new column `scientificNameStd`. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
 
 If further layers of taxonomic information are desired as an output, the function takes the parameter `return`, which by default contains `c("taxonID", "scientificNameStd", "order", "taxonRank")`. Other specifications can be added here. 
 
@@ -271,7 +271,7 @@ Note that for this to work, `scientificName` must contain a full account of the 
 Note also, that taxon name mapping requires an internet connection and might take some time, depending on the length of your species list. 
 
 ```{r, message=FALSE, warning=FALSE}
-dataset1Std <- standardize.taxonomy(dataset1)
+dataset1Std <- standardize_taxa(dataset1)
 head(dataset1Std)
 
 ```
@@ -282,7 +282,7 @@ Due to the heterogeneity of approaches and research questions related to trait-b
 
 For most cases, you would instead refer to an own lookup table, a so called thesaurus of traits, using dataset specific identifiers. The thesaurus may also be part of your metadata accompanying the trait dataset.
 
-To transfer the user provided traits and trait values into standardised values, the function `standardize.traits()` merges the data table with a reference table of trait definitions to produce values of a compliant format. 
+To transfer the user provided traits and trait values into standardised values, the function `standardize_traits()` merges the data table with a reference table of trait definitions to produce values of a compliant format. 
 
 ### refer to an existing trait ontology
 
@@ -363,11 +363,11 @@ traits1 <- as.thesaurus(
 
 ### standardise trait data
 
-The function `standardize.traits()` now finally has all it needs to complete its job. 
+The function `standardize_traits()` now finally has all it needs to complete its job. 
 
 ```{r, message=FALSE, warning=FALSE}
 
-dataset1final <- standardize.traits(dataset1Std, traits1)
+dataset1final <- standardize_traits(dataset1Std, traits1)
 head(dataset1final)
 
 ```
