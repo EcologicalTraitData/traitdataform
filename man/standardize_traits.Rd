@@ -89,31 +89,40 @@ dataset2 <- as.traitdata(heteroptera_raw,
     )
 )
 
-dataset2 <- mutate.traitdata(dataset2, 
-   antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 
-   )
-
 
 traits2 <- as.thesaurus(
- body_length = as.trait("body_length", 
-   expectedUnit = "mm", valueType = "numeric", 
-   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
- antenna_length = as.trait("antenna_length", 
-   expectedUnit = "mm", valueType = "numeric", 
-   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
- metafemur_length = as.trait("metafemur_length", 
-   expectedUnit = "mm", valueType = "numeric", 
-   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
-)
-
-dataset2Std <- standardize_traits(dataset2, 
-    thesaurus = traits2, 
-    rename = c(Body_length = "body_length", 
-               antenna_length = "antenna_length", 
-               Hind.Femur_length = "metafemur_length"
-               )
+    Body_length = as.trait("Body_length",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "From the tip of the head to the end of the abdomen"),
+    Antenna_Seg1 = as.trait("Antenna_Seg1",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "Length of first antenna segment",
+            broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+    Antenna_Seg2 = as.trait("Antenna_Seg2",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "Length of second antenna segment",
+            broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+    Antenna_Seg3 = as.trait("Antenna_Seg3",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "Length of third antenna segment",
+            broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+    Antenna_Seg4 = as.trait("Antenna_Seg4",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "Length of fourth antenna segment",
+            broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+    Antenna_Seg5 = as.trait("Antenna_Seg5",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "Length of fifth antenna segment (only Pentatomoidea)",
+            broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
+    Hind.Femur_length = as.trait("Hind.Femur_length",
+            expectedUnit = "mm", valueType = "numeric",
+            traitDescription = "Length of the femur of the hind leg",
+            broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
     )
 
+dataset2Std <- standardize_traits(dataset2, 
+    thesaurus = traits2
+    )
 
 }
 \seealso{

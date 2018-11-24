@@ -5,10 +5,10 @@
 \title{Create a trait definition}
 \usage{
 as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
-  expectedUnit = NA, maxAllowedValue = NA, minAllowedValue = NA,
-  factorLevels = NA, valueType = NA, traitDescription = NA,
-  comments = NA, relationSource = NA, version = NA, author = NA,
-  ...)
+  relatedTerm = NA, valueType = NA, expectedUnit = NA,
+  factorLevels = NA, maxAllowedValue = NA, minAllowedValue = NA,
+  traitDescription = NA, comments = NA, source = NA, version = NA,
+  author = NA, ...)
 }
 \arguments{
 \item{trait}{A character string, providing an intuitive, human-readable trait
@@ -22,27 +22,23 @@ URI which identify the source of the trait definition.}
 \item{narrowerTerm}{One or several terms that are enclosed by the trait
 definition.}
 
+\item{valueType}{the type of trait values. Possible entries are 'numeric',
+'integer', 'categorical', 'logical', or 'character'.}
+
 \item{expectedUnit}{the unit expected for measurement entries.}
-
-\item{maxAllowedValue}{An upper boundary for accepted numerical values.}
-
-\item{minAllowedValue}{A lower boundary for accepted numerical values.}
 
 \item{factorLevels}{A comma separated list of terms comprising the
 constrained vocabulary for categorical traits or ordinal binary traits.}
 
-\item{valueType}{the type of trait values. Possible entries are 'numeric',
-'integer', 'categorical', 'logical', or 'character'.}
+\item{maxAllowedValue}{An upper boundary for accepted numerical values.}
+
+\item{minAllowedValue}{A lower boundary for accepted numerical values.}
 
 \item{traitDescription}{A short, unambiguous definition of the trait. May
 refer to a method of measurement.}
 
 \item{comments}{Details and Examples for clarification of the trait
 definition.}
-
-\item{relationSource}{A character string providing a full bibliographic
-reference to the trait definition (giving title, author, year and
-publication).}
 
 \item{version}{A character string containing the version number of the
 referenced definition (e.g. "v1.2"), if applicable.}
@@ -51,6 +47,10 @@ referenced definition (e.g. "v1.2"), if applicable.}
 \code{as.person()}) attributing the author(s) of the trait definition.}
 
 \item{...}{other arguments, passed on to print function.}
+
+\item{relationSource}{A character string providing a full bibliographic
+reference to the trait definition (giving title, author, year and
+publication).}
 }
 \description{
 Creating an object containing a standardised trait definition according to
