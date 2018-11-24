@@ -2,8 +2,12 @@
 
 arthropodtraits <- utils::read.csv(url("http://datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1"), 
                                    sep = "\t",
+                                   stringsAsFactors = TRUE,
                                    fileEncoding = "latin2"
 )
+
+arthropodtraits$Author <- iconv(arthropodtraits$Author, to = "UTF-8")
+
 
 attr(arthropodtraits, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Functional Arthropod Traits",

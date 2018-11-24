@@ -4,6 +4,12 @@ heteroptera_raw <-  utils:::read.csv("https://ndownloader.figshare.com/files/563
                                     stringsAsFactors=TRUE,
                                     fileEncoding = "windows-1252")
 
+heteroptera_raw$Center_Sampling_region <- iconv(as.character(heteroptera_raw$Center_Sampling_region), to = "UTF-8")
+levels(heteroptera_raw$Author) <- iconv(levels(heteroptera_raw$Author), to = "UTF-8")
+levels(heteroptera_raw$Voucher_ID) <- iconv(levels(heteroptera_raw$Voucher_ID), to = "UTF-8")
+levels(heteroptera_raw$Source) <- iconv(levels(heteroptera_raw$Source), to = "UTF-8")
+
+
 # heteroptera_raw <- utils::read.table("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
 #                                      sep = "\t", header = TRUE, fill = TRUE,
 #                                      fileEncoding = "windows-1252"
