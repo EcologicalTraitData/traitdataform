@@ -4,14 +4,25 @@
 \alias{cast.traitdata}
 \title{Cast long-table trait data into wide-table format}
 \usage{
-cast.traitdata(.data, summarize_num = mean, summarize_cat)
+cast.traitdata(.data, values = "traitValue", traits = "traitName",
+  units = "traitUnit", fun.aggregate = NULL)
 }
 \arguments{
 \item{.data}{dataset of class 'traitdata' to be cast into wide-table format.}
 
-\item{summarize_num}{Not functional.}
+\item{values}{the column name containing the trait values to be used to fill
+the matrix (default is \code{traitValue}). Duplicate columns (e.g.
+\code{traitValueStd}) will be omitted. See notes.}
 
-\item{summarize_cat}{Not functional.}
+\item{traits}{the column name to be kept for parsing into wide-table (default
+is \code{traitName}). Note that any duplicate column that contains trait names,
+e.g. \code{traitNameStd} will be omitted.}
+
+\item{units}{the column name containing the units of numerical values
+(default is \code{traitUnit}).}
+
+\item{fun.aggregate}{option for \link[reshape2:dcast]{reshape2::dcast} to define method of
+aggregation.}
 }
 \value{
 a wide-table data.frame object containing all taxa (and other
@@ -36,27 +47,38 @@ is equal in all of the input entries. Otherwise NA is returned. For
 heterogeneous factorial or character input, user action is required for
 homogenizing the data before calling \code{cast.traitdata()}.
 }
+\section{Duplicate columns}{
+ The function is currently not able to handle
+multiple columns of trait data (incl. names and units). Those are currently
+omitted from the output and may be added manually. You can alter the
+columns to be used to construct the matrix by specifying those in
+parameters \code{traits}, \code{values}, and \code{units}. Automatic handling of the \code{Std}
+columns might be added at a later stage.
+}
+
 \examples{
 
 pulldata("arthropodtraits")
 head(arthropodtraits)
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",
-                         traits = c("Body_Size", "Dispersal_ability", 
-                               "Feeding_guild","Feeding_guild_short", 
-                               "Feeding_mode", "Feeding_specialization", 
-                               "Feeding_tissue", "Feeding_plant_part", 
-                               "Endophagous_lifestyle", "Stratum_use", 
+                         traits = c("Body_Size", "Dispersal_ability",
+                               "Feeding_guild","Feeding_guild_short",
+                               "Feeding_mode", "Feeding_specialization",
+                               "Feeding_tissue", "Feeding_plant_part",
+                               "Endophagous_lifestyle", "Stratum_use",
                                "Stratum_use_short"),
-                         units = c(Body_Size = "mm", Dispersal_ability = "unitless"),
+                         units = c(Body_Size = "mm"),
                          keep = c(measurementRemark = "Remark"),
-                         metadata = list(
+                         metadata = as.metadata(
                             license = "http://creativecommons.org/publicdomain/zero/1.0/"
                             )
 )
-head(dataset3)
-head(cast.traitdata(dataset3))
 
+head(dataset3)
+
+dd3 <-cast.traitdata(dataset3)
+head(dd3)
 
 
 }

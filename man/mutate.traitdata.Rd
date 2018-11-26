@@ -4,12 +4,24 @@
 \alias{mutate.traitdata}
 \title{Mutate traits within a traitdata object.}
 \usage{
-mutate.traitdata(.data, ...)
+mutate.traitdata(.data, ..., values = "traitValue",
+  traits = "traitName", units = "traitUnit")
 }
 \arguments{
 \item{.data}{the traitdata object to transform}
 
 \item{...}{named parameters giving definitions of new columns.}
+
+\item{values}{(NOT TESTED) the column name containing the trait values to be
+used to fill the matrix (default is \code{traitValue}). Duplicate columns (e.g.
+\code{traitValueStd}) will be omitted. See notes.}
+
+\item{traits}{(NOT TESTED) the column name to be kept for parsing into
+wide-table (default is \code{traitName}). Note that any duplicate column that
+contains trait names, e.g. \code{traitNameStd} will be omitted.}
+
+\item{units}{(NOT TESTED) the column name containing the units of numerical
+values (default is \code{traitUnit}).}
 }
 \value{
 an updated traitdata object with the new trait measures or facts
@@ -21,9 +33,10 @@ This function allows to transform, factorize, or combine trait measurements
 into compound measurements or update factor levels into binaries.
 }
 \details{
-Note that units for numerical traits will not be maintained or
-computed (e.g. for ratios). They should be assigned later through the
-\code{thesaurus()} function.
+The function handles units for numerical traits and returns the new
+unit of the computed value in column \code{traitUnit}, if units of input
+variables were specified according to the units package. Handling of other
+columns than \code{traitName} and \code{traitValue} is not advised at present.
 
 It is advised to mutate traits before applying \code{standardize.traits()}! If
 the mutate function is applied to a standardised dataset, the new trait
@@ -35,12 +48,12 @@ re-mapping might be added in later versions of the package.)
 pulldata("arthropodtraits")
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",
-                         traits = c("Body_Size", "Dispersal_ability", 
-                            "Feeding_guild","Feeding_guild_short", 
-                            "Feeding_mode", "Feeding_specialization", 
-                            "Feeding_tissue", "Feeding_plant_part", 
-                            "Endophagous_lifestyle", "Stratum_use", 
-                            "Stratum_use_short"), 
+                         traits = c("Body_Size", "Dispersal_ability",
+                            "Feeding_guild","Feeding_guild_short",
+                            "Feeding_mode", "Feeding_specialization",
+                            "Feeding_tissue", "Feeding_plant_part",
+                            "Endophagous_lifestyle", "Stratum_use",
+                            "Stratum_use_short"),
                          units = c(Body_Size = "mm", Dispersal_ability = "unitless"),
                          keep = c(measurementRemark = "Remark"),
                          metadata = list(
@@ -50,11 +63,13 @@ dataset3 <- as.traitdata(arthropodtraits,
 head(dataset3)
 
 updated <- mutate.traitdata(dataset3, predator = Feeding_guild == "c" )
+
 head(updated[updated$traitName == "predator",])
+
 levels(updated$traitName)
 
 
-## 
+##
 
 pulldata("heteroptera_raw")
 dataset2 <- as.traitdata(heteroptera_raw,
@@ -63,15 +78,15 @@ dataset2 <- as.traitdata(heteroptera_raw,
                                    "Antenna_Seg2", "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5",
                                    "Front.Tibia_length", "Mid.Tibia_length", "Hind.Tibia_length",
                                    "Front.Femur_length", "Hind.Femur_length", "Front.Femur_width",
-                                   "Hind.Femur_width", "Rostrum_length", "Rostrum_width", 
+                                   "Hind.Femur_width", "Rostrum_length", "Rostrum_width",
                                    "Wing_length", "Wing_width"),
                         taxa = "SpeciesID",
                         occurrences = "ID"
 )
-updated <- mutate.traitdata(dataset2, 
-                            Body_shape = Body_length/Body_width, 
+updated <- mutate.traitdata(dataset2,
+                            Body_shape = Body_length/Body_width,
                             Body_volume = Body_length*Body_width*Body_height,
                             Wingload = Wing_length*Wing_width/Body_volume)
 
-head(updated[updated$traitName \%in\% c("Body_shape", "Body_volume", "Wingload"),])
+head(updated[updated$traitName \%in\% c( "Body_volume"),])
 }

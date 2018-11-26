@@ -62,9 +62,9 @@ as.thesaurus(data.frame(
 # (pulls from https://github.com/EcologicalTraitData/TraitDataList)
 
 traits1 <- as.thesaurus(read.csv("https://git.io/fpsj5"), 
-replace = c(traitID = "identifier", 
-            traitName = "trait",
-            traitUnit = "expectedUnit",
-            Comments = "comments") 
+                   replace = c(traitID = "identifier", 
+                                  traitName = "trait",
+                                  traitUnit = "expectedUnit",
+                                  Comments = "comments") 
 )
 }
