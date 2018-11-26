@@ -13,7 +13,7 @@ reference:
       - mutate.traitdata
       - rbind.traitdata
   - title: "Data objects"
-    desc: "List of data objects available after calling `data(<nameofdataset>)`."
+    desc: "List of data objects available after calling `pulldata('<nameofdataset>')`."
     contens: 
       - amniota
       - amphibio
@@ -26,7 +26,9 @@ reference:
   - title: "Helper functions"
     desc: "Internal functions called by the main functions of the package."
     contents: 
+      - glossary
+      - get_gbif_taxonomy
+      - as.metadata
+      - cast.traitdata
       - read.service
       - fixlogical
-      - get_gbif_taxonomy
-      
