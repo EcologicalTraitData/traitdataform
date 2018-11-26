@@ -63,7 +63,7 @@ http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.0</span>
       </span>
     </div>
 
@@ -147,6 +147,11 @@ URI which identify the source of the trait definition.</p></td>
 definition.</p></td>
     </tr>
     <tr>
+      <th>relatedTerm</th>
+      <td><p>One or several terms that are related to this term
+(ideally given as URI).</p></td>
+    </tr>
+    <tr>
       <th>valueType</th>
       <td><p>the type of trait values. Possible entries are 'numeric',
 'integer', 'categorical', 'logical', or 'character'.</p></td>
@@ -179,6 +184,12 @@ refer to a method of measurement.</p></td>
 definition.</p></td>
     </tr>
     <tr>
+      <th>source</th>
+      <td><p>A character string providing a full bibliographic
+reference to the trait definition (giving title, author, year and
+publication).</p></td>
+    </tr>
+    <tr>
       <th>version</th>
       <td><p>A character string containing the version number of the
 referenced definition (e.g. "v1.2"), if applicable.</p></td>
@@ -191,12 +202,6 @@ referenced definition (e.g. "v1.2"), if applicable.</p></td>
     <tr>
       <th>...</th>
       <td><p>other arguments, passed on to print function.</p></td>
-    </tr>
-    <tr>
-      <th>relationSource</th>
-      <td><p>A character string providing a full bibliographic
-reference to the trait definition (giving title, author, year and
-publication).</p></td>
     </tr>
     </table>
     

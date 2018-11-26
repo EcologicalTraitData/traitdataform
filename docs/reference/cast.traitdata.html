@@ -62,7 +62,7 @@ or occurrence table format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.0</span>
       </span>
     </div>
 
@@ -116,7 +116,8 @@ or occurrence table format.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>cast.traitdata</span>(<span class='no'>.data</span>, <span class='kw'>summarize_num</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='no'>summarize_cat</span>)</pre>
+    <pre class="usage"><span class='fu'>cast.traitdata</span>(<span class='no'>.data</span>, <span class='kw'>values</span> <span class='kw'>=</span> <span class='st'>"traitValue"</span>, <span class='kw'>traits</span> <span class='kw'>=</span> <span class='st'>"traitName"</span>,
+  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"traitUnit"</span>, <span class='kw'>fun.aggregate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,12 +127,26 @@ or occurrence table format.</p>
       <td><p>dataset of class 'traitdata' to be cast into wide-table format.</p></td>
     </tr>
     <tr>
-      <th>summarize_num</th>
-      <td><p>Not functional.</p></td>
+      <th>values</th>
+      <td><p>the column name containing the trait values to be used to fill
+the matrix (default is <code>traitValue</code>). Duplicate columns (e.g.
+<code>traitValueStd</code>) will be omitted. See notes.</p></td>
     </tr>
     <tr>
-      <th>summarize_cat</th>
-      <td><p>Not functional.</p></td>
+      <th>traits</th>
+      <td><p>the column name to be kept for parsing into wide-table (default
+is <code>traitName</code>). Note that any duplicate column that contains trait names,
+e.g. <code>traitNameStd</code> will be omitted.</p></td>
+    </tr>
+    <tr>
+      <th>units</th>
+      <td><p>the column name containing the units of numerical values
+(default is <code>traitUnit</code>).</p></td>
+    </tr>
+    <tr>
+      <th>fun.aggregate</th>
+      <td><p>option for <a href='http://www.rdocumentation.org/packages/reshape2/topics/cast'>reshape2::dcast</a> to define method of
+aggregation.</p></td>
     </tr>
     </table>
     
@@ -154,6 +169,15 @@ including any outliers. For factorial values, the value is accepted if it
 is equal in all of the input entries. Otherwise NA is returned. For
 heterogeneous factorial or character input, user action is required for
 homogenizing the data before calling <code>cast.traitdata()</code>.</p>
+    
+    <h2 class="hasAnchor" id="duplicate-columns"><a class="anchor" href="#duplicate-columns"></a>Duplicate columns</h2>
+
+    <p>The function is currently not able to handle
+multiple columns of trait data (incl. names and units). Those are currently
+omitted from the output and may be added manually. You can alter the
+columns to be used to construct the matrix by specifying those in
+parameters <code>traits</code>, <code>values</code>, and <code>units</code>. Automatic handling of the <code>Std</code>
+columns might be added at a later stage.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -193,12 +217,13 @@ homogenizing the data before calling <code>cast.traitdata()</code>.</p>
                                <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>,
                                <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>,
                                <span class='st'>"Stratum_use_short"</span>),
-                         <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>Body_Size</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>Dispersal_ability</span> <span class='kw'>=</span> <span class='st'>"unitless"</span>),
+                         <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>Body_Size</span> <span class='kw'>=</span> <span class='st'>"mm"</span>),
                          <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"Remark"</span>),
-                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>list</span>(
+                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='as.metadata.html'>as.metadata</a></span>(
                             <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
                             )
-)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>dataset3</span>)</div><div class='output co'>#&gt;         scientificName traitName traitValue traitUnit measurementID
+)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
+<span class='fu'>head</span>(<span class='no'>dataset3</span>)</div><div class='output co'>#&gt;         scientificName traitName traitValue traitUnit measurementID
 #&gt; 1 Anyphaena accentuata Body_Size       6.25        mm             1
 #&gt; 2 Aculepeira ceropegia Body_Size         11        mm             2
 #&gt; 3     Agalenatea redii Body_Size       6.93        mm             3
@@ -214,13 +239,20 @@ homogenizing the data before calling <code>cast.traitdata()</code>.</p>
 #&gt; 6                  
 #&gt; 
 #&gt; This trait-dataset contains 11 traits for 1230 taxa ( 6 measurements in total).
-#&gt; NULL</div><div class='input'><span class='fu'>head</span>(<span class='fu'>cast.traitdata</span>(<span class='no'>dataset3</span>))</div><div class='output co'>#&gt;              scientificName measurementRemark Body_Size Dispersal_ability
-#&gt; 1          Acalypta nigrina                         2.6              0.25
-#&gt; 2          Acalypta parvula                           2              0.25
-#&gt; 3      Acalypta platycheila                         2.6              0.25
-#&gt; 4         Acalyptus carpini                 *       2.2                 1
-#&gt; 5 Acanthodelphax denticauda                           3               0.5
-#&gt; 6   Acanthodelphax spinosus                           2                 0
+#&gt; 
+#&gt; [ ] : 
+#&gt;     When using these data, you must acknowledge the following usage policies: 
+#&gt; 
+#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ 
+#&gt; </div><div class='input'>
+<span class='no'>dd3</span> <span class='kw'>&lt;-</span><span class='fu'>cast.traitdata</span>(<span class='no'>dataset3</span>)
+<span class='fu'>head</span>(<span class='no'>dd3</span>)</div><div class='output co'>#&gt;              scientificName measurementRemark Body_Size Dispersal_ability
+#&gt; 1          Acalypta nigrina                    2.6 [mm]              0.25
+#&gt; 2          Acalypta parvula                    2.0 [mm]              0.25
+#&gt; 3      Acalypta platycheila                    2.6 [mm]              0.25
+#&gt; 4         Acalyptus carpini                 *  2.2 [mm]                 1
+#&gt; 5 Acanthodelphax denticauda                    3.0 [mm]               0.5
+#&gt; 6   Acanthodelphax spinosus                    2.0 [mm]                 0
 #&gt;   Feeding_guild Feeding_guild_short Feeding_mode Feeding_specialization
 #&gt; 1             h                   h            s                      o
 #&gt; 2             h                   h            s                      o
@@ -243,7 +275,6 @@ homogenizing the data before calling <code>cast.traitdata()</code>.</p>
 #&gt; 5                 h
 #&gt; 6                 h</div><div class='input'>
 
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -254,6 +285,8 @@ homogenizing the data before calling <code>cast.traitdata()</code>.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#duplicate-columns">Duplicate columns</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
