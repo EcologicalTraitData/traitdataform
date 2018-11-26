@@ -74,29 +74,23 @@
 #' )
 #' 
 #'dataset2 <- mutate.traitdata(dataset2, 
-#'   antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg3 
+#'   antenna_length = Antenna_Seg1 + Antenna_Seg2 + Antenna_Seg3 + Antenna_Seg4 + Antenna_Seg5 
 #'   )
 #' 
 #' 
 #' traits2 <- as.thesaurus(
-#'  body_length = as.trait("body_length", 
+#'  Body_length = as.trait("body_length", 
 #'    expectedUnit = "mm", valueType = "numeric", 
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
 #'  antenna_length = as.trait("antenna_length", 
 #'    expectedUnit = "mm", valueType = "numeric", 
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
-#'  metafemur_length = as.trait("metafemur_length", 
+#'  Hind.Femur_length = as.trait("metafemur_length", 
 #'    expectedUnit = "mm", valueType = "numeric", 
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #')
 #'
-#' dataset2Std <- standardize.traits(dataset2, 
-#'     thesaurus = traits2, 
-#'     rename = c(Body_length = "body_length", 
-#'                antenna_length = "antenna_length", 
-#'                Hind.Femur_length = "metafemur_length"
-#'                )
-#'     )
+#' dataset2Std <- standardize_traits(dataset2, thesaurus = traits2)
 #' 
 #' database <- rbind(dataset1Std, dataset2Std)
 

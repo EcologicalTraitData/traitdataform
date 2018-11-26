@@ -127,7 +127,8 @@ mutate.traitdata <- function(.data,
   out <- merge(out, out_units, by = "traitName" )
   
   out <- plyr::rbind.fill(subset(.data, !traitName %in% names(out_traits)), subset(out, traitName %in% names(out_traits))) 
-
+  out$traitUnit <- as.factor(out$traitUnit)
+  
     # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]
   
