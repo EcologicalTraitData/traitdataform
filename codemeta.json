@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "traitdataform",
-  "description": "Assistance for handling functional trait data and applying the Ecological Trait-data Standard terminology.",
+  "description": "Assistance for handling functional trait data and applying the Ecological Trait-data Standard terminology (Schneider et al. 2018 [http://dx.doi.org/10.1101/328302]).",
   "name": "traitdataform: Formatting trait data compliant with the Ecological Traitdata Standard",
   "codeRepository": "https://github.com/EcologicalTraitData/traitdataform",
   "relatedLink": [
@@ -15,7 +15,7 @@
   ],
   "issueTracker": "https://github.com/EcologicalTraitData/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -129,15 +129,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "reshape",
-      "name": "reshape",
+      "identifier": "reshape2",
+      "name": "reshape2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=reshape"
+      "sameAs": "https://CRAN.R-project.org/package=reshape2"
     },
     {
       "@type": "SoftwareApplication",
@@ -226,7 +226,7 @@
   ],
   "releaseNotes": "https://github.com/fdschneider/traitdataform/blob/master/NEWS.md",
   "readme": "https://github.com/EcologicalTraitData/traitdataform/blob/master/README.md",
-  "fileSize": "150.237KB",
+  "fileSize": "151.846KB",
   "contIntegration": "https://travis-ci.com/EcologicalTraitData/traitdataform",
   "keywords": [
     "dataset",
