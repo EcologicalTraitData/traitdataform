@@ -4,6 +4,14 @@
 #' or occurrence table format.
 #'
 #' @param .data dataset of class 'traitdata' to be cast into wide-table format.
+#' @param traits the column name to be kept for parsing into wide-table (default
+#'   is `traitName`). Note that any duplicate column that contains trait names,
+#'   e.g. `traitNameStd` will be omitted.
+#' @param units the column name containing the units of numerical values
+#'   (default is `traitUnit`).
+#' @param values the column name containing the trait values to be used to fill
+#'   the matrix (default is `traitValue`). Duplicate columns (e.g.
+#'   `traitValueStd`) will be omitted. See notes.
 #' @param summarize_num Not functional.
 #' @param summarize_cat Not functional.
 #'
@@ -20,11 +28,21 @@
 #'   heterogeneous factorial or character input, user action is required for
 #'   homogenizing the data before calling `cast.traitdata()`.
 #'
+#' @section Duplicate columns: 
+#'   The function is currently not able to handle multiple columns of trait data
+#'   (incl. names and units). Those are currently omitted from the output and
+#'   may be added manually. You can alter the columns to be used to construct
+#'   the matrix by specifying those in parameters `traits`, `values`, and
+#'   `units`.
+#'   Automatic handling of the `Std` columns might be added at a later stage.
+#'
 #' @return a wide-table data.frame object containing all taxa (and other
 #'   differentiating parameters) in rows and all traits (extracted from column
 #'   'traitName') in columns.
 #'
 #' @export
+#' @importFrom reshape2 dcast
+#' @import units
 #'
 #' @examples
 #'
@@ -32,30 +50,67 @@
 #' head(arthropodtraits)
 #' dataset3 <- as.traitdata(arthropodtraits,
 #'                          taxa = "SpeciesID",
-#'                          traits = c("Body_Size", "Dispersal_ability", 
-#'                                "Feeding_guild","Feeding_guild_short", 
-#'                                "Feeding_mode", "Feeding_specialization", 
-#'                                "Feeding_tissue", "Feeding_plant_part", 
-#'                                "Endophagous_lifestyle", "Stratum_use", 
+#'                          traits = c("Body_Size", "Dispersal_ability",
+#'                                "Feeding_guild","Feeding_guild_short",
+#'                                "Feeding_mode", "Feeding_specialization",
+#'                                "Feeding_tissue", "Feeding_plant_part",
+#'                                "Endophagous_lifestyle", "Stratum_use",
 #'                                "Stratum_use_short"),
-#'                          units = c(Body_Size = "mm", Dispersal_ability = "unitless"),
+#'                          units = c(Body_Size = "mm"),
 #'                          keep = c(measurementRemark = "Remark"),
-#'                          metadata = list(
+#'                          metadata = as.metadata(
 #'                             license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'                             )
 #' )
+#' 
 #' head(dataset3)
-#' head(cast.traitdata(dataset3))
-#'
+#' 
+#' dd3 <-cast.traitdata(dataset3)
+#' head(dd3)
 #'
 #' 
 
-cast.traitdata <- function(.data, summarize_num = mean, summarize_cat) {
+cast.traitdata <- function(.data, 
+                           values = "traitValue", 
+                           traits = "traitName", 
+                           units = "traitUnit", 
+                           fun.aggregate = NULL
+                           ) {
   
-  columns <- names(.data[,-which(names(.data) %in% c("traitName", "traitValue", "traitUnit", "measurementID"))])
+  columns <- names(.data[,-which(names(.data) %in% c(traits, values, units, "measurementID"))])
   
-  out <- reshape::cast(.data, eval(expression(paste(paste(columns, collapse =" + "), "~ traitName"))), value = 'traitValue') 
+  # Extract units of numerical traits
   
+  unit_list <- split(.data[,c(units)], f = .data[,traits])
+  
+  # out <- reshape::cast(.data, eval(expression(paste(paste(columns, collapse =" + "), "~", traits))), 
+  #                      value = values,
+  #                      fun.aggregate = fun.aggregate,
+  #                      fill = NA
+  #                      ) 
+  
+  out <- reshape2::dcast(.data, eval(expression(paste(paste(columns, collapse =" + "), "~", traits))), 
+               value.var = values,
+               fun.aggregate = fun.aggregate,
+               fill = NA)
+  
+  for(i in levels(.data[,traits])) {
+    
+    if(length(unique(unit_list[[i]])) == 1 )  {
+      unit_list[[i]] <- as.character(unique(unit_list[[i]]))
+    } else {
+      unit_list[[i]] <- as.character(unit_list[[i]])
+    }
+    
+    if(all(sapply(unit_list[[i]] , units:::ud_is_parseable))) {
+      out[,i] <- as.numeric(as.character(out[,i])) * units::as_units(unit_list[[i]])
+    } else {
+      if(!all(is.na(unit_list[[i]]))) {
+        message(paste0("Provided unit for '", names(unit_list[i]), "' is not recognised and will be dropped!"))
+      }
+    }
+
+  }
   
   
   return(out) 
