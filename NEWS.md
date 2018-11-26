@@ -1,3 +1,19 @@
+# traitataform 0.4 (released 26.11.2018)
+
+## bugfixes
+
+- fix locale issues with pulldata() on linux (still not solved on Mac OS X)
+- eliminate dependency on 'reshape' package
+
+## Minor changes
+
+- the functions cast.traitdata() and mutate.traitdata() now support units. 
+
+# traitdataform 0.3.4
+
+- update as.trait() and as.thesaurus() as well as print methods
+- update dependencies on units()
+
 # traitdataform 0.3.3
 
 - rename and update standardize_taxa() <- standardize.taxonomy()
