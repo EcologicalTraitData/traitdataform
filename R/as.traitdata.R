@@ -67,7 +67,7 @@
 #'   additional columns and dataset attribution will be listed in attributes.
 #'
 #' @export
-#' @importFrom reshape melt
+#' @importFrom reshape2 melt
 #'
 #' @examples
 #'
@@ -172,7 +172,8 @@ as.traitdata <- function(x,
   # produce out while respecting id.vars to keep and drop
   if(length(traits) > 1 & longtable) {
     
-    out <- reshape::melt(x, 
+    out <- suppressWarnings(
+                reshape2::melt(x, 
                          measure.vars = traits[traits %in% colnames(x)], 
                          variable_name = "traitName", 
                          id.vars = c("scientificName", 
@@ -181,7 +182,10 @@ as.traitdata <- function(x,
                                      id.vars),
                          na.rm = na.rm
                         )
+                        )
+    
     #rename value column in "traitValue"
+    names(out)[names(out) == "variable"] <- "traitName"
     names(out)[names(out) == "value"] <- "traitValue"
     
   } 

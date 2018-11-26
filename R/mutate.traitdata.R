@@ -20,7 +20,8 @@
 #'   re-mapping might be added in later versions of the package.)
 #'   
 #' @export mutate.traitdata
-#' @importFrom reshape melt
+#' @importFrom reshape2 melt
+#' @importFrom plyr rbind.fill
 #' 
 #' @examples
 #' 
@@ -89,7 +90,7 @@ mutate.traitdata <- function(.data,
   }
   class(temp) <- "data.frame"
   
-  out <- reshape::melt(temp, 
+  out <- reshape2::melt(temp, 
                        measure.vars = names(out_traits), 
                        id.vars = names(temp[,
                             which(!names(temp) %in% c(in_traits,names(out_traits)))]), 

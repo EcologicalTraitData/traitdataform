@@ -17,7 +17,7 @@ Depends:
     R (>= 2.10)
 Imports:
     data.table, 
-    reshape, 
+    reshape2,
     taxize,
     getPass,
     units,

@@ -17,7 +17,6 @@
 #'   to apply unit conversion and factor level harmonization.
 #'   
 #' @export
-#' @importFrom reshape rename
 #' 
 #' @examples
 #' 
@@ -54,10 +53,10 @@
 #' # (pulls from https://github.com/EcologicalTraitData/TraitDataList)
 #' 
 #' traits1 <- as.thesaurus(read.csv("https://git.io/fpsj5"), 
-#' replace = c(traitID = "identifier", 
-#'             traitName = "trait",
-#'             traitUnit = "expectedUnit",
-#'             Comments = "comments") 
+#'                    replace = c(traitID = "identifier", 
+#'                                   traitName = "trait",
+#'                                   traitUnit = "expectedUnit",
+#'                                   Comments = "comments") 
 #' )
 
 as.thesaurus <- function(...,
@@ -65,7 +64,12 @@ as.thesaurus <- function(...,
                          ) {
   if( "data.frame" %in% class(..1)) {
     input <- ..1
-    if(!is.null(replace)) input <- reshape::rename(input, replace)
+    
+    if(!is.null(replace)) {
+      replacement <- replace[names(input)]
+      names(input)[!is.na(replacement)] <- replacement[!is.na(replacement)]
+    } 
+    
     out <- lapply(split(input, f = input$trait, drop= TRUE), function(y) do.call(as.trait, y))
     
   }
