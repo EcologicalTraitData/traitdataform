@@ -12,8 +12,8 @@
 #' @param values the column name containing the trait values to be used to fill
 #'   the matrix (default is `traitValue`). Duplicate columns (e.g.
 #'   `traitValueStd`) will be omitted. See notes.
-#' @param summarize_num Not functional.
-#' @param summarize_cat Not functional.
+#' @param fun.aggregate option for [reshape2::dcast] to define method of
+#'   aggregation.
 #'
 #' @details The wide-table will be composed while preserving the detail given in
 #'   the dataset (occurrence level or taxa level). The cells  will be filled
@@ -28,13 +28,12 @@
 #'   heterogeneous factorial or character input, user action is required for
 #'   homogenizing the data before calling `cast.traitdata()`.
 #'
-#' @section Duplicate columns: 
-#'   The function is currently not able to handle multiple columns of trait data
-#'   (incl. names and units). Those are currently omitted from the output and
-#'   may be added manually. You can alter the columns to be used to construct
-#'   the matrix by specifying those in parameters `traits`, `values`, and
-#'   `units`.
-#'   Automatic handling of the `Std` columns might be added at a later stage.
+#' @section Duplicate columns: The function is currently not able to handle
+#'   multiple columns of trait data (incl. names and units). Those are currently
+#'   omitted from the output and may be added manually. You can alter the
+#'   columns to be used to construct the matrix by specifying those in
+#'   parameters `traits`, `values`, and `units`. Automatic handling of the `Std`
+#'   columns might be added at a later stage.
 #'
 #' @return a wide-table data.frame object containing all taxa (and other
 #'   differentiating parameters) in rows and all traits (extracted from column
@@ -62,9 +61,9 @@
 #'                             license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'                             )
 #' )
-#' 
+#'
 #' head(dataset3)
-#' 
+#'
 #' dd3 <-cast.traitdata(dataset3)
 #' head(dd3)
 #'
