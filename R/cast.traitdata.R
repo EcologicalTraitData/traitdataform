@@ -12,7 +12,7 @@
 #' @param values the column name containing the trait values to be used to fill
 #'   the matrix (default is `traitValue`). Duplicate columns (e.g.
 #'   `traitValueStd`) will be omitted. See notes.
-#' @param fun.aggregate option for [reshape2::dcast] to define method of
+#' @param fun.aggregate option for [reshape2::dcast()] to define method of
 #'   aggregation.
 #'
 #' @details The wide-table will be composed while preserving the detail given in
@@ -79,8 +79,7 @@ cast.traitdata <- function(.data,
   columns <- names(.data[,-which(names(.data) %in% c(traits, values, units, "measurementID"))])
   
   # Extract units of numerical traits
-  
-  unit_list <- split(.data[,c(units)], f = .data[,traits])
+  if(units %in% names(.data)) unit_list <- split(.data[,c(units)], f = .data[,traits])
   
   # out <- reshape::cast(.data, eval(expression(paste(paste(columns, collapse =" + "), "~", traits))), 
   #                      value = values,
@@ -93,23 +92,26 @@ cast.traitdata <- function(.data,
                fun.aggregate = fun.aggregate,
                fill = NA)
   
-  for(i in levels(.data[,traits])) {
-    
-    if(length(unique(unit_list[[i]])) == 1 )  {
-      unit_list[[i]] <- as.character(unique(unit_list[[i]]))
-    } else {
-      unit_list[[i]] <- as.character(unit_list[[i]])
-    }
-    
-    if(all(sapply(unit_list[[i]] , is_unit))) {
-      out[,i] <- as.numeric(as.character(out[,i])) * units::as_units(unit_list[[i]])
-    } else {
-      if(!all(is.na(unit_list[[i]]))) {
-        message(paste0("Provided unit for '", names(unit_list[i]), "' is not recognised and will be dropped!"))
+  if(units %in% names(.data)) {
+    for(i in levels(.data[,traits])) {
+      
+      if(length(unique(unit_list[[i]])) == 1 )  {
+        unit_list[[i]] <- as.character(unique(unit_list[[i]]))
+      } else {
+        unit_list[[i]] <- as.character(unit_list[[i]])
       }
+      
+      if(all(sapply(unit_list[[i]] , is_unit))) {
+        out[,i] <- as.numeric(as.character(out[,i])) * units::as_units(unit_list[[i]])
+      } else {
+        if(!all(is.na(unit_list[[i]]))) {
+          message(paste0("Provided unit for '", names(unit_list[i]), "' is not recognised and will be dropped!"))
+        }
+      }
+      
     }
-
   }
+
   
   
   return(out) 
