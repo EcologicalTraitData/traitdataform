@@ -1,4 +1,12 @@
-# traitataform 0.4 (released 26.11.2018)
+# traitdataform 0.4.1
+
+- update package vignette
+- fix print methods
+- fix thesaurus function
+- set helper functions internal (not exported) 
+- fix file import for carabids
+
+# traitdataform 0.4.0 (released 26.11.2018)
 
 ## bugfixes
 

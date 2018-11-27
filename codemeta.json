@@ -15,7 +15,7 @@
   ],
   "issueTracker": "https://github.com/EcologicalTraitData/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -226,7 +226,6 @@
   ],
   "releaseNotes": "https://github.com/fdschneider/traitdataform/blob/master/NEWS.md",
   "readme": "https://github.com/EcologicalTraitData/traitdataform/blob/master/README.md",
-  "fileSize": "151.846KB",
   "contIntegration": "https://travis-ci.com/EcologicalTraitData/traitdataform",
   "keywords": [
     "dataset",
