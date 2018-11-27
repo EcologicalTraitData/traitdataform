@@ -4,9 +4,9 @@ author: "Florian D. Schneider"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{traitdataform}
+  \VignetteIndexEntry{traitdataform}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \VignetteEncoding{UTF-8}
 ---
 
 
