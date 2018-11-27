@@ -4,9 +4,10 @@ addons:
   apt:
     packages:
       - libudunits2-dev 
+      - language-pack-de
 os:
-- linux
 - osx
 r:
 - release
 - devel
+ 
