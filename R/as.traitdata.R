@@ -269,7 +269,7 @@ print.traitdata <- function(x, ...) {
   
   n_traits <- length(levels(x$traitName))
   n_taxa <- length(levels(x$scientificName))
-  n_measurements <- length(attributes(x)$row.names)
+  n_measurements <- length(levels(x$measurementID))
   metadata <- attributes(x)$metadata
   thesaurus <- attributes(x)$thesaurus
 

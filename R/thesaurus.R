@@ -177,10 +177,10 @@ as.trait <- function(
 print.trait <- function(x, ...) {
 
   cat("\n", x$trait, "\t:\n\n")
-  if(!is.na(x$traitDescription)) cat("\tDefined as:", gsub('(.{1,50})(\\s|$)', '\\1\n\t\t\t', x$traitDescription), "\n" )
-  if(!is.na(x$broaderTerm)) cat("\tBroader term: ", x$broaderTerm, "\n") 
-  if(!is.na(x$narrowerTerm)) cat("\tNarrower term: ", x$broaderTerm, "\n")
-  if(!is.na(x$relatedTerm)) cat("\tRelated term: ", x$relatedTerm, "\n") 
+  if(!is.na(x$traitDescription)) cat("\tDefined as:", gsub('(.{1,60})(\\s|$)', '\\1\n\t\t\t', x$traitDescription), "\n" )
+  if(!all(is.na(x$broaderTerm))) { cat("\tBroader term: "); cat(x$broaderTerm, sep = ";\n\t\t\t"); cat("\n") }
+  if(!all(is.na(x$narrowerTerm))) { cat("\tNarrower term: "); cat(x$narrowerTerm, sep = ";\n\t\t\t"); cat("\n") }
+  if(!all(is.na(x$relatedTerm))) { cat("\tRelated term: "); cat(x$relatedTerm, sep = ";\n\t\t\t"); cat("\n") }
   if(!is.na(x$valueType)) cat("\tValue type: ", x$valueType, "\n") 
   if(!is.na(x$expectedUnit)) cat("\tExpected unit: ", x$expectedUnit, "\n") 
   if(!all(is.na(x$factorLevels))) {cat("\tExpected categories: "); cat(x$factorLevels, sep = "; "); cat("\n") } 
