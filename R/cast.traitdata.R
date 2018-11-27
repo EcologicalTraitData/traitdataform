@@ -101,7 +101,7 @@ cast.traitdata <- function(.data,
       unit_list[[i]] <- as.character(unit_list[[i]])
     }
     
-    if(all(sapply(unit_list[[i]] , units:::ud_is_parseable))) {
+    if(all(sapply(unit_list[[i]] , is_unit))) {
       out[,i] <- as.numeric(as.character(out[,i])) * units::as_units(unit_list[[i]])
     } else {
       if(!all(is.na(unit_list[[i]]))) {
