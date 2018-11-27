@@ -1,8 +1,8 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-carabids <- utils::read.csv(url("http://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt?sequence=1"), 
-                              sep = "\t", 
-                              fileEncoding = "UTF-8"
+carabids <- utils::read.csv(url("http://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt?sequence=1", 
+                                encoding = "UTF-8", method = "libcurl"), 
+                              sep = "\t"
                               )
 
 attr(carabids, 'metadata') <- traitdataform::as.metadata(
