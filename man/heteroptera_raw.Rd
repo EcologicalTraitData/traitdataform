@@ -16,22 +16,57 @@ each species (occurence table). The dataset \code{heteroptera} is a
 compiled species-trait matrix.
 }
 \description{
-The data sets comprise morphometric trait data of species that
-were sampled and measured within the a subproject of the Biodiversity
-Exploratories Project (Fischer et al. 2010) which focuses on the  effect of
-land use on arthropod community composition and related processes in three
-regions of Germany (Gossner et al. 2014, Simons et al. 2014, Simons et al.
-2015).
-}
-\details{
 Morphometric measures of Heteroptera sampled in grasslands across three
 regions of Germany.
-
-Cite this dataset as: \itemize{ \item M. Gossner, Martin; K. Simons,
-Nadja; Höck, Leonhard; W. Weisser, Wolfgang (2016): Morphometric measures
-of Heteroptera sampled in grasslands across three regions of Germany.
-figshare. https://doi.org/10.6084/m9.figshare.c.3307611.v1 }
 }
+\details{
+Trait-based approaches have increased significantly in community
+ecology during the last decade. This is not least because studies on
+biodiversity–ecosystem functioning relationships became a major topic in
+ecology. Species’ functions in ecosystems are mediated by their traits. For
+a better understanding of the relationships between environmental drivers,
+the community composition of organisms and ecosystems functioning, it is
+crucial to understand how these relationships are mediated by the
+communities’ trait composition. While there are world-wide efforts to set
+up trait databases, most have so far focused on plants and species-poorer
+taxa such as birds or amphibians. In contrast, for insects, the large
+number of species makes the gathering of comparable trait data a
+challenging task. In addition, there is the danger that generic trait
+information, which is available from common textbooks, may not be
+sufficient to detect the response of insect communities to environmental
+change or the consequences of trait changes for ecosystem functioning. One
+method to overcome this is to take morphometric measurements of species. In
+this study we measured morphometric traits of a total of 179 Heteroptera
+species that were sampled by sweep-netting on a total of 150 managed
+grassland plots across three regions in Germany between 2008 and 2012.
+These plots represent the whole range of grassland management intensities
+from extensively used pastures to mown pastures to intensively managed and
+fertilized meadows. In this paper we provide a database of mean values of
+23 morphometric measures across sex and morphotypes for each sampled
+Heteroptera species. Morphological traits are assumed to be related to
+their adaptation and function in the environment. Thus the relative
+morphometric traits can be used as proxies for ecological features of a
+species that may affect its performance or fitness. Our database can be
+used by future trait-based studies for developing and testing hypotheses of
+the functional significance of these traits. Examples include studying the
+functional responses of insect communities to environmental drivers or
+studying how the change in trait composition affects ecosystem processes.
+}
+\section{Citation}{
+ Cite this dataset as
+\itemize{
+\item Gossner, M. M., N. K. Simons, L. Höck, and W. W. Weisser. 2015.
+Morphometric measures of Heteroptera sampled in grasslands across three
+regions of Germany. Ecology 96:1154–1154.
+\item Data publication: Gossner, M.M, Simons, N.K., Höck, L., Weisser, W.W.,
+}
+\enumerate{
+\item Morphometric measures of Heteroptera sampled in grasslands across three
+regions of Germany. figshare.
+https://doi.org/10.6084/m9.figshare.c.3307611.v1
+}
+}
+
 \seealso{
 Other rawdata: \code{\link{amniota}},
   \code{\link{amphibio}}, \code{\link{arthropodtraits}},
