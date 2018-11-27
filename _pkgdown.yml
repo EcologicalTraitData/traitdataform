@@ -6,8 +6,8 @@ reference:
       - as.traitdata
       - as.trait
       - as.thesaurus
-      - standardize.taxonomy
-      - standardize.traits
+      - standardize_taxa
+      - standardize_traits
       - standardize.exploratories
       - standardize
       - mutate.traitdata
@@ -26,9 +26,6 @@ reference:
   - title: "Helper functions"
     desc: "Internal functions called by the main functions of the package."
     contents: 
-      - glossary
       - get_gbif_taxonomy
       - as.metadata
       - cast.traitdata
-      - read.service
-      - fixlogical
