@@ -2,8 +2,7 @@
 
 heteroptera_raw <-  utils:::read.csv(url("https://ndownloader.figshare.com/files/5633883", encoding = "windows-1252", method = "libcurl"), 
                                     sep = "\t",
-                                    stringsAsFactors=TRUE,
-                                    fileEncoding = "windows-1252")
+                                    stringsAsFactors=TRUE)
 
 heteroptera_raw$Center_Sampling_region <- iconv(as.character(heteroptera_raw$Center_Sampling_region), to = "UTF-8")
 levels(heteroptera_raw$Author) <- iconv(levels(heteroptera_raw$Author), to = "UTF-8")
