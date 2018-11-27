@@ -18,6 +18,7 @@
 #' @import XML
 #' @import RCurl
 #' @import getPass
+#' @keywords internal
 #' 
 
 
@@ -53,6 +54,7 @@ read.service <- function(datasetid,
 
 #' @inheritParams read.service
 #' @rdname read.service
+#' @keywords internal
 
 read.service.blocks <- function(datasetid, 
                                 user, pswd, 
@@ -87,6 +89,7 @@ read.service.blocks <- function(datasetid,
 #' @param output a switch to set the desired output format. Defaults to "logical", but can be "character", "binary" or "factor".  
 #' @param categories output target categories for binary/logical traits harmonization if `output` is not set to 'logical'.
 #'
+#' @keywords internal
 #' @return A vector of harmonized logical values.
 #'
 
@@ -112,10 +115,11 @@ fixlogical <- function(x, output = "logical", categories = c("No", "Yes")) {
 
 
 
-#'  Check if string is valid unit
+#' Check if string is valid unit
 #'  
-#'  @param x ds
-#'  @noRd
+#' @param x ds
+#' @noRd
+#' @keywords internal
 
 is_unit <- function(x) { 
   !c("simpleError") %in% class(tryCatch(as_units(x), error  = function(e) e))
