@@ -1,7 +1,7 @@
 # for roxygen2 documentation please edit file R/data.R!
 
 arthropodtraits <- utils::read.csv(url("https://datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1", 
-                                       encoding = "latin1", method = "libcurl"), 
+                                       encoding = "latin1"), 
                                    sep = "\t",
                                    stringsAsFactors = TRUE
 )

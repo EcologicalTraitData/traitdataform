@@ -1,7 +1,7 @@
 # for roxygen2 documentation please edit file R/data.R!
 
 heteroptera_raw <-  utils:::read.csv(url("https://ndownloader.figshare.com/files/5633883", 
-                                         encoding = "windows-1252", method = "libcurl"), 
+                                         encoding = "windows-1252"), 
                                     sep = "\t",
                                     stringsAsFactors=TRUE)
 
