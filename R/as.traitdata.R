@@ -216,7 +216,7 @@ as.traitdata <- function(x,
   
   # add measurement ID 
   if(is.null(measurements) && !"measurementID" %in% colnames(out)) {
-    out$measurementID <- paste0(datasetID, 1:dim(out)[1]) 
+    out$measurementID <- as.factor(paste0(datasetID, 1:dim(out)[1]))
   }
   
   if(!is.null(units)) {

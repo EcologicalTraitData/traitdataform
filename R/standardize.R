@@ -405,4 +405,5 @@ standardize <- function(x,
                           if("data.frame" %in% class(x) && ! "traitdata" %in% class(x) ) x <- as.traitdata(x,...)
                           x <- standardize.taxonomy(x, ...)
                           x <- standardize.traits(x, ...)
+                          return(x)
                       }
