@@ -5,6 +5,9 @@ addons:
     packages:
       - libudunits2-dev 
 os:
-- osx
+- linux
+r:
+- release
+- devel
 
 r_check_args: --no-build-vignettes  
