@@ -62,7 +62,7 @@ into compound measurements or update factor levels into binaries." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.2</span>
       </span>
     </div>
 
@@ -209,7 +209,7 @@ re-mapping might be added in later versions of the package.)</p>
 #&gt; 5                  
 #&gt; 6                  
 #&gt; 
-#&gt; This trait-dataset contains 11 traits for 1230 taxa ( 0 measurements in total).
+#&gt; This trait-dataset contains 11 traits for 1230 taxa ( 10238 measurements in total).
 #&gt; NULL</div><div class='input'>
 <span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset3</span>, <span class='kw'>predator</span> <span class='kw'>=</span> <span class='no'>Feeding_guild</span> <span class='kw'>==</span> <span class='st'>"c"</span> )</div><div class='output co'>#&gt; <span class='message'>Provided unit for 'Dispersal_ability' is not recognised and will be dropped!</span></div><div class='input'>
 <span class='fu'>head</span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>==</span> <span class='st'>"predator"</span>,])</div><div class='output co'>#&gt;                  scientificName traitName traitValue traitUnit measurementID
@@ -227,7 +227,7 @@ re-mapping might be added in later versions of the package.)</p>
 #&gt; 10243                  
 #&gt; 10244                  
 #&gt; 
-#&gt; This trait-dataset contains 12 traits for 1230 taxa ( 0 measurements in total).
+#&gt; This trait-dataset contains 12 traits for 1230 taxa ( 10238 measurements in total).
 #&gt; NULL</div><div class='input'>
 <span class='fu'>levels</span>(<span class='no'>updated</span>$<span class='no'>traitName</span>)</div><div class='output co'>#&gt;  [1] "Body_Size"              "Dispersal_ability"      "Feeding_guild"         
 #&gt;  [4] "Feeding_guild_short"    "Feeding_mode"           "Feeding_specialization"
@@ -275,7 +275,7 @@ re-mapping might be added in later versions of the package.)</p>
 #&gt; 9816                Nürnberg_Seidenstücker_4.8.45   f 49°27’ N 11°05’ E
 #&gt; 9817               Erlangen_Seidenstücker_30.9.40   f 49°36’ N 11°00’ E
 #&gt; 
-#&gt; This trait-dataset contains 26 traits for 179 taxa ( 0 measurements in total).
+#&gt; This trait-dataset contains 26 traits for 179 taxa ( 9386 measurements in total).
 #&gt; 
 #&gt;  heteroptera : Heteroptera morphometry traits by Martin M. Gossner .
 #&gt; 

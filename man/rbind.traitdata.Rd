@@ -5,7 +5,7 @@
 \title{Combine trait datasets}
 \usage{
 \method{rbind}{traitdata}(..., metadata = NULL, datasetID = NULL,
-  drop = NULL)
+  metadata_as_columns = FALSE, drop = NULL)
 }
 \arguments{
 \item{...}{two or more objects of class traitdata.}

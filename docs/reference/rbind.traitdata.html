@@ -62,7 +62,7 @@ other." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.2</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@ other.</p>
 
     <pre class="usage"><span class='co'># S3 method for traitdata</span>
 <span class='fu'>rbind</span>(<span class='no'>...</span>, <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>metadata_as_columns</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -234,8 +234,8 @@ accessed by calling <code>attributes(&lt;dataset&gt;)$datasets</code>.</p>
 
 <span class='no'>dataset2Std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='standardize_traits.html'>standardize_traits</a></span>(<span class='no'>dataset2</span>, <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='no'>traits2</span>)
 
-<span class='no'>database</span> <span class='kw'>&lt;-</span> <span class='fu'>rbind</span>(<span class='no'>dataset1Std</span>, <span class='no'>dataset2Std</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: There seems to be no overlap in taxon names of the provided datasets. </span>
-#&gt; <span class='warning'>            It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!</span></div></pre>
+<span class='no'>database</span> <span class='kw'>&lt;-</span> <span class='fu'>rbind</span>(<span class='no'>dataset1Std</span>, <span class='no'>dataset2Std</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: There seems to be no overlap in taxon names of the provided datasets!</span>
+#&gt; <span class='warning'>It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
