@@ -61,11 +61,10 @@ If reading files from a file repository, you can refer to the URL directly, e.g.
 
 # pulling data from van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017) Sensitivity of functional diversity metrics to sampling intensity. Methods in Ecology and Evolution 8(9): 1072-1080. https://doi.org/10.1111/2041-210x.12728
 
-file_url <- url("http://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt?sequence=1", 
+file_url <- url("https://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt", 
                                 encoding = "UTF-8", method = "libcurl"
                 )
 ```
-
 
 ```{r}
 carabids <- utils::read.delim(file_url)
