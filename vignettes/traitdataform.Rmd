@@ -47,8 +47,14 @@ carabids <- read.table("../../data/carabid traits final.txt", header = TRUE)
 
 If reading files from a file repository, you can refer to the URL directly, e.g. 
 
+```{r}
 
+file_url <- url("https://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt"
+                )
 
+carabids <- utils::read.delim(file_url)
+
+```
 
 
 
@@ -64,9 +70,7 @@ If reading files from a file repository, you can refer to the URL directly, e.g.
 file_url <- url("https://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt", 
                                 encoding = "UTF-8", method = "libcurl"
                 )
-```
 
-```{r}
 carabids <- utils::read.delim(file_url)
 ```
 
