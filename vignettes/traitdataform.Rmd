@@ -92,8 +92,7 @@ In case of multiple assignments to the same taxon, the script assumes an observa
 
 ```{r}
 
-heteroptera_raw <-  read.delim(url("https://ndownloader.figshare.com/files/5633883", 
-                                         encoding = "windows-1252"),
+heteroptera_raw <-  read.delim("https://ndownloader.figshare.com/files/5633883",
                                     stringsAsFactors=TRUE)
 
 # Data pulication: M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W.
