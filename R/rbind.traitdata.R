@@ -97,6 +97,7 @@
 rbind.traitdata <- function(..., 
                             metadata = NULL, 
                             datasetID = NULL,
+                            metadata_as_columns = FALSE,
                             drop = NULL # drop columns that are not present in all datasets
 ) {
   
@@ -108,9 +109,13 @@ rbind.traitdata <- function(...,
   # compose list of input objects
   input <- list(...)
   
-  metadata <- lapply(input, function(x) attributes(x)$metadata)
-  has_metadata <- sapply(input, function(x) !is.null(attributes(x)$metadata))
-  has_id <- sapply(input, function(x) !is.null(attributes(x)$metadata$datasetID))
+  if(is.null(metadata)) {
+    metadata <- lapply(input, function(x) attributes(x)$metadata)
+    has_metadata <- sapply(input, function(x) !is.null(attributes(x)$metadata))
+    has_id <- sapply(input, function(x) !is.null(attributes(x)$metadata$datasetID))
+  } else {
+    metadata <- list(NULL)
+  }
   
   #add datasetID value as column in core data,
     for(i in 1:length(metadata)) {
@@ -129,7 +134,7 @@ rbind.traitdata <- function(...,
   
   ##### make metadata lookup table
 
-  attr_table <- do.call(rbind.data.frame, lapply(metadata, function(x) lapply(x[c("datasetID", "datasetName", "author")], function(y) if(is.null(y)) "NA" else y )))
+  attr_table <- do.call(rbind.data.frame, lapply(metadata, function(x) lapply(x[c("datasetID", "datasetName", "author", "license")], function(y) if(is.null(y)) "NA" else y )))
 
   ##### check for compatibility of used terms in datasets
   
@@ -143,8 +148,7 @@ rbind.traitdata <- function(...,
   if(all(traits_standardized)) { traitsStd <- lapply(input, function(x) levels(x$traitNameStd)) } else { traitsStd <- NA }
   
   if(length(unlist(traits)) == length(unique(unlist(traits))) && length(unlist(traitsStd)) == length(unique(unlist(traitsStd)))) {
-   warning("There seems to be no overlap in trait names of the provided datasets. 
-           It is recommended to map 'traitNameStd' of each dataset to the same thesaurus or ontology!")
+   warning("There seems to be no overlap in trait names of the provided datasets. \nIt is recommended to map 'traitNameStd' of each dataset to the same thesaurus or ontology!")
   }
   
   # check if taxon names are compatible
@@ -152,10 +156,8 @@ rbind.traitdata <- function(...,
   if(all(taxa_standardized) ) {taxaStd <- lapply(input, function(x) levels(x$ScientificNameStd)) } else { taxaStd <- NA }
   
   if(length(unlist(taxa)) == length(unique(unlist(taxa))) && length(unlist(taxaStd)) == length(unique(unlist(taxaStd))) )  {
-    warning("There seems to be no overlap in taxon names of the provided datasets. 
-            It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!")
+    warning("There seems to be no overlap in taxon names of the provided datasets!\nIt is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!")
   }
-  
   
   # rbind data objects in input list
   input <- lapply(input, data.table::as.data.table)
@@ -166,7 +168,7 @@ rbind.traitdata <- function(...,
   
   # match metadata attributes according to datasetID
   
-  out <- merge(out, attr_table, by = "datasetID")
+  if(metadata_as_columns)  out <- merge(out, attr_table, by = "datasetID")
   
   # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]
