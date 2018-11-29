@@ -92,7 +92,8 @@ In case of multiple assignments to the same taxon, the script assumes an observa
 
 ```{r}
 
-heteroptera_raw <-  read.delim("https://ndownloader.figshare.com/files/5633883",
+heteroptera_raw <-  read.delim(url("https://ndownloader.figshare.com/files/5633883", 
+                                         encoding = "windows-1252"),
                                     stringsAsFactors=TRUE)
 
 # Data pulication: M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W.
@@ -484,7 +485,7 @@ head(dataset5Std)
 ```
 -->
 
-## single stroke standardization
+## Single-stroke standardization
 
 The functions `standardize_traits()` and `standardize_taxa()` are applied sequentially but not necessarily in that order. The output of the first step can be piped into the second step. 
 
@@ -503,69 +504,148 @@ dataset1Std <- standardize(carabids,
 
 As an alternative input pathway, all parameters to `standardize()` can be specified as attributes of the input object and will be found natively by the function. This allows for the specification of recipes for data integration for projects pulling data from multiple sources. 
 
-
 # 4. Working with trait datasets
-
 
 ## combine multiple traitdata tables
 
-Combining separate datasets can be done using `rbind()` before or after the standardisation process, depending on the use case. Use cases of merging data are:
+After standardizing trait and taxon concepts into unified definitions and converting trait values into harmonized units, it is straightforward to combine multiple trait-dataset into one using `rbind()`. This can be applied before or after the standardisation process, depending on the use case. Use cases of merging data are:
 
 - you collected data from different sources and want to harmonize taxon and trait names: bring data in long-table format and merge into one data object, then harmonize taxa and units following a uniform standard
 - No unified trait list or taxon reference exists for the heterogeneous data assembled of different sources (e.g. because spanning many different taxa): Apply standardization to different reference systems before merging the datasets.
 
-The function call will append the data tables while merging the common columns and maintaining columns that are not present in all datasets (this might produce lots of NA). The column `datasetID` will be added to keep track of the origin of the data. By default this column will contain the object names of the original datasets, but it can be replaced by more meaningful IDs using the parameter `datasetID`. 
+The function call will append the data tables while merging the common columns and maintaining columns that are not present in all datasets (this might produce lots of NA). 
+The column `datasetID` will be added to keep track of the origin of the data. By default this column will contain the object names of the original datasets, but it can be replaced by more meaningful IDs using the parameter `datasetID`. 
 
 ```{r, eval = FALSE}
 
-newdata <- rbind(dataset1Std, dataset3, 
-                datasetID = c("carabids", "arthropodtraits")
+newdata <- rbind(dataset1Std, dataset2Std, 
+                datasetID = c("vanderplas15", "gossner15")
               )
 
 ```
 
-Note that the package provides a method for the base function `rbind()`. Documentation can be accessed via `?rbind.traitdata`. 
+Note that the package provides a method for the base function `rbind()` that handles this merge. Documentation can be accessed via `?rbind.traitdata`. 
 
-The function will handle metadata information on the dataset level as described in the section 'Metadata' of the Traitdata Standard (e.g. `author` or `bibliographicCitation`) and add a column 'datasetID' as well as 'datasetName' and 'author' if those are provided in the attributes of the input objects. This can be achieved by using the metadata parameter of `as.traitdata()`. 
+## maintaining metadata
+
+The function will handle metadata information on the dataset level as described in the section 'Metadata' of the Traitdata Standard (e.g. `author` or `bibliographicCitation`) and add a column `datasetID` as well as  `datasetName` and `author` if those are provided in the parameter `metadata` of the `as.traitdata()` function call which creates the data. 
+The function `as.metadata()` provides a standard structure for this case. 
 
 ```{r}
 
-pulldata("carabids")
+metadata1 <- as.metadata(
+      datasetName = "Carabid traits",
+      datasetID = "carabids",
+      bibliographicCitation =  bibentry(
+        bibtype = "Article",
+        title = "Sensitivity of functional diversity metrics to sampling intensity",
+        journal = "Methods in Ecology and Evolution",
+        author = c(as.person("Fons van der Plas, Roel van Klink, Pete Manning, Han Olff, Markus Fischer")
+        ),
+        year = 2017,
+        doi = "10.1111/2041-210x.12728"
+      ),
+      author = "Fons van der Plas",
+      license = "http://creativecommons.org/publicdomain/zero/1.0/"
+       )
 
 dataset1 <- as.traitdata(carabids,
   taxa = "name_correct",
-  traits = c("body_length", "antenna_length", "metafemur_length"),
+  thesaurus = thesaurus1,
   units = "mm",
   keep = c(datasetID = "source_measurement", measurementRemark = "note"),
-  metadata = list(
-    bibliographicCitation = attributes(carabids)$citeAs,
-    author = "Fons van der Plas",
-    license = "http://creativecommons.org/publicdomain/zero/1.0/"
-    )
+  metadata = metadata1
 )
 
-pulldata("heteroptera_raw")
+head(dataset1)
+```
+
+Note the use of the `bibentry()` function to create a formal bibliographic entry. Also note that this also affects the way how the dataset is printed into the R console. This facilitates for data users to acknowledge authorship and ownership of the data, while alsow providing a machine readable structure that can easily be accessed further down the line. 
+
+```{r}
+
+metadata2 <- as.metadata(
+  datasetName = "Heteroptera morphometry traits",
+  datasetID = "heteroptera",
+  bibliographicCitation =  bibentry(
+    bibtype = "Article",
+    title = "Morphometric measures of Heteroptera sampled in grasslands across three regions of Germany",
+    journal = "Ecology",
+    volume = 96,
+    issue = 4,
+    pages = 1154,
+    author = c(as.person("Martin M. Gossner , Nadja K. Simons, Leonhard Hoeck, Wolfgang W. Weisser")),
+    year = 2015,
+    doi = "10.1890/14-2159.1"
+  ),
+  author = "Martin M. Gossner",
+  license = "http://creativecommons.org/publicdomain/zero/1.0/"
+)
 
 dataset2 <- as.traitdata(heteroptera_raw,
   taxa = "SpeciesID",
-  traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
-    "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1", "Antenna_Seg2",
-    "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Front.Tibia_length",
-    "Mid.Tibia_length", "Hind.Tibia_length", "Front.Femur_length",
-    "Hind.Femur_length", "Front.Femur_width", "Hind.Femur_width",
-    "Rostrum_length", "Rostrum_width", "Wing_length", "Wing_widt"),
+  thesaurus = thesaurus2,
   units = "mm",
   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
-  metadata = list(
-    bibliographicCitation = attributes(heteroptera_raw)$citeAs,
-    license = "http://creativecommons.org/publicdomain/zero/1.0/"
-    )
+  metadata =  metadata2
 )
 
-database <- rbind(dataset1, dataset2)
+database <- rbind(dataset1, dataset2, 
+                datasetID = c("vanderplas15", "gossner15"), metadata_as_columns = TRUE) 
 ```
 
-The detailled metadata information (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R. 
+The detailled metadata information of both datasets (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R console.
+
+## writing data recipes
+
+For projects compiling data from multiple sources, it is recommendet best practice to refer to original raw data, potentially even by pulling them from their original repository, and make any changes and standardisation procedures script based in R. 
+If many field-based changes are necessary, you can refer to [lookup tables](https://nicercode.github.io/blog/2013-07-09-modifying-data-with-lookup-tables/) to keep the script slim. 
+
+`traitdataform` allows you to script all parameters required for the standardization call into the attributes of the R object. A script for a single data source can then look like this
+
+```{r, eval = FALSE}
+carabids <- utils::read.delim(url("https://datadryad.org/bitstream/handle/10255/dryad.134418/carabid traits final.txt", 
+                                encoding = "UTF-8")
+                              )
+
+attr(carabids, 'metadata') <- traitdataform::as.metadata(
+      datasetName = "Carabid traits",
+      datasetID = "carabids",
+      bibliographicCitation =  utils::bibentry(
+        bibtype = "Article",
+        title = "Sensitivity of functional diversity metrics to sampling intensity",
+        journal = "Methods in Ecology and Evolution",
+        author = c(utils::as.person("Fons van der Plas, Roel van Klink, Pete Manning, Han Olff, Markus Fischer")
+        ),
+        year = 2017,
+        doi = "10.1111/2041-210x.12728"
+      ),
+      author = "Fons van der Plas",
+      license = "http://creativecommons.org/publicdomain/zero/1.0/"
+       )
+
+attr(carabids, 'thesaurus') <-  traitdataform:::as.thesaurus(
+          body_length = traitdataform:::as.trait("body_length",
+                              expectedUnit = "mm", valueType = "numeric",
+                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"),
+          antenna_length = traitdataform:::as.trait("antenna_length",
+                              expectedUnit = "mm", valueType = "numeric",
+                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
+          metafemur_length = traitdataform:::as.trait("femur_length",
+                              expectedUnit = "mm", valueType = "numeric",
+                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"),
+          eyewidth_corr = traitdataform:::as.trait("eye_diameter",
+                              expectedUnit = "mm", valueType = "numeric",
+                              identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Eye_diameter")
+        )
+
+attr(carabids, 'taxa') <- "name_correct"
+attr(carabids, 'units') <- "mm"
+attr(carabids, 'keep') <-  c(measurementDeterminedBy = "source_measurement", measurementRemarks = "note")
+
+```
+
+When thus specified, the data can be re-formated simply by calling `standardize(carabids)`. 
 
 
 ## add data layers
