@@ -1,3 +1,10 @@
+# traitdataform 0.4.2
+
+- finalize package vignette
+- simplify demo data calls
+- fix handling of measurementID as factor
+- fix return of output in standardize()
+
 # traitdataform 0.4.1
 
 - update package vignette

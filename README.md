@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master)](https://travis-ci.com/EcologicalTraitData/traitdataform)
 
 
-Assistance for handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. in preparation). 
+Assistance for handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. 2018 Towards an Ecological Trait-data Standard, biorxiv.org DOI: [10.1101/328302](http://dx.doi.org/10.1101/328302)). 
 
 There are two major use cases for the package: 
 
