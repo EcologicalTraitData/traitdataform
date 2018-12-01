@@ -591,20 +591,29 @@ dataset2 <- as.traitdata(heteroptera_raw,
 )
 
 database <- rbind(dataset1, dataset2, 
-                datasetID = c("vanderplas15", "gossner15"), metadata_as_columns = TRUE) 
+                datasetID = c("vanderplas17", "gossner15"), 
+                metadata_as_columns = TRUE
+                ) 
+
+head(database)
 ```
 
-The detailled metadata information of both datasets (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R console.
+The detailled metadata information of both datasets (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R console. You can access the metadata via the `attributes()`  function. E.g.
+
+```{r}
+attributes(dataset1)$metadata$bibliographicCitation
+```
+
 
 ## writing data recipes
 
-For projects compiling data from multiple sources, it is recommendet best practice to refer to original raw data, potentially even by pulling them from their original repository, and make any changes and standardisation procedures script based in R. 
+For projects compiling data from multiple sources, it is recommended best practice to refer to original raw data, potentially even by pulling them from their original repository, and make any changes and standardisation procedures script based in R. 
 If many field-based changes are necessary, you can refer to [lookup tables](https://nicercode.github.io/blog/2013-07-09-modifying-data-with-lookup-tables/) to keep the script slim. 
 
 `traitdataform` allows you to script all parameters required for the standardization call into the attributes of the R object. A script for a single data source can then look like this
 
 ```{r, eval = FALSE}
-carabids <- utils::read.delim(url("https://datadryad.org/bitstream/handle/10255/dryad.134418/carabid traits final.txt", 
+carabids <- utils::read.delim(url("https://datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt", 
                                 encoding = "UTF-8")
                               )
 
