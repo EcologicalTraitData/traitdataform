@@ -10,7 +10,7 @@ Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.co
     person("Dennis", "Heimann", role = c("ctb")),
     person("Felix","Neff", role = c("ctb")),
     person("Markus J.", "Ankenbrand", role = c("ctb")))
-Description: Assistance for handling ecological trait data and applying the Ecological Trait-data Standard terminology (Schneider et al. 2018 [http://dx.doi.org/10.1101/328302]).
+Description: Assistance for handling ecological trait data and applying the Ecological Trait-data Standard terminology (Schneider et al. 2018 <doi:10.1101/328302>).
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends:
@@ -23,8 +23,7 @@ Imports:
     units,
     XML,
     RCurl,
-    plyr,
-    readxl
+    plyr
 URL: https://EcologicalTraitData.github.io/traitdataform, https://github.com/EcologicalTraitData/traitdataform
 BugReports: https://github.com/EcologicalTraitData/traitdataform/issues
 VignetteBuilder: knitr
