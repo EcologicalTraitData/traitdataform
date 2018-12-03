@@ -51,8 +51,8 @@ dataset1 <- as.traitdata(carabids,
   keep = c(datasetID = "source_measurement", measurementRemarks = "note"),
   metadata = as.metadata(
     bibliographicCitation = c(
- "van der Plas et al. (2017) Methods in Ecology and Evolution, doi: 10.1111/2041-210x.12728"
- ),
+        "van der Plas et al. (2017) Methods in Ecol. & Evol., doi: 10.1111/2041-210x.12728"
+       ),
     author = "Fons van der Plas",
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
     )

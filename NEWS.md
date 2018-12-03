@@ -1,3 +1,11 @@
+# traitdataform 0.4.4
+
+- finalize vignette (include section on writing data)
+
+# traitdataform 0.4.3
+
+- update rbind.traitdataform() to specify metadata handling
+
 # traitdataform 0.4.2
 
 - finalize package vignette
