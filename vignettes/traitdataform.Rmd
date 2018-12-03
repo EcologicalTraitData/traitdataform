@@ -10,7 +10,7 @@ bibliography: div05.bib
 csl: mee.csl
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning= FALSE, message=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
 library(traitdataform)
@@ -439,7 +439,7 @@ attributes(dataset2Std)$traits[,c("trait", "identifier","traitDescription","expe
 
 # 3. Standardize taxa
 
-For taxon name standardisation, the function `standardize_taxa()` makes use of fuzzy matching algorithms provided by the package ['taxize' by Scott Chamberlain ](https://cran.r-project.org/web/packages/taxize/index.html) to match the entries of column `scientificName` against the GBIF Backbone Taxonomy. 
+For taxon name standardisation, the function `standardize_taxa()` makes use of fuzzy matching algorithms provided by the package ['taxize' by Scott Chamberlain ](https://CRAN.R-project.org/package=taxize) to match the entries of column `scientificName` against the GBIF Backbone Taxonomy. 
 The result is written into a new column `scientificNameStd`. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
 
 If further layers of taxonomic information are desired as an output, the function takes the parameter `return`, which by default contains `c("taxonID", "scientificNameStd", "order", "taxonRank")`. Other specifications can be added here. 
