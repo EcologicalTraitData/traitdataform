@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
       - libudunits2-dev 
+      
 os:
 - linux
 
@@ -13,7 +14,9 @@ r:
 
 r_check_args: --no-build-vignettes  
 
-before_deploy: Rscript -e 'install.packages("pkgdown")'
+before_deploy: 
+  - Rscript -e 'install.packages("pkgdown")'
+  - Rscript -e 'pkgdown::build_site()'
 deploy:
   provider: pages
   skip-cleanup: true
@@ -22,3 +25,4 @@ deploy:
   local-dir: docs
   on:
     branch: master
+    
