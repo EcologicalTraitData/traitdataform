@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.4</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
       <h1>Handling units with trait-data</h1>
                         <h4 class="author">Florian D. Schneider</h4>
             
-            <h4 class="date">2018-11-29</h4>
+            <h4 class="date">2018-12-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EcologicalTraitData/traitdataform/blob/master/vignettes/traitdataform-units.Rmd"><code>vignettes/traitdataform-units.Rmd</code></a></small>
       <div class="hidden name"><code>traitdataform-units.Rmd</code></div>
@@ -94,6 +94,7 @@
 
     
     
+<p>This vignette of the ‘traitdataform’ package is providing further detail on how to work with trait values in a traitdata object. The package supports handling of units of numerical values based on the package ‘units’ (<a href="http://journal.r-project.org/archive/2016-2/pebesma-mailund-hiebert.pdf">Pebesma et al. 2016 The R Journal 8:486–494</a>. <a href="https://github.com/edzer/units/" class="uri">https://github.com/edzer/units/</a>, v0.4-5). Further, the vignette provides some advise on factor level harmonization.</p>
 <div id="case-example-provide-measurement-unit" class="section level2">
 <h2 class="hasAnchor">
 <a href="#case-example-provide-measurement-unit" class="anchor"></a>case example: provide measurement unit</h2>
@@ -128,7 +129,7 @@
 <a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt; 5                  ribera deduced_from_genus</span></a>
 <a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt; 6                  ribera               &lt;NA&gt;</span></a>
 <a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 0 measurements in total).</span></a>
+<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span></a>
 <a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co">#&gt;  carabids : Carabid traits by Fons van der Plas .</span></a>
 <a class="sourceLine" id="cb1-32" data-line-number="32"><span class="co">#&gt; </span></a>
@@ -171,7 +172,7 @@
 <a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; 5                   </span></a>
 <a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; 6                   </span></a>
 <a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; This trait-dataset contains 10 traits for 1230 taxa ( 0 measurements in total).</span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; This trait-dataset contains 10 traits for 1230 taxa ( 9008 measurements in total).</span></a>
 <a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt;  arthropodtraits : Functional Arthropod Traits by Martin M Gossner .</span></a>
 <a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt; </span></a>
@@ -221,7 +222,7 @@
 <a class="sourceLine" id="cb2-76" data-line-number="76"><span class="co">#&gt; 5             5</span></a>
 <a class="sourceLine" id="cb2-77" data-line-number="77"><span class="co">#&gt; 6             6</span></a>
 <a class="sourceLine" id="cb2-78" data-line-number="78"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-79" data-line-number="79"><span class="co">#&gt; This trait-dataset contains 10 traits for 179 taxa ( 0 measurements in total).</span></a>
+<a class="sourceLine" id="cb2-79" data-line-number="79"><span class="co">#&gt; This trait-dataset contains 10 traits for 179 taxa ( 1790 measurements in total).</span></a>
 <a class="sourceLine" id="cb2-80" data-line-number="80"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-81" data-line-number="81"><span class="co">#&gt; [ ] :</span></a></code></pre></div>
 <p>Logical or factorial traits ususally don’t come with a unit. In mixed data, the field should specify as empty, <code>""</code> or as<code>NA</code>.</p>
