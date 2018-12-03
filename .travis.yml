@@ -15,7 +15,8 @@ r:
 r_check_args: --no-build-vignettes  
 
 before_deploy: 
-  - Rscript -e 'install.packages("pkgdown")'
+  - Rscript -e 'install.packages(c("pkgdown", "devtools"))'
+  - Rscript -e 'devtools::install()'
   - Rscript -e 'pkgdown::build_site()'
 deploy:
   provider: pages
