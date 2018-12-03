@@ -6,8 +6,20 @@ addons:
       - libudunits2-dev 
 os:
 - linux
+- windows
+
 r:
 - release
 - devel
 
 r_check_args: --no-build-vignettes  
+
+before_deploy: Rscript -e 'install.packages("pkgdown")'
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_PAT
+  keep-history: true
+  local-dir: docs
+  on:
+    branch: master
