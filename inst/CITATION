@@ -1,0 +1,12 @@
+citHeader("To cite 'traitdataform' in publications use:")
+
+citEntry(entry = "Manual",
+  title        = "Package 'traitdataform'",
+  author       = personList(as.person("Florian D. Schneider")),
+  url          = "https://ecologicaltraitdata.github.io/traitdataform/",
+
+  textVersion  =
+  paste("Florian D. Schneider (2018).",
+        "Package 'traitdataform'",
+        "URL https://ecologicaltraitdata.github.io/traitdataform/.")
+)
