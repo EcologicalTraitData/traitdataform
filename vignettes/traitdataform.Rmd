@@ -6,6 +6,8 @@ vignette: >
   %\VignetteIndexEntry{traitdataform}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: div05.bib
+csl: mee.csl
 ---
 
 ```{r, echo = FALSE}
@@ -24,9 +26,9 @@ There are two major use cases for the package:
 The toolset of the package includes
 
 1. transforming typical trait-data formats (e.g. species-trait-matrix or measurement-table data) into a unified long-table format and mapping column names into terms provided in the Ecological Trait-data Standard (ETS) (see section [1. Reading data](#reading-data)),
-2. mapping of trait concepts onto a user-provided traitlist (i.e. a thesaurus of traits) or globally accessible URIs  (see section [3. Standardize traits](#standardize-traits)) and unify units and factor levels (see vignete ['Handling units with trait-data'](traitdataform-units.html)),
+2. mapping of trait concepts onto a user-provided traitlist (i.e. a thesaurus of traits) or globally accessible URIs  (see section [2. Standardize traits](#standardize-traits)) and unify units and factor levels (see vignete ['Handling units with trait-data'](traitdataform-units.html)),
 3. mapping of species concepts onto globally accessible definitions via URIs (pointing to GFBio taxonomic ontology server) (see section [3. Standardize taxa](#standardize-taxa)), 
-4. merging and handling compiled trait-data () 
+4. Merging and handling compiled trait-data, while keeping track of the metadata for each original dataset (see section [4. Working with trait-datasets](#working-with-trait-datasets)) 
 5. saving trait dataset into a desired format using templates (e.g. for project-specific databases or online repositories) (see section [5. Writing data](#writing-data)) 
 
 This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. See Schneider et al. 2018 'Towards an Ecological Trait-data Standard' (pre-print on biorxiv.org, doi: [10.1101/328302](http://dx.doi.org/10.1101/328302) ) for a discussion of the rationale. 
@@ -65,7 +67,7 @@ As the column names and the width of the table varies with the number of traits 
 A more effective format is the **measurement long-table** [@wickham14; @parr16; @kattge11a], where each row is reserved for a single measurement or fact of a specific trait.
 This allows repeated measurements on a single individual to be stored by linking the data from separate rows via a unique  identifier for each individual (labelled `occurrenceID`). 
 Also, multivariate trait measurements can be recorded in this format by linking multiple rows via a unique measurement identifier.  Long-table datasets purport multiple advantages for data manipulation (e.g. filtering, sub-setting and aggregating data), visualization (e.g. plot measured values by factor variable or taxon) and statistical modelling (e.g. ANOVA for testing difference of trait value by sex) [@wickham14].
-Each row of the dataset can therefore be interpreted as a statement of an 'entity x having a qualitative/quantitative feature y' [@garnier15; @schneider18].
+Each row of the dataset can therefore be interpreted as a statement of an 'entity x having a qualitative/quantitative feature y' [@garnier17; @schneider18].
 As long-table formats draw from a defined set of columns,  merging of datasets is much easier. 
 
 The function `as.traitdata()` provided in the package assist in transferring data into the measurement long-table format. For this function to work, it needs at least to know about the columns of the original data that contain trait values (parameter `traits`), and the column which contains the taxonomic concept (parameter `taxa`).
@@ -504,7 +506,7 @@ dataset1Std <- standardize(carabids,
 
 As an alternative input pathway, all parameters to `standardize()` can be specified as attributes of the input object and will be found natively by the function. This allows for the specification of recipes for data integration for projects pulling data from multiple sources. 
 
-# 4. Working with trait datasets
+# 4. Working with trait-datasets
 
 ## combine multiple traitdata tables
 
@@ -656,7 +658,7 @@ attr(carabids, 'keep') <-  c(measurementDeterminedBy = "source_measurement", mea
 
 When thus specified, the data can be re-formated simply by calling `standardize(carabids)`. 
 
-
+<!--
 ## add data layers
 
 When storing data, it might be advised to externalise repetitive entries in a separate datasheet and link to it via datasetID. In R, you can use the function `merge()` to map metadata information from a second data table into the core data table based on the datasetID. 
@@ -680,5 +682,45 @@ dataset3wide <- cast.traitdata(dataset3)
 head(dataset3wide)
  
 ```
+-->
+
+# 5. Writing data 
+
+The final step in converting trait data into a standardised format before uploading the file to a public file hosting service is saving them in a file format that is internationalized, portable and long-term accessible . 
+Internationalization refers to the file encoding ('UTF-8' should be used, 'ASCII' is possible for data with no special characters) as well as the use of decimal delimiters (highly recommended to use '.') and internationally accepted formatting standards for values such as dates (the international norm for date entries is  ISO 8601, i.e. “YYYY-MM-DD”). Portability means that the file can be opened on all operating systems (specifically important, the 'end of line' character) and does not rely on proprietary software (like MS Excel or database tools). Long-term accessibility is warranted by chosing a text-based file format (txt, csv or tsv) and by packaging the primary data with all neccessary metadata.
+
+The base R function `write.table()` gives full control over these parameters and should be used to export trait-data.
+
+```{r, eval = FALSE}
+
+write.table(dataset1Std, file = "carabids_std.csv", 
+            sep = ",", dec = ".", quote = TRUE, eol = "\r", row.names = FALSE)
+
+```
+
+Along with these primary data, you should make any ancilliary data table available along with the data, e.g. the metadata in a human readable form, as well as the lookup table of traits and taxa:
+
+```{r, eval = FALSE}
+
+capture.output(attributes(dataset1Std)$metadata, file = "metadata.txt")
+
+write.table(attributes(dataset1Std)$traits, file = "traits.csv", 
+            sep = ",", dec = ".", quote = TRUE, eol = "\r", row.names = FALSE)
+write.table(attributes(dataset1Std)$taxonomy, file = "taxa.csv", 
+            sep = ",", dec = ".", quote = TRUE, eol = "\r", row.names = FALSE)
+
+```
+
+When publishing the trait data on file servers like Figshare or Zenodo, those files should be uploaded in a single file repository (e.g. in a zip file). R does the archiving for you using `zip()`: 
+
+```{r, eval = FALSE}
+zip("carabids_std.zip", c("carabids_std.csv", "metadata.txt", "traits.csv", "taxa.csv") )
+```
+
+More advise for publishing trait data in a standardised way can be found in our ['Best practice examples for primary data publication'](https://ecologicaltraitdata.github.io/ETS/bestpractice.html) [@schneider18]. 
+
+
+# References
+
 
 
