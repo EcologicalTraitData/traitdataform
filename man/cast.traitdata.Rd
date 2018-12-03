@@ -21,7 +21,7 @@ e.g. \code{traitNameStd} will be omitted.}
 \item{units}{the column name containing the units of numerical values
 (default is \code{traitUnit}).}
 
-\item{fun.aggregate}{option for \code{\link[reshape2:dcast]{reshape2::dcast()}} to define method of
+\item{fun.aggregate}{option for \code{\link[reshape2:cast]{reshape2::cast()}} to define method of
 aggregation.}
 }
 \value{

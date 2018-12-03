@@ -12,7 +12,7 @@
 #' @param values the column name containing the trait values to be used to fill
 #'   the matrix (default is `traitValue`). Duplicate columns (e.g.
 #'   `traitValueStd`) will be omitted. See notes.
-#' @param fun.aggregate option for [reshape2::dcast()] to define method of
+#' @param fun.aggregate option for [reshape2::cast()] to define method of
 #'   aggregation.
 #'
 #' @details The wide-table will be composed while preserving the detail given in

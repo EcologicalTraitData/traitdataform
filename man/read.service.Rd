@@ -30,7 +30,7 @@ read.service.blocks(datasetid, user, pswd, dec = ".",
 
 \item{quote}{the set of quoting characters. To disable quoting altogether, use quote = "". See scan for the behaviour on quotes embedded in quotes. Quoting is only considered for columns read as character, which is all of them unless colClasses is specified.}
 
-\item{fileEncoding}{character string: if non-empty declares the encoding to be used on a file (not a connection) so the character data can be re-encoded as they are written. See \code{\link[base:file]{base::file()}}.}
+\item{fileEncoding}{character string: if non-empty declares the encoding to be used on a file (not a connection) so the character data can be re-encoded as they are written. See \code{\link[base:connections]{base::connections()}}.}
 }
 \description{
 Read table from a web service. Inherits functionality of \code{read.table()}.
