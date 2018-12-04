@@ -6,7 +6,7 @@
   "@type": "SoftwareSourceCode",
   "identifier": "traitdataform",
   "description": "Assistance for handling ecological trait data and applying the Ecological Trait-data Standard terminology (Schneider et al. 2018 <doi:10.1101/328302>).",
-  "name": "traitdataform: Formatting trait data compliant with the Ecological Traitdata Standard",
+  "name": "traitdataform: Formatting Data Compliant with the Ecological Trait-data Standard",
   "codeRepository": "https://github.com/EcologicalTraitData/traitdataform",
   "relatedLink": [
     "http://fdschneider.github.io/traitdataform",
@@ -15,7 +15,7 @@
   ],
   "issueTracker": "https://github.com/EcologicalTraitData/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",

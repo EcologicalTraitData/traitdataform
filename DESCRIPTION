@@ -1,8 +1,8 @@
 Package: traitdataform
 Type: Package
-Title: Formatting trait data compliant with the Ecological Traitdata Standard
-Version: 0.4.4
-Date: 2018-12-02
+Title: Formatting Data Compliant with the Ecological Trait-data Standard
+Version: 0.5.0
+Date: 2018-12-04
 Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre"), 
   comment = c(ORCID = "0000-0002-1494-5684")), 
     person("Caterina", "Penone", role = c("ctb"), comment = c(ORCID = "0000-0002-8170-6659")),

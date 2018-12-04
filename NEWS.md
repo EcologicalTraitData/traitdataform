@@ -1,3 +1,15 @@
+# traitdataform 0.5 (released 04.12.2018)
+
+stable, for submission on CRAN. From this point on, backwards compatibility will be maintained. 
+
+minor changes (since v0.4): 
+
+- complete package vignette 
+- improved unit handling
+- solid demo data import
+
+---
+
 # traitdataform 0.4.4
 
 - finalize vignette (include section on writing data)
