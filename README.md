@@ -1,11 +1,13 @@
-# Package 'traitdataform': harmonizing ecological trait data in R
+# Package 'traitdataform': Formatting and Harmonizing Ecological Trait-Data 
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master)](https://travis-ci.com/EcologicalTraitData/traitdataform)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1921175.svg)](https://doi.org/10.5281/zenodo.1921175)
 
 
-Assistance for handling functional trait data and transferring them into the Trait Data Standard (Schneider et al. 2018 Towards an Ecological Trait-data Standard, biorxiv.org DOI: [10.1101/328302](http://dx.doi.org/10.1101/328302)). 
+
+Assistance for handling functional trait data and transferring them into the Ecological Trait-Data Standard (Schneider et al. 2018 Towards an Ecological Trait-data Standard, biorxiv.org DOI: [10.1101/328302](http://dx.doi.org/10.1101/328302)). 
 
 There are two major use cases for the package: 
 

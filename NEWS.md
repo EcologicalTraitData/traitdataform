@@ -1,5 +1,7 @@
 # traitdataform 0.5 (released 04.12.2018)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1921175.svg)](https://doi.org/10.5281/zenodo.1921175)
+
 stable, for submission on CRAN. From this point on, backwards compatibility will be maintained. 
 
 minor changes (since v0.4): 
@@ -64,9 +66,13 @@ minor changes (since v0.4):
 
 # traitdataform 0.3.0
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489528.svg)](https://doi.org/10.5281/zenodo.1489528)
+
 - solve all errors, warnings and notes on R CHECK
 - complete man pages  
 - fix matching bug for get_gbif_taxonomy()
+
+---
 
 # traitdataform 0.2.6 
 

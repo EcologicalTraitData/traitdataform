@@ -5,8 +5,8 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "traitdataform",
-  "description": "Assistance for handling ecological trait data and applying the Ecological Trait-data Standard terminology (Schneider et al. 2018 <doi:10.1101/328302>).",
-  "name": "traitdataform: Formatting Data Compliant with the Ecological Trait-data Standard",
+  "description": "Assistance for handling ecological trait data and applying the Ecological Trait-Data Standard terminology (Schneider et al. 2018 <doi:10.1101/328302>).",
+  "name": "traitdataform: Formatting and Harmonizing Ecological Trait-Data",
   "codeRepository": "https://github.com/EcologicalTraitData/traitdataform",
   "relatedLink": [
     "http://fdschneider.github.io/traitdataform",
@@ -236,5 +236,6 @@
       "name": "Package 'traitdataform'",
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
-  ]
+  ],
+  "fileSize": "603.574KB"
 }

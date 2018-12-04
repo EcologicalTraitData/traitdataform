@@ -1,6 +1,6 @@
 Package: traitdataform
 Type: Package
-Title: Formatting and Harmonizing Data Compliant with the Ecological Trait-Data Standard
+Title: Formatting and Harmonizing Ecological Trait-Data
 Version: 0.5.0
 Date: 2018-12-04
 Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre"), 
