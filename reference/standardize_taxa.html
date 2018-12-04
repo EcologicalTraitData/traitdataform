@@ -64,7 +64,7 @@ names and relates to globally unique taxon identifiers via URI." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -166,7 +166,7 @@ authors, moving species into other genera or difficulties to place species
 into the Linean nomenclature results in highly fluctuent taxonomic
 definitions.</p>
 <p>As a consequence, there is not one reference for accepted species names and
-dependin on the field of resaerch and taxonomic focus other authorities
+depending on the field of resaerch and taxonomic focus other authorities
 will be employed.</p>
 <p>For reasons of simplicity and because of its high coverage of taxa, the
 function <code>standardize.taxonomy()</code> uses the GBIF Backbone Taxonomy as its
@@ -183,7 +183,9 @@ enable a choice of a taxonomic reference.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'carabids' is now available for use! </span></div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)
+
 <span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>carabids</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),
@@ -194,8 +196,10 @@ enable a choice of a taxonomic reference.</p>
     <span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Fons van der Plas"</span>,
     <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     )
-)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
-<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize_taxa</span>(<span class='no'>dataset1</span>)</div></pre>
+)
+
+<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize_taxa</span>(<span class='no'>dataset1</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

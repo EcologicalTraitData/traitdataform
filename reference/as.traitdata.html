@@ -68,7 +68,7 @@ created." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -248,18 +248,22 @@ additional columns and dataset attribution will be listed in attributes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='co'># species-trait matrix:</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'carabids' is now available for use! </span></div><div class='input'>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)
+
 <span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.traitdata</span>(<span class='no'>carabids</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),
   <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
   <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>basisOfRecordDecription</span> <span class='kw'>=</span> <span class='st'>"source_measurement"</span>, <span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"note"</span>)
-  )</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
+  )
+
 <span class='co'># occurrence table:</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'heteroptera_raw' is now available for use! </span></div><div class='input'>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)
+
 <span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.traitdata</span>(<span class='no'>heteroptera_raw</span>,
   <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
   <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
@@ -271,15 +275,13 @@ additional columns and dataset attribution will be listed in attributes.</p>
   <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
   <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Sex"</span>, <span class='kw'>references</span> <span class='kw'>=</span> <span class='st'>"Source"</span>, <span class='kw'>lifestage</span> <span class='kw'>=</span> <span class='st'>"Wing_development"</span>),
   <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='as.metadata.html'>as.metadata</a></span>(
-    <span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Gossner MM, Simons NK, Höck L and Weisser WW"</span>,
+    <span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Gossner MM, Simons NK, HC6ck L and Weisser WW"</span>,
     <span class='kw'>datasetName</span> <span class='kw'>=</span> <span class='st'>"Morphometric traits Heteroptera"</span>,
     <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attributes'>attributes</a></span>(<span class='no'>heteroptera_raw</span>)$<span class='no'>citeAs</span>,
     <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     )
-)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be an occurrence table/an observation -- trait matrix </span>
-#&gt; <span class='message'>(i.e. with individual specimens per row and multiple trait measurements in columns). </span>
-#&gt; <span class='message'>If this is not the case, please provide parameters! </span></div><div class='input'>
-
+)
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

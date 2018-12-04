@@ -64,7 +64,7 @@ traits within function standardize.traits()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -213,15 +213,17 @@ to apply unit conversion and factor level harmonization.</p>
 #&gt; 	Expected unit:  1 
 #&gt; 
 #&gt; 	 4</div><div class='input'>
-<span class='co'># provide traitlist from remote archive with renaming  </span>
-<span class='co'># (pulls from https://github.com/EcologicalTraitData/TraitDataList)</span>
+# provide traitlist from remote archive with renaming  
+# (pulls from https://github.com/EcologicalTraitData/TraitDataList)
 
+</div><span class='co'># NOT RUN {</span>
 <span class='no'>traits1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.thesaurus</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a></span>(<span class='st'>"https://git.io/fpsj5"</span>),
                    <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>traitID</span> <span class='kw'>=</span> <span class='st'>"identifier"</span>,
                                   <span class='kw'>traitName</span> <span class='kw'>=</span> <span class='st'>"trait"</span>,
                                   <span class='kw'>traitUnit</span> <span class='kw'>=</span> <span class='st'>"expectedUnit"</span>,
                                   <span class='kw'>Comments</span> <span class='kw'>=</span> <span class='st'>"comments"</span>)
-)</div></pre>
+)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
