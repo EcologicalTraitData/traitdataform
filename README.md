@@ -99,7 +99,7 @@ We are aiming to provide the following features in future iterations of the pack
 
 ## Cite as
 
-Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.3.0, doi: xxx.xxx, http://ecologicaltraitdata.github.io/traitdataform
+Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.5.0, http://ecologicaltraitdata.github.io/traitdataform
 
 ## License
 
