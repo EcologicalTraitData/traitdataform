@@ -45,6 +45,7 @@ re-mapping might be added in later versions of the package.)
 }
 \examples{
 
+\dontrun{
 pulldata("arthropodtraits")
 dataset3 <- as.traitdata(arthropodtraits,
                          taxa = "SpeciesID",
@@ -67,7 +68,7 @@ updated <- mutate.traitdata(dataset3, predator = Feeding_guild == "c" )
 head(updated[updated$traitName == "predator",])
 
 levels(updated$traitName)
-
+}
 
 ##
 

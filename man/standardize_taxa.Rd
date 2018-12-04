@@ -56,6 +56,8 @@ enable a choice of a taxonomic reference.
 }
 \examples{
 
+\dontrun{
+
 pulldata("carabids")
 
 dataset1 <- as.traitdata(carabids,
@@ -71,7 +73,7 @@ dataset1 <- as.traitdata(carabids,
 )
 
 dataset1Std <- standardize_taxa(dataset1)
-
+}
 }
 \seealso{
 Other standardize: \code{\link{standardize_traits}},

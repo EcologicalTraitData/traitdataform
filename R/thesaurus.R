@@ -52,12 +52,14 @@
 #' # provide traitlist from remote archive with renaming  
 #' # (pulls from https://github.com/EcologicalTraitData/TraitDataList)
 #' 
+#' \dontrun{
 #' traits1 <- as.thesaurus(read.csv("https://git.io/fpsj5"), 
 #'                    replace = c(traitID = "identifier", 
 #'                                   traitName = "trait",
 #'                                   traitUnit = "expectedUnit",
 #'                                   Comments = "comments") 
 #' )
+#' }
 
 as.thesaurus <- function(...,
                          replace = NULL

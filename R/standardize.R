@@ -42,7 +42,9 @@
 #'
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
+#' 
 #' pulldata("carabids")
 #'
 #' dataset1 <- as.traitdata(carabids,
@@ -56,9 +58,9 @@
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
-#'
-#' dataset1Std <- standardize_taxa(dataset1)
 #' 
+#' dataset1Std <- standardize_taxa(dataset1)
+#' }
 standardize_taxa <- function(x, 
                                  method = get_gbif_taxonomy, 
                                  method_options = c(subspecies = TRUE, 

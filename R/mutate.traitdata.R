@@ -33,7 +33,8 @@
 #' @importFrom plyr rbind.fill
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' pulldata("arthropodtraits")
 #' dataset3 <- as.traitdata(arthropodtraits,
 #'                          taxa = "SpeciesID",
@@ -56,7 +57,7 @@
 #' head(updated[updated$traitName == "predator",])
 #'
 #' levels(updated$traitName)
-#'
+#' }
 #'
 #' ##
 #'

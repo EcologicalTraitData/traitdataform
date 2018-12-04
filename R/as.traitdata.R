@@ -70,9 +70,10 @@
 #' @importFrom reshape2 melt
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' # species-trait matrix:
-#'
+#' 
 #' pulldata("carabids")
 #'
 #' dataset1 <- as.traitdata(carabids,
@@ -83,7 +84,7 @@
 #'   )
 #'
 #' # occurrence table:
-#'
+#' 
 #' pulldata("heteroptera_raw")
 #'
 #' dataset2 <- as.traitdata(heteroptera_raw,
@@ -103,7 +104,7 @@
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
-#'
+#' }
 #' 
 
 as.traitdata <- function(x, 
