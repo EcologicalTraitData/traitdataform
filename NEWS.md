@@ -1,4 +1,9 @@
-# traitdataform 0.5 (released 04.12.2018)
+# traitdataform 0.5.1
+
+- thorough spell-checking 
+- set heavy examples to 'dontrun'
+
+# traitdataform 0.5.0 (released 04.12.2018)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1921175.svg)](https://doi.org/10.5281/zenodo.1921175)
 

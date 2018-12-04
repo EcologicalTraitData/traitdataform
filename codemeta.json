@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "traitdataform",
-  "description": "Assistance for handling ecological trait data and applying the Ecological Trait-Data Standard terminology (Schneider et al. 2018 <doi:10.1101/328302>).",
+  "description": "Assistance for handling ecological trait data and applying the \n    Ecological Trait-Data Standard terminology (Schneider et al. 2018\n    <doi:10.1101/328302>). There are two major use cases: (1) preparation of\n    own trait datasets for upload into public data bases, and (2) harmonizing\n    trait datasets from different sources by re-formatting them into a unified\n    format. See 'traitdataform' website for full documentation. ",
   "name": "traitdataform: Formatting and Harmonizing Ecological Trait-Data",
   "codeRepository": "https://github.com/EcologicalTraitData/traitdataform",
   "relatedLink": [
@@ -15,7 +15,7 @@
   ],
   "issueTracker": "https://github.com/EcologicalTraitData/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -237,5 +237,5 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "603.574KB"
+  "fileSize": "284.213KB"
 }
