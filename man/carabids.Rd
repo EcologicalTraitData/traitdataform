@@ -10,7 +10,7 @@
 \item body_length = body length in mm;
 \item antenna_length = antenna length in mm;
 \item metafemur_length = length metafemur in mm;
-\item eyewith_corr = eye width in mm;
+\item eyewidth_corr = eye width in mm;
 \item note = note;
 \item resid_femur = residual femur length in mm (i.e. residual from
 linear model in which femur length is explained by body length);

@@ -23,11 +23,11 @@ regions of Germany.
 Trait-based approaches have increased significantly in community
 ecology during the last decade. This is not least because studies on
 biodiversity–ecosystem functioning relationships became a major topic in
-ecology. Species’ functions in ecosystems are mediated by their traits. For
+ecology. Species' functions in ecosystems are mediated by their traits. For
 a better understanding of the relationships between environmental drivers,
 the community composition of organisms and ecosystems functioning, it is
 crucial to understand how these relationships are mediated by the
-communities’ trait composition. While there are world-wide efforts to set
+communities' trait composition. While there are world-wide efforts to set
 up trait databases, most have so far focused on plants and species-poorer
 taxa such as birds or amphibians. In contrast, for insects, the large
 number of species makes the gathering of comparable trait data a

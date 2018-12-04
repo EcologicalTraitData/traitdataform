@@ -44,7 +44,7 @@ into the Linean nomenclature results in highly fluctuent taxonomic
 definitions.
 
 As a consequence, there is not one reference for accepted species names and
-dependin on the field of resaerch and taxonomic focus other authorities
+depending on the field of resaerch and taxonomic focus other authorities
 will be employed.
 
 For reasons of simplicity and because of its high coverage of taxa, the

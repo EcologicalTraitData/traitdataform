@@ -36,7 +36,7 @@ terrestrial mammals.
 \details{
 Ecological trait data are essential for understanding the
 broad-scale distribution of biodiversity and its response to global change.
-For animals, diet represents a fundamental aspect of species’ evolutionary
+For animals, diet represents a fundamental aspect of species' evolutionary
 adaptations, ecological and functional roles, and trophic interactions.
 However, the importance of diet for macroevolutionary and macroecological
 dynamics remains little explored, partly because of the lack of
