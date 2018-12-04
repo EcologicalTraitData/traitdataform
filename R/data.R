@@ -104,7 +104,7 @@ NULL
 #'     \item body_length = body length in mm; 
 #'     \item antenna_length = antenna length in mm; 
 #'     \item metafemur_length = length metafemur in mm;
-#'     \item eyewith_corr = eye width in mm; 
+#'     \item eyewidth_corr = eye width in mm; 
 #'     \item note = note; 
 #'     \item resid_femur = residual femur length in mm (i.e. residual from 
 #'        linear model in which femur length is explained by body length); 
@@ -143,11 +143,11 @@ NULL
 #' @details Trait-based approaches have increased significantly in community
 #'   ecology during the last decade. This is not least because studies on
 #'   biodiversity–ecosystem functioning relationships became a major topic in
-#'   ecology. Species’ functions in ecosystems are mediated by their traits. For
+#'   ecology. Species' functions in ecosystems are mediated by their traits. For
 #'   a better understanding of the relationships between environmental drivers,
 #'   the community composition of organisms and ecosystems functioning, it is
 #'   crucial to understand how these relationships are mediated by the
-#'   communities’ trait composition. While there are world-wide efforts to set
+#'   communities' trait composition. While there are world-wide efforts to set
 #'   up trait databases, most have so far focused on plants and species-poorer
 #'   taxa such as birds or amphibians. In contrast, for insects, the large
 #'   number of species makes the gathering of comparable trait data a
@@ -341,7 +341,7 @@ NULL
 #'   
 #' @details Ecological trait data are essential for understanding the 
 #'   broad-scale distribution of biodiversity and its response to global change.
-#'   For animals, diet represents a fundamental aspect of species’ evolutionary 
+#'   For animals, diet represents a fundamental aspect of species' evolutionary 
 #'   adaptations, ecological and functional roles, and trophic interactions. 
 #'   However, the importance of diet for macroevolutionary and macroecological 
 #'   dynamics remains little explored, partly because of the lack of 
