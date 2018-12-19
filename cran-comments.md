@@ -1,4 +1,8 @@
-This is the first submission of the 'traitdataform' package. 
+## Resubmission
+
+This is a resubmission. 
+
+* The file LICENSE has been updated to complement the CRAN template.
 
 ## Test environments
 
