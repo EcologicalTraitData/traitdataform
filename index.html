@@ -97,9 +97,11 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The package can be installed from Github via the ‘devtools’ package</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'devtools'</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'EcologicalTraitData/traitdataform'</span>)</a></code></pre></div>
+<p>Install from CRAN via</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'traitdataform'</span>)</a></code></pre></div>
+<p>The development version of the package can be installed from Github via the ‘devtools’ package</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'devtools'</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'EcologicalTraitData/traitdataform'</span>)</a></code></pre></div>
 </div>
 <div id="system-requirements" class="section level2">
 <h2 class="hasAnchor">
@@ -109,33 +111,33 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/pulldata.html">pulldata</a></span>(<span class="st">"carabids"</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">thesaurus &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">       <span class="dt">body_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"body_length"</span>, </a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">         <span class="dt">identifier =</span> <span class="st">"length"</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">         ), </a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">       <span class="dt">antenna_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"antenna_length"</span>, </a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">         <span class="dt">identifier =</span> <span class="st">"antenna"</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">         ),</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">       <span class="dt">metafemur_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"metafemur_length"</span>, </a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">         <span class="dt">identifier =</span> <span class="st">"metafemur"</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">         ),</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">       <span class="dt">eyewidth =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"eyewidth_corr"</span>, </a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">         <span class="dt">identifier =</span> <span class="st">"eyewidth"</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">         )</a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">)</a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">                          </a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">traitdataset1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/standardize.html">standardize</a></span>(carabids,</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">            <span class="dt">thesaurus =</span> thesaurus,</a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">            <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">            <span class="dt">units =</span> <span class="st">"mm"</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27">            )</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/pulldata.html">pulldata</a></span>(<span class="st">"carabids"</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">thesaurus &lt;-<span class="st"> </span><span class="kw"><a href="reference/as.thesaurus.html">as.thesaurus</a></span>(</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">       <span class="dt">body_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"body_length"</span>, </a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">         <span class="dt">identifier =</span> <span class="st">"length"</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">         ), </a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">       <span class="dt">antenna_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"antenna_length"</span>, </a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">         <span class="dt">identifier =</span> <span class="st">"antenna"</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">         ),</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">       <span class="dt">metafemur_length =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"metafemur_length"</span>, </a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">         <span class="dt">identifier =</span> <span class="st">"metafemur"</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">         ),</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">       <span class="dt">eyewidth =</span> <span class="kw"><a href="reference/as.trait.html">as.trait</a></span>(<span class="st">"eyewidth_corr"</span>, </a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">         <span class="dt">expectedUnit =</span> <span class="st">"mm"</span>, </a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">         <span class="dt">identifier =</span> <span class="st">"eyewidth"</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">         )</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">)</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">                          </a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">traitdataset1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/standardize.html">standardize</a></span>(carabids,</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">            <span class="dt">thesaurus =</span> thesaurus,</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">            <span class="dt">taxa =</span> <span class="st">"name_correct"</span>,</a>
+<a class="sourceLine" id="cb3-26" data-line-number="26">            <span class="dt">units =</span> <span class="st">"mm"</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">            )</a></code></pre></div>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -171,7 +173,7 @@
 <div id="cite-as" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cite-as" class="anchor"></a>Cite as</h2>
-<p>Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.5.0, <a href="http://ecologicaltraitdata.github.io/traitdataform" class="uri">http://ecologicaltraitdata.github.io/traitdataform</a></p>
+<p>Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.5.2, DOI: <a href="http://dx.doi.org/10.5281/zenodo.1921175">10.5281/zenodo.1921175</a> <a href="http://ecologicaltraitdata.github.io/traitdataform" class="uri">http://ecologicaltraitdata.github.io/traitdataform</a></p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
@@ -186,6 +188,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=traitdataform">https://​cloud.r-project.org/​package=traitdataform</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/EcologicalTraitData/traitdataform">https://​github.com/​EcologicalTraitData/​traitdataform</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/EcologicalTraitData/traitdataform/issues">https://​github.com/​EcologicalTraitData/​traitdataform/​issues</a>
@@ -220,7 +224,8 @@
 <li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a></li>
 <li><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
 <li><a href="https://travis-ci.com/EcologicalTraitData/traitdataform"><img src="https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://doi.org/10.5281/zenodo.1921175"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1921175.svg" alt="DOI"></a></li>
+<li><a href="https://cran.r-project.org/package=traitdataform"><img src="https://www.r-pkg.org/badges/version/traitdataform" alt="CRAN status"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.1489527"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1489527.svg" alt="DOI"></a></li>
 </ul>
 </div>
 </div>
