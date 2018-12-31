@@ -1,3 +1,7 @@
+# traitdataform 0.5.2 (released on CRAN 30.12.2018)
+
+- solve minor compliance issues with CRAN: use LICENSE template
+
 # traitdataform 0.5.1
 
 - thorough spell-checking 

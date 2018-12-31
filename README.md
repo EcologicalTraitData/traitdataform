@@ -3,8 +3,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.com/EcologicalTraitData/traitdataform.svg?branch=master)](https://travis-ci.com/EcologicalTraitData/traitdataform)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1921175.svg)](https://doi.org/10.5281/zenodo.1921175)
-
+[![CRAN status](https://www.r-pkg.org/badges/version/traitdataform)](https://cran.r-project.org/package=traitdataform)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489527.svg)](https://doi.org/10.5281/zenodo.1489527)
 
 
 Assistance for handling functional trait data and transferring them into the Ecological Trait-Data Standard (Schneider et al. 2018 Towards an Ecological Trait-data Standard, biorxiv.org DOI: [10.1101/328302](http://dx.doi.org/10.1101/328302)). 
@@ -25,7 +25,13 @@ The toolset of the package includes
 
 ## Installation
 
-The package can be installed from Github via the 'devtools' package
+Install from CRAN via
+
+```r
+install.packages('traitdataform')
+```
+
+The development version of the package can be installed from Github via the 'devtools' package
 
 ```r
 install.packages('devtools')
@@ -101,7 +107,7 @@ We are aiming to provide the following features in future iterations of the pack
 
 ## Cite as
 
-Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.5.0, http://ecologicaltraitdata.github.io/traitdataform
+Schneider, F.D. (2018) traitdataform - harmonizing ecological trait data in R, v0.5.2, DOI: [10.5281/zenodo.1921175](http://dx.doi.org/10.5281/zenodo.1921175) http://ecologicaltraitdata.github.io/traitdataform
 
 ## License
 
