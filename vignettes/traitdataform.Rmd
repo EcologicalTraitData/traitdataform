@@ -16,7 +16,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 library(traitdataform)
 ```
 
-Assistance for handling functional trait data and transferring them into the Ecological Trait-data Standard (Schneider et al. 2018, https://terminologies.gfbio.org/terms/ets/pages/ doi: [10.5281/zenodo.1485739](http://dx.doi.org/10.5281/zenodo.1485739)). 
+Assistance for handling functional trait data and transferring them into the Ecological Trait-data Standard (Schneider et al. 2018, https://terminologies.gfbio.org/terms/ets/pages/ doi: [10.5281/zenodo.1485739](https://doi.org/10.5281/zenodo.1485739)). 
 
 There are two major use cases for the package: 
 
@@ -31,7 +31,7 @@ The toolset of the package includes
 4. Merging and handling compiled trait-data, while keeping track of the metadata for each original dataset (see section [4. Working with trait-datasets](#working-with-trait-datasets)) 
 5. saving trait dataset into a desired format using templates (e.g. for project-specific databases or online repositories) (see section [5. Writing data](#writing-data)) 
 
-This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. See Schneider et al. 2018 'Towards an Ecological Trait-data Standard' (pre-print on biorxiv.org, doi: [10.1101/328302](http://dx.doi.org/10.1101/328302) ) for a discussion of the rationale. 
+This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. See Schneider et al. 2018 'Towards an Ecological Trait-data Standard' (pre-print on biorxiv.org, doi: [10.1101/328302](https://doi.org/10.1101/328302) ) for a discussion of the rationale. 
 
 ---
 

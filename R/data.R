@@ -53,7 +53,7 @@ pulldata <- function(x = NULL) {
 #'   Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) A summary of eight traits
 #'   of Coleoptera, Hemiptera, Orthoptera and Araneae, occurring in grasslands
 #'   in Germany. Scientific Data 2: 150013.
-#'   http://dx.doi.org/10.1038/sdata.2015.13 }
+#'   https://doi.org/10.1038/sdata.2015.13 }
 #'   
 #'   Additionally, please cite the Dryad data package:
 #'   
@@ -61,13 +61,13 @@ pulldata <- function(x = NULL) {
 #'   Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW (2015) Data
 #'   from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 #'   Araneae, occurring in grasslands in Germany. Dryad Digital Repository.
-#'   http://dx.doi.org/10.5061/dryad.53ds2 }
+#'   https://doi.org/10.5061/dryad.53ds2 }
 #'   
 #' @author Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
 #' 
 #' @family rawdata
 #' 
-#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#' @source \url{https://doi.org/10.5061/dryad.53ds2};
 #'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
@@ -116,7 +116,7 @@ NULL
 #'
 #' @family rawdata
 #' 
-#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#' @source \url{https://doi.org/10.5061/dryad.53ds2};
 #'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
