@@ -11,11 +11,12 @@
   "relatedLink": [
     "http://fdschneider.github.io/traitdataform",
     "http://EcologicalTraitData.github.io/traitdataform",
-    "https://EcologicalTraitData.github.io/traitdataform"
+    "https://EcologicalTraitData.github.io/traitdataform",
+    "https://CRAN.R-project.org/package=traitdataform"
   ],
   "issueTracker": "https://github.com/EcologicalTraitData/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -212,7 +213,7 @@
       "sameAs": "https://CRAN.R-project.org/package=plyr"
     }
   ],
-  "releaseNotes": "https://github.com/fdschneider/traitdataform/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/EcologicalTraitData/traitdataform/blob/master/NEWS.md",
   "readme": "https://github.com/EcologicalTraitData/traitdataform/blob/master/README.md",
   "contIntegration": "https://travis-ci.com/EcologicalTraitData/traitdataform",
   "keywords": [
@@ -237,5 +238,13 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "283.716KB"
+  "fileSize": "283.839KB",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "copyrightHolder": {},
+  "funder": {}
 }

@@ -1,3 +1,8 @@
+# traitdataform 0.5.3 
+
+- character issues in strict Latin-1 locale have been resolved (apostrophe and en-dash)
+- a dependency on an external resource (ETS.csv) is now static.
+
 # traitdataform 0.5.2 (released on CRAN 30.12.2018)
 
 - solve minor compliance issues with CRAN: use LICENSE template
