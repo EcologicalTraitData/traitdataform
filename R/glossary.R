@@ -3,4 +3,4 @@
 #' @description The terms and concepts as defined by the ETS (https://terminologies.gfbio.org/terms/ets/pages/)
 "glossary"
 
-glossary <- read.csv("https://raw.githubusercontent.com/EcologicalTraitData/TraitDataStandard/master/ETS.csv")
+glossary <- read.csv("https://raw.githubusercontent.com/EcologicalTraitData/ETS/v0.9/ETS.csv")
