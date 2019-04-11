@@ -142,7 +142,7 @@ NULL
 #'
 #' @details Trait-based approaches have increased significantly in community
 #'   ecology during the last decade. This is not least because studies on
-#'   biodiversity–ecosystem functioning relationships became a major topic in
+#'   biodiversity-ecosystem functioning relationships became a major topic in
 #'   ecology. Species' functions in ecosystems are mediated by their traits. For
 #'   a better understanding of the relationships between environmental drivers,
 #'   the community composition of organisms and ecosystems functioning, it is
@@ -179,7 +179,7 @@ NULL
 #'  
 #' -  Gossner, M. M., N. K. Simons, L. Höck, and W. W. Weisser. 2015.
 #' Morphometric measures of Heteroptera sampled in grasslands across three
-#' regions of Germany. Ecology 96:1154–1154.
+#' regions of Germany. Ecology 96:1154-1154.
 #' - Data publication: Gossner, M.M, Simons, N.K., Höck, L., Weisser, W.W.,
 #' 2016. Morphometric measures of Heteroptera sampled in grasslands across three
 #' regions of Germany. figshare.
@@ -314,7 +314,7 @@ NULL
 #' 
 #' @name mammaldiet
 #' @description A comprehensive global dataset of diet preferences of mammals 
-#'   (‘MammalDIET’). Diet information was digitized from the literature and 
+#'   ('MammalDIET'). Diet information was digitized from the literature and 
 #'   extrapolated for species with missing information. The original and 
 #'   extrapolated data cover species-level diet information for >99% of all 
 #'   terrestrial mammals.
@@ -324,7 +324,7 @@ NULL
 #'   - Kissling, W.D., Dalby, L., Fløjgaard, C., Lenoir, J., Sandel, B., Sandom,
 #'   C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological 
 #'   trait datasets: digitalization, extrapolation, and validation of diet 
-#'   preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913–2930. 
+#'   preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913-2930. 
 #'   \url{http://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/}
 #'   
 #'   Additionally, please cite the Dryad data package:
