@@ -22,7 +22,7 @@ regions of Germany.
 \details{
 Trait-based approaches have increased significantly in community
 ecology during the last decade. This is not least because studies on
-biodiversity–ecosystem functioning relationships became a major topic in
+biodiversity-ecosystem functioning relationships became a major topic in
 ecology. Species' functions in ecosystems are mediated by their traits. For
 a better understanding of the relationships between environmental drivers,
 the community composition of organisms and ecosystems functioning, it is
@@ -57,7 +57,7 @@ studying how the change in trait composition affects ecosystem processes.
 \itemize{
 \item Gossner, M. M., N. K. Simons, L. Höck, and W. W. Weisser. 2015.
 Morphometric measures of Heteroptera sampled in grasslands across three
-regions of Germany. Ecology 96:1154–1154.
+regions of Germany. Ecology 96:1154-1154.
 \item Data publication: Gossner, M.M, Simons, N.K., Höck, L., Weisser, W.W.,
 }
 \enumerate{

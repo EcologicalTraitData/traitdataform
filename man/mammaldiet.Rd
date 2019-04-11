@@ -9,7 +9,7 @@ Cite this dataset as:
 \item Kissling, W.D., Dalby, L., Fløjgaard, C., Lenoir, J., Sandel, B., Sandom,
 C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological
 trait datasets: digitalization, extrapolation, and validation of diet
-preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913–2930.
+preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913-2930.
 \url{http://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/}
 }
 
@@ -28,7 +28,7 @@ and related or neighboring rights to this data.
 }
 \description{
 A comprehensive global dataset of diet preferences of mammals
-(‘MammalDIET’). Diet information was digitized from the literature and
+('MammalDIET'). Diet information was digitized from the literature and
 extrapolated for species with missing information. The original and
 extrapolated data cover species-level diet information for >99% of all
 terrestrial mammals.
