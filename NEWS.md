@@ -1,4 +1,8 @@
-# traitdataform 0.5.3 
+# traitdataform 0.5.4
+
+- enforce UTF-8 environment in Latin-1 locale now works for 
+
+# traitdataform 0.5.3 (released on CRAN	2019-04-16)
 
 - character issues in strict Latin-1 locale have been resolved (apostrophe and en-dash)
 - a dependency on an external resource (ETS.csv) is now static.
