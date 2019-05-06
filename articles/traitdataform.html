@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
       </span>
     </div>
 
@@ -145,82 +145,84 @@
 <a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; [ ] :</span></a></code></pre></div>
 <p>Note that in the output table the columns have been renamed <a href="https://terminologies.gfbio.org/terms/ets/pages/">according to the ETS</a>. The essential columns are <code>traitName</code>, <code>traitValue</code> for the reported measurement or fact as well as <code>scientificName</code> for the taxon concept. The newly assigned column <code>measurementID</code> contains a running number for each individual trait measurement.<br>
 The function automatically interprets data as a species<span class="math inline">\(\times\)</span>traits matrix if the taxa column contains only unique entries and no duplicates. In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column <code>occurrenceID</code> which links measurements taken on the same individuals. Both <code>occurrenceID</code> and <code>measurementID</code> can be provided by the author using the parameter <code>occurrences</code> (as a column name or a vector) or <code>measurements</code> (as a column name or a vector).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">heteroptera_raw &lt;-<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/read.table">read.delim</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/connections">url</a></span>(<span class="st">"https://ndownloader.figshare.com/files/5633883"</span>, </a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                                         <span class="dt">encoding =</span> <span class="st">"windows-1252"</span>),</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">                                    <span class="dt">stringsAsFactors=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co"># Data pulication: M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W.</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># grasslands across three regions of Germany. figshare.</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co"># https://doi.org/10.6084/m9.figshare.c.3307611.v1</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11">dataset2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera_raw,</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">              <span class="dt">traits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,</a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">                         <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>,</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">                         <span class="st">"Antenna_Seg2"</span>, <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>,</a>
-<a class="sourceLine" id="cb4-15" data-line-number="15">                         <span class="st">"Front.Tibia_length"</span>, <span class="st">"Mid.Tibia_length"</span>, <span class="st">"Hind.Tibia_length"</span>,</a>
-<a class="sourceLine" id="cb4-16" data-line-number="16">                         <span class="st">"Front.Femur_length"</span>, <span class="st">"Hind.Femur_length"</span>, <span class="st">"Front.Femur_width"</span>,</a>
-<a class="sourceLine" id="cb4-17" data-line-number="17">                         <span class="st">"Hind.Femur_width"</span>, <span class="st">"Rostrum_length"</span>, <span class="st">"Rostrum_width"</span>, </a>
-<a class="sourceLine" id="cb4-18" data-line-number="18">                         <span class="st">"Wing_length"</span>, <span class="st">"Wing_width"</span>),</a>
-<a class="sourceLine" id="cb4-19" data-line-number="19">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
-<a class="sourceLine" id="cb4-20" data-line-number="20">              <span class="dt">occurrences =</span> <span class="st">"ID"</span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21">              )</a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; Input is taken to be an occurrence table/an observation -- trait matrix </span></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; (i.e. with individual specimens per row and multiple trait measurements in columns). </span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; If this is not the case, please provide parameters!</span></a>
-<a class="sourceLine" id="cb4-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co"># show different trait measurements for same occurrence/individual</span></a>
-<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(dataset2, occurrenceID <span class="op">==</span><span class="st"> "5"</span> ) </a>
-<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt;        scientificName          traitName traitValue measurementID</span></a>
-<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; 5    Acalypta parvula        Body_length       1.84             5</span></a>
-<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; 430  Acalypta parvula         Body_width       0.82           430</span></a>
-<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; 855  Acalypta parvula        Body_height       0.56           855</span></a>
-<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; 1280 Acalypta parvula      Thorax_length       0.17          1280</span></a>
-<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; 1705 Acalypta parvula       Thorax_width       0.84          1705</span></a>
-<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; 2130 Acalypta parvula         Head_width       0.36          2130</span></a>
-<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt; 2555 Acalypta parvula          Eye_width       0.10          2555</span></a>
-<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt; 2980 Acalypta parvula       Antenna_Seg1       0.07          2980</span></a>
-<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; 3405 Acalypta parvula       Antenna_Seg2       0.06          3405</span></a>
-<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; 3830 Acalypta parvula       Antenna_Seg3       0.40          3830</span></a>
-<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt; 4255 Acalypta parvula       Antenna_Seg4       0.15          4255</span></a>
-<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt; 5105 Acalypta parvula Front.Tibia_length       0.39          4716</span></a>
-<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt; 5530 Acalypta parvula   Mid.Tibia_length       0.40          5141</span></a>
-<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co">#&gt; 5955 Acalypta parvula  Hind.Tibia_length       0.50          5566</span></a>
-<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="co">#&gt; 6380 Acalypta parvula Front.Femur_length       0.42          5991</span></a>
-<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">#&gt; 6805 Acalypta parvula  Hind.Femur_length       0.43          6416</span></a>
-<a class="sourceLine" id="cb4-45" data-line-number="45"><span class="co">#&gt; 7230 Acalypta parvula  Front.Femur_width       0.08          6841</span></a>
-<a class="sourceLine" id="cb4-46" data-line-number="46"><span class="co">#&gt; 7655 Acalypta parvula   Hind.Femur_width       0.07          7266</span></a>
-<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt; 8080 Acalypta parvula     Rostrum_length       0.80          7691</span></a>
-<a class="sourceLine" id="cb4-48" data-line-number="48"><span class="co">#&gt; 8505 Acalypta parvula      Rostrum_width       0.08          8116</span></a>
-<a class="sourceLine" id="cb4-49" data-line-number="49"><span class="co">#&gt; 8930 Acalypta parvula        Wing_length       1.78          8541</span></a>
-<a class="sourceLine" id="cb4-50" data-line-number="50"><span class="co">#&gt; 9355 Acalypta parvula         Wing_width       0.65          8966</span></a>
-<a class="sourceLine" id="cb4-51" data-line-number="51"><span class="co">#&gt;      occurrenceID</span></a>
-<a class="sourceLine" id="cb4-52" data-line-number="52"><span class="co">#&gt; 5               5</span></a>
-<a class="sourceLine" id="cb4-53" data-line-number="53"><span class="co">#&gt; 430             5</span></a>
-<a class="sourceLine" id="cb4-54" data-line-number="54"><span class="co">#&gt; 855             5</span></a>
-<a class="sourceLine" id="cb4-55" data-line-number="55"><span class="co">#&gt; 1280            5</span></a>
-<a class="sourceLine" id="cb4-56" data-line-number="56"><span class="co">#&gt; 1705            5</span></a>
-<a class="sourceLine" id="cb4-57" data-line-number="57"><span class="co">#&gt; 2130            5</span></a>
-<a class="sourceLine" id="cb4-58" data-line-number="58"><span class="co">#&gt; 2555            5</span></a>
-<a class="sourceLine" id="cb4-59" data-line-number="59"><span class="co">#&gt; 2980            5</span></a>
-<a class="sourceLine" id="cb4-60" data-line-number="60"><span class="co">#&gt; 3405            5</span></a>
-<a class="sourceLine" id="cb4-61" data-line-number="61"><span class="co">#&gt; 3830            5</span></a>
-<a class="sourceLine" id="cb4-62" data-line-number="62"><span class="co">#&gt; 4255            5</span></a>
-<a class="sourceLine" id="cb4-63" data-line-number="63"><span class="co">#&gt; 5105            5</span></a>
-<a class="sourceLine" id="cb4-64" data-line-number="64"><span class="co">#&gt; 5530            5</span></a>
-<a class="sourceLine" id="cb4-65" data-line-number="65"><span class="co">#&gt; 5955            5</span></a>
-<a class="sourceLine" id="cb4-66" data-line-number="66"><span class="co">#&gt; 6380            5</span></a>
-<a class="sourceLine" id="cb4-67" data-line-number="67"><span class="co">#&gt; 6805            5</span></a>
-<a class="sourceLine" id="cb4-68" data-line-number="68"><span class="co">#&gt; 7230            5</span></a>
-<a class="sourceLine" id="cb4-69" data-line-number="69"><span class="co">#&gt; 7655            5</span></a>
-<a class="sourceLine" id="cb4-70" data-line-number="70"><span class="co">#&gt; 8080            5</span></a>
-<a class="sourceLine" id="cb4-71" data-line-number="71"><span class="co">#&gt; 8505            5</span></a>
-<a class="sourceLine" id="cb4-72" data-line-number="72"><span class="co">#&gt; 8930            5</span></a>
-<a class="sourceLine" id="cb4-73" data-line-number="73"><span class="co">#&gt; 9355            5</span></a>
-<a class="sourceLine" id="cb4-74" data-line-number="74"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-75" data-line-number="75"><span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span></a>
-<a class="sourceLine" id="cb4-76" data-line-number="76"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="cf">if</span>(<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/l10n_info">l10n_info</a></span>()<span class="op">$</span><span class="st">`</span><span class="dt">UTF-8</span><span class="st">`</span>) {<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/locales">Sys.setlocale</a></span>(<span class="st">"LC_CTYPE"</span>, <span class="st">"en_US.UTF-8"</span>)}</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">heteroptera_raw &lt;-<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/read.table">read.delim</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/connections">url</a></span>(<span class="st">"https://ndownloader.figshare.com/files/5633883"</span>, </a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">                                         <span class="dt">encoding =</span> <span class="st">"windows-1252"</span>),</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">                                    <span class="dt">stringsAsFactors=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># Data pulication: M. Gossner, Martin; K. Simons, Nadja; Höck, Leonhard; W.</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co"># Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co"># grasslands across three regions of Germany. figshare.</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co"># https://doi.org/10.6084/m9.figshare.c.3307611.v1</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">dataset2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as.traitdata.html">as.traitdata</a></span>(heteroptera_raw,</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">              <span class="dt">traits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">                         <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>,</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">                         <span class="st">"Antenna_Seg2"</span>, <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>,</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">                         <span class="st">"Front.Tibia_length"</span>, <span class="st">"Mid.Tibia_length"</span>, <span class="st">"Hind.Tibia_length"</span>,</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">                         <span class="st">"Front.Femur_length"</span>, <span class="st">"Hind.Femur_length"</span>, <span class="st">"Front.Femur_width"</span>,</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">                         <span class="st">"Hind.Femur_width"</span>, <span class="st">"Rostrum_length"</span>, <span class="st">"Rostrum_width"</span>, </a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">                         <span class="st">"Wing_length"</span>, <span class="st">"Wing_width"</span>),</a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">              <span class="dt">taxa =</span> <span class="st">"SpeciesID"</span>,</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">              <span class="dt">occurrences =</span> <span class="st">"ID"</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">              )</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; Input is taken to be an occurrence table/an observation -- trait matrix </span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; (i.e. with individual specimens per row and multiple trait measurements in columns). </span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; If this is not the case, please provide parameters!</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co"># show different trait measurements for same occurrence/individual</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(dataset2, occurrenceID <span class="op">==</span><span class="st"> "5"</span> ) </a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt;        scientificName          traitName traitValue measurementID</span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; 5    Acalypta parvula        Body_length       1.84             5</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; 430  Acalypta parvula         Body_width       0.82           430</span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; 855  Acalypta parvula        Body_height       0.56           855</span></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; 1280 Acalypta parvula      Thorax_length       0.17          1280</span></a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt; 1705 Acalypta parvula       Thorax_width       0.84          1705</span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt; 2130 Acalypta parvula         Head_width       0.36          2130</span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; 2555 Acalypta parvula          Eye_width       0.10          2555</span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; 2980 Acalypta parvula       Antenna_Seg1       0.07          2980</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt; 3405 Acalypta parvula       Antenna_Seg2       0.06          3405</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt; 3830 Acalypta parvula       Antenna_Seg3       0.40          3830</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt; 4255 Acalypta parvula       Antenna_Seg4       0.15          4255</span></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co">#&gt; 5105 Acalypta parvula Front.Tibia_length       0.39          4716</span></a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="co">#&gt; 5530 Acalypta parvula   Mid.Tibia_length       0.40          5141</span></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">#&gt; 5955 Acalypta parvula  Hind.Tibia_length       0.50          5566</span></a>
+<a class="sourceLine" id="cb4-45" data-line-number="45"><span class="co">#&gt; 6380 Acalypta parvula Front.Femur_length       0.42          5991</span></a>
+<a class="sourceLine" id="cb4-46" data-line-number="46"><span class="co">#&gt; 6805 Acalypta parvula  Hind.Femur_length       0.43          6416</span></a>
+<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt; 7230 Acalypta parvula  Front.Femur_width       0.08          6841</span></a>
+<a class="sourceLine" id="cb4-48" data-line-number="48"><span class="co">#&gt; 7655 Acalypta parvula   Hind.Femur_width       0.07          7266</span></a>
+<a class="sourceLine" id="cb4-49" data-line-number="49"><span class="co">#&gt; 8080 Acalypta parvula     Rostrum_length       0.80          7691</span></a>
+<a class="sourceLine" id="cb4-50" data-line-number="50"><span class="co">#&gt; 8505 Acalypta parvula      Rostrum_width       0.08          8116</span></a>
+<a class="sourceLine" id="cb4-51" data-line-number="51"><span class="co">#&gt; 8930 Acalypta parvula        Wing_length       1.78          8541</span></a>
+<a class="sourceLine" id="cb4-52" data-line-number="52"><span class="co">#&gt; 9355 Acalypta parvula         Wing_width       0.65          8966</span></a>
+<a class="sourceLine" id="cb4-53" data-line-number="53"><span class="co">#&gt;      occurrenceID</span></a>
+<a class="sourceLine" id="cb4-54" data-line-number="54"><span class="co">#&gt; 5               5</span></a>
+<a class="sourceLine" id="cb4-55" data-line-number="55"><span class="co">#&gt; 430             5</span></a>
+<a class="sourceLine" id="cb4-56" data-line-number="56"><span class="co">#&gt; 855             5</span></a>
+<a class="sourceLine" id="cb4-57" data-line-number="57"><span class="co">#&gt; 1280            5</span></a>
+<a class="sourceLine" id="cb4-58" data-line-number="58"><span class="co">#&gt; 1705            5</span></a>
+<a class="sourceLine" id="cb4-59" data-line-number="59"><span class="co">#&gt; 2130            5</span></a>
+<a class="sourceLine" id="cb4-60" data-line-number="60"><span class="co">#&gt; 2555            5</span></a>
+<a class="sourceLine" id="cb4-61" data-line-number="61"><span class="co">#&gt; 2980            5</span></a>
+<a class="sourceLine" id="cb4-62" data-line-number="62"><span class="co">#&gt; 3405            5</span></a>
+<a class="sourceLine" id="cb4-63" data-line-number="63"><span class="co">#&gt; 3830            5</span></a>
+<a class="sourceLine" id="cb4-64" data-line-number="64"><span class="co">#&gt; 4255            5</span></a>
+<a class="sourceLine" id="cb4-65" data-line-number="65"><span class="co">#&gt; 5105            5</span></a>
+<a class="sourceLine" id="cb4-66" data-line-number="66"><span class="co">#&gt; 5530            5</span></a>
+<a class="sourceLine" id="cb4-67" data-line-number="67"><span class="co">#&gt; 5955            5</span></a>
+<a class="sourceLine" id="cb4-68" data-line-number="68"><span class="co">#&gt; 6380            5</span></a>
+<a class="sourceLine" id="cb4-69" data-line-number="69"><span class="co">#&gt; 6805            5</span></a>
+<a class="sourceLine" id="cb4-70" data-line-number="70"><span class="co">#&gt; 7230            5</span></a>
+<a class="sourceLine" id="cb4-71" data-line-number="71"><span class="co">#&gt; 7655            5</span></a>
+<a class="sourceLine" id="cb4-72" data-line-number="72"><span class="co">#&gt; 8080            5</span></a>
+<a class="sourceLine" id="cb4-73" data-line-number="73"><span class="co">#&gt; 8505            5</span></a>
+<a class="sourceLine" id="cb4-74" data-line-number="74"><span class="co">#&gt; 8930            5</span></a>
+<a class="sourceLine" id="cb4-75" data-line-number="75"><span class="co">#&gt; 9355            5</span></a>
+<a class="sourceLine" id="cb4-76" data-line-number="76"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-77" data-line-number="77"><span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span></a>
+<a class="sourceLine" id="cb4-78" data-line-number="78"><span class="co">#&gt; NULL</span></a></code></pre></div>
 <p>This allows the user to be explicit about the structure of the output data.</p>
 </div>
 <div id="specify-units" class="section level2">
@@ -918,7 +920,7 @@ head(dataset5Std)
 <a class="sourceLine" id="cb17-50" data-line-number="50"><span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling</span></a>
 <a class="sourceLine" id="cb17-51" data-line-number="51"><span class="co">#&gt; intensity." _Methods in Ecology and Evolution_. doi:</span></a>
 <a class="sourceLine" id="cb17-52" data-line-number="52"><span class="co">#&gt; 10.1111/2041-210x.12728 (URL:</span></a>
-<a class="sourceLine" id="cb17-53" data-line-number="53"><span class="co">#&gt; http://doi.org/10.1111/2041-210x.12728).</span></a>
+<a class="sourceLine" id="cb17-53" data-line-number="53"><span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span></a>
 <a class="sourceLine" id="cb17-54" data-line-number="54"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb17-55" data-line-number="55"><span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/</span></a></code></pre></div>
 <p>Note the use of the <code><a href="https://www.rdocumentation.org/packages/utils/topics/bibentry">bibentry()</a></code> function to create a formal bibliographic entry. Also note that this also affects the way how the dataset is printed into the R console. This facilitates for data users to acknowledge authorship and ownership of the data, while also providing a machine readable structure that can easily be accessed further down the line.</p>
@@ -1000,7 +1002,7 @@ head(dataset5Std)
 <a class="sourceLine" id="cb18-76" data-line-number="76"><span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling</span></a>
 <a class="sourceLine" id="cb18-77" data-line-number="77"><span class="co">#&gt; intensity." _Methods in Ecology and Evolution_. doi:</span></a>
 <a class="sourceLine" id="cb18-78" data-line-number="78"><span class="co">#&gt; 10.1111/2041-210x.12728 (URL:</span></a>
-<a class="sourceLine" id="cb18-79" data-line-number="79"><span class="co">#&gt; http://doi.org/10.1111/2041-210x.12728).</span></a>
+<a class="sourceLine" id="cb18-79" data-line-number="79"><span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span></a>
 <a class="sourceLine" id="cb18-80" data-line-number="80"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb18-81" data-line-number="81"><span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span></a>
 <a class="sourceLine" id="cb18-82" data-line-number="82"><span class="co">#&gt; </span></a>
@@ -1015,7 +1017,7 @@ head(dataset5Std)
 <a class="sourceLine" id="cb18-91" data-line-number="91"><span class="co">#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric</span></a>
 <a class="sourceLine" id="cb18-92" data-line-number="92"><span class="co">#&gt; measures of Heteroptera sampled in grasslands across three regions</span></a>
 <a class="sourceLine" id="cb18-93" data-line-number="93"><span class="co">#&gt; of Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:</span></a>
-<a class="sourceLine" id="cb18-94" data-line-number="94"><span class="co">#&gt; http://doi.org/10.1890/14-2159.1).</span></a>
+<a class="sourceLine" id="cb18-94" data-line-number="94"><span class="co">#&gt; https://doi.org/10.1890/14-2159.1).</span></a>
 <a class="sourceLine" id="cb18-95" data-line-number="95"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb18-96" data-line-number="96"><span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/</span></a></code></pre></div>
 <p>The detailed metadata information of both datasets (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R console. You can access the metadata via the <code><a href="https://www.rdocumentation.org/packages/base/topics/attributes">attributes()</a></code> function. E.g.</p>
@@ -1024,7 +1026,7 @@ head(dataset5Std)
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling</span></a>
 <a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; intensity." _Methods in Ecology and Evolution_. doi:</span></a>
 <a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; 10.1111/2041-210x.12728 (URL:</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt; http://doi.org/10.1111/2041-210x.12728).</span></a></code></pre></div>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span></a></code></pre></div>
 </div>
 <div id="writing-data-recipes" class="section level2">
 <h2 class="hasAnchor">
