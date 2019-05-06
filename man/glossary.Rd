@@ -4,7 +4,7 @@
 \name{glossary}
 \alias{glossary}
 \title{Ecological Trait-data Standard vocabulary (ETS)}
-\format{An object of class \code{data.frame} with 95 rows and 13 columns.}
+\format{An object of class \code{data.frame} with 80 rows and 13 columns.}
 \usage{
 glossary
 }
