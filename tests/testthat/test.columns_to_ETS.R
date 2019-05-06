@@ -7,7 +7,7 @@ pulldata('carabids')
 
 
 test_that("encoding and read-in successful", {
-  
+  skip_if_not( l10n_info()$`UTF-8` )
   
   expect_true(exists("arthropodtraits"))
   expect_equal(as.character(arthropodtraits[1065,"Author"]),"(Herrich-Schäffer, 1841)")

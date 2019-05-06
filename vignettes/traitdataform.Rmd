@@ -91,6 +91,8 @@ The function automatically interprets data as a species$\times$traits matrix if 
 In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column `occurrenceID` which links measurements taken on the same individuals. Both `occurrenceID` and `measurementID` can be provided by the author using the parameter `occurrences` (as a column name or a vector) or `measurements` (as a column name or a vector).
 
 ```{r}
+if(!l10n_info()$`UTF-8`) {Sys.setlocale("LC_CTYPE", "en_US.UTF-8")}
+
 heteroptera_raw <-  read.delim(url("https://ndownloader.figshare.com/files/5633883", 
                                          encoding = "windows-1252"),
                                     stringsAsFactors=TRUE)
