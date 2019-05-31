@@ -1,3 +1,7 @@
+# traitdataform 0.5.5
+
+- upgrading vignette to knitr v1.23 upon request of CRAN
+
 # traitdataform 0.5.4
 
 - enforce UTF-8 environment in Latin-1 locale now works for 
