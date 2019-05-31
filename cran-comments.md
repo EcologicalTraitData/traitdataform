@@ -7,8 +7,8 @@ This resubmission follows the request by Kurt Hornik to upgrade the package vign
 * local Windows 10 install, R version 3.6.0 (2019-05-31) 
 * Windows R devel on win-builder.r-project.org, platform: x86_64-w64-mingw32 (64-bit), R version 3.6.0 (2019-05-31)
 * local Mac OS X 10.13.6, R version 3.6.0 (2019-05-31)
-* Ubuntu 14.04.5 LTS (on travis-ci), R version 3.6.0 (2019-05-06) and R devel (2019-05-06)
-* Debian Linux, clang, ISO-8859-15 locale (on R-hub), R devel (2019-05-06)
+* Ubuntu 14.04.5 LTS (on travis-ci), R version 3.6.0 (2019-05-31) and R devel (2019-05-31)
+* Debian Linux, clang, ISO-8859-15 locale (on R-hub), R devel (2019-05-31)
 
 ## R CMD check results
 
