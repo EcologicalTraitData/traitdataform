@@ -381,7 +381,7 @@ NULL
 #'   digitalization, extrapolation and validation procedures could be 
 #'   transferable to other trait data and taxa.
 #'   
-#' @author [Kissling, W.D.](danielkissling@web.de), Dalby, L., Fløjgaard, C.,
+#' @author Kissling, W.D., Dalby, L., Fløjgaard, C.,
 #'   Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
 #'   
 #' @family rawdata

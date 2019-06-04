@@ -83,7 +83,7 @@ Other rawdata: \code{\link{amniota}},
   \code{\link{pantheria}}, \code{\link{pulldata}}
 }
 \author{
-\href{danielkissling@web.de}{Kissling, W.D.}, Dalby, L., Fløjgaard, C.,
+Kissling, W.D., Dalby, L., Fløjgaard, C.,
 Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
 }
 \concept{rawdata}

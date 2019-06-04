@@ -90,9 +90,9 @@ If you want  further datasources published under Creative Commons Licenses or in
 
 ## Contributing
 
-The package invites any contributions e.g. minor fixes and spell-checks, improving interoperability with data and other packages or software for trait-data handling. Please see [the Contributing Guidelines](CONTRIBUTING.md) for details.
+The package invites any contributions e.g. minor fixes and spell-checks, improving interoperability with data and other packages or software for trait-data handling. Please see [the Contributing Guidelines](https://ecologicaltraitdata.github.io/traitdataform/CONTRIBUTING.html) for details.
 
-Please note that the 'traitdataform' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+Please note that the 'traitdataform' project is released with a [Contributor Code of Conduct](https://ecologicaltraitdata.github.io/traitdataform/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## Future features
 
