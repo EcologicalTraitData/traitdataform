@@ -91,7 +91,7 @@
 <p>The toolset of the package includes</p>
 <ol style="list-style-type: decimal">
 <li>transforming typical trait-data formats (e.g. species-trait-matrix or measurement-table data) into a unified long-table format and mapping column names into terms provided in the Ecological Trait-data Standard (ETS) (see section <a href="#reading-data">1. Reading data</a>),</li>
-<li>mapping of trait concepts onto a user-provided traitlist (i.e. a thesaurus of traits) or globally accessible URIs (see section <a href="#standardize-traits">2. Standardize traits</a>) and unify units and factor levels (see vignette <a href="traitdataform-units.html">‘Handling units with trait-data’</a>),</li>
+<li>mapping of trait concepts onto a user-provided traitlist (i.e. a thesaurus of traits) or globally accessible URIs (see section <a href="#standardize-traits">2. Standardize traits</a>) and unify units and factor levels,</li>
 <li>mapping of species concepts onto globally accessible definitions via URIs (pointing to GFBio taxonomic ontology server) (see section <a href="#standardize-taxa">3. Standardize taxa</a>),</li>
 <li>Merging and handling compiled trait-data, while keeping track of the metadata for each original dataset (see section <a href="#working-with-trait-datasets">4. Working with trait-datasets</a>)</li>
 <li>saving trait dataset into a desired format using templates (e.g. for project-specific databases or online repositories) (see section <a href="#writing-data">5. Writing data</a>)</li>
@@ -231,7 +231,6 @@ The function automatically interprets data as a species<span class="math inline"
 <p>For a standardisation of quantitative trait data, the unit of measurement is essential. Often, this information is kept in the metadata descriptions. But for a standardised table containing measurements from different sources, this information should always accompany the measurement value. The ETS suggests the term <code>traitUnit</code> to contain the unit for each measurement in the data table.</p>
 <p>The function <code><a href="../reference/as.traitdata.html">as.traitdata()</a></code> creates this column via its parameter <code>units</code> (see example above). This can be done for all traits in a single stroke (if all reported values refer to the same unit) or to each trait specifically (if they used different measurement units or if the table comprises a mixture of quantitative and qualitative traits).<br>
 Accordingly, the parameter <code>units</code> takes a single character string, or a vector of character strings, containing valid entries as expected by the package ‘units’ (Pebesma et al. 2016, <a href="https://github.com/edzer/units/" class="uri">https://github.com/edzer/units/</a>, v0.4-5, Examples are ‘mm’, ‘m2’ or ‘m^2’, ‘m/s’ ).</p>
-<p>The vignette <a href="traitdataform-units.html">“Handling units with trait-data”</a> cover the various use cases of unit assignments and harmonizing trait-data with different units and different factor levels in depth.</p>
 </div>
 <div id="keep-additional-information" class="section level2">
 <h2 class="hasAnchor">
