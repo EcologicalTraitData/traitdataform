@@ -1,5 +1,5 @@
 # for roxygen2 documentation please edit file R/data.R!
-if(!l10n_info()$`UTF-8`) {Sys.setlocale("LC_CTYPE", "en_US.UTF-8")}
+if(!l10n_info()$`UTF-8`) {suppressWarnings(Sys.setlocale("LC_CTYPE", "en_US.UTF-8"))}
 
 heteroptera_raw <-  utils::read.delim(url("https://ndownloader.figshare.com/files/5633883", 
                                           encoding = "windows-1252"),
