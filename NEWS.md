@@ -1,3 +1,7 @@
+# traitdataform 0.5.6
+
+- fix broken data calls to datadryad.org
+
 # traitdataform 0.5.5
 
 - upgrading vignette to knitr v1.23 upon request of CRAN

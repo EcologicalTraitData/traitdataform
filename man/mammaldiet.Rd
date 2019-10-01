@@ -10,7 +10,7 @@ Cite this dataset as:
 C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological
 trait datasets: digitalization, extrapolation, and validation of diet
 preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913-2930.
-\url{http://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/}
+\url{https://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/}
 }
 
 Additionally, please cite the Dryad data package:
