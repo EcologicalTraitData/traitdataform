@@ -7,7 +7,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489527.svg)](https://doi.org/10.5281/zenodo.1489527)
 
 
-Assistance for handling functional trait data and transferring them into the Ecological Trait-Data Standard (Schneider et al. 2018 Towards an Ecological Trait-data Standard, biorxiv.org DOI: [10.1101/328302](http://dx.doi.org/10.1101/328302)). 
+Assistance for handling functional trait data and transferring them into the Ecological Trait-Data Standard (Schneider et al. 2019 Towards an Ecological Trait-data Standard, *Methods in Ecology and Evolution* DOI: [10.1111/2041-210X.13288]( https://doi.org/10.1111/2041-210X.13288)). 
 
 There are two major use cases for the package: 
 

@@ -31,7 +31,7 @@ The toolset of the package includes
 4. Merging and handling compiled trait-data, while keeping track of the metadata for each original dataset (see section [4. Working with trait-datasets](#working-with-trait-datasets)) 
 5. saving trait dataset into a desired format using templates (e.g. for project-specific databases or online repositories) (see section [5. Writing data](#writing-data)) 
 
-This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. See Schneider et al. 2018 'Towards an Ecological Trait-data Standard' (pre-print on biorxiv.org, doi: [10.1101/328302](http://dx.doi.org/10.1101/328302) ) for a discussion of the rationale. 
+This vignette contains step-by step instructions for transferring own data into a standardized trait-dataset for upload to public databases. See Schneider et al. 2019 Towards an Ecological Trait-data Standard *Methods in Ecology and Evolution* DOI: [10.1111/2041-210X.13288]( https://doi.org/10.1111/2041-210X.13288)) for a discussion of the rationale. 
 
 ---
 
