@@ -95,6 +95,14 @@ get_gbif_taxonomy <- function(x,
       }
     }
     
+    #clean out higherrank matches, if not allowed
+    if(!higherrank) {
+      temp[[i]] <- subset(temp[[i]], matchtype != "HIGHERRANK")
+      if(nrow(temp[[i]]) == 0) {
+        warning_i <- paste(warning_i, "No matching species concept!")
+      }
+    }
+    
     # check for confidence threshold 
     
     if(!is.null(conf_threshold) & nrow(temp[[i]]) > 0) {
@@ -158,7 +166,7 @@ get_gbif_taxonomy <- function(x,
       
     # check for doubtful status 
     
-    if(all(temp[[i]]$status == "DOUBTFUL")) {
+    if(nrow(temp[[i]]) > 0 && all(temp[[i]]$status == "DOUBTFUL")) {
       
       temp[[i]] <- subset(temp[[i]], status == "DOUBTFUL")
       warning_i <- paste(warning_i, "Mapped concept is labelled 'DOUBTFUL'!")
@@ -176,7 +184,7 @@ get_gbif_taxonomy <- function(x,
   
     rankorder <- c("kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies")
     
-    if(match(temp[[i]]$rank, rankorder) > 7 & !subspecies) {
+    if(nrow(temp[[i]]) > 0 && match(temp[[i]]$rank, rankorder) > 7 & !subspecies) {
       
       if(length(strsplit(as.character(temp[[i]]$canonicalname), " ")[[1]]) > 2) {
         
@@ -193,7 +201,7 @@ get_gbif_taxonomy <- function(x,
       
     }
     
-    if(temp[[i]]$matchtype == "HIGHERRANK") {
+    if(nrow(temp[[i]]) > 0 && temp[[i]]$matchtype == "HIGHERRANK") {
       if(higherrank) {
         temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
         warning_i <- paste(warning_i, "No matching species concept! Entry has been mapped to higher taxonomic level.")
@@ -205,7 +213,7 @@ get_gbif_taxonomy <- function(x,
     
     
     # 4. create structured output
-    if(temp[[i]]$matchtype != "NONE") {
+    if(nrow(temp[[i]]) > 0 && temp[[i]]$matchtype != "NONE") {
       
       temp[[i]] <- data.frame(
         scientificName = x[i], 
