@@ -130,7 +130,7 @@ get_gbif_taxonomy <- function(x,
     
     # resolve all synonyms, if allowed 
      
-    if(!any(temp[[i]]$status == "ACCEPTED") & any(temp[[i]]$status == "SYNONYM")) {
+    if(nrow(temp[[i]]) > 0 && !any(temp[[i]]$status == "ACCEPTED") & any(temp[[i]]$status == "SYNONYM")) {
       if(resolve_synonyms) {
           keep <- temp[i]
           temp[i] <- taxize::get_gbifid_(temp[[i]]$species[which.max(temp[[i]]$confidence)], messages = verbose)
