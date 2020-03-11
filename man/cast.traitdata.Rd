@@ -4,8 +4,13 @@
 \alias{cast.traitdata}
 \title{Cast long-table trait data into wide-table format}
 \usage{
-cast.traitdata(.data, values = "traitValue", traits = "traitName",
-  units = "traitUnit", fun.aggregate = NULL)
+cast.traitdata(
+  .data,
+  values = "traitValue",
+  traits = "traitName",
+  units = "traitUnit",
+  fun.aggregate = NULL
+)
 }
 \arguments{
 \item{.data}{dataset of class 'traitdata' to be cast into wide-table format.}

@@ -17,7 +17,8 @@ wrapper that applies \code{standardize.taxonomy()} and
 \code{standardize.traits()} in one go.
 }
 \seealso{
-Other standardize: \code{\link{standardize_taxa}},
-  \code{\link{standardize_traits}}
+Other standardize: 
+\code{\link{standardize_taxa}()},
+\code{\link{standardize_traits}()}
 }
 \concept{standardize}

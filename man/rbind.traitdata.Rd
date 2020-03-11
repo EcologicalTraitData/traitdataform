@@ -4,8 +4,13 @@
 \alias{rbind.traitdata}
 \title{Combine trait datasets}
 \usage{
-\method{rbind}{traitdata}(..., metadata = NULL, datasetID = NULL,
-  metadata_as_columns = FALSE, drop = NULL)
+\method{rbind}{traitdata}(
+  ...,
+  metadata = NULL,
+  datasetID = NULL,
+  metadata_as_columns = FALSE,
+  drop = NULL
+)
 }
 \arguments{
 \item{...}{two or more objects of class traitdata.}
@@ -38,7 +43,7 @@ according to the terms of the Ecological Traitdata Standard
 
 A lookup table for dataset details will be appended as an attribute to the
 output dataset, linked to each entry via the field \code{datasetID}. It can be
-accessed by calling \code{attributes(<dataset>)$datasets}.
+accessed by calling \verb{attributes(<dataset>)$datasets}.
 }
 \examples{
 

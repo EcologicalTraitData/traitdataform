@@ -4,11 +4,24 @@
 \alias{as.trait}
 \title{Create a trait definition}
 \usage{
-as.trait(trait, identifier = NA, broaderTerm = NA, narrowerTerm = NA,
-  relatedTerm = NA, valueType = NA, expectedUnit = NA,
-  factorLevels = NA, maxAllowedValue = NA, minAllowedValue = NA,
-  traitDescription = NA, comments = NA, source = NA, version = NA,
-  author = NA, ...)
+as.trait(
+  trait,
+  identifier = NA,
+  broaderTerm = NA,
+  narrowerTerm = NA,
+  relatedTerm = NA,
+  valueType = NA,
+  expectedUnit = NA,
+  factorLevels = NA,
+  maxAllowedValue = NA,
+  minAllowedValue = NA,
+  traitDescription = NA,
+  comments = NA,
+  source = NA,
+  version = NA,
+  author = NA,
+  ...
+)
 }
 \arguments{
 \item{trait}{A character string, providing an intuitive, human-readable trait

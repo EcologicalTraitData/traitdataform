@@ -6,9 +6,14 @@
 \alias{standardize.traits}
 \title{Standardize trait names and harmonize measured values and reported facts}
 \usage{
-standardize_traits(x, thesaurus = attributes(x)$thesaurus,
-  rename = NULL, categories = c("No", "Yes"), output = "logical",
-  ...)
+standardize_traits(
+  x,
+  thesaurus = attributes(x)$thesaurus,
+  rename = NULL,
+  categories = c("No", "Yes"),
+  output = "logical",
+  ...
+)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
@@ -126,10 +131,12 @@ dataset2Std <- standardize_traits(dataset2,
 
 }
 \seealso{
-Other standardize: \code{\link{standardize_taxa}},
-  \code{\link{standardize}}
+Other standardize: 
+\code{\link{standardize_taxa}()},
+\code{\link{standardize}()}
 
-Other standardize: \code{\link{standardize_taxa}},
-  \code{\link{standardize}}
+Other standardize: 
+\code{\link{standardize_taxa}()},
+\code{\link{standardize}()}
 }
 \concept{standardize}

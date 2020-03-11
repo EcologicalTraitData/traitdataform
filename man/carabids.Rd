@@ -43,10 +43,14 @@ Additionally, please cite the Dryad data package:
 intensity. Dryad Digital Repository. https://doi.org/10.5061/dryad.1fn46 }
 }
 \seealso{
-Other rawdata: \code{\link{amniota}},
-  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{heteroptera_raw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}, \code{\link{pulldata}}
+Other rawdata: 
+\code{\link{amniota}},
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{heteroptera_raw}},
+\code{\link{mammaldiet}},
+\code{\link{pantheria}},
+\code{\link{pulldata}()}
 }
 \author{
 Fons van der Plas, R. van Klink, P. Manning, H. Olff, M. Fischer

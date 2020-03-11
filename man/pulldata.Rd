@@ -31,10 +31,14 @@ pulldata()
 pulldata("carabids")
 }
 \seealso{
-Other rawdata: \code{\link{amniota}},
-  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{heteroptera_raw}},
-  \code{\link{mammaldiet}}, \code{\link{pantheria}}
+Other rawdata: 
+\code{\link{amniota}},
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{carabids}},
+\code{\link{heteroptera_raw}},
+\code{\link{mammaldiet}},
+\code{\link{pantheria}}
 }
 \author{
 Florian D. Schneider

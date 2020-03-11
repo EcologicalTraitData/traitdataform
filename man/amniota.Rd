@@ -47,10 +47,14 @@ at least one life-history parameter for 21 322 species of birds, mammals,
 and reptiles.
 }
 \seealso{
-Other rawdata: \code{\link{amphibio}},
-  \code{\link{arthropodtraits}}, \code{\link{carabids}},
-  \code{\link{heteroptera_raw}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}, \code{\link{pulldata}}
+Other rawdata: 
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{carabids}},
+\code{\link{heteroptera_raw}},
+\code{\link{mammaldiet}},
+\code{\link{pantheria}},
+\code{\link{pulldata}()}
 }
 \author{
 Nathan P. Myhrvold, Elita Baldridge, Benjamin Chan, Dhileep Sivam,

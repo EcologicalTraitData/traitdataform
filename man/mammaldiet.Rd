@@ -10,7 +10,7 @@ Cite this dataset as:
 C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological
 trait datasets: digitalization, extrapolation, and validation of diet
 preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913-2930.
-\url{https://onlinelibrary.wiley.com/doi/10.1002/ece3.1136/}
+\url{https://doi.org/10.1002/ece3.1136}
 }
 
 Additionally, please cite the Dryad data package:
@@ -30,7 +30,7 @@ and related or neighboring rights to this data.
 A comprehensive global dataset of diet preferences of mammals
 ('MammalDIET'). Diet information was digitized from the literature and
 extrapolated for species with missing information. The original and
-extrapolated data cover species-level diet information for >99% of all
+extrapolated data cover species-level diet information for >99\% of all
 terrestrial mammals.
 }
 \details{
@@ -54,14 +54,14 @@ species-level diet information from a comprehensive continentwide data
 source). Finally, we grouped mammal species into trophic levels and dietary
 guilds, and their species richness as well as their proportion of total
 richness were mapped at a global scale for those diet categories with good
-validation results. The success rate of correctly digitizing data was 94%,
+validation results. The success rate of correctly digitizing data was 94\%,
 indicating that the consistency in data entry among multiple recorders was
 high. Data sources provided species-level diet information for a total of
-2033 species (38% of all 5364 terrestrial mammal species, based on the IUCN
+2033 species (38\% of all 5364 terrestrial mammal species, based on the IUCN
 taxonomy). For the remaining 3331 species, diet information was mostly
-extrapolated from genus-level diet information (48% of all terrestrial
+extrapolated from genus-level diet information (48\% of all terrestrial
 mammal species), and only rarely from other species within the same genus
-(6%) or from family level (8%). Internal and external validation showed
+(6\%) or from family level (8\%). Internal and external validation showed
 that: (1) extrapolations were most reliable for primary food items; (2)
 several diet categories (“Animal,” “Mammal,” “Invertebrate,” “Plant,”
 “Seed,” “Fruit,” and “Leaf”) had high proportions of correctly predicted
@@ -77,10 +77,14 @@ digitalization, extrapolation and validation procedures could be
 transferable to other trait data and taxa.
 }
 \seealso{
-Other rawdata: \code{\link{amniota}},
-  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{heteroptera_raw}},
-  \code{\link{pantheria}}, \code{\link{pulldata}}
+Other rawdata: 
+\code{\link{amniota}},
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{carabids}},
+\code{\link{heteroptera_raw}},
+\code{\link{pantheria}},
+\code{\link{pulldata}()}
 }
 \author{
 Kissling, W.D., Dalby, L., Fløjgaard, C.,

@@ -4,9 +4,15 @@
 \alias{get_gbif_taxonomy}
 \title{Get accepted canonical names and taxonomy for a given species name}
 \usage{
-get_gbif_taxonomy(x, subspecies = TRUE, higherrank = FALSE,
-  verbose = FALSE, fuzzy = TRUE, conf_threshold = 90,
-  resolve_synonyms = TRUE)
+get_gbif_taxonomy(
+  x,
+  subspecies = TRUE,
+  higherrank = FALSE,
+  verbose = FALSE,
+  fuzzy = TRUE,
+  conf_threshold = 90,
+  resolve_synonyms = TRUE
+)
 }
 \arguments{
 \item{x}{a character string or vector of species names.}

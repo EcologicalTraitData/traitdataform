@@ -68,15 +68,23 @@ https://doi.org/10.6084/m9.figshare.c.3307611.v1
 }
 
 \seealso{
-Other rawdata: \code{\link{amniota}},
-  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}, \code{\link{pulldata}}
+Other rawdata: 
+\code{\link{amniota}},
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{carabids}},
+\code{\link{mammaldiet}},
+\code{\link{pantheria}},
+\code{\link{pulldata}()}
 
-Other rawdata: \code{\link{amniota}},
-  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{mammaldiet}},
-  \code{\link{pantheria}}, \code{\link{pulldata}}
+Other rawdata: 
+\code{\link{amniota}},
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{carabids}},
+\code{\link{mammaldiet}},
+\code{\link{pantheria}},
+\code{\link{pulldata}()}
 }
 \author{
 Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.

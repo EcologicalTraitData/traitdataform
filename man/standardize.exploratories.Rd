@@ -4,9 +4,16 @@
 \alias{standardize.exploratories}
 \title{Standardize Georeference from Biodiversity Exploratories Plot ID}
 \usage{
-standardize.exploratories(x, plots = "locationID", user = NULL,
-  pswd = NULL, getdata = !is.null(user), fillall = TRUE, ...,
-  verbose = NULL)
+standardize.exploratories(
+  x,
+  plots = "locationID",
+  user = NULL,
+  pswd = NULL,
+  getdata = !is.null(user),
+  fillall = TRUE,
+  ...,
+  verbose = NULL
+)
 }
 \arguments{
 \item{x}{A traitdata table of class 'traitdata'.}

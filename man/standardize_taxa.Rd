@@ -6,10 +6,14 @@
 \alias{standardise_taxa}
 \title{Standardize scientific names of species}
 \usage{
-standardize_taxa(x, method = get_gbif_taxonomy,
-  method_options = c(subspecies = TRUE, higherrank = FALSE, verbose =
-  FALSE, fuzzy = TRUE, conf_threshold = 90, resolve_synonyms = TRUE),
-  return = c("kingdom", "phylum", "class", "order", "family"), ...)
+standardize_taxa(
+  x,
+  method = get_gbif_taxonomy,
+  method_options = c(subspecies = TRUE, higherrank = FALSE, verbose = FALSE, fuzzy =
+    TRUE, conf_threshold = 90, resolve_synonyms = TRUE),
+  return = c("kingdom", "phylum", "class", "order", "family"),
+  ...
+)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
@@ -76,7 +80,8 @@ dataset1Std <- standardize_taxa(dataset1)
 }
 }
 \seealso{
-Other standardize: \code{\link{standardize_traits}},
-  \code{\link{standardize}}
+Other standardize: 
+\code{\link{standardize_traits}()},
+\code{\link{standardize}()}
 }
 \concept{standardize}

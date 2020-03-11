@@ -4,8 +4,13 @@
 \alias{mutate.traitdata}
 \title{Mutate traits within a traitdata object.}
 \usage{
-mutate.traitdata(.data, ..., values = "traitValue",
-  traits = "traitName", units = "traitUnit")
+mutate.traitdata(
+  .data,
+  ...,
+  values = "traitValue",
+  traits = "traitName",
+  units = "traitUnit"
+)
 }
 \arguments{
 \item{.data}{the traitdata object to transform}

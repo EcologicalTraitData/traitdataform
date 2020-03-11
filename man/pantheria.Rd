@@ -51,10 +51,14 @@ see \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm} for further
 information.
 }
 \seealso{
-Other rawdata: \code{\link{amniota}},
-  \code{\link{amphibio}}, \code{\link{arthropodtraits}},
-  \code{\link{carabids}}, \code{\link{heteroptera_raw}},
-  \code{\link{mammaldiet}}, \code{\link{pulldata}}
+Other rawdata: 
+\code{\link{amniota}},
+\code{\link{amphibio}},
+\code{\link{arthropodtraits}},
+\code{\link{carabids}},
+\code{\link{heteroptera_raw}},
+\code{\link{mammaldiet}},
+\code{\link{pulldata}()}
 }
 \author{
 Kate E. Jones, Jon Bielby, Marcel Cardillo, Susanne A. Fritz, Justin
