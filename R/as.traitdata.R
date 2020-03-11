@@ -135,17 +135,20 @@ as.traitdata <- function(x,
 
   
   if(is.null(occurrences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
-    message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
+    x$scientificName <- as_factor_clocale(x$scientificName)
     occurrences <- seq_along(x$scientificName)
     x$occurrenceID <- paste(datasetID, occurrences, sep = "")
+    message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
   }
-  
+
   if(is.null(occurrences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
+    x$scientificName <- as_factor_clocale(x$scientificName)
     message("Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!")
   }
   
   # if occurrences has a single character string, take this as column name for occurrence IDs 
   if(!is.null(occurrences) && length(occurrences) == 1) { 
+      x$scientificName <- as_factor_clocale(x$scientificName)
       colnames(x)[colnames(x) == occurrences] <- "occurrenceID" 
       x$occurrenceID <- paste(datasetID, x$occurrenceID, sep = "")
       message("Input is taken to be an occurrence table/an observation -- trait matrix \n(i.e. with individual specimens per row and multiple trait measurements in columns). \nIf this is not the case, please provide parameters! ")
@@ -189,6 +192,8 @@ as.traitdata <- function(x,
     names(out)[names(out) == "variable"] <- "traitName"
     names(out)[names(out) == "value"] <- "traitValue"
     
+    out$traitName <- as_factor_clocale(out$traitName)
+    
   } 
   
   if(length(traits) > 1 & !longtable) { 
@@ -210,14 +215,14 @@ as.traitdata <- function(x,
   if(length(traits) == 1) {   
     out <- 
     colnames(out)[colnames(out) == traits] <- "traitValue"
-                                out$traitName <- traits
+                                out$traitName <- as.factor(traits)
   } 
     
   
   
   # add measurement ID 
   if(is.null(measurements) && !"measurementID" %in% colnames(out)) {
-    out$measurementID <- as.factor(paste0(datasetID, 1:dim(out)[1]))
+    out$measurementID <- as_factor_clocale(paste0(datasetID, 1:dim(out)[1]))
   }
   
   if(!is.null(units)) {

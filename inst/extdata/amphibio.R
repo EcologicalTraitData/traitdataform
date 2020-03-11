@@ -5,7 +5,8 @@ utils::unzip(temp, files = "AmphiBIO_v1.csv", exdir = ".")
 unlink(temp)
 rm(temp)
 
-amphibio <- utils::read.csv("AmphiBIO_v1.csv")
+amphibio <- utils::read.csv("AmphiBIO_v1.csv",
+                            stringsAsFactors = FALSE)
 file.remove("AmphiBIO_v1.csv")
 
 attr(amphibio, 'citeAs') <- utils::bibentry(

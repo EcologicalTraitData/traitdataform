@@ -1,6 +1,7 @@
 
 amniota <- utils::read.csv("http://esapubs.org/archive/ecol/E096/269/Data_Files/Amniote_Database_Aug_2015.csv",
-                           fileEncoding = "UTF-8")
+                           fileEncoding = "UTF-8",
+                           stringsAsFactors = FALSE)
 
 attr(amniota, 'citeAs') <- utils::bibentry(
   bibtype = "Article",

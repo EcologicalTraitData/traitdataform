@@ -3,7 +3,7 @@ if(!l10n_info()$`UTF-8`) {suppressWarnings(Sys.setlocale("LC_CTYPE", "en_US.UTF-
 
 heteroptera_raw <-  utils::read.delim(url("https://ndownloader.figshare.com/files/5633883", 
                                           encoding = "windows-1252"),
-                                    stringsAsFactors=TRUE)
+                                    stringsAsFactors=FALSE)
 
 heteroptera_raw$Center_Sampling_region <- iconv(as.character(heteroptera_raw$Center_Sampling_region), to = "UTF-8")
 levels(heteroptera_raw$Author) <- iconv(levels(heteroptera_raw$Author), to = "UTF-8")

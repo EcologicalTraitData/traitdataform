@@ -2,7 +2,7 @@
 arthropodtraits <- utils::read.csv(url("https://v1.datadryad.org/bitstream/handle/10255/dryad.76638/ArthropodSpeciesTraits.txt?sequence=1", 
                                        encoding = "latin1"), 
                                    sep = "\t",
-                                   stringsAsFactors = TRUE
+                                   stringsAsFactors = FALSE
 )
 
 levels(arthropodtraits$Author) <- iconv(levels(arthropodtraits$Author), to = "UTF-8")

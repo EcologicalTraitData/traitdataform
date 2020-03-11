@@ -2,7 +2,7 @@
 
 heteroptera <- utils::read.csv(url("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraits.txt"), 
                                sep = "\t", header = TRUE, 
-                               stringsAsFactors=TRUE,
+                               stringsAsFactors=FALSE,
                                fileEncoding = "latin1"
                                )
 

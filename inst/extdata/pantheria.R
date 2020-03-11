@@ -1,7 +1,8 @@
 # for roxygen2 documentation please edit file R/data.R!
 
 pantheria <- utils::read.csv("http://esapubs.org/archive/ecol/E090/184/PanTHERIA_1-0_WR05_Aug2008.txt", sep = "\t",
-                             fileEncoding = "UTF-8")
+                             fileEncoding = "UTF-8",
+                             stringsAsFactors = FALSE)
 
 attr(pantheria, 'citeAs') <- utils::bibentry(
   bibtype = "Article",
