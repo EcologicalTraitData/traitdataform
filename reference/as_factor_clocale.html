@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create metadata for trait dataset — as.metadata • traitdataform</title>
+<title>Locale-independent factor conversion — as_factor_clocale • traitdataform</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Create metadata for trait dataset — as.metadata" />
-<meta property="og:description" content="Function to create a defined object containing metadata paramaters according to a pre-defined template." />
+<meta property="og:title" content="Locale-independent factor conversion — as_factor_clocale" />
+<meta property="og:description" content="Locale-independent factor conversion" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,53 +111,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create metadata for trait dataset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/R/as.metadata.R'><code>R/as.metadata.R</code></a></small>
-    <div class="hidden name"><code>as.metadata.Rd</code></div>
+    <h1>Locale-independent factor conversion</h1>
+    <small class="dont-index">Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>as_factor_clocale.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to create a defined object containing metadata paramaters according to a pre-defined template.</p>
+    <p>Locale-independent factor conversion</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.metadata</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>datasetName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>author</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rightsHolder</span> <span class='kw'>=</span>
-    <span class='kw'>NULL</span>, <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>license</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comments</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-    <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>region</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>as_factor_clocale</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>named objects of any class. Names must be the same as given by template or they will be ignored when producing the metadata object.</p></td>
-    </tr>
-    <tr>
-      <th>template</th>
-      <td><p>The default template contains the elements as defined by the Ecological Traitdata Standard. (see Details)</p></td>
+      <th>x</th>
+      <td><p>a vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an object of class 'metadata', or - if metadata objects are provided as input - a list object of class 'metadatalist'.</p>
+    <p>the same vector, but with any factorial content or colums with repeating character strings converted to factors, applying a locale-independent sorting.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># set metadata object</span>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>as.metadata</span>(<span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Martin Gossner"</span>, <span class='kw'>datasetName</span> <span class='kw'>=</span> <span class='st'>"Heteroptera morphometric traits"</span>)
+    <p>Only for internal application in <code><a href='as.traitdata.html'>as.traitdata()</a></code> This deals with the problem described by Kurt Hornik <a href='https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/index.html'>(here)</a> for changes coming in R 4.0.0. In traitdataform, this concerns the locale-dependence of taxon and trait name sorting when calling published trait-datasets. For traits, the sorting order of factor levels will be superimposed by the order given in the thesaurus specification (if provided).</p>
 
-<span class='co'># update an existing metadata object</span>
-<span class='no'>a1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.metadata</span>(<span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='st'>"heteroptera"</span>, <span class='kw'>template</span> <span class='kw'>=</span> <span class='no'>a</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#note">Note</a></li>
     </ul>
 
   </div>

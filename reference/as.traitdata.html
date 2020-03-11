@@ -130,15 +130,23 @@ traits within the same taxon, an occurrenceID should be given or will be
 created.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.traitdata</span>(<span class='no'>x</span>, <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>traits</span>,
-  <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>taxa</span>, <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>occurrences</span>,
+    <pre class="usage"><span class='fu'>as.traitdata</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>traits</span>,
+  <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>taxa</span>,
+  <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>occurrences</span>,
   <span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>datasetID</span>,
   <span class='kw'>measurements</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>measurements</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>units</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>keep</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>drop</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>units</span>,
+  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>keep</span>,
+  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>drop</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>id.vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)[<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>keep</span> <span class='kw'>&amp;</span> !<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>drop</span>],
   <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>thesaurus</span>,
-  <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>metadata</span>, <span class='kw'>longtable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>metadata</span>,
+  <span class='kw'>longtable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -122,8 +122,13 @@ or occurrence table format." />
 or occurrence table format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cast.traitdata</span>(<span class='no'>.data</span>, <span class='kw'>values</span> <span class='kw'>=</span> <span class='st'>"traitValue"</span>, <span class='kw'>traits</span> <span class='kw'>=</span> <span class='st'>"traitName"</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"traitUnit"</span>, <span class='kw'>fun.aggregate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>cast.traitdata</span>(
+  <span class='no'>.data</span>,
+  <span class='kw'>values</span> <span class='kw'>=</span> <span class='st'>"traitValue"</span>,
+  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='st'>"traitName"</span>,
+  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"traitUnit"</span>,
+  <span class='kw'>fun.aggregate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -256,20 +261,20 @@ columns might be added at a later stage.</p>
 #&gt; 4         Acalyptus carpini                 *  2.2 [mm]                 1
 #&gt; 5 Acanthodelphax denticauda                    3.0 [mm]               0.5
 #&gt; 6   Acanthodelphax spinosus                    2.0 [mm]                 0
-#&gt;   Feeding_guild Feeding_guild_short Feeding_mode Feeding_specialization
-#&gt; 1             h                   h            s                      o
-#&gt; 2             h                   h            s                      o
-#&gt; 3             h                   h            s                      o
-#&gt; 4             h                   h            c                      m
-#&gt; 5             h                   h            s                      m
-#&gt; 6             h                   h            s                      m
-#&gt;   Feeding_tissue Feeding_plant_part Endophagous_lifestyle Stratum_use
-#&gt; 1              m               &lt;NA&gt;                  &lt;NA&gt;           g
-#&gt; 2              m               &lt;NA&gt;                  &lt;NA&gt;           g
-#&gt; 3              m               &lt;NA&gt;                  &lt;NA&gt;           g
-#&gt; 4           &lt;NA&gt;                l-r                  &lt;NA&gt;           t
-#&gt; 5              p               &lt;NA&gt;                  &lt;NA&gt;           h
-#&gt; 6              p               &lt;NA&gt;                  &lt;NA&gt;           h
+#&gt;   Endophagous_lifestyle Feeding_guild Feeding_guild_short Feeding_mode
+#&gt; 1                  &lt;NA&gt;             h                   h            s
+#&gt; 2                  &lt;NA&gt;             h                   h            s
+#&gt; 3                  &lt;NA&gt;             h                   h            s
+#&gt; 4                  &lt;NA&gt;             h                   h            c
+#&gt; 5                  &lt;NA&gt;             h                   h            s
+#&gt; 6                  &lt;NA&gt;             h                   h            s
+#&gt;   Feeding_plant_part Feeding_specialization Feeding_tissue Stratum_use
+#&gt; 1               &lt;NA&gt;                      o              m           g
+#&gt; 2               &lt;NA&gt;                      o              m           g
+#&gt; 3               &lt;NA&gt;                      o              m           g
+#&gt; 4                l-r                      m           &lt;NA&gt;           t
+#&gt; 5               &lt;NA&gt;                      m              p           h
+#&gt; 6               &lt;NA&gt;                      m              p           h
 #&gt;   Stratum_use_short
 #&gt; 1                 g
 #&gt; 2                 g

@@ -122,10 +122,14 @@ names and relates to globally unique taxon identifiers via URI." />
 names and relates to globally unique taxon identifiers via URI.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>standardize_taxa</span>(<span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>get_gbif_taxonomy</span>,
-  <span class='kw'>method_options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>higherrank</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span>
-  <span class='fl'>FALSE</span>, <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf_threshold</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>, <span class='st'>"class"</span>, <span class='st'>"order"</span>, <span class='st'>"family"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>standardize_taxa</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>get_gbif_taxonomy</span>,
+  <span class='kw'>method_options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>higherrank</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fuzzy</span> <span class='kw'>=</span>
+    <span class='fl'>TRUE</span>, <span class='kw'>conf_threshold</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>, <span class='st'>"class"</span>, <span class='st'>"order"</span>, <span class='st'>"family"</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,8 +184,9 @@ process). We invite pull requests to make this function more general and
 enable a choice of a taxonomic reference.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other standardize: <code><a href='standardize_traits.html'>standardize_traits</a></code>,
-  <code><a href='standardize.html'>standardize</a></code></p></div>
+    <div class='dont-index'><p>Other standardize: 
+<code><a href='standardize_traits.html'>standardize_traits</a>()</code>,
+<code><a href='standardize.html'>standardize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
