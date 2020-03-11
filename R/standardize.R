@@ -390,12 +390,10 @@ standardize.traits <- standardize_traits
 #' @description wrapper that applies `standardize.taxonomy()` and
 #'   `standardize.traits()` in one go.
 #'   
-#' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
-#'   containing at least the column `scientificName.
 #' @param ... parameters as described for `standardize.traits()` and `standardize.taxonomy()`.
 #' 
-#' @inheritParams standardize.traits 
-#' @inheritParams standardize.taxonomy
+#' @inheritParams standardize_traits 
+#' @inheritParams standardize_taxa
 #' 
 #' @export
 #' 

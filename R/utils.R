@@ -52,7 +52,6 @@ read.service <- function(datasetid,
 #---- returns a data.frame array                      -----------
 #----------------------------------------------------------
 
-#' @inheritParams read.service
 #' @rdname read.service
 #' @keywords internal
 
