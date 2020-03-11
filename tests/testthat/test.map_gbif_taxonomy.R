@@ -7,8 +7,8 @@ pulldata("carabids")
 pulldata("arthropodtraits")
 
 test_that("gbif taxonomy reachable", {
-  expect_known_hash(get_gbif_taxonomy(as.character(carabids$name_correct[1:12])), hash = 'bc9f97d273')
-  expect_known_hash(get_gbif_taxonomy(as.character(arthropodtraits$SpeciesID[1:12])), hash = '74f9a02a12')
+  expect_known_hash(get_gbif_taxonomy(carabids$name_correct[1:12]), hash = 'bc9f97d273')
+  expect_known_hash(get_gbif_taxonomy(arthropodtraits$SpeciesID[1:12]), hash = '74f9a02a12')
 })
 
 test_that("mapping misspelled names", {
@@ -58,10 +58,10 @@ test_that("big data handling", {
   skip_on_cran()
 
   pulldata("carabids")
-  expect_known_hash(get_gbif_taxonomy(levels(carabids$name_correct)), hash = '44ff2d4880')
+  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(carabids$name_correct))), hash = '44ff2d488089a70b1e712215688f47f2')
 
   pulldata("heteroptera_raw")
-  expect_known_hash(get_gbif_taxonomy(levels(heteroptera_raw$SpeciesID)), hash = '82dd096bb5')
+  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(heteroptera_raw$SpeciesID))), hash = '82dd096bb5a429ed519f55193206ab63')
 
 #  pulldata("arthropodtraits")
 #  expect_known_hash(get_gbif_taxonomy(levels(arthropodtraits$SpeciesID)), hash = '2efcaaa0e1')
