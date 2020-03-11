@@ -67,12 +67,16 @@ as.thesaurus <- function(...,
   if( "data.frame" %in% class(..1)) {
     input <- ..1
     
-    if(!is.null(replace)) {
+      if(!is.null(replace)) {
       replacement <- replace[names(input)]
       names(input)[!is.na(replacement)] <- replacement[!is.na(replacement)]
     } 
+    input <- split(input, f = as_factor_clocale(input$trait))
+    input <- lapply(input, function(d) {
+      lapply(d, function(x) if(is.factor(x)) as.character(x) else x)
+    })
     
-    out <- lapply(split(input, f = input$trait, drop= TRUE), function(y) do.call(as.trait, y))
+    out <- lapply(input, function(y) { do.call(as.trait, y)})
     
   }
   if("trait" %in% class(..1)) {
