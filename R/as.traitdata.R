@@ -227,14 +227,14 @@ as.traitdata <- function(x,
   
   if(!is.null(units)) {
     out$traitUnit <- NA
-    if(length(units) == 1) out$traitUnit <- as.factor(units)
-    if(length(units) == length(traits)) out$traitUnit <- as.factor(units[match(out$traitName, traits)])
+    if(length(units) == 1) out$traitUnit <- as_factor_clocale(units)
+    if(length(units) == length(traits)) out$traitUnit <- as_factor_clocale(units[match(out$traitName, traits)])
     if(length(units) != length(traits) & !is.null(names(units)) ) {
-      out$traitUnit <- as.factor(match(out$traitName, names(units))) 
+      out$traitUnit <- as_factor_clocale(match(out$traitName, names(units))) 
       levels(out$traitUnit) <- units
     }
     if(length(units) == ( length(traits) * length(x$scientificName) )) {
-      out$traitUnit <- as.factor(units)
+      out$traitUnit <- as_factor_clocale(units)
     }
   } 
    

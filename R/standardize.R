@@ -283,7 +283,7 @@ standardize_traits <- function(x,
  
   out$traitValueStd <- NA
  
-  traits <- levels(droplevels(out$traitNameStd)) #levels(lookup$trait) #
+  traits <- levels(droplevels(out$traitNameStd)) 
   
   for(i in traits) { # iterate over all trait categories (by user provided names)
    
@@ -308,7 +308,7 @@ standardize_traits <- function(x,
      ## factor level harmonization
      if(lookup[lookup$trait == i,]$valueType %in% c("factor", "categorical")) { 
        
-       value_original <- as.factor(subset(out, traitNameStd == i)$traitValue)
+       value_original <- as_factor_clocale(subset(out, traitNameStd == i)$traitValue)
        #TODO: check if factor level clustering occurs, and harmonize, if switch is set for it
        #value_standardized <- refinr::key_collision_merge(as.character(value_original))
        
@@ -320,8 +320,8 @@ standardize_traits <- function(x,
      ## unit conversion:
      if(lookup[lookup$trait == i,]$valueType == "numeric") {
 
-       unit_original <- droplevels(subset(out, traitNameStd == i)$traitUnit)
-       unit_target <- droplevels(subset(out, traitNameStd == i)$traitUnitStd)
+       unit_original <- as_factor_clocale(subset(out, traitNameStd == i)$traitUnit)
+       unit_target <- as_factor_clocale(subset(out, traitNameStd == i)$traitUnitStd)
        
        # case 1: homogeneous units for the entire trait
        if(length(levels(unit_original)) == 1 && length(levels(unit_target)) == 1) {
