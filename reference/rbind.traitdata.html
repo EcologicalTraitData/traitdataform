@@ -244,41 +244,41 @@ accessed by calling <code>attributes(&lt;dataset&gt;)$datasets</code>.</p>
 <span class='no'>database</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>dataset1Std</span>, <span class='no'>dataset2Std</span>,
                    <span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"vanderplas17"</span>, <span class='st'>"gossner15"</span>),
                    <span class='kw'>metadata_as_columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"author"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: There seems to be no overlap in taxon names of the provided datasets!</span>
-#&gt; <span class='warning'>It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>database</span>)</div><div class='output co'>#&gt;           scientificName      traitName
-#&gt; 1        Aelia acuminata antenna_length
-#&gt; 2        Aelia acuminata antenna_length
-#&gt; 3           Aelia klugii antenna_length
-#&gt; 4           Aelia klugii antenna_length
-#&gt; 5 Carpocoris fuscispinus antenna_length
-#&gt; 6 Carpocoris fuscispinus antenna_length
-#&gt;                                                          traitID traitValue
-#&gt; 1 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length       3.74
-#&gt; 2 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length       3.73
-#&gt; 3 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length       2.68
-#&gt; 4 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length       2.19
-#&gt; 5 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length       5.37
-#&gt; 6 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length       5.62
-#&gt;   traitUnit   traitNameStd traitValueStd traitUnitStd measurementID
-#&gt; 1        mm antenna_length          3.74           mm          &lt;NA&gt;
-#&gt; 2        mm antenna_length          3.73           mm          &lt;NA&gt;
-#&gt; 3        mm antenna_length          2.68           mm          &lt;NA&gt;
-#&gt; 4        mm antenna_length          2.19           mm          &lt;NA&gt;
-#&gt; 5        mm antenna_length          5.37           mm          &lt;NA&gt;
-#&gt; 6        mm antenna_length          5.62           mm          &lt;NA&gt;
-#&gt;   occurrenceID                         references measurementRemarks sex
-#&gt; 1           24         Biodiversity Exploratories               &lt;NA&gt;   f
-#&gt; 2           25         Biodiversity Exploratories               &lt;NA&gt;   m
-#&gt; 3           26 Zoological State Collection Munich               &lt;NA&gt;   f
-#&gt; 4           27 Zoological State Collection Munich               &lt;NA&gt;   m
-#&gt; 5           65 Zoological State Collection Munich               &lt;NA&gt;   f
-#&gt; 6           66         Biodiversity Exploratories               &lt;NA&gt;   m
-#&gt;   lifeStage datasetID         author
-#&gt; 1         m gossner15 Martin Gossner
-#&gt; 2         m gossner15 Martin Gossner
-#&gt; 3         m gossner15 Martin Gossner
-#&gt; 4         m gossner15 Martin Gossner
-#&gt; 5         m gossner15 Martin Gossner
-#&gt; 6         m gossner15 Martin Gossner
+#&gt; <span class='warning'>It is recommended to map 'ScientificNameStd' of each dataset to the same thesaurus or ontology!</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>database</span>)</div><div class='output co'>#&gt;                 scientificName   traitName
+#&gt; 1 Adelphocoris quadripunctatus Body_length
+#&gt; 2 Adelphocoris quadripunctatus Body_length
+#&gt; 3             Acalypta nigrina Body_length
+#&gt; 4             Acalypta nigrina Body_length
+#&gt; 5             Acalypta nigrina Body_length
+#&gt; 6             Acalypta nigrina Body_length
+#&gt;                                                       traitID traitValue
+#&gt; 1 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length       7.29
+#&gt; 2 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length       8.61
+#&gt; 3 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length       2.35
+#&gt; 4 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length       2.10
+#&gt; 5 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length       2.17
+#&gt; 6 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length       2.15
+#&gt;   traitUnit traitNameStd traitValueStd traitUnitStd measurementID occurrenceID
+#&gt; 1        mm  Body_length          7.29           mm            20           20
+#&gt; 2        mm  Body_length          8.61           mm            21           21
+#&gt; 3        mm  Body_length          2.35           mm             1            1
+#&gt; 4        mm  Body_length          2.10           mm             2            2
+#&gt; 5        mm  Body_length          2.17           mm             3            3
+#&gt; 6        mm  Body_length          2.15           mm             4            4
+#&gt;                           references measurementRemarks sex lifeStage datasetID
+#&gt; 1 Zoological State Collection Munich               &lt;NA&gt;   f         m gossner15
+#&gt; 2 Zoological State Collection Munich               &lt;NA&gt;   m         m gossner15
+#&gt; 3 Zoological State Collection Munich               &lt;NA&gt;   f         m gossner15
+#&gt; 4 Zoological State Collection Munich               &lt;NA&gt;   f         b gossner15
+#&gt; 5 Zoological State Collection Munich               &lt;NA&gt;   m         m gossner15
+#&gt; 6 Zoological State Collection Munich               &lt;NA&gt;   m         b gossner15
+#&gt;           author
+#&gt; 1 Martin Gossner
+#&gt; 2 Martin Gossner
+#&gt; 3 Martin Gossner
+#&gt; 4 Martin Gossner
+#&gt; 5 Martin Gossner
+#&gt; 6 Martin Gossner
 #&gt; 
 #&gt; This trait-dataset contains 10 traits for 299 taxa ( 2586 measurements in total).
 #&gt; $vanderplas17
