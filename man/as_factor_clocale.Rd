@@ -18,3 +18,4 @@ Locale-independent factor conversion
 \note{
 Only for internal application in \code{\link[=as.traitdata]{as.traitdata()}} This deals with the problem described by Kurt Hornik \href{https://developer.r-project.org/Blog/public/2020/02/16/stringsasfactors/index.html}{(here)} for changes coming in R 4.0.0. In traitdataform, this concerns the locale-dependence of taxon and trait name sorting when calling published trait-datasets. For traits, the sorting order of factor levels will be superimposed by the order given in the thesaurus specification (if provided).
 }
+\keyword{internal}

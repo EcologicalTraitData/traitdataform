@@ -64,27 +64,41 @@
 as.thesaurus <- function(...,
                          replace = NULL
                          ) {
+  
   if( "data.frame" %in% class(..1)) {
     input <- ..1
     
       if(!is.null(replace)) {
       replacement <- replace[names(input)]
       names(input)[!is.na(replacement)] <- replacement[!is.na(replacement)]
-    } 
+      } 
+    
+    
     input <- split(input, f = as_factor_clocale(input$trait))
+    traitNames <- as_factor_clocale(names(input))
+    
     input <- lapply(input, function(d) {
+      
       lapply(d, function(x) if(is.factor(x)) as.character(x) else x)
+
     })
     
     out <- lapply(input, function(y) { do.call(as.trait, y)})
     
   }
+  
   if("trait" %in% class(..1)) {
     out <- list(...)
   }
+  
+  traitNames <- as_factor_clocale(names(out))
+  names(out) <- traitNames
+  for(i in 1:length(out)) out[[i]]$trait <- traitNames[[i]]
+  
   if(! "trait" %in% class(..1) && ! "data.frame" %in% class(..1)) stop("no valid input for creating a thesaurus")
   
   class(out) <- c("thesaurus", "list")
+
   return(out)
 }
 
@@ -182,7 +196,7 @@ as.trait <- function(
 #' @export
 print.trait <- function(x, ...) {
 
-  cat("\n", x$trait, "\t:\n\n")
+  cat("\n", as.character(x$trait), ":\n\n")
   if(!is.na(x$traitDescription)) cat("\tDefined as:", gsub('(.{1,60})(\\s|$)', '\\1\n\t\t\t', x$traitDescription), "\n" )
   if(!all(is.na(x$broaderTerm))) { cat("\tBroader term: "); cat(x$broaderTerm, sep = ";\n\t\t\t"); cat("\n") }
   if(!all(is.na(x$narrowerTerm))) { cat("\tNarrower term: "); cat(x$narrowerTerm, sep = ";\n\t\t\t"); cat("\n") }
