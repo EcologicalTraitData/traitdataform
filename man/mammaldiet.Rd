@@ -22,7 +22,7 @@ preferences in terrestrial mammals worldwide. Dryad Digital Repository.
 \url{https://doi.org/10.5061/dryad.6cd0v}
 }
 
-\href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+\href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }

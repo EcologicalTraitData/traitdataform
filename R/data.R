@@ -68,7 +68,7 @@ pulldata <- function(x = NULL) {
 #' @family rawdata
 #' 
 #' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 
@@ -117,7 +117,7 @@ NULL
 #' @family rawdata
 #' 
 #' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 
@@ -136,7 +136,7 @@ NULL
 #'   Weisser
 #'
 #' @source \url{https://figshare.com/articles/Data_Paper_Data_Paper/3561936};
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 #'
@@ -213,7 +213,7 @@ NULL
 #'   analyses with birds, mammals, and reptiles.
 #'   http://esapubs.org/archive/ecol/E096/269/}
 #'   
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
+#'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 #'   
@@ -300,7 +300,7 @@ NULL
 #'   and geography of extant and recently extinct mammals.
 #'   \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm};
 #'   
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+#'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 #'   
@@ -335,7 +335,7 @@ NULL
 #'   preferences in terrestrial mammals worldwide. Dryad Digital Repository. 
 #'   \url{https://doi.org/10.5061/dryad.6cd0v}
 #'   
-#'   \href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
+#'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
 #'   

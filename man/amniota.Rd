@@ -10,7 +10,7 @@ Morgan (2016): An amniote life-history database to perform comparative
 analyses with birds, mammals, and reptiles.
 http://esapubs.org/archive/ecol/E096/269/}
 
-\href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+\href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }

@@ -16,7 +16,7 @@ Andy (2016): PanTHERIA: a species-level database of life history, ecology,
 and geography of extant and recently extinct mammals.
 \url{http://esapubs.org/archive/ecol/E090/184/metadata.htm};
 
-\href{http://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
+\href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
