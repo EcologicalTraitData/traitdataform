@@ -436,20 +436,27 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <p>To transfer the user-provided traits and trait values into standardised values, the function <code><a href="../reference/standardize_traits.html">standardize_traits()</a></code> merges the data table with a reference table of trait definitions to produce values of a compliant format.</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">dataset1Std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/standardize_traits.html">standardize_traits</a></span>(<span class="no">dataset1</span>, <span class="no">thesaurus1</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">dataset1Std</span>)
-<span class="co">#&gt;          scientificName   traitName traitID traitValue traitUnit traitNameStd</span>
-<span class="co">#&gt; 1 Abax_parallelepipedus body_length       2  15.846561        mm  body_length</span>
-<span class="co">#&gt; 2  Acupalpus_meridianus body_length       2   2.670000        mm  body_length</span>
-<span class="co">#&gt; 3        Agonum_ericeti body_length       2   5.873016        mm  body_length</span>
-<span class="co">#&gt; 4    Agonum_fuliginosum body_length       2   5.090000        mm  body_length</span>
-<span class="co">#&gt; 5        Agonum_gracile body_length       2   4.880000        mm  body_length</span>
-<span class="co">#&gt; 6     Agonum_marginatum body_length       2   8.250000        mm  body_length</span>
-<span class="co">#&gt;   traitValueStd traitUnitStd measurementID</span>
-<span class="co">#&gt; 1     15.846561           mm             1</span>
-<span class="co">#&gt; 2      2.670000           mm             2</span>
-<span class="co">#&gt; 3      5.873016           mm             3</span>
-<span class="co">#&gt; 4      5.090000           mm             4</span>
-<span class="co">#&gt; 5      4.880000           mm             5</span>
-<span class="co">#&gt; 6      8.250000           mm             6</span>
+<span class="co">#&gt;          scientificName   traitName</span>
+<span class="co">#&gt; 1 Abax_parallelepipedus body_length</span>
+<span class="co">#&gt; 2  Acupalpus_meridianus body_length</span>
+<span class="co">#&gt; 3        Agonum_ericeti body_length</span>
+<span class="co">#&gt; 4    Agonum_fuliginosum body_length</span>
+<span class="co">#&gt; 5        Agonum_gracile body_length</span>
+<span class="co">#&gt; 6     Agonum_marginatum body_length</span>
+<span class="co">#&gt;                                                       traitID traitValue</span>
+<span class="co">#&gt; 1 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length  15.846561</span>
+<span class="co">#&gt; 2 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   2.670000</span>
+<span class="co">#&gt; 3 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   5.873016</span>
+<span class="co">#&gt; 4 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   5.090000</span>
+<span class="co">#&gt; 5 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   4.880000</span>
+<span class="co">#&gt; 6 http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length   8.250000</span>
+<span class="co">#&gt;   traitUnit traitNameStd traitValueStd traitUnitStd measurementID</span>
+<span class="co">#&gt; 1        mm  body_length     15.846561           mm             1</span>
+<span class="co">#&gt; 2        mm  body_length      2.670000           mm             2</span>
+<span class="co">#&gt; 3        mm  body_length      5.873016           mm             3</span>
+<span class="co">#&gt; 4        mm  body_length      5.090000           mm             4</span>
+<span class="co">#&gt; 5        mm  body_length      4.880000           mm             5</span>
+<span class="co">#&gt; 6        mm  body_length      8.250000           mm             6</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
@@ -571,28 +578,28 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">dataset2Std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/standardize_traits.html">standardize_traits</a></span>(<span class="no">dataset2</span>, <span class="no">thesaurus2</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">dataset2Std</span>, <span class="no">occurrenceID</span> <span class="kw">==</span> <span class="fl">2</span>)
 <span class="co">#&gt;        scientificName          traitName traitID traitValue traitUnit</span>
-<span class="co">#&gt; 185  Acalypta nigrina        Body_length       1       2.10        mm</span>
-<span class="co">#&gt; 610  Acalypta nigrina         Body_width       2       1.22        mm</span>
-<span class="co">#&gt; 871  Acalypta nigrina        Body_height       3       0.67        mm</span>
-<span class="co">#&gt; 1337 Acalypta nigrina      Thorax_length       4       0.24        mm</span>
-<span class="co">#&gt; 1721 Acalypta nigrina       Thorax_width       5       0.95        mm</span>
-<span class="co">#&gt; 2309 Acalypta nigrina         Head_width       6       0.45        mm</span>
-<span class="co">#&gt; 2734 Acalypta nigrina          Eye_width       7       0.13        mm</span>
-<span class="co">#&gt; 3364 Acalypta nigrina       Antenna_Seg1       8       0.12        mm</span>
-<span class="co">#&gt; 3422 Acalypta nigrina       Antenna_Seg2       9       0.04        mm</span>
-<span class="co">#&gt; 3888 Acalypta nigrina       Antenna_Seg3      10       0.44        mm</span>
-<span class="co">#&gt; 4271 Acalypta nigrina       Antenna_Seg4      11       0.15        mm</span>
-<span class="co">#&gt; 4895 Acalypta nigrina Front.Tibia_length      13       0.40        mm</span>
-<span class="co">#&gt; 5524 Acalypta nigrina   Mid.Tibia_length      14       0.42        mm</span>
-<span class="co">#&gt; 5563 Acalypta nigrina  Hind.Tibia_length      15       0.56        mm</span>
-<span class="co">#&gt; 6048 Acalypta nigrina Front.Femur_length      16       0.48        mm</span>
-<span class="co">#&gt; 6412 Acalypta nigrina  Hind.Femur_length      17       0.56        mm</span>
-<span class="co">#&gt; 7021 Acalypta nigrina  Front.Femur_width      18       0.12        mm</span>
-<span class="co">#&gt; 7569 Acalypta nigrina   Hind.Femur_width      19       0.10        mm</span>
-<span class="co">#&gt; 7870 Acalypta nigrina     Rostrum_length      20       0.92        mm</span>
-<span class="co">#&gt; 8118 Acalypta nigrina      Rostrum_width      21       0.08        mm</span>
-<span class="co">#&gt; 8598 Acalypta nigrina        Wing_length      22       1.66        mm</span>
-<span class="co">#&gt; 8968 Acalypta nigrina         Wing_width      23       0.57        mm</span>
+<span class="co">#&gt; 185  Acalypta nigrina        Body_length      t1       2.10        mm</span>
+<span class="co">#&gt; 610  Acalypta nigrina         Body_width      t2       1.22        mm</span>
+<span class="co">#&gt; 871  Acalypta nigrina        Body_height      t3       0.67        mm</span>
+<span class="co">#&gt; 1337 Acalypta nigrina      Thorax_length      t4       0.24        mm</span>
+<span class="co">#&gt; 1721 Acalypta nigrina       Thorax_width      t5       0.95        mm</span>
+<span class="co">#&gt; 2309 Acalypta nigrina         Head_width      t6       0.45        mm</span>
+<span class="co">#&gt; 2734 Acalypta nigrina          Eye_width      t7       0.13        mm</span>
+<span class="co">#&gt; 3364 Acalypta nigrina       Antenna_Seg1      t8       0.12        mm</span>
+<span class="co">#&gt; 3422 Acalypta nigrina       Antenna_Seg2      t9       0.04        mm</span>
+<span class="co">#&gt; 3888 Acalypta nigrina       Antenna_Seg3     t10       0.44        mm</span>
+<span class="co">#&gt; 4271 Acalypta nigrina       Antenna_Seg4     t11       0.15        mm</span>
+<span class="co">#&gt; 4895 Acalypta nigrina Front.Tibia_length     t13       0.40        mm</span>
+<span class="co">#&gt; 5524 Acalypta nigrina   Mid.Tibia_length     t14       0.42        mm</span>
+<span class="co">#&gt; 5563 Acalypta nigrina  Hind.Tibia_length     t15       0.56        mm</span>
+<span class="co">#&gt; 6048 Acalypta nigrina Front.Femur_length     t16       0.48        mm</span>
+<span class="co">#&gt; 6412 Acalypta nigrina  Hind.Femur_length     t17       0.56        mm</span>
+<span class="co">#&gt; 7021 Acalypta nigrina  Front.Femur_width     t18       0.12        mm</span>
+<span class="co">#&gt; 7569 Acalypta nigrina   Hind.Femur_width     t18       0.10        mm</span>
+<span class="co">#&gt; 7870 Acalypta nigrina     Rostrum_length     t19       0.92        mm</span>
+<span class="co">#&gt; 8118 Acalypta nigrina      Rostrum_width     t20       0.08        mm</span>
+<span class="co">#&gt; 8598 Acalypta nigrina        Wing_length     t21       1.66        mm</span>
+<span class="co">#&gt; 8968 Acalypta nigrina         Wing_width     t22       0.57        mm</span>
 <span class="co">#&gt;            traitNameStd traitValueStd traitUnitStd measurementID occurrenceID</span>
 <span class="co">#&gt; 185         Body_length          2.10           mm             2            2</span>
 <span class="co">#&gt; 610          Body_width          1.22           mm           427            2</span>
@@ -668,29 +675,29 @@ The function `as.traitdata()` provides a set of parameters to add information at
 
 <span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span>(<span class="no">dataset2Std</span>)$<span class="no">traits</span>[,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"trait"</span>, <span class="st">"identifier"</span>,<span class="st">"traitDescription"</span>,<span class="st">"expectedUnit"</span>)]
 <span class="co">#&gt;                                 trait identifier</span>
-<span class="co">#&gt; Body_length               Body_length          1</span>
-<span class="co">#&gt; Body_width                 Body_width          2</span>
-<span class="co">#&gt; Body_height               Body_height          3</span>
-<span class="co">#&gt; Thorax_length           Thorax_length          4</span>
-<span class="co">#&gt; Thorax_width             Thorax_width          5</span>
-<span class="co">#&gt; Head_width                 Head_width          6</span>
-<span class="co">#&gt; Eye_width                   Eye_width          7</span>
-<span class="co">#&gt; Antenna_Seg1             Antenna_Seg1          8</span>
-<span class="co">#&gt; Antenna_Seg2             Antenna_Seg2          9</span>
-<span class="co">#&gt; Antenna_Seg3             Antenna_Seg3         10</span>
-<span class="co">#&gt; Antenna_Seg4             Antenna_Seg4         11</span>
-<span class="co">#&gt; Antenna_Seg5             Antenna_Seg5         12</span>
-<span class="co">#&gt; Front.Tibia_length Front.Tibia_length         13</span>
-<span class="co">#&gt; Mid.Tibia_length     Mid.Tibia_length         14</span>
-<span class="co">#&gt; Hind.Tibia_length   Hind.Tibia_length         15</span>
-<span class="co">#&gt; Front.Femur_length Front.Femur_length         16</span>
-<span class="co">#&gt; Hind.Femur_length   Hind.Femur_length         17</span>
-<span class="co">#&gt; Front.Femur_width   Front.Femur_width         18</span>
-<span class="co">#&gt; Hind.Femur_width     Hind.Femur_width         19</span>
-<span class="co">#&gt; Rostrum_length         Rostrum_length         20</span>
-<span class="co">#&gt; Rostrum_width           Rostrum_width         21</span>
-<span class="co">#&gt; Wing_length               Wing_length         22</span>
-<span class="co">#&gt; Wing_width                 Wing_width         23</span>
+<span class="co">#&gt; Body_length               Body_length         t1</span>
+<span class="co">#&gt; Body_width                 Body_width         t2</span>
+<span class="co">#&gt; Body_height               Body_height         t3</span>
+<span class="co">#&gt; Thorax_length           Thorax_length         t4</span>
+<span class="co">#&gt; Thorax_width             Thorax_width         t5</span>
+<span class="co">#&gt; Head_width                 Head_width         t6</span>
+<span class="co">#&gt; Eye_width                   Eye_width         t7</span>
+<span class="co">#&gt; Antenna_Seg1             Antenna_Seg1         t8</span>
+<span class="co">#&gt; Antenna_Seg2             Antenna_Seg2         t9</span>
+<span class="co">#&gt; Antenna_Seg3             Antenna_Seg3        t10</span>
+<span class="co">#&gt; Antenna_Seg4             Antenna_Seg4        t11</span>
+<span class="co">#&gt; Antenna_Seg5             Antenna_Seg5        t12</span>
+<span class="co">#&gt; Front.Tibia_length Front.Tibia_length        t13</span>
+<span class="co">#&gt; Mid.Tibia_length     Mid.Tibia_length        t14</span>
+<span class="co">#&gt; Hind.Tibia_length   Hind.Tibia_length        t15</span>
+<span class="co">#&gt; Front.Femur_length Front.Femur_length        t16</span>
+<span class="co">#&gt; Hind.Femur_length   Hind.Femur_length        t17</span>
+<span class="co">#&gt; Front.Femur_width   Front.Femur_width        t18</span>
+<span class="co">#&gt; Hind.Femur_width     Hind.Femur_width        t18</span>
+<span class="co">#&gt; Rostrum_length         Rostrum_length        t19</span>
+<span class="co">#&gt; Rostrum_width           Rostrum_width        t20</span>
+<span class="co">#&gt; Wing_length               Wing_length        t21</span>
+<span class="co">#&gt; Wing_width                 Wing_width        t22</span>
 <span class="co">#&gt;                                                        traitDescription</span>
 <span class="co">#&gt; Body_length          From the tip of the head to the end of the abdomen</span>
 <span class="co">#&gt; Body_width                                      Widest part of the body</span>
