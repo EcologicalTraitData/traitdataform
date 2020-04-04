@@ -204,11 +204,11 @@ re-mapping might be added in later versions of the package.)</p>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>==</span> <span class='st'>"predator"</span>,])
 
 <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>updated</span>$<span class='no'>traitName</span>)
-}
 
 <span class='co'>##</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'heteroptera_raw' is now available for use! </span></div><div class='input'><span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>heteroptera_raw</span>,
+<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)
+<span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>heteroptera_raw</span>,
                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
                                   <span class='st'>"Thorax_width"</span>, <span class='st'>"Head_width"</span>, <span class='st'>"Eye_width"</span>, <span class='st'>"Antenna_Seg1"</span>,
                                    <span class='st'>"Antenna_Seg2"</span>, <span class='st'>"Antenna_Seg3"</span>, <span class='st'>"Antenna_Seg4"</span>, <span class='st'>"Antenna_Seg5"</span>,
@@ -218,49 +218,14 @@ re-mapping might be added in later versions of the package.)</p>
                                    <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_width"</span>),
                         <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
                         <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='st'>"ID"</span>
-)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be an occurrence table/an observation -- trait matrix </span>
-#&gt; <span class='message'>(i.e. with individual specimens per row and multiple trait measurements in columns). </span>
-#&gt; <span class='message'>If this is not the case, please provide parameters! </span></div><div class='input'><span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset2</span>,
+)
+<span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset2</span>,
                             <span class='kw'>Body_shape</span> <span class='kw'>=</span> <span class='no'>Body_length</span>/<span class='no'>Body_width</span>,
                             <span class='kw'>Body_volume</span> <span class='kw'>=</span> <span class='no'>Body_length</span>*<span class='no'>Body_width</span>*<span class='no'>Body_height</span>,
                             <span class='kw'>Wingload</span> <span class='kw'>=</span> <span class='no'>Wing_length</span>*<span class='no'>Wing_width</span>/<span class='no'>Body_volume</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='st'>"Body_volume"</span>),])</div><div class='output co'>#&gt;        scientificName   traitName traitValue traitUnit measurementID
-#&gt; 9812 Acalypta nigrina Body_volume   2.080925      mm^3          &lt;NA&gt;
-#&gt; 9813 Acalypta nigrina Body_volume   1.716540      mm^3          &lt;NA&gt;
-#&gt; 9814 Acalypta nigrina Body_volume   1.578892      mm^3          &lt;NA&gt;
-#&gt; 9815 Acalypta nigrina Body_volume   1.498120      mm^3          &lt;NA&gt;
-#&gt; 9816 Acalypta parvula Body_volume   0.844928      mm^3          &lt;NA&gt;
-#&gt; 9817 Acalypta parvula Body_volume   0.973056      mm^3          &lt;NA&gt;
-#&gt;      occurrenceID           basisOfRecordDescription
-#&gt; 9812            1 Zoological State Collection Munich
-#&gt; 9813            2 Zoological State Collection Munich
-#&gt; 9814            3 Zoological State Collection Munich
-#&gt; 9815            4 Zoological State Collection Munich
-#&gt; 9816            5 Zoological State Collection Munich
-#&gt; 9817            6 Zoological State Collection Munich
-#&gt;                                        references sex  verbatimLocality
-#&gt; 9812      Treuchtlingen_leg.Seidenstücker_21.5.48   f 48°57’ N 10°55’ E
-#&gt; 9813            Nürnberg_leg.Seidenstücker_9.7.44   f 49°27’ N 11°05’ E
-#&gt; 9814 Gunzenshausen_Mfr._leg.Seidenstücker_15.4.58   m 49°07’ N 10°45’ E
-#&gt; 9815            Nürnberg_leg.Seidenstücker_9.7.44   m 49°27’ N 11°05’ E
-#&gt; 9816                Nürnberg_Seidenstücker_4.8.45   f 49°27’ N 11°05’ E
-#&gt; 9817               Erlangen_Seidenstücker_30.9.40   f 49°36’ N 11°00’ E
-#&gt; 
-#&gt; This trait-dataset contains 26 traits for 179 taxa ( 9386 measurements in total).
-#&gt; 
-#&gt;  heteroptera : Heteroptera morphometry traits by Martin M. Gossner .
-#&gt; 
-#&gt;     When using these data, you must acknowledge the following usage policies: 
-#&gt; 
-#&gt;     Cite this trait dataset as: 
-#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). “Morphometric
-#&gt; measures of Heteroptera sampled in grasslands across three regions of
-#&gt; Germany.” _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:
-#&gt; https://doi.org/10.1890/14-2159.1).
-#&gt; 
-#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ 
-#&gt; </div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='st'>"Body_volume"</span>),])
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
