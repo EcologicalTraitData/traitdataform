@@ -3,7 +3,8 @@
 \name{carabids}
 \alias{carabids}
 \title{Carabid morphological traits}
-\format{A data frame containing following columns:
+\format{
+A data frame containing following columns:
 \itemize{
 \item name_correct = species name
 \item source_measurement = researcher who performed measurement;
@@ -18,7 +19,8 @@ linear model in which femur length is explained by body length);
 model in which eye length is explained by body length)
 \item resid_antenna = residual antenna length in mm (i.e. residual
 from linear model in which antenna length is explained by body length)
-}}
+}
+}
 \source{
 \url{http://dx.doi.org/10.5061/dryad.53ds2};
 \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
