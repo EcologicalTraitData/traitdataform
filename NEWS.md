@@ -1,6 +1,7 @@
 # traitdataform 0.5.7
 
 - Preparing for R 4.0.0 change to read.table() and data.frame(): handling of factor data (trait and taxon names) is now locale-independent
+- updating download links for Data Dryad 
 
 # traitdataform 0.5.6
 
