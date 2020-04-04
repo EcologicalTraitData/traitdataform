@@ -73,7 +73,6 @@ updated <- mutate.traitdata(dataset3, predator = Feeding_guild == "c" )
 head(updated[updated$traitName == "predator",])
 
 levels(updated$traitName)
-}
 
 ##
 
@@ -95,4 +94,5 @@ updated <- mutate.traitdata(dataset2,
                             Wingload = Wing_length*Wing_width/Body_volume)
 
 head(updated[updated$traitName \%in\% c( "Body_volume"),])
+}
 }

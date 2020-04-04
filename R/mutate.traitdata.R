@@ -57,7 +57,6 @@
 #' head(updated[updated$traitName == "predator",])
 #'
 #' levels(updated$traitName)
-#' }
 #'
 #' ##
 #'
@@ -79,6 +78,7 @@
 #'                             Wingload = Wing_length*Wing_width/Body_volume)
 #'
 #' head(updated[updated$traitName %in% c( "Body_volume"),])
+#' }
 
 mutate.traitdata <- function(.data, 
                              ..., 
