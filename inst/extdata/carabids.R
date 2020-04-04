@@ -1,6 +1,6 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-carabids <- utils::read.delim(url("https://v1.datadryad.org/bitstream/handle/10255/dryad.134418/carabid%20traits%20final.txt", 
+carabids <- utils::read.delim(url("https://datadryad.org/stash/downloads/file_stream/24267", 
                                 encoding = "UTF-8"), 
                               stringsAsFactors = FALSE
                               )
