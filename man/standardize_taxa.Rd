@@ -17,11 +17,11 @@ standardize_taxa(
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
-containing at least the column `scientificName.}
+containing at least the column `verbatimScientificName.}
 
 \item{method}{default option is \code{get_gbif_taxonomy}. In principle, takes any
 function that takes a vector of species names as input to produce a
-taxonomy lookup table (i.e. mapping user-provided \code{scientificName} to
+taxonomy lookup table (i.e. mapping user-provided \code{verbatimScientificName} to
 \code{taxonID} and other taxon-level information). Will allow to chose from
 different sources of taxonomic reference.}
 

@@ -8,7 +8,7 @@ standardize(x, ...)
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
-containing at least the column `scientificName.}
+containing at least the column `verbatimScientificName.}
 
 \item{...}{parameters as described for \code{standardize.traits()} and \code{standardize.taxonomy()}.}
 }

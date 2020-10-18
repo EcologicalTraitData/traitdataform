@@ -6,9 +6,9 @@
 \usage{
 cast.traitdata(
   .data,
-  values = "traitValue",
-  traits = "traitName",
-  units = "traitUnit",
+  values = "verbatimTraitValue",
+  traits = "verbatimTraitName",
+  units = "verbatimTraitUnit",
   fun.aggregate = NULL
 )
 }
@@ -16,15 +16,15 @@ cast.traitdata(
 \item{.data}{dataset of class 'traitdata' to be cast into wide-table format.}
 
 \item{values}{the column name containing the trait values to be used to fill
-the matrix (default is \code{traitValue}). Duplicate columns (e.g.
-\code{traitValueStd}) will be omitted. See notes.}
+the matrix (default is \code{verbatimTraitValue}). Duplicate columns (e.g.
+\code{traitValue}) will be omitted. See notes.}
 
 \item{traits}{the column name to be kept for parsing into wide-table (default
-is \code{traitName}). Note that any duplicate column that contains trait names,
-e.g. \code{traitNameStd} will be omitted.}
+is \code{verbatimTraitName}). Note that any duplicate column that contains trait names,
+e.g. \code{traitName} will be omitted.}
 
 \item{units}{the column name containing the units of numerical values
-(default is \code{traitUnit}).}
+(default is \code{verbatimTraitUnit}).}
 
 \item{fun.aggregate}{option for \code{\link[reshape2:cast]{reshape2::cast()}} to define method of
 aggregation.}
@@ -32,7 +32,7 @@ aggregation.}
 \value{
 a wide-table data.frame object containing all taxa (and other
 differentiating parameters) in rows and all traits (extracted from column
-'traitName') in columns.
+'verbatimTraitName') in columns.
 }
 \description{
 Function to reformat trait data from the long-table into a matrix/wide-table
@@ -41,7 +41,7 @@ or occurrence table format.
 \details{
 The wide-table will be composed while preserving the detail given in
 the dataset (occurrence level or taxa level). The cells  will be filled
-with the values from 'traitValue'.
+with the values from 'verbatimTraitValue'.
 
 If taxa should be summarized, provide function for summarizing in parameter
 'summarize'. This can be any function that takes a vector and returns a

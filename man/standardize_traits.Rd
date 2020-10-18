@@ -17,7 +17,7 @@ standardize_traits(
 }
 \arguments{
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
-containing at least the column `scientificName.}
+containing at least the column `verbatimScientificName.}
 
 \item{thesaurus}{an object of class 'thesaurus' (as returned by
 \code{as.thesaurus()}).}
@@ -37,7 +37,7 @@ and relates them to globally unique identifiers via URIs. Optionally
 converts units of values and renames factor levels into accepted terms.
 }
 \details{
-The function matches the trait names provided in 'traitName' to the
+The function matches the trait names provided in 'verbatimTraitName' to the
 traits provided in the thesaurus (in field 'trait'). Matching must be exact
 (case sensitive). Fuzzy matching may be provided in a later version of the
 package.
@@ -45,7 +45,7 @@ package.
 The function parameter 'rename' should be provided to map trait names where
 user-provided names and thesaurus names are different. In this case, rename
 should be a named vector with the target names used in the thesaurus as
-names, and the original names as provided in 'traitName' as value. E.g.
+names, and the original names as provided in 'verbatimTraitName' as value. E.g.
 \code{rename = c()}
 }
 \examples{

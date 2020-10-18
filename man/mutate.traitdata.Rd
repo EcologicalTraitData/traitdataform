@@ -7,9 +7,9 @@
 mutate.traitdata(
   .data,
   ...,
-  values = "traitValue",
-  traits = "traitName",
-  units = "traitUnit"
+  values = "verbatimTraitValue",
+  traits = "verbatimTraitName",
+  units = "verbatimTraitUnit"
 )
 }
 \arguments{
@@ -18,15 +18,15 @@ mutate.traitdata(
 \item{...}{named parameters giving definitions of new columns.}
 
 \item{values}{(NOT TESTED) the column name containing the trait values to be
-used to fill the matrix (default is \code{traitValue}). Duplicate columns (e.g.
-\code{traitValueStd}) will be omitted. See notes.}
+used to fill the matrix (default is \code{verbatimTraitValue}). Duplicate columns (e.g.
+\code{traitValue}) will be omitted. See notes.}
 
 \item{traits}{(NOT TESTED) the column name to be kept for parsing into
-wide-table (default is \code{traitName}). Note that any duplicate column that
-contains trait names, e.g. \code{traitNameStd} will be omitted.}
+wide-table (default is \code{verbatimTraitName}). Note that any duplicate column that
+contains trait names, e.g. \code{traitName} will be omitted.}
 
 \item{units}{(NOT TESTED) the column name containing the units of numerical
-values (default is \code{traitUnit}).}
+values (default is \code{verbatimTraitUnit}).}
 }
 \value{
 an updated traitdata object with the new trait measures or facts
@@ -39,9 +39,9 @@ into compound measurements or update factor levels into binaries.
 }
 \details{
 The function handles units for numerical traits and returns the new
-unit of the computed value in column \code{traitUnit}, if units of input
+unit of the computed value in column \code{verbatimTraitUnit}, if units of input
 variables were specified according to the units package. Handling of other
-columns than \code{traitName} and \code{traitValue} is not advised at present.
+columns than \code{verbatimTraitName} and \code{verbatimTraitValue} is not advised at present.
 
 It is advised to mutate traits before applying \code{standardize.traits()}! If
 the mutate function is applied to a standardised dataset, the new trait
@@ -70,9 +70,9 @@ head(dataset3)
 
 updated <- mutate.traitdata(dataset3, predator = Feeding_guild == "c" )
 
-head(updated[updated$traitName == "predator",])
+head(updated[updated$verbatimTraitName == "predator",])
 
-levels(updated$traitName)
+levels(updated$verbatimTraitName)
 
 ##
 
@@ -93,6 +93,6 @@ updated <- mutate.traitdata(dataset2,
                             Body_volume = Body_length*Body_width*Body_height,
                             Wingload = Wing_length*Wing_width/Body_volume)
 
-head(updated[updated$traitName \%in\% c( "Body_volume"),])
+head(updated[updated$verbatimTraitName \%in\% c( "Body_volume"),])
 }
 }
