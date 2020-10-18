@@ -4,8 +4,6 @@ cache: packages
 apt_packages:
       - libudunits2-dev 
 
-r_packages: pkgdown
-      
 matrix:
   include:
   - r: release
