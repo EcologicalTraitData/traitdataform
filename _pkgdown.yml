@@ -1,6 +1,6 @@
 reference:
   - title: "Reading and Writing Data"
-    desc: "Functions for reading and writing Spark DataFrames."
+    desc: "Functions for importing, standardizing and merging trait data from different sources."
     contents:
       - pulldata
       - as.traitdata

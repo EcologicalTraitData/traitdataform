@@ -1,9 +1,10 @@
 language: r
 cache: packages
-addons:
-  apt:
-    packages:
+
+apt_packages:
       - libudunits2-dev 
+
+r_packages: pkgdown
       
 matrix:
   include:
@@ -13,7 +14,6 @@ matrix:
     os: linux
   - r: release
     os: osx   
-      
 
 r_check_args: --no-build-vignettes 
 
@@ -21,3 +21,8 @@ before_deploy:
   - Rscript -e 'install.packages(c("devtools"))'
   - Rscript -e 'devtools::install()'
   
+before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
