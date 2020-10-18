@@ -26,9 +26,10 @@ unknown species names to higher taxon ranks (e.g. genus).}
 \item{verbose}{logical. If FALSE (default), warnings and messages are
 suppressed.}
 
-\item{fuzzy}{logical. If FALSE (default), names are only resolved to exactly
-matching taxa on GBIF taxonomy service. Setting to TRUE may produce matches
-when failing otherwise.}
+\item{fuzzy}{logical. Defaults to TRUE to deal with misspelled names. May
+produce wrong assignments in case of very similar taxon names. If FALSE
+(default), names are only resolved to exactly matching taxa on GBIF
+taxonomy service.}
 
 \item{conf_threshold}{numerical, ranging from 0 to 100 (default value = 90).
 Defines the confidence level of the request to be accepted. To cover for
