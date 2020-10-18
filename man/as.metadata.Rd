@@ -8,7 +8,7 @@ as.metadata(
   ...,
   template = list(datasetID = NULL, datasetName = NULL, author = NULL, rightsHolder =
     NULL, bibliographicCitation = NULL, license = NULL, version = NULL, comments = NULL,
-    description = NULL, region = NULL)
+    description = NULL, region = NULL, conformsTo = NULL)
 )
 }
 \arguments{

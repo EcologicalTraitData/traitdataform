@@ -19,6 +19,7 @@ as.traitdata(
   thesaurus = attributes(x)$thesaurus,
   metadata = attributes(x)$metadata,
   longtable = TRUE,
+  conformsTo = "v0.10",
   ...
 )
 }
@@ -82,6 +83,11 @@ Possible parameters to the function call are: \code{rightsHolder},
 converted into lontable format, but remain in widetable format as provided.
 Note that any columns not indicated in arguments \code{traits}, \code{keep}, \code{units},
 \code{taxa}, \code{occurrences} will be dropped from the output.}
+
+\item{conformsTo}{version of the Ecological Trait-data Standard to which the
+data conform. Default procedures return data conform to v0.10. If
+\code{conformsTo = "v0.9"}, data output will be converted to Ecological
+Trait-data Standard v0.9.}
 
 \item{...}{other arguments, passed on to print function.}
 }
