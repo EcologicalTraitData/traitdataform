@@ -130,25 +130,25 @@ as.traitdata <- function(x,
   
   if(!is.null(thesaurus) && "thesaurus" %in% class(thesaurus) && is.null(traits)) traits <- names(thesaurus)
   
-  # rename taxon column into 'scientificName'
-  if(length(taxa) == 1 && !is.null(taxa)) colnames(x)[colnames(x) == taxa] <- "scientificName"
+  # rename taxon column into 'verbatimScientificName'
+  if(length(taxa) == 1 && !is.null(taxa)) colnames(x)[colnames(x) == taxa] <- "verbatimScientificName"
 
   
-  if(is.null(occurrences) && length(x$scientificName) != length(unique(x$scientificName)) ) {
-    x$scientificName <- as_factor_clocale(x$scientificName)
-    occurrences <- seq_along(x$scientificName)
+  if(is.null(occurrences) && length(x$verbatimScientificName) != length(unique(x$verbatimScientificName)) ) {
+    x$verbatimScientificName <- as_factor_clocale(x$verbatimScientificName)
+    occurrences <- seq_along(x$verbatimScientificName)
     x$occurrenceID <- paste(datasetID, occurrences, sep = "")
     message("it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'. ")
   }
 
-  if(is.null(occurrences) && length(x$scientificName) == length(unique(x$scientificName)) ) {
-    x$scientificName <- as_factor_clocale(x$scientificName)
+  if(is.null(occurrences) && length(x$verbatimScientificName) == length(unique(x$verbatimScientificName)) ) {
+    x$verbatimScientificName <- as_factor_clocale(x$verbatimScientificName)
     message("Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!")
   }
   
   # if occurrences has a single character string, take this as column name for occurrence IDs 
   if(!is.null(occurrences) && length(occurrences) == 1) { 
-      x$scientificName <- as_factor_clocale(x$scientificName)
+      x$verbatimScientificName <- as_factor_clocale(x$verbatimScientificName)
       colnames(x)[colnames(x) == occurrences] <- "occurrenceID" 
       x$occurrenceID <- paste(datasetID, x$occurrenceID, sep = "")
       message("Input is taken to be an occurrence table/an observation -- trait matrix \n(i.e. with individual specimens per row and multiple trait measurements in columns). \nIf this is not the case, please provide parameters! ")
@@ -156,7 +156,7 @@ as.traitdata <- function(x,
   } 
   
   # check for occurrence table format & add occurrence ID 
-  #if(!is.null(occurrences) && length(occurrences) == length(x$scientificName) ) {
+  #if(!is.null(occurrences) && length(occurrences) == length(x$verbatimScientificName) ) {
   #  x$occurrenceID <- paste(datasetID, occurrences, sep = "")
   #}
   
@@ -169,7 +169,7 @@ as.traitdata <- function(x,
     #TODO specify case for self provided measurementID vector
   
   if(length(traits) == 1 && !is.null(traits)) {
-    colnames(x)[colnames(x) == traits] <- "traitName"
+    colnames(x)[colnames(x) == traits] <- "verbatimTraitName"
     out <- x
   }
   
@@ -179,8 +179,8 @@ as.traitdata <- function(x,
     out <- suppressWarnings(
                 reshape2::melt(x, 
                          measure.vars = traits[traits %in% colnames(x)], 
-                         variable_name = "traitName", 
-                         id.vars = c("scientificName", 
+                         variable_name = "verbatimTraitName", 
+                         id.vars = c("verbatimScientificName", 
                                      c("occurrenceID")[!is.null(occurrences)],
                                      c("measurementID")[!is.null(measurements)], 
                                      id.vars),
@@ -188,11 +188,11 @@ as.traitdata <- function(x,
                         )
                         )
     
-    #rename value column in "traitValue"
-    names(out)[names(out) == "variable"] <- "traitName"
-    names(out)[names(out) == "value"] <- "traitValue"
+    #rename value column in "verbatimTraitValue"
+    names(out)[names(out) == "variable"] <- "verbatimTraitName"
+    names(out)[names(out) == "value"] <- "verbatimTraitValue"
     
-    out$traitName <- as_factor_clocale(out$traitName)
+    out$verbatimTraitName <- as_factor_clocale(out$verbatimTraitName)
     
   } 
   
@@ -200,7 +200,7 @@ as.traitdata <- function(x,
     
     out <- subset.data.frame(x, 
                              subset = rep_len(TRUE, nrow(x)),
-                             select = c("scientificName", 
+                             select = c("verbatimScientificName", 
                                 c("occurrenceID")[!is.null(occurrences)],
                                 c("measurementID")[!is.null(measurements)], 
                                 traits, 
@@ -214,8 +214,8 @@ as.traitdata <- function(x,
   
   if(length(traits) == 1) {   
     out <- 
-    colnames(out)[colnames(out) == traits] <- "traitValue"
-                                out$traitName <- as.factor(traits)
+    colnames(out)[colnames(out) == traits] <- "verbatimTraitValue"
+                                out$verbatimTraitName <- as.factor(traits)
   } 
     
   
@@ -226,15 +226,15 @@ as.traitdata <- function(x,
   }
   
   if(!is.null(units)) {
-    out$traitUnit <- NA
-    if(length(units) == 1) out$traitUnit <- as_factor_clocale(units)
-    if(length(units) == length(traits)) out$traitUnit <- as_factor_clocale(units[match(out$traitName, traits)])
+    out$verbatimTraitUnit <- NA
+    if(length(units) == 1) out$verbatimTraitUnit <- as_factor_clocale(units)
+    if(length(units) == length(traits)) out$verbatimTraitUnit <- as_factor_clocale(units[match(out$verbatimTraitName, traits)])
     if(length(units) != length(traits) & !is.null(names(units)) ) {
-      out$traitUnit <- as_factor_clocale(match(out$traitName, names(units))) 
-      levels(out$traitUnit) <- units
+      out$verbatimTraitUnit <- as_factor_clocale(match(out$verbatimTraitName, names(units))) 
+      levels(out$verbatimTraitUnit) <- units
     }
-    if(length(units) == ( length(traits) * length(x$scientificName) )) {
-      out$traitUnit <- as_factor_clocale(units)
+    if(length(units) == ( length(traits) * length(x$verbatimScientificName) )) {
+      out$verbatimTraitUnit <- as_factor_clocale(units)
     }
   } 
    
@@ -273,8 +273,8 @@ as.traitdata <- function(x,
 #' @export
 print.traitdata <- function(x, ...) {
   
-  n_traits <- length(levels(x$traitName))
-  n_taxa <- length(levels(x$scientificName))
+  n_traits <- length(levels(x$verbatimTraitName))
+  n_taxa <- length(levels(x$verbatimScientificName))
   n_measurements <- length(levels(x$measurementID))
   metadata <- attributes(x)$metadata
   thesaurus <- attributes(x)$thesaurus

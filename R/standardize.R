@@ -4,10 +4,10 @@
 #'   names and relates to globally unique taxon identifiers via URI.
 #'
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
-#'   containing at least the column `scientificName.
+#'   containing at least the column `verbatimScientificName.
 #' @param method default option is `get_gbif_taxonomy`. In principle, takes any
 #'   function that takes a vector of species names as input to produce a
-#'   taxonomy lookup table (i.e. mapping user-provided `scientificName` to
+#'   taxonomy lookup table (i.e. mapping user-provided `verbatimScientificName` to
 #'   `taxonID` and other taxon-level information). Will allow to chose from
 #'   different sources of taxonomic reference.
 #' @param method_options a name vector of arguments to be passed on to `method`.
@@ -80,12 +80,12 @@ standardize_taxa <- function(x,
   #if(!"traitdata" %in% class(x)) x <- as.traitdata(x, ...)
     
   # call method to handle name mapping
-  temp <- do.call(method, c(list(levels(droplevels(as.factor(x$scientificName)))), method_options))
+  temp <- do.call(method, c(list(levels(droplevels(as.factor(x$verbatimScientificName)))), method_options))
   
   # merge simplified output into input table
-  out <- merge.data.frame(x, temp[, unique(c( "taxonID", "scientificNameStd", "scientificName",
+  out <- merge.data.frame(x, temp[, unique(c( "taxonID", "scientificName", "verbatimScientificName",
                                               "taxonRank", "warnings", return))], 
-                          by.x = "scientificName", by.y = "scientificName")
+                          by.x = "verbatimScientificName", by.y = "verbatimScientificName")
   
   #TODO: produce warning for unmatched names!
   
@@ -121,7 +121,7 @@ standardize.taxonomy <- standardize_taxa
 #'   converts units of values and renames factor levels into accepted terms.
 #'   
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
-#'   containing at least the column `scientificName.
+#'   containing at least the column `verbatimScientificName.
 #' @param thesaurus an object of class 'thesaurus' (as returned by
 #'   `as.thesaurus()`).
 #' @param rename a named vector to map user-provided names to thesaurus object
@@ -134,7 +134,7 @@ standardize.taxonomy <- standardize_taxa
 #' @export
 #' @family standardize
 #' 
-#' @details The function matches the trait names provided in 'traitName' to the
+#' @details The function matches the trait names provided in 'verbatimTraitName' to the
 #'   traits provided in the thesaurus (in field 'trait'). Matching must be exact
 #'   (case sensitive). Fuzzy matching may be provided in a later version of the
 #'   package.
@@ -142,7 +142,7 @@ standardize.taxonomy <- standardize_taxa
 #'   The function parameter 'rename' should be provided to map trait names where
 #'   user-provided names and thesaurus names are different. In this case, rename
 #'   should be a named vector with the target names used in the thesaurus as
-#'   names, and the original names as provided in 'traitName' as value. E.g.
+#'   names, and the original names as provided in 'verbatimTraitName' as value. E.g.
 #'   `rename = c()`
 #'   
 #' @aliases standardise_traits standardize.traits
@@ -236,9 +236,9 @@ standardize_traits <- function(x,
                                ...
                                ) {
   
-  traitNameStd = NULL # reserving variable for subsetting (to avoid nots in R CHECK)
+  traitName = NULL # reserving variable for subsetting (to avoid nots in R CHECK)
   
-  x$traitNameStd <- x$traitName
+  x$traitName <- x$verbatimTraitName
   
   if(!"thesaurus" %in% class(thesaurus)) as.thesaurus(thesaurus)
   
@@ -259,41 +259,41 @@ standardize_traits <- function(x,
   if(is.null(levels(lookup$identifier))) lookup$identifier <- as.factor(seq_along(lookup$trait))
   
   
-  # map user-provided trait names to thesaurus (i.e. set traitNameStd)
+  # map user-provided trait names to thesaurus (i.e. set traitName)
   
   ## if rename provides user name
   if(!is.null(names(rename))) {
-    levels(x$traitNameStd) <- rename[match(levels(x$traitName), names(rename) )]
+    levels(x$traitName) <- rename[match(levels(x$verbatimTraitName), names(rename) )]
   }
   
   ## if thesaurus provides user name
-  if(is.null(rename) && length(thesaurus) == length(levels(x$traitName)) && !is.null(names(thesaurus))) { 
-    levels(x$traitNameStd) <- lookup$trait[match(levels(x$traitName), names(thesaurus) )] 
+  if(is.null(rename) && length(thesaurus) == length(levels(x$verbatimTraitName)) && !is.null(names(thesaurus))) { 
+    levels(x$traitName) <- lookup$trait[match(levels(x$verbatimTraitName), names(thesaurus) )] 
   }
   
   # merge lookup table into original data frame based on user provided trait name mapping
-  out <- merge.data.frame(x, lookup[,c("trait","identifier", "expectedUnit" )], by.x = "traitNameStd", by.y = "trait", sort = FALSE )
+  out <- merge.data.frame(x, lookup[,c("trait","identifier", "expectedUnit" )], by.x = "traitName", by.y = "trait", sort = FALSE )
  
   ## rename columns according to ETS
-  colnames(out)[colnames(out) == "trait"] <- "traitNameStd"
-  colnames(out)[colnames(out) == "expectedUnit"] <- "traitUnitStd"
+  colnames(out)[colnames(out) == "trait"] <- "traitName"
+  colnames(out)[colnames(out) == "expectedUnit"] <- "traitUnit"
   colnames(out)[colnames(out) == "identifier"] <- "traitID"
  
   # generate standardized trait vector
  
-  out$traitValueStd <- NA
+  out$traitValue <- NA
  
-  traits <- levels(droplevels(out$traitNameStd)) 
+  traits <- levels(droplevels(out$traitName)) 
   
   for(i in traits) { # iterate over all trait categories (by user provided names)
    
-   #if(length(lookup[lookup$trait == i,]$valueType) == 1 ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnitStd' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
+   #if(length(lookup[lookup$trait == i,]$valueType) == 1 ) {warning("trait value has not been harmonized to standard terms! To perform standardization provide field 'valueType', as well as 'traitUnit' and 'factorLevels' for numeric and factorial traits, respectively!")} else {
     
     
     # TODO: add check of value type if none is provided
     # if(is.na(lookup[lookup$trait == i,]$valueType)) {
     # 
-    #   guessed_type <- typeof(templist[[i]]$traitValue)
+    #   guessed_type <- typeof(templist[[i]]$verbatimTraitValue)
     #   
     #   warning("no value type has been provided. I take trait", i, "to be ", guessed_type)
     # }
@@ -301,27 +301,27 @@ standardize_traits <- function(x,
   
     # harmonize logical values
     if(lookup[lookup$trait == i,]$valueType == "logical") {
-       templist <- split(out, f = out$traitNameStd) 
-       out[out$traitNameStd == i,"traitValueStd"] <- fixlogical(templist[[i]]$traitValue, output = output, categories = categories)
+       templist <- split(out, f = out$traitName) 
+       out[out$traitName == i,"traitValue"] <- fixlogical(templist[[i]]$verbatimTraitValue, output = output, categories = categories)
      }
      
      ## factor level harmonization
      if(lookup[lookup$trait == i,]$valueType %in% c("factor", "categorical")) { 
        
-       value_original <- as_factor_clocale(subset(out, traitNameStd == i)$traitValue)
+       value_original <- as_factor_clocale(subset(out, traitName == i)$verbatimTraitValue)
        #TODO: check if factor level clustering occurs, and harmonize, if switch is set for it
        #value_standardized <- refinr::key_collision_merge(as.character(value_original))
        
        #TODO: remap factor levels according to user provided mapping (e.g. c("f", "female", "xy") all resolve to "f") 
-       #out[out$traitNameStd == i, "traitValueStd"] <- value_standardized
+       #out[out$traitName == i, "traitValue"] <- value_standardized
        
      } ## end of factor level harmonization
      
      ## unit conversion:
      if(lookup[lookup$trait == i,]$valueType == "numeric") {
 
-       unit_original <- as_factor_clocale(subset(out, traitNameStd == i)$traitUnit)
-       unit_target <- as_factor_clocale(subset(out, traitNameStd == i)$traitUnitStd)
+       unit_original <- as_factor_clocale(subset(out, traitName == i)$verbatimTraitUnit)
+       unit_target <- as_factor_clocale(subset(out, traitName == i)$traitUnit)
        
        # case 1: homogeneous units for the entire trait
        if(length(levels(unit_original)) == 1 && length(levels(unit_target)) == 1) {
@@ -331,18 +331,18 @@ standardize_traits <- function(x,
          
          ## OLDMETHOD: did not handle squares and operations
          # extract original value
-         value_original <- as.numeric(subset(out, traitNameStd == i)$traitValue) * units::as_units(unit_original)
+         value_original <- as.numeric(subset(out, traitName == i)$verbatimTraitValue) * units::as_units(unit_original)
          
          # create vector with standardized value and write into output
          value_standardized <- value_original
          units(value_standardized) <- units::as_units(unit_target)
-         out[out$traitNameStd == i, "traitValueStd"] <- value_standardized
+         out[out$traitName == i, "traitValue"] <- value_standardized
          
          
        } else {     # case 2: heterogeneous units used within a single trait
          
          # extract original value
-         value_original <-  subset(out, traitNameStd == traits[i])$traitValue
+         value_original <-  subset(out, traitName == traits[i])$verbatimTraitValue
          
          # convert value in standardized value and write into output
          for(j in seq_along(value_original))  {
@@ -351,7 +351,7 @@ standardize_traits <- function(x,
            
            value_standardized_j <- value_original_j
            units(value_standardized_j) <- units::parse_unit(unit_target[j])
-           out[out$traitNameStd == i,"traitValueStd"][j] <- value_standardized_j
+           out[out$traitName == i,"traitValue"][j] <- value_standardized_j
          }
          
        }

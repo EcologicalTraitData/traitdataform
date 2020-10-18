@@ -6,22 +6,22 @@
 #' @param .data the traitdata object to transform
 #' @param ... named parameters giving definitions of new columns.
 #' @param traits (NOT TESTED) the column name to be kept for parsing into
-#'   wide-table (default is `traitName`). Note that any duplicate column that
-#'   contains trait names, e.g. `traitNameStd` will be omitted.
+#'   wide-table (default is `verbatimTraitName`). Note that any duplicate column that
+#'   contains trait names, e.g. `traitName` will be omitted.
 #' @param units (NOT TESTED) the column name containing the units of numerical
-#'   values (default is `traitUnit`).
+#'   values (default is `verbatimTraitUnit`).
 #' @param values (NOT TESTED) the column name containing the trait values to be
-#'   used to fill the matrix (default is `traitValue`). Duplicate columns (e.g.
-#'   `traitValueStd`) will be omitted. See notes.
+#'   used to fill the matrix (default is `verbatimTraitValue`). Duplicate columns (e.g.
+#'   `traitValue`) will be omitted. See notes.
 #'
 #' @return an updated traitdata object with the new trait measures or facts
 #'   appended to the original table. If the given trait name has been refined,
 #'   it will be replaced.
 #'
 #' @details The function handles units for numerical traits and returns the new
-#'   unit of the computed value in column `traitUnit`, if units of input
+#'   unit of the computed value in column `verbatimTraitUnit`, if units of input
 #'   variables were specified according to the units package. Handling of other
-#'   columns than `traitName` and `traitValue` is not advised at present.
+#'   columns than `verbatimTraitName` and `verbatimTraitValue` is not advised at present.
 #'
 #'   It is advised to mutate traits before applying `standardize.traits()`! If
 #'   the mutate function is applied to a standardised dataset, the new trait
@@ -54,9 +54,9 @@
 #'
 #' updated <- mutate.traitdata(dataset3, predator = Feeding_guild == "c" )
 #'
-#' head(updated[updated$traitName == "predator",])
+#' head(updated[updated$verbatimTraitName == "predator",])
 #'
-#' levels(updated$traitName)
+#' levels(updated$verbatimTraitName)
 #'
 #' ##
 #'
@@ -77,17 +77,17 @@
 #'                             Body_volume = Body_length*Body_width*Body_height,
 #'                             Wingload = Wing_length*Wing_width/Body_volume)
 #'
-#' head(updated[updated$traitName %in% c( "Body_volume"),])
+#' head(updated[updated$verbatimTraitName %in% c( "Body_volume"),])
 #' }
 
 mutate.traitdata <- function(.data, 
                              ..., 
-                             values = "traitValue", 
-                             traits = "traitName", 
-                             units = "traitUnit"
+                             values = "verbatimTraitValue", 
+                             traits = "verbatimTraitName", 
+                             units = "verbatimTraitUnit"
                              ) {
   
-  traitName = NULL
+  verbatimTraitName = NULL
   
   stopifnot(is.data.frame(.data) || is.list(.data) || is.environment(.data))
   
@@ -104,8 +104,8 @@ mutate.traitdata <- function(.data,
     temp[[col]] <- eval(out_traits[[col]], temp, parent.frame())
   }
   
-  out_units <- data.frame(traitName = c(in_traits, names(out_traits)) )
-  out_units$traitUnit <- sapply(as.character(out_units$traitName), function(t) {
+  out_units <- data.frame(verbatimTraitName = c(in_traits, names(out_traits)) )
+  out_units$verbatimTraitUnit <- sapply(as.character(out_units$verbatimTraitName), function(t) {
     if("units" %in% class(temp[[t]])) {
       as.character(units(temp[[t]]))
     } else { return(NA) }
@@ -117,18 +117,18 @@ mutate.traitdata <- function(.data,
                        measure.vars = names(out_traits), 
                        id.vars = names(temp[,
                             which(!names(temp) %in% c(in_traits, names(out_traits)))]), 
-                       variable_name = "traitName",
+                       variable_name = "verbatimTraitName",
                        na.rm = TRUE
                        ) )
   
   
-  names(out)[names(out) == "variable"] <- "traitName"
-  names(out)[names(out) == "value"] <- "traitValue"
+  names(out)[names(out) == "variable"] <- "verbatimTraitName"
+  names(out)[names(out) == "value"] <- "verbatimTraitValue"
 
-  out <- merge(out, out_units, by = "traitName" )
+  out <- merge(out, out_units, by = "verbatimTraitName" )
   
-  out <- plyr::rbind.fill(subset(.data, !traitName %in% names(out_traits)), subset(out, traitName %in% names(out_traits))) 
-  out$traitUnit <- as.factor(out$traitUnit)
+  out <- plyr::rbind.fill(subset(.data, !verbatimTraitName %in% names(out_traits)), subset(out, verbatimTraitName %in% names(out_traits))) 
+  out$verbatimTraitUnit <- as.factor(out$verbatimTraitUnit)
   
     # sort columns according to glossary of terms
   out <- out[, order(match(names(out), glossary$columnName) )]

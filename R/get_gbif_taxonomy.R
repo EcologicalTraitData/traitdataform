@@ -82,7 +82,7 @@ get_gbif_taxonomy <- function(x,
     
     if(nrow(temp[[i]]) == 0) {
       warning_i <- paste("No matching species concept!")
-      temp[[i]] <- data.frame(scientificName = x[i], matchtype = "NONE", status = "NA", rank = "species", stringsAsFactors = FALSE)
+      temp[[i]] <- data.frame(verbatimScientificName = x[i], matchtype = "NONE", status = "NA", rank = "species", stringsAsFactors = FALSE)
       
     }
     
@@ -100,7 +100,7 @@ get_gbif_taxonomy <- function(x,
     if(!is.null(conf_threshold) & nrow(temp[[i]]) > 0) {
       temp[[i]] <- subset(temp[[i]], confidence >= conf_threshold)
       if(nrow(temp[[i]]) == 0) {
-        temp[[i]] <- data.frame(scientificName = x[i], matchtype = "NONE", status = "NA", rank = "species", stringsAsFactors = FALSE)
+        temp[[i]] <- data.frame(verbatimScientificName = x[i], matchtype = "NONE", status = "NA", rank = "species", stringsAsFactors = FALSE)
         warning_i <- paste(warning_i, "No match! Check spelling or lower confidence threshold!")
       }
     }
@@ -187,7 +187,7 @@ get_gbif_taxonomy <- function(x,
         
       } else {
         
-        temp[[i]] <- data.frame(scientificName = x[i], matchtype = "NONE", rank = "subspecies", stringsAsFactors = FALSE)
+        temp[[i]] <- data.frame(verbatimScientificName = x[i], matchtype = "NONE", rank = "subspecies", stringsAsFactors = FALSE)
         warning_i <- paste(warning_i, "No mapping of subspecies name to species was possible!", sep = " ")
       }
       
@@ -198,7 +198,7 @@ get_gbif_taxonomy <- function(x,
         temp[[i]] <- subset(temp[[i]], temp[[i]]$confidence == max(temp[[i]]$confidence))
         warning_i <- paste(warning_i, "No matching species concept! Entry has been mapped to higher taxonomic level.")
       } else {
-        temp[[i]] <- data.frame(scientificName = x[i], matchtype = "NONE", rank = "highertaxon", stringsAsFactors = FALSE)
+        temp[[i]] <- data.frame(verbatimScientificName = x[i], matchtype = "NONE", rank = "highertaxon", stringsAsFactors = FALSE)
         warning_i <- paste("No matching species concept!", warning_i)
       }
     } 
@@ -208,9 +208,9 @@ get_gbif_taxonomy <- function(x,
     if(temp[[i]]$matchtype != "NONE") {
       
       temp[[i]] <- data.frame(
-        scientificName = x[i], 
+        verbatimScientificName = x[i], 
         synonym = synonym_i, 
-        scientificNameStd = temp[[i]]$canonicalname, 
+        scientificName = temp[[i]]$canonicalname, 
         author = sub(paste0(temp[[i]]$canonicalname," "), "", temp[[i]]$scientificname),
         taxonRank = temp[[i]]$rank,
         confidence = temp[[i]]$confidence,
@@ -226,7 +226,7 @@ get_gbif_taxonomy <- function(x,
         stringsAsFactors = FALSE
       )
     } else {
-      temp[[i]] <- data.frame(scientificName = x[i], warnings = NA, stringsAsFactors = FALSE )
+      temp[[i]] <- data.frame(verbatimScientificName = x[i], warnings = NA, stringsAsFactors = FALSE )
     }
     
     temp[[i]]$warnings <- warning_i

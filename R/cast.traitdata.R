@@ -5,19 +5,19 @@
 #'
 #' @param .data dataset of class 'traitdata' to be cast into wide-table format.
 #' @param traits the column name to be kept for parsing into wide-table (default
-#'   is `traitName`). Note that any duplicate column that contains trait names,
-#'   e.g. `traitNameStd` will be omitted.
+#'   is `verbatimTraitName`). Note that any duplicate column that contains trait names,
+#'   e.g. `traitName` will be omitted.
 #' @param units the column name containing the units of numerical values
-#'   (default is `traitUnit`).
+#'   (default is `verbatimTraitUnit`).
 #' @param values the column name containing the trait values to be used to fill
-#'   the matrix (default is `traitValue`). Duplicate columns (e.g.
-#'   `traitValueStd`) will be omitted. See notes.
+#'   the matrix (default is `verbatimTraitValue`). Duplicate columns (e.g.
+#'   `traitValue`) will be omitted. See notes.
 #' @param fun.aggregate option for [reshape2::cast()] to define method of
 #'   aggregation.
 #'
 #' @details The wide-table will be composed while preserving the detail given in
 #'   the dataset (occurrence level or taxa level). The cells  will be filled
-#'   with the values from 'traitValue'.
+#'   with the values from 'verbatimTraitValue'.
 #'
 #'   If taxa should be summarized, provide function for summarizing in parameter
 #'   'summarize'. This can be any function that takes a vector and returns a
@@ -37,7 +37,7 @@
 #'
 #' @return a wide-table data.frame object containing all taxa (and other
 #'   differentiating parameters) in rows and all traits (extracted from column
-#'   'traitName') in columns.
+#'   'verbatimTraitName') in columns.
 #'
 #' @export
 #' @importFrom reshape2 dcast
@@ -70,9 +70,9 @@
 #' 
 
 cast.traitdata <- function(.data, 
-                           values = "traitValue", 
-                           traits = "traitName", 
-                           units = "traitUnit", 
+                           values = "verbatimTraitValue", 
+                           traits = "verbatimTraitName", 
+                           units = "verbatimTraitUnit", 
                            fun.aggregate = NULL
                            ) {
   
