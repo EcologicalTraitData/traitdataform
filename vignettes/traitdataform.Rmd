@@ -86,7 +86,7 @@ head(dataset1)
 ```
 
 Note that in the output table the columns have been renamed [according to the ETS](https://terminologies.gfbio.org/terms/ets/pages/). 
-The essential columns are `traitName`, `traitValue` for the reported measurement or fact as well as `scientificName` for the taxon concept. The newly assigned column `measurementID` contains a running number for each individual trait measurement.  
+The essential columns are `verbatimTraitName`, `verbatimTraitValue` for the reported measurement or fact as well as `verbatimScientificName` for the taxon concept. The newly assigned column `measurementID` contains a running number for each individual trait measurement.  
 The function automatically interprets data as a species$\times$traits matrix if the taxa column contains only unique entries and no duplicates. 
 In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column `occurrenceID` which links measurements taken on the same individuals. Both `occurrenceID` and `measurementID` can be provided by the author using the parameter `occurrences` (as a column name or a vector) or `measurements` (as a column name or a vector).
 
@@ -126,7 +126,7 @@ This allows the user to be explicit about the structure of the output data.
 
 For a standardisation of quantitative trait data, the unit of measurement is essential. 
 Often, this information is kept in the metadata descriptions. But for a standardised table containing measurements from different sources, this information should always accompany the measurement value. 
-The ETS suggests the term `traitUnit` to contain the unit for each measurement in the data table. 
+The ETS suggests the term `verbatimTraitUnit` to contain the original author's unit for each measurement in the data table. 
 
 The function `as.traitdata()` creates this column via its parameter `units` (see example above). 
 This can be done for all traits in a single stroke (if all reported values refer to the same unit) or to each trait specifically (if they used different measurement units or if the table comprises a mixture of quantitative and qualitative traits).  
@@ -234,7 +234,7 @@ dataset2 <- mutate.traitdata(dataset2,
                             Body_volume = Body_length*Body_width*Body_height,
                             Wingload = Wing_length*Wing_width/Body_volume)
 
-head(dataset2[dataset2$traitName %in% c("Body_shape", "Body_volume", "Wingload"),])
+head(dataset2[dataset2$verbatimTraitName %in% c("Body_shape", "Body_volume", "Wingload"),])
 ```
 
 Note that all existing traits remain untouched and additional trait measures will be added to the dataset, unless a definition replaces an already existing trait.
@@ -311,7 +311,7 @@ dataset1Std <- standardize_traits(dataset1, thesaurus1)
 head(dataset1Std)
 ```
 
-The output table now contains a duplicate record of the originally provided trait measurements (in `traitName`, `traitValue` and `traitUnit`) and now being standardised into target terms and units as requested by the thesaurus. 
+The output table now contains a duplicate record of the originally provided trait measurements (in `verbatimTraitName`, `verbatimTraitValue` and `verbatimTraitUnit`) and now being standardised into target terms and units as requested by the thesaurus. 
 
 
 ### refer to own trait definitions
@@ -328,7 +328,7 @@ This reference file should contain at least the following fields for each trait 
   - For *numeric traits*, the parameter `expectedUnit` should provide the expected unit for the trait. The R script will then try to convert trait values into this unit. 
   - for *categorical traits* of kind 'factor' or 'integer', the field `factorLevels` should contain a list the valid factorial traits separated by semicolon. In case of ordinal traits, the order must be precisely corresponding to the number of possible integer values. 
 - `comments` may contain examples and clarifications
--  optionally, `identifier` may specify an alphanumeric ID for the specific use in your dataset, but this function is also covered by having defined unambiguous trait labels in field `trait` which recur in field `traitName` of the main dataset. 
+-  optionally, `identifier` may specify an alphanumeric ID for the specific use in your dataset, but this function is also covered by having defined unambiguous trait labels in field `trait` which recur in field `verbatimTraitName` of the main dataset. 
 
 Refer to the [ETS set of terms to describe trait concepts](https://terminologies.gfbio.org/terms/ets/pages/#terms-for-trait-definitions)) for further definitions of these terms, as well as the [best practice guidelines for trait-data publications](https://terminologies.gfbio.org/terms/ets/pages/bestpractice.html). 
 
@@ -439,12 +439,12 @@ attributes(dataset2Std)$traits[,c("trait", "identifier","traitDescription","expe
 
 # 3. Standardize taxa
 
-For taxon name standardisation, the function `standardize_taxa()` makes use of fuzzy matching algorithms provided by the package ['taxize' by Scott Chamberlain ](https://CRAN.R-project.org/package=taxize) to match the entries of column `scientificName` against the GBIF Backbone Taxonomy. 
-The result is written into a new column `scientificNameStd`. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
+For taxon name standardisation, the function `standardize_taxa()` makes use of fuzzy matching algorithms provided by the package ['taxize' by Scott Chamberlain ](https://CRAN.R-project.org/package=taxize) to match the entries of column `verbatimScientificName` against the GBIF Backbone Taxonomy. 
+The result is written into a new column `scientificName`. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.  
 
-If further layers of taxonomic information are desired as an output, the function takes the parameter `return`, which by default contains `c("taxonID", "scientificNameStd", "order", "taxonRank")`. Other specifications can be added here. 
+If further layers of taxonomic information are desired as an output, the function takes the parameter `return`, which by default contains `c("taxonID", "scientificName", "order", "taxonRank")`. Other specifications can be added here. 
 
-Note that for this to work, `scientificName` must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright). 
+Note that for this to work, `verbatimScientificName` must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright). 
 Note also, that taxon name mapping requires an internet connection and might take some time, depending on the length of your species list. 
 
 ```{r, message=FALSE, warning=FALSE}
