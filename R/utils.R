@@ -141,3 +141,23 @@ as_factor_clocale <- function(x) {
       Sys.setlocale("LC_COLLATE", lc_collate)
   return(x)      
 }
+
+
+#' Convert output to ETS v0.9
+#'   
+#' @noRd
+#' @keywords internal
+
+convert.ets0.9 <- function(x) {
+  if(attr(x, "metadata")$conformsTo == "Ecological Trait-data Standard (ETS) v0.10") {
+    
+    oldnames <- c("scientificName", "verbatimScientificName", "traitName", "verbatimTraitName", "traitUnit", "verbatimTraitUnit", "traitValue", "verbatimTraitValue")
+    newnames <- c("scientificNameStd", "scientificName", "traitNameStd", "traitName", "traitUnitStd", "traitUnit", "traitValueStd", "traitValue")
+    
+    colnames(x)[names(x) %in% oldnames] <- na.omit(newnames[match(names(x), oldnames)])
+
+    attr(x, "metadata")$conformsTo <- "Ecological Trait-data Standard (ETS) v0.9"
+    
+  } 
+  return(x)
+} 

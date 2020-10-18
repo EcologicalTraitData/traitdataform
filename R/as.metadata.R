@@ -28,7 +28,8 @@ as.metadata <- function(...,
                       version = NULL,
                       comments = NULL,
                       description = NULL,
-                      region = NULL
+                      region = NULL,
+                      conformsTo = NULL
                       )
                     ) {
     
@@ -81,6 +82,12 @@ print.metadata <- function(x, ...) {
       if(!is.null(x$bibliographicCitation) |
          !is.null(x$license))  {
         cat("\n    When using these data, you must acknowledge the following usage policies: \n")
+      }
+  
+      # conforms to standard: 
+      if(!is.null(x$conformsTo)) {
+        cat("\n    This dataset conforms to: ")
+        print(x$conformsTo)
       }
       
       # cite as: 

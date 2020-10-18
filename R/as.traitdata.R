@@ -53,7 +53,11 @@
 #'   converted into lontable format, but remain in widetable format as provided.
 #'   Note that any columns not indicated in arguments `traits`, `keep`, `units`,
 #'   `taxa`, `occurrences` will be dropped from the output.
-#' @param ... other arguments, passed on to print function. 
+#' @param conformsTo version of the Ecological Trait-data Standard to which the
+#'   data conform. Default procedures return data conform to v0.10. If
+#'   `conformsTo = "v0.9"`, data output will be converted to Ecological
+#'   Trait-data Standard v0.9.
+#' @param ... other arguments, passed on to print function.
 #'
 #' @details If `occurrences` is left blank, the script will check for the
 #'   structure of the input table. If several entries are given for the same
@@ -70,10 +74,10 @@
 #' @importFrom reshape2 melt
 #'
 #' @examples
-#' 
+#'
 #' \dontrun{
 #' # species-trait matrix:
-#' 
+#'
 #' pulldata("carabids")
 #'
 #' dataset1 <- as.traitdata(carabids,
@@ -84,7 +88,7 @@
 #'   )
 #'
 #' # occurrence table:
-#' 
+#'
 #' pulldata("heteroptera_raw")
 #'
 #' dataset2 <- as.traitdata(heteroptera_raw,
@@ -121,6 +125,7 @@ as.traitdata <- function(x,
                          thesaurus = attributes(x)$thesaurus,
                          metadata = attributes(x)$metadata,
                          longtable = TRUE,
+                         conformsTo = "v0.10",
                          ...
 ) {
   
@@ -256,6 +261,12 @@ as.traitdata <- function(x,
       attr(out, "metadata") <- metadata
   } else {
     attr(out, "metadata") <- traitdataform::as.metadata(metadata)
+  }
+  
+  attr(out, "metadata")$conformsTo <- "Ecological Trait-data Standard (ETS) v0.10"
+    
+  if(conformsTo == "v0.9") {
+    out <- convert.ets0.9(out)
   }
   
   # set thesaurus attributes
