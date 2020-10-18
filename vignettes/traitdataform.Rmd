@@ -3,7 +3,7 @@ title: "Package 'traitdataform'"
 author: "Florian D. Schneider"
 output:  rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{traitdataform}
+  %\VignetteIndexEntry{Package 'traitdataform'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: div05.bib
@@ -26,7 +26,7 @@ There are two major use cases for the package:
 The toolset of the package includes
 
 1. transforming typical trait-data formats (e.g. species-trait-matrix or measurement-table data) into a unified long-table format and mapping column names into terms provided in the Ecological Trait-data Standard (ETS) (see section [1. Reading data](#reading-data)),
-2. mapping of trait concepts onto a user-provided traitlist (i.e. a thesaurus of traits) or globally accessible URIs  (see section [2. Standardize traits](#standardize-traits)) and unify units and factor levels,
+2. mapping of trait concepts onto a user-provided trait list (i.e. a thesaurus of traits) or globally accessible URIs  (see section [2. Standardize traits](#standardize-traits)) and unify units and factor levels,
 3. mapping of species concepts onto globally accessible definitions via URIs (pointing to GFBio taxonomic ontology server) (see section [3. Standardize taxa](#standardize-taxa)), 
 4. Merging and handling compiled trait-data, while keeping track of the metadata for each original dataset (see section [4. Working with trait-datasets](#working-with-trait-datasets)) 
 5. saving trait dataset into a desired format using templates (e.g. for project-specific databases or online repositories) (see section [5. Writing data](#writing-data)) 
@@ -97,7 +97,7 @@ heteroptera_raw <-  read.delim(url("https://ndownloader.figshare.com/files/56338
                                          encoding = "windows-1252"),
                                     stringsAsFactors=TRUE)
 
-# Data pulication: M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W.
+# Data publication: M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W.
 # Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in
 # grasslands across three regions of Germany. figshare.
 # https://doi.org/10.6084/m9.figshare.c.3307611.v1
