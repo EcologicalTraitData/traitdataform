@@ -123,15 +123,15 @@
     <p>The function maps user provided names to accepted species names.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_gbif_taxonomy</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>higherrank</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>fuzzy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>conf_threshold</span> <span class='kw'>=</span> <span class='fl'>90</span>,
-  <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_gbif_taxonomy</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  subspecies <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  higherrank <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  fuzzy <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  conf_threshold <span class='op'>=</span> <span class='fl'>90</span>,
+  resolve_synonyms <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,9 +157,10 @@ suppressed.</p></td>
     </tr>
     <tr>
       <th>fuzzy</th>
-      <td><p>logical. If FALSE (default), names are only resolved to exactly
-matching taxa on GBIF taxonomy service. Setting to TRUE may produce matches
-when failing otherwise.</p></td>
+      <td><p>logical. Defaults to TRUE to deal with misspelled names. May
+produce wrong assignments in case of very similar taxon names. If FALSE
+(default), names are only resolved to exactly matching taxa on GBIF
+taxonomy service.</p></td>
     </tr>
     <tr>
       <th>conf_threshold</th>
@@ -195,7 +196,7 @@ GBIF backbone taxonomy.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>get_gbif_taxonomy</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Chorthippus albomarginatus"</span>, <span class='st'>"Chorthippus apricarius"</span>,
+<span class='fu'>get_gbif_taxonomy</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Chorthippus albomarginatus"</span>, <span class='st'>"Chorthippus apricarius"</span>,
   <span class='st'>"Chorthippus biguttulus"</span>, <span class='st'>"Chorthippus dorsatus"</span>, <span class='st'>"Chorthippus montanus"</span>,
   <span class='st'>"Chorthippus parallelus"</span>, <span class='st'>"Chrysochraon dispar"</span>, <span class='st'>"Conocephalus dorsalis"</span>,
   <span class='st'>"Conocephalus fuscus"</span>, <span class='st'>"Decticus verrucivorus"</span>, <span class='st'>"Euthystira brachyptera"</span>,
@@ -204,8 +205,9 @@ GBIF backbone taxonomy.</p>
   <span class='st'>"Spec"</span>, <span class='st'>"Stenobothrus lineatus"</span>, <span class='st'>"Stenobothrus stigmaticus"</span>,
   <span class='st'>"Stethophyma grossum"</span>, <span class='st'>"Tetrix kraussi"</span>, <span class='st'>"Tetrix subulata"</span>,
   <span class='st'>"Tetrix tenuicornis"</span>, <span class='st'>"Tetrix undulata"</span>, <span class='st'>"Tettigonia cantans"</span>,
-  <span class='st'>"Tettigonia viridissima"</span>)
-  )</div><div class='output co'>#&gt;                scientificName synonym            scientificNameStd
+  <span class='st'>"Tettigonia viridissima"</span><span class='op'>)</span>
+  <span class='op'>)</span>
+</div><div class='output co'>#&gt;        verbatimScientificName synonym               scientificName
 #&gt; 1  Chorthippus albomarginatus   FALSE   Chorthippus albomarginatus
 #&gt; 2      Chorthippus apricarius   FALSE       Chorthippus apricarius
 #&gt; 3      Chorthippus biguttulus   FALSE       Chorthippus biguttulus
@@ -345,12 +347,13 @@ GBIF backbone taxonomy.</p>
 #&gt; 25                                                         
 #&gt; 26                                                         
 #&gt; 27                                                         </div><div class='input'>
-<span class='fu'>get_gbif_taxonomy</span>(<span class='st'>"Vicia"</span>)</div><div class='output co'>#&gt;   scientificName synonym scientificNameStd author taxonRank confidence kingdom
-#&gt; 1          Vicia   FALSE             Vicia     L.     genus         94 Plantae
-#&gt;         phylum         class   order   family genus               taxonomy
-#&gt; 1 Tracheophyta Magnoliopsida Fabales Fabaceae Vicia GBIF Backbone Taxonomy
-#&gt;                               taxonID warnings
-#&gt; 1 http://www.gbif.org/species/2974751         </div></pre>
+<span class='fu'>get_gbif_taxonomy</span><span class='op'>(</span><span class='st'>"Vicia"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   verbatimScientificName synonym scientificName author taxonRank confidence
+#&gt; 1                  Vicia   FALSE          Vicia     L.     genus         94
+#&gt;   kingdom       phylum         class   order   family genus
+#&gt; 1 Plantae Tracheophyta Magnoliopsida Fabales Fabaceae Vicia
+#&gt;                 taxonomy                             taxonID warnings
+#&gt; 1 GBIF Backbone Taxonomy http://www.gbif.org/species/2974751         </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -366,7 +369,7 @@ GBIF backbone taxonomy.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

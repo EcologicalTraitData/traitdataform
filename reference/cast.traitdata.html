@@ -125,13 +125,13 @@ or occurrence table format." />
 or occurrence table format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cast.traitdata</span>(
-  <span class='no'>.data</span>,
-  <span class='kw'>values</span> <span class='kw'>=</span> <span class='st'>"traitValue"</span>,
-  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='st'>"traitName"</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"traitUnit"</span>,
-  <span class='kw'>fun.aggregate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>cast.traitdata</span><span class='op'>(</span>
+  <span class='va'>.data</span>,
+  values <span class='op'>=</span> <span class='st'>"verbatimTraitValue"</span>,
+  traits <span class='op'>=</span> <span class='st'>"verbatimTraitName"</span>,
+  units <span class='op'>=</span> <span class='st'>"verbatimTraitUnit"</span>,
+  fun.aggregate <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,19 +143,19 @@ or occurrence table format.</p>
     <tr>
       <th>values</th>
       <td><p>the column name containing the trait values to be used to fill
-the matrix (default is <code>traitValue</code>). Duplicate columns (e.g.
-<code>traitValueStd</code>) will be omitted. See notes.</p></td>
+the matrix (default is <code>verbatimTraitValue</code>). Duplicate columns (e.g.
+<code>traitValue</code>) will be omitted. See notes.</p></td>
     </tr>
     <tr>
       <th>traits</th>
       <td><p>the column name to be kept for parsing into wide-table (default
-is <code>traitName</code>). Note that any duplicate column that contains trait names,
-e.g. <code>traitNameStd</code> will be omitted.</p></td>
+is <code>verbatimTraitName</code>). Note that any duplicate column that contains trait names,
+e.g. <code>traitName</code> will be omitted.</p></td>
     </tr>
     <tr>
       <th>units</th>
       <td><p>the column name containing the units of numerical values
-(default is <code>traitUnit</code>).</p></td>
+(default is <code>verbatimTraitUnit</code>).</p></td>
     </tr>
     <tr>
       <th>fun.aggregate</th>
@@ -168,12 +168,12 @@ aggregation.</p></td>
 
     <p>a wide-table data.frame object containing all taxa (and other
 differentiating parameters) in rows and all traits (extracted from column
-'traitName') in columns.</p>
+'verbatimTraitName') in columns.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The wide-table will be composed while preserving the detail given in
 the dataset (occurrence level or taxa level). The cells  will be filled
-with the values from 'traitValue'.</p>
+with the values from 'verbatimTraitValue'.</p>
 <p>If taxa should be summarized, provide function for summarizing in parameter
 'summarize'. This can be any function that takes a vector and returns a
 single value for <strong>both numerical and factorial/character input vectors!</strong>.
@@ -193,7 +193,9 @@ columns might be added at a later stage.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"arthropodtraits"</span>)</div><div class='output co'>#&gt; <span class='message'>The dataset 'arthropodtraits' is now available for use! </span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>arthropodtraits</span>)</div><div class='output co'>#&gt;     Order     Suborder       Family            SpeciesID             Author
+<span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"arthropodtraits"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>The dataset 'arthropodtraits' is now available for use! </span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>arthropodtraits</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     Order     Suborder       Family            SpeciesID             Author
 #&gt; 1 Araneae Labidognatha Anyphaenidae Anyphaena accentuata (Walckenaer, 1802)
 #&gt; 2 Araneae Labidognatha    Araneidae Aculepeira ceropegia   Walckenaer, 1802
 #&gt; 3 Araneae Labidognatha    Araneidae     Agalenatea redii    (Scopoli, 1763)
@@ -220,44 +222,49 @@ columns might be added at a later stage.</p>
 #&gt; 3                  &lt;NA&gt;           h                 h       
 #&gt; 4                  &lt;NA&gt;       (h)-t                 u       
 #&gt; 5                  &lt;NA&gt;       (h)-t                 u       
-#&gt; 6                  &lt;NA&gt;       (h)-t                 u       </div><div class='input'><span class='no'>dataset3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>arthropodtraits</span>,
-                         <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
-                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>,
+#&gt; 6                  &lt;NA&gt;       (h)-t                 u       </div><div class='input'><span class='va'>dataset3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>arthropodtraits</span>,
+                         taxa <span class='op'>=</span> <span class='st'>"SpeciesID"</span>,
+                         traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>,
                                <span class='st'>"Feeding_guild"</span>,<span class='st'>"Feeding_guild_short"</span>,
                                <span class='st'>"Feeding_mode"</span>, <span class='st'>"Feeding_specialization"</span>,
                                <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>,
                                <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>,
-                               <span class='st'>"Stratum_use_short"</span>),
-                         <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Body_Size</span> <span class='kw'>=</span> <span class='st'>"mm"</span>),
-                         <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"Remark"</span>),
-                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='as.metadata.html'>as.metadata</a></span>(
-                            <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
-                            )
-)</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>dataset3</span>)</div><div class='output co'>#&gt;         scientificName traitName traitValue traitUnit measurementID
-#&gt; 1 Anyphaena accentuata Body_Size       6.25        mm             1
-#&gt; 2 Aculepeira ceropegia Body_Size         11        mm             2
-#&gt; 3     Agalenatea redii Body_Size       6.93        mm             3
-#&gt; 4   Araneus diadematus Body_Size      11.88        mm             4
-#&gt; 5    Araneus marmoreus Body_Size      10.03        mm             5
-#&gt; 6    Araneus quadratus Body_Size      12.25        mm             6
-#&gt;   measurementRemark
-#&gt; 1                  
-#&gt; 2                  
-#&gt; 3                  
-#&gt; 4                  
-#&gt; 5                  
-#&gt; 6                  
+                               <span class='st'>"Stratum_use_short"</span><span class='op'>)</span>,
+                         units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>Body_Size <span class='op'>=</span> <span class='st'>"mm"</span><span class='op'>)</span>,
+                         keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>measurementRemark <span class='op'>=</span> <span class='st'>"Remark"</span><span class='op'>)</span>,
+                         metadata <span class='op'>=</span> <span class='fu'><a href='as.metadata.html'>as.metadata</a></span><span class='op'>(</span>
+                            license <span class='op'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
+                            <span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>dataset3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   verbatimScientificName verbatimTraitName verbatimTraitValue verbatimTraitUnit
+#&gt; 1   Anyphaena accentuata         Body_Size               6.25                mm
+#&gt; 2   Aculepeira ceropegia         Body_Size                 11                mm
+#&gt; 3       Agalenatea redii         Body_Size               6.93                mm
+#&gt; 4     Araneus diadematus         Body_Size              11.88                mm
+#&gt; 5      Araneus marmoreus         Body_Size              10.03                mm
+#&gt; 6      Araneus quadratus         Body_Size              12.25                mm
+#&gt;   measurementID measurementRemark
+#&gt; 1             1                  
+#&gt; 2             2                  
+#&gt; 3             3                  
+#&gt; 4             4                  
+#&gt; 5             5                  
+#&gt; 6             6                  
 #&gt; 
 #&gt; This trait-dataset contains 11 traits for 1230 taxa ( 10238 measurements in total).
 #&gt; 
 #&gt; [ ] : 
 #&gt;     When using these data, you must acknowledge the following usage policies: 
 #&gt; 
+#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"
+#&gt; 
 #&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ 
 #&gt; </div><div class='input'>
-<span class='no'>dd3</span> <span class='kw'>&lt;-</span><span class='fu'>cast.traitdata</span>(<span class='no'>dataset3</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>dd3</span>)</div><div class='output co'>#&gt;              scientificName measurementRemark Body_Size Dispersal_ability
+<span class='va'>dd3</span> <span class='op'>&lt;-</span><span class='fu'>cast.traitdata</span><span class='op'>(</span><span class='va'>dataset3</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>dd3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      verbatimScientificName measurementRemark Body_Size Dispersal_ability
 #&gt; 1          Acalypta nigrina                    2.6 [mm]              0.25
 #&gt; 2          Acalypta parvula                    2.0 [mm]              0.25
 #&gt; 3      Acalypta platycheila                    2.6 [mm]              0.25
@@ -302,7 +309,7 @@ columns might be added at a later stage.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

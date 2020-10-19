@@ -133,23 +133,24 @@ traits within the same taxon, an occurrenceID should be given or will be
 created.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.traitdata</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>traits</span>,
-  <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>taxa</span>,
-  <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>occurrences</span>,
-  <span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>datasetID</span>,
-  <span class='kw'>measurements</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>measurements</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>units</span>,
-  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>keep</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>drop</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>id.vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>)[<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>keep</span> <span class='kw'>&amp;</span> !<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>x</span>) <span class='kw'>%in%</span> <span class='no'>drop</span>],
-  <span class='kw'>thesaurus</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>thesaurus</span>,
-  <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>x</span>)$<span class='no'>metadata</span>,
-  <span class='kw'>longtable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>as.traitdata</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>traits</span>,
+  taxa <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>taxa</span>,
+  occurrences <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>occurrences</span>,
+  datasetID <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>datasetID</span>,
+  measurements <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>measurements</span>,
+  units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>units</span>,
+  keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>keep</span>,
+  drop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>drop</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  id.vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%in%</span> <span class='va'>keep</span> <span class='op'>&amp;</span> <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%in%</span> <span class='va'>drop</span><span class='op'>]</span>,
+  thesaurus <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>thesaurus</span>,
+  metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>$</span><span class='va'>metadata</span>,
+  longtable <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  conformsTo <span class='op'>=</span> <span class='st'>"v0.10"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,6 +244,13 @@ Note that any columns not indicated in arguments <code>traits</code>, <code>keep
 <code>taxa</code>, <code>occurrences</code> will be dropped from the output.</p></td>
     </tr>
     <tr>
+      <th>conformsTo</th>
+      <td><p>version of the Ecological Trait-data Standard to which the
+data conform. Default procedures return data conform to v0.10. If
+<code>conformsTo = "v0.9"</code>, data output will be converted to Ecological
+Trait-data Standard v0.9.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>other arguments, passed on to print function.</p></td>
     </tr>
@@ -262,40 +270,42 @@ additional columns and dataset attribution will be listed in attributes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># species-trait matrix:</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)
+<span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"carabids"</span><span class='op'>)</span>
 
-<span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.traitdata</span>(<span class='no'>carabids</span>,
-  <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
-  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
-  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>basisOfRecordDecription</span> <span class='kw'>=</span> <span class='st'>"source_measurement"</span>, <span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"note"</span>)
-  )
+<span class='va'>dataset1</span> <span class='op'>&lt;-</span> <span class='fu'>as.traitdata</span><span class='op'>(</span><span class='va'>carabids</span>,
+  taxa <span class='op'>=</span> <span class='st'>"name_correct"</span>,
+  traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span><span class='op'>)</span>,
+  units <span class='op'>=</span> <span class='st'>"mm"</span>,
+  keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>basisOfRecordDecription <span class='op'>=</span> <span class='st'>"source_measurement"</span>, measurementRemark <span class='op'>=</span> <span class='st'>"note"</span><span class='op'>)</span>
+  <span class='op'>)</span>
 
 <span class='co'># occurrence table:</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)
+<span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"heteroptera_raw"</span><span class='op'>)</span>
 
-<span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.traitdata</span>(<span class='no'>heteroptera_raw</span>,
-  <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
-  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
+<span class='va'>dataset2</span> <span class='op'>&lt;-</span> <span class='fu'>as.traitdata</span><span class='op'>(</span><span class='va'>heteroptera_raw</span>,
+  taxa <span class='op'>=</span> <span class='st'>"SpeciesID"</span>,
+  traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
     <span class='st'>"Thorax_width"</span>, <span class='st'>"Head_width"</span>, <span class='st'>"Eye_width"</span>, <span class='st'>"Antenna_Seg1"</span>, <span class='st'>"Antenna_Seg2"</span>,
     <span class='st'>"Antenna_Seg3"</span>, <span class='st'>"Antenna_Seg4"</span>, <span class='st'>"Antenna_Seg5"</span>, <span class='st'>"Front.Tibia_length"</span>,
     <span class='st'>"Mid.Tibia_length"</span>, <span class='st'>"Hind.Tibia_length"</span>, <span class='st'>"Front.Femur_length"</span>,
     <span class='st'>"Hind.Femur_length"</span>, <span class='st'>"Front.Femur_width"</span>, <span class='st'>"Hind.Femur_width"</span>,
-    <span class='st'>"Rostrum_length"</span>, <span class='st'>"Rostrum_width"</span>, <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_widt"</span>),
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
-  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Sex"</span>, <span class='kw'>references</span> <span class='kw'>=</span> <span class='st'>"Source"</span>, <span class='kw'>lifestage</span> <span class='kw'>=</span> <span class='st'>"Wing_development"</span>),
-  <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='as.metadata.html'>as.metadata</a></span>(
-    <span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Gossner MM, Simons NK, HÃ¶ck L and Weisser WW"</span>,
-    <span class='kw'>datasetName</span> <span class='kw'>=</span> <span class='st'>"Morphometric traits Heteroptera"</span>,
-    <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>heteroptera_raw</span>)$<span class='no'>citeAs</span>,
-    <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
-    )
-)
-}</div></pre>
+    <span class='st'>"Rostrum_length"</span>, <span class='st'>"Rostrum_width"</span>, <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_widt"</span><span class='op'>)</span>,
+  units <span class='op'>=</span> <span class='st'>"mm"</span>,
+  keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>sex <span class='op'>=</span> <span class='st'>"Sex"</span>, references <span class='op'>=</span> <span class='st'>"Source"</span>, lifestage <span class='op'>=</span> <span class='st'>"Wing_development"</span><span class='op'>)</span>,
+  metadata <span class='op'>=</span> <span class='fu'><a href='as.metadata.html'>as.metadata</a></span><span class='op'>(</span>
+    author <span class='op'>=</span> <span class='st'>"Gossner MM, Simons NK, HÃ¶ck L and Weisser WW"</span>,
+    datasetName <span class='op'>=</span> <span class='st'>"Morphometric traits Heteroptera"</span>,
+    bibliographicCitation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>heteroptera_raw</span><span class='op'>)</span><span class='op'>$</span><span class='va'>citeAs</span>,
+    license <span class='op'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
+    <span class='op'>)</span>
+<span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -311,7 +321,7 @@ additional columns and dataset attribution will be listed in attributes.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

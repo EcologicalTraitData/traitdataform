@@ -125,13 +125,13 @@ into compound measurements or update factor levels into binaries." />
 into compound measurements or update factor levels into binaries.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mutate.traitdata</span>(
-  <span class='no'>.data</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>values</span> <span class='kw'>=</span> <span class='st'>"traitValue"</span>,
-  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='st'>"traitName"</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"traitUnit"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mutate.traitdata</span><span class='op'>(</span>
+  <span class='va'>.data</span>,
+  <span class='va'>...</span>,
+  values <span class='op'>=</span> <span class='st'>"verbatimTraitValue"</span>,
+  traits <span class='op'>=</span> <span class='st'>"verbatimTraitName"</span>,
+  units <span class='op'>=</span> <span class='st'>"verbatimTraitUnit"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,19 +147,19 @@ into compound measurements or update factor levels into binaries.</p>
     <tr>
       <th>values</th>
       <td><p>(NOT TESTED) the column name containing the trait values to be
-used to fill the matrix (default is <code>traitValue</code>). Duplicate columns (e.g.
-<code>traitValueStd</code>) will be omitted. See notes.</p></td>
+used to fill the matrix (default is <code>verbatimTraitValue</code>). Duplicate columns (e.g.
+<code>traitValue</code>) will be omitted. See notes.</p></td>
     </tr>
     <tr>
       <th>traits</th>
       <td><p>(NOT TESTED) the column name to be kept for parsing into
-wide-table (default is <code>traitName</code>). Note that any duplicate column that
-contains trait names, e.g. <code>traitNameStd</code> will be omitted.</p></td>
+wide-table (default is <code>verbatimTraitName</code>). Note that any duplicate column that
+contains trait names, e.g. <code>traitName</code> will be omitted.</p></td>
     </tr>
     <tr>
       <th>units</th>
       <td><p>(NOT TESTED) the column name containing the units of numerical
-values (default is <code>traitUnit</code>).</p></td>
+values (default is <code>verbatimTraitUnit</code>).</p></td>
     </tr>
     </table>
 
@@ -171,9 +171,9 @@ it will be replaced.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The function handles units for numerical traits and returns the new
-unit of the computed value in column <code>traitUnit</code>, if units of input
+unit of the computed value in column <code>verbatimTraitUnit</code>, if units of input
 variables were specified according to the units package. Handling of other
-columns than <code>traitName</code> and <code>traitValue</code> is not advised at present.</p>
+columns than <code>verbatimTraitName</code> and <code>verbatimTraitValue</code> is not advised at present.</p>
 <p>It is advised to mutate traits before applying <code><a href='standardize_traits.html'>standardize.traits()</a></code>! If
 the mutate function is applied to a standardised dataset, the new trait
 will not be mapped automatically to the provided thesaurus. (automated
@@ -181,51 +181,52 @@ re-mapping might be added in later versions of the package.)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"arthropodtraits"</span>)
-<span class='no'>dataset3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>arthropodtraits</span>,
-                         <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
-                         <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>,
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"arthropodtraits"</span><span class='op'>)</span>
+<span class='va'>dataset3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>arthropodtraits</span>,
+                         taxa <span class='op'>=</span> <span class='st'>"SpeciesID"</span>,
+                         traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Body_Size"</span>, <span class='st'>"Dispersal_ability"</span>,
                             <span class='st'>"Feeding_guild"</span>,<span class='st'>"Feeding_guild_short"</span>,
                             <span class='st'>"Feeding_mode"</span>, <span class='st'>"Feeding_specialization"</span>,
                             <span class='st'>"Feeding_tissue"</span>, <span class='st'>"Feeding_plant_part"</span>,
                             <span class='st'>"Endophagous_lifestyle"</span>, <span class='st'>"Stratum_use"</span>,
-                            <span class='st'>"Stratum_use_short"</span>),
-                         <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>Body_Size</span> <span class='kw'>=</span> <span class='st'>"mm"</span>, <span class='kw'>Dispersal_ability</span> <span class='kw'>=</span> <span class='st'>"unitless"</span>),
-                         <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"Remark"</span>),
-                         <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-                            <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
-                            )
-)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>dataset3</span>)
+                            <span class='st'>"Stratum_use_short"</span><span class='op'>)</span>,
+                         units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>Body_Size <span class='op'>=</span> <span class='st'>"mm"</span>, Dispersal_ability <span class='op'>=</span> <span class='st'>"unitless"</span><span class='op'>)</span>,
+                         keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>measurementRemark <span class='op'>=</span> <span class='st'>"Remark"</span><span class='op'>)</span>,
+                         metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+                            license <span class='op'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
+                            <span class='op'>)</span>
+<span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>dataset3</span><span class='op'>)</span>
 
-<span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset3</span>, <span class='kw'>predator</span> <span class='kw'>=</span> <span class='no'>Feeding_guild</span> <span class='kw'>==</span> <span class='st'>"c"</span> )
+<span class='va'>updated</span> <span class='op'>&lt;-</span> <span class='fu'>mutate.traitdata</span><span class='op'>(</span><span class='va'>dataset3</span>, predator <span class='op'>=</span> <span class='va'>Feeding_guild</span> <span class='op'>==</span> <span class='st'>"c"</span> <span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>==</span> <span class='st'>"predator"</span>,])
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>updated</span><span class='op'>[</span><span class='va'>updated</span><span class='op'>$</span><span class='va'>verbatimTraitName</span> <span class='op'>==</span> <span class='st'>"predator"</span>,<span class='op'>]</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>updated</span>$<span class='no'>traitName</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span><span class='op'>(</span><span class='va'>updated</span><span class='op'>$</span><span class='va'>verbatimTraitName</span><span class='op'>)</span>
 
 <span class='co'>##</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"heteroptera_raw"</span>)
-<span class='no'>dataset2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>heteroptera_raw</span>,
-                        <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
+<span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"heteroptera_raw"</span><span class='op'>)</span>
+<span class='va'>dataset2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>heteroptera_raw</span>,
+                        traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Body_length"</span>, <span class='st'>"Body_width"</span>, <span class='st'>"Body_height"</span>, <span class='st'>"Thorax_length"</span>,
                                   <span class='st'>"Thorax_width"</span>, <span class='st'>"Head_width"</span>, <span class='st'>"Eye_width"</span>, <span class='st'>"Antenna_Seg1"</span>,
                                    <span class='st'>"Antenna_Seg2"</span>, <span class='st'>"Antenna_Seg3"</span>, <span class='st'>"Antenna_Seg4"</span>, <span class='st'>"Antenna_Seg5"</span>,
                                    <span class='st'>"Front.Tibia_length"</span>, <span class='st'>"Mid.Tibia_length"</span>, <span class='st'>"Hind.Tibia_length"</span>,
                                    <span class='st'>"Front.Femur_length"</span>, <span class='st'>"Hind.Femur_length"</span>, <span class='st'>"Front.Femur_width"</span>,
                                    <span class='st'>"Hind.Femur_width"</span>, <span class='st'>"Rostrum_length"</span>, <span class='st'>"Rostrum_width"</span>,
-                                   <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_width"</span>),
-                        <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"SpeciesID"</span>,
-                        <span class='kw'>occurrences</span> <span class='kw'>=</span> <span class='st'>"ID"</span>
-)
-<span class='no'>updated</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate.traitdata</span>(<span class='no'>dataset2</span>,
-                            <span class='kw'>Body_shape</span> <span class='kw'>=</span> <span class='no'>Body_length</span>/<span class='no'>Body_width</span>,
-                            <span class='kw'>Body_volume</span> <span class='kw'>=</span> <span class='no'>Body_length</span>*<span class='no'>Body_width</span>*<span class='no'>Body_height</span>,
-                            <span class='kw'>Wingload</span> <span class='kw'>=</span> <span class='no'>Wing_length</span>*<span class='no'>Wing_width</span>/<span class='no'>Body_volume</span>)
+                                   <span class='st'>"Wing_length"</span>, <span class='st'>"Wing_width"</span><span class='op'>)</span>,
+                        taxa <span class='op'>=</span> <span class='st'>"SpeciesID"</span>,
+                        occurrences <span class='op'>=</span> <span class='st'>"ID"</span>
+<span class='op'>)</span>
+<span class='va'>updated</span> <span class='op'>&lt;-</span> <span class='fu'>mutate.traitdata</span><span class='op'>(</span><span class='va'>dataset2</span>,
+                            Body_shape <span class='op'>=</span> <span class='va'>Body_length</span><span class='op'>/</span><span class='va'>Body_width</span>,
+                            Body_volume <span class='op'>=</span> <span class='va'>Body_length</span><span class='op'>*</span><span class='va'>Body_width</span><span class='op'>*</span><span class='va'>Body_height</span>,
+                            Wingload <span class='op'>=</span> <span class='va'>Wing_length</span><span class='op'>*</span><span class='va'>Wing_width</span><span class='op'>/</span><span class='va'>Body_volume</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>updated</span>[<span class='no'>updated</span>$<span class='no'>traitName</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='st'>"Body_volume"</span>),])
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>updated</span><span class='op'>[</span><span class='va'>updated</span><span class='op'>$</span><span class='va'>verbatimTraitName</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span> <span class='st'>"Body_volume"</span><span class='op'>)</span>,<span class='op'>]</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -241,7 +242,7 @@ re-mapping might be added in later versions of the package.)</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

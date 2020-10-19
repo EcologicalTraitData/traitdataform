@@ -125,14 +125,14 @@ names and relates to globally unique taxon identifiers via URI." />
 names and relates to globally unique taxon identifiers via URI.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>standardize_taxa</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>get_gbif_taxonomy</span>,
-  <span class='kw'>method_options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>subspecies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>higherrank</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fuzzy</span> <span class='kw'>=</span>
-    <span class='fl'>TRUE</span>, <span class='kw'>conf_threshold</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>resolve_synonyms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>return</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>, <span class='st'>"class"</span>, <span class='st'>"order"</span>, <span class='st'>"family"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>standardize_taxa</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  method <span class='op'>=</span> <span class='va'>get_gbif_taxonomy</span>,
+  method_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>subspecies <span class='op'>=</span> <span class='cn'>TRUE</span>, higherrank <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, fuzzy <span class='op'>=</span>
+    <span class='cn'>TRUE</span>, conf_threshold <span class='op'>=</span> <span class='fl'>90</span>, resolve_synonyms <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+  return <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"kingdom"</span>, <span class='st'>"phylum"</span>, <span class='st'>"class"</span>, <span class='st'>"order"</span>, <span class='st'>"family"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,13 +140,13 @@ names and relates to globally unique taxon identifiers via URI.</p>
     <tr>
       <th>x</th>
       <td><p>a traitdata object (as returned by <code><a href='as.traitdata.html'>as.traitdata()</a></code>) or a data table
-containing at least the column `scientificName.</p></td>
+containing at least the column `verbatimScientificName.</p></td>
     </tr>
     <tr>
       <th>method</th>
       <td><p>default option is <code>get_gbif_taxonomy</code>. In principle, takes any
 function that takes a vector of species names as input to produce a
-taxonomy lookup table (i.e. mapping user-provided <code>scientificName</code> to
+taxonomy lookup table (i.e. mapping user-provided <code>verbatimScientificName</code> to
 <code>taxonID</code> and other taxon-level information). Will allow to chose from
 different sources of taxonomic reference.</p></td>
     </tr>
@@ -193,24 +193,25 @@ enable a choice of a taxonomic reference.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='fu'><a href='pulldata.html'>pulldata</a></span>(<span class='st'>"carabids"</span>)
+<span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"carabids"</span><span class='op'>)</span>
 
-<span class='no'>dataset1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span>(<span class='no'>carabids</span>,
-  <span class='kw'>taxa</span> <span class='kw'>=</span> <span class='st'>"name_correct"</span>,
-  <span class='kw'>traits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span>),
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"mm"</span>,
-  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='st'>"source_measurement"</span>, <span class='kw'>measurementRemark</span> <span class='kw'>=</span> <span class='st'>"note"</span>),
-  <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='no'>carabids</span>)$<span class='no'>citeAs</span>,
-    <span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Fons van der Plas"</span>,
-    <span class='kw'>license</span> <span class='kw'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
-    )
-)
+<span class='va'>dataset1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>carabids</span>,
+  taxa <span class='op'>=</span> <span class='st'>"name_correct"</span>,
+  traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span><span class='op'>)</span>,
+  units <span class='op'>=</span> <span class='st'>"mm"</span>,
+  keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>datasetID <span class='op'>=</span> <span class='st'>"source_measurement"</span>, measurementRemark <span class='op'>=</span> <span class='st'>"note"</span><span class='op'>)</span>,
+  metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    bibliographicCitation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>carabids</span><span class='op'>)</span><span class='op'>$</span><span class='va'>citeAs</span>,
+    author <span class='op'>=</span> <span class='st'>"Fons van der Plas"</span>,
+    license <span class='op'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
+    <span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='no'>dataset1Std</span> <span class='kw'>&lt;-</span> <span class='fu'>standardize_taxa</span>(<span class='no'>dataset1</span>)
-}</div></pre>
+<span class='va'>dataset1Std</span> <span class='op'>&lt;-</span> <span class='fu'>standardize_taxa</span><span class='op'>(</span><span class='va'>dataset1</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -226,7 +227,7 @@ enable a choice of a taxonomic reference.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

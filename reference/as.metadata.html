@@ -123,12 +123,12 @@
     <p>Function to create a defined object containing metadata paramaters according to a pre-defined template.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.metadata</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>datasetName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>author</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rightsHolder</span> <span class='kw'>=</span>
-    <span class='kw'>NULL</span>, <span class='kw'>bibliographicCitation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>license</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comments</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-    <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>region</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>as.metadata</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  template <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>datasetID <span class='op'>=</span> <span class='cn'>NULL</span>, datasetName <span class='op'>=</span> <span class='cn'>NULL</span>, author <span class='op'>=</span> <span class='cn'>NULL</span>, rightsHolder <span class='op'>=</span>
+    <span class='cn'>NULL</span>, bibliographicCitation <span class='op'>=</span> <span class='cn'>NULL</span>, license <span class='op'>=</span> <span class='cn'>NULL</span>, version <span class='op'>=</span> <span class='cn'>NULL</span>, comments <span class='op'>=</span> <span class='cn'>NULL</span>,
+    description <span class='op'>=</span> <span class='cn'>NULL</span>, region <span class='op'>=</span> <span class='cn'>NULL</span>, conformsTo <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,10 +150,12 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># set metadata object</span>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>as.metadata</span>(<span class='kw'>author</span> <span class='kw'>=</span> <span class='st'>"Martin Gossner"</span>, <span class='kw'>datasetName</span> <span class='kw'>=</span> <span class='st'>"Heteroptera morphometric traits"</span>)
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>as.metadata</span><span class='op'>(</span>author <span class='op'>=</span> <span class='st'>"Martin Gossner"</span>, datasetName <span class='op'>=</span> <span class='st'>"Heteroptera morphometric traits"</span><span class='op'>)</span>
 
 <span class='co'># update an existing metadata object</span>
-<span class='no'>a1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.metadata</span>(<span class='kw'>datasetID</span> <span class='kw'>=</span> <span class='st'>"heteroptera"</span>, <span class='kw'>template</span> <span class='kw'>=</span> <span class='no'>a</span>)</div></pre>
+<span class='va'>a1</span> <span class='op'>&lt;-</span> <span class='fu'>as.metadata</span><span class='op'>(</span>datasetID <span class='op'>=</span> <span class='st'>"heteroptera"</span>, template <span class='op'>=</span> <span class='va'>a</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -169,7 +171,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
