@@ -1,9 +1,9 @@
 ---
-title: "Package 'traitdataform'"
+title: "Introduction to 'traitdataform'"
 author: "Florian D. Schneider"
 output:  rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Package 'traitdataform'}
+  %\VignetteIndexEntry{Introduction to 'traitdataform'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: div05.bib
