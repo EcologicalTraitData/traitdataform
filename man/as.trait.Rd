@@ -71,7 +71,7 @@ referenced definition (e.g. "v1.2"), if applicable.}
 \description{
 Creating an object containing a standardised trait definition according to
 the Ecological Traitdata Standard. Parameters correspond to the definition at
-\url{http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri}.
+\url{https://ecologicaltraitdata.github.io/ETS/#terms-for-trait-definitions}.
 }
 \examples{
 

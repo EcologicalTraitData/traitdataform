@@ -130,7 +130,7 @@ The ETS suggests the term `verbatimTraitUnit` to contain the original author's u
 
 The function `as.traitdata()` creates this column via its parameter `units` (see example above). 
 This can be done for all traits in a single stroke (if all reported values refer to the same unit) or to each trait specifically (if they used different measurement units or if the table comprises a mixture of quantitative and qualitative traits).  
-Accordingly, the parameter `units` takes a single character string, or a vector of character strings, containing valid entries as expected  by the package 'units' (Pebesma et al. 2016, https://github.com/edzer/units/, v0.4-5, Examples are 'mm', 'm2' or 'm^2', 'm/s' ). 
+Accordingly, the parameter `units` takes a single character string, or a vector of character strings, containing valid entries as expected  by the package 'units' [@pebesma16, https://github.com/r-quantities/units]. Examples are 'mm', 'm2' or 'm^2', 'm/s'. 
 
 
 ## keep additional information

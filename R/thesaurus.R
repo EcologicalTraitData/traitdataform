@@ -113,7 +113,7 @@ print.thesaurus <- function(x, ...) {
 #'
 #' Creating an object containing a standardised trait definition according to
 #' the Ecological Traitdata Standard. Parameters correspond to the definition at
-#' \url{http://ecologicaltraitdata.github.io/ETS/#terms-for-thesauri}.
+#' \url{https://ecologicaltraitdata.github.io/ETS/#terms-for-trait-definitions}.
 #'
 #' @param trait A character string, providing an intuitive, human-readable trait
 #'   name.
