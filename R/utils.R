@@ -146,6 +146,7 @@ as_factor_clocale <- function(x) {
 #' Convert output to ETS v0.9
 #'   
 #' @noRd
+#' @import stats
 #' @keywords internal
 
 convert.ets0.9 <- function(x) {
