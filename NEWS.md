@@ -1,3 +1,15 @@
+# traitdataform 0.6.0
+
+Major changes: 
+
+- update internal terms to v0.10 of the Ecological Trait-data Standard (ETS). 
+  In ETS v0.10 the assignment of user-defined and standardised measurement values and trait and taxon assignments has been updated, to match labelling practice in DwC and provide a more intuitive content for those fields. Accordingly
+    - the v0.9.1 terms `scientificName`, `traitName`, `traitValue`, and `traitUnit` have been renamed into `verbatimScientificName`, `verbatimTraitName`, `verbatimTraitValue`, and `verbatimTraitUnit` with new identifiers. 
+    - the terms `scientificNameStd`, `traitNameStd`, `traitValueStd`, and  `traitUnitStd` have been renamed into `scientificName`, `traitName`, `traitValue`, and `traitUnit` and now form the default suggested content for trait data complying with the ETS. Definitions have been harmonized. The original *Std identifiers now resolve to these new terms.
+
+  This causes the output file to differ from earlier outputs. To maintain compatibility with earlier versions, an option `conformsTo` has been added to `as.traitdata()` to return the data table in terms of version 0.9. By default, output is returned in ETS version 0.10.  Data releases created by `traitdataform` should always be labelled with the version of ETS that applies to the data! 
+  
+
 # traitdataform 0.5.7
 
 - Preparing for R 4.0.0 change to read.table() and data.frame(): handling of factor data (trait and taxon names) is now locale-independent

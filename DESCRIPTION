@@ -1,15 +1,16 @@
 Package: traitdataform
 Type: Package
 Title: Formatting and Harmonizing Ecological Trait-Data
-Version: 0.5.7
-Date: 2020-03-11
+Version: 0.6.0
+Date: 2020-10-18
 Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre"), 
   comment = c(ORCID = "0000-0002-1494-5684")), 
     person("Caterina", "Penone", role = c("ctb"), comment = c(ORCID = "0000-0002-8170-6659")),
     person("Andreas", "Ostrowski", role = c("ctb"), comment = c(ORCID = "0000-0002-2033-779X")),
     person("Dennis", "Heimann", role = c("ctb")),
     person("Felix","Neff", role = c("ctb")),
-    person("Markus J.", "Ankenbrand", role = c("ctb")))
+    person("Markus J.", "Ankenbrand", role = c("ctb")),
+    person("Jessica", "Burnett", role = c("ctb")))
 Description: Assistance for handling ecological trait data and applying the 
     Ecological Trait-Data Standard terminology (Schneider et al. 2019
     <doi:10.1111/2041-210X.13288>). There are two major use cases: (1) preparation of
@@ -21,7 +22,8 @@ LazyData: TRUE
 Depends:
     R (>= 2.10)
 Imports:
-    data.table, 
+    data.table,
+    stats,
     reshape2,
     taxize,
     getPass,
@@ -29,10 +31,10 @@ Imports:
     XML,
     RCurl,
     plyr
-URL: https://EcologicalTraitData.github.io/traitdataform, https://github.com/EcologicalTraitData/traitdataform
-BugReports: https://github.com/EcologicalTraitData/traitdataform/issues
+URL: https://ecologicaltraitdata.github.io/traitdataform/, https://github.com/ecologicaltraitdata/traitdataform
+BugReports: https://github.com/ecologicaltraitdata/traitdataform/issues
 VignetteBuilder: knitr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests: 

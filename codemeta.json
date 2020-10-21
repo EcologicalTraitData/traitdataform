@@ -7,23 +7,23 @@
   "identifier": "traitdataform",
   "description": "Assistance for handling ecological trait data and applying the \n    Ecological Trait-Data Standard terminology (Schneider et al. 2019\n    <doi:10.1111/2041-210X.13288>). There are two major use cases: (1) preparation of\n    own trait datasets for upload into public data bases, and (2) harmonizing\n    trait datasets from different sources by re-formatting them into a unified\n    format. See 'traitdataform' website for full documentation. ",
   "name": "traitdataform: Formatting and Harmonizing Ecological Trait-Data",
-  "codeRepository": "https://github.com/EcologicalTraitData/traitdataform",
+  "codeRepository": "https://github.com/ecologicaltraitdata/traitdataform",
   "relatedLink": [
     "http://fdschneider.github.io/traitdataform",
     "http://EcologicalTraitData.github.io/traitdataform",
     "https://EcologicalTraitData.github.io/traitdataform",
-    "https://CRAN.R-project.org/package=traitdataform"
+    "https://CRAN.R-project.org/package=traitdataform",
+    "https://ecologicaltraitdata.github.io/traitdataform/"
   ],
-  "issueTracker": "https://github.com/EcologicalTraitData/traitdataform/issues",
+  "issueTracker": "https://github.com/ecologicaltraitdata/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.3",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.3 (2020-02-29)",
+  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
   "author": [
     {
       "@type": "Person",
@@ -60,6 +60,11 @@
       "@type": "Person",
       "givenName": "Markus J.",
       "familyName": "Ankenbrand"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Jessica",
+      "familyName": "Burnett"
     }
   ],
   "maintainer": [
@@ -127,6 +132,11 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=data.table"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
     },
     {
       "@type": "SoftwareApplication",
@@ -213,7 +223,7 @@
       "sameAs": "https://CRAN.R-project.org/package=plyr"
     }
   ],
-  "releaseNotes": "https://github.com/EcologicalTraitData/traitdataform/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/ecologicaltraitdata/traitdataform/blob/master/NEWS.md",
   "readme": "https://github.com/EcologicalTraitData/traitdataform/blob/master/README.md",
   "contIntegration": "https://travis-ci.com/EcologicalTraitData/traitdataform",
   "keywords": [
@@ -223,7 +233,7 @@
     "r-package",
     "ecology"
   ],
-  "developmentStatus": "https://www.repostatus.org/#wip",
+  "developmentStatus": ["https://www.tidyverse.org/lifecycle/#stable", "https://www.repostatus.org/#active"],
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -238,7 +248,7 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "284.578KB",
+  "fileSize": "2246.709KB",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
