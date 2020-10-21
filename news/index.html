@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/EcologicalTraitData/traitdataform/">
+  <a href="https://github.com/ecologicaltraitdata/traitdataform/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -114,9 +114,23 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/EcologicalTraitData/traitdataform/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <small>Source: <a href='https://github.com/ecologicaltraitdata/traitdataform/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="traitdataform-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#traitdataform-060" class="anchor"></a>traitdataform 0.6.0<small> Unreleased </small>
+</h1>
+<p>Major changes:</p>
+<ul>
+<li>update internal terms to v0.10 of the Ecological Trait-data Standard (ETS). In ETS v0.10 the assignment of user-defined and standardised measurement values and trait and taxon assignments has been updated, to match labelling practice in DwC and provide a more intuitive content for those fields. Accordingly
+<ul>
+<li>the v0.9.1 terms <code>scientificName</code>, <code>traitName</code>, <code>traitValue</code>, and <code>traitUnit</code> have been renamed into <code>verbatimScientificName</code>, <code>verbatimTraitName</code>, <code>verbatimTraitValue</code>, and <code>verbatimTraitUnit</code> with new identifiers.</li>
+<li>the terms <code>scientificNameStd</code>, <code>traitNameStd</code>, <code>traitValueStd</code>, and <code>traitUnitStd</code> have been renamed into <code>scientificName</code>, <code>traitName</code>, <code>traitValue</code>, and <code>traitUnit</code> and now form the default suggested content for trait data complying with the ETS. Definitions have been harmonized. The original *Std identifiers now resolve to these new terms.</li>
+</ul>
+This causes the output file to differ from earlier outputs. To maintain compatibility with earlier versions, an option <code>conformsTo</code> has been added to <code><a href="../reference/as.traitdata.html">as.traitdata()</a></code> to return the data table in terms of version 0.9. By default, output is returned in ETS version 0.10. Data releases created by <code>traitdataform</code> should always be labelled with the version of ETS that applies to the data!</li>
+</ul>
+</div>
     <div id="traitdataform-057" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.7">
 <a href="#traitdataform-057" class="anchor"></a>traitdataform 0.5.7<small> 2020-04-05 </small>
