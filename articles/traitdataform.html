@@ -109,13 +109,13 @@
 <a href="#load-data-from-source" class="anchor"></a>load data from source</h2>
 <p>The first step is to load your data into R. This can be your own data, read from file, or data published elsewhere, directly accessible via an URL.</p>
 <p>R knows many ways of getting your data into an R object. In most cases you would read an object from a csv or txt file while maintaining the column headers.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="va">carabids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../../data/carabid traits final.txt"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">carabids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../../data/carabid traits final.txt"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>If reading files from a file repository, you can refer to the URL directly, e.g. </p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># pulling data from van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017) Sensitivity of functional diversity metrics to sampling intensity. Methods in Ecology and Evolution 8(9): 1072-1080. https://doi.org/10.1111/2041-210x.12728</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># pulling data from van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017) Sensitivity of functional diversity metrics to sampling intensity. Methods in Ecology and Evolution 8(9): 1072-1080. https://doi.org/10.1111/2041-210x.12728</span>
 
-<span class="va">carabids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"https://datadryad.org/stash/downloads/file_stream/24267"</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<span class="va">carabids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"https://datadryad.org/stash/downloads/file_stream/24267"</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Most trait data are stored in one of the following two formats:</p>
 <ul>
 <li>
@@ -126,8 +126,8 @@
 <p>In both cases, additional information on the species or observation may be stored in further columns (e.g. the unit in which a value is reported or the literature source for this measurement or fact, or the date and geolocation of sampling), or in a separate data sheet linked via identifiers for trait, taxon, occurrence or sampling/measurement event. As the column names and the width of the table varies with the number of traits included, merging data from different sources requires user-defined mapping and manual harmonization of these structures.</p>
 <p>A more effective format is the <strong>measurement long-table</strong> <span class="citation">(Kattge et al., 2011; Wickham, 2014; Parr et al., 2016)</span>, where each row is reserved for a single measurement or fact of a specific trait. This allows repeated measurements on a single individual to be stored by linking the data from separate rows via a unique identifier for each individual (labelled <code>occurrenceID</code>). Also, multivariate trait measurements can be recorded in this format by linking multiple rows via a unique measurement identifier. Long-table datasets purport multiple advantages for data manipulation (e.g. filtering, sub-setting and aggregating data), visualization (e.g. plot measured values by factor variable or taxon) and statistical modelling (e.g. ANOVA for testing difference of trait value by sex) <span class="citation">(Wickham, 2014)</span>. Each row of the dataset can therefore be interpreted as a statement of an ‘entity x having a qualitative/quantitative feature y’ <span class="citation">(Garnier et al., 2017; Schneider et al., 2018)</span>. As long-table formats draw from a defined set of columns, merging of datasets is much easier.</p>
 <p>The function <code><a href="../reference/as.traitdata.html">as.traitdata()</a></code> provided in the package assist in transferring data into the measurement long-table format. For this function to work, it needs at least to know about the columns of the original data that contain trait values (parameter <code>traits</code>), and the column which contains the taxonomic concept (parameter <code>taxa</code>).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">dataset1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.traitdata.html">as.traitdata</a></span><span class="op">(</span><span class="va">carabids</span>, 
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.traitdata.html">as.traitdata</a></span><span class="op">(</span><span class="va">carabids</span>, 
                          taxa <span class="op">=</span> <span class="st">"name_correct"</span>,
                          traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"body_length"</span>, 
                                     <span class="st">"antenna_length"</span>, 
@@ -156,11 +156,11 @@
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [ ] : </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></pre></div>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note that in the output table the columns have been renamed <a href="https://terminologies.gfbio.org/terms/ets/pages/">according to the ETS</a>. The essential columns are <code>verbatimTraitName</code>, <code>verbatimTraitValue</code> for the reported measurement or fact as well as <code>verbatimScientificName</code> for the taxon concept. The newly assigned column <code>measurementID</code> contains a running number for each individual trait measurement.<br>
 The function automatically interprets data as a species<span class="math inline">\(\times\)</span>traits matrix if the taxa column contains only unique entries and no duplicates. In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column <code>occurrenceID</code> which links measurements taken on the same individuals. Both <code>occurrenceID</code> and <code>measurementID</code> can be provided by the author using the parameter <code>occurrences</code> (as a column name or a vector) or <code>measurements</code> (as a column name or a vector).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/l10n_info.html">l10n_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">`UTF-8`</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/locales.html">Sys.setlocale</a></span><span class="op">(</span><span class="st">"LC_CTYPE"</span>, <span class="st">"en_US.UTF-8"</span><span class="op">)</span><span class="op">}</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/l10n_info.html">l10n_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">`UTF-8`</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/locales.html">Sys.setlocale</a></span><span class="op">(</span><span class="st">"LC_CTYPE"</span>, <span class="st">"en_US.UTF-8"</span><span class="op">)</span><span class="op">}</span>
 
 <span class="va">heteroptera_raw</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/5633883"</span>, 
                                          encoding <span class="op">=</span> <span class="st">"windows-1252"</span><span class="op">)</span>,
@@ -237,7 +237,7 @@ The function automatically interprets data as a species<span class="math inline"
 <span class="co">#&gt; 9355            5</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span>
-<span class="co">#&gt; NULL</span></pre></div>
+<span class="co">#&gt; NULL</span></code></pre></div>
 <p>This allows the user to be explicit about the structure of the output data.</p>
 </div>
 <div id="specify-units" class="section level2">
@@ -252,8 +252,8 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <a href="#keep-additional-information" class="anchor"></a>keep additional information</h2>
 <p>The raw data might contain further information on the individuals or the trait measurement itself in further data columns that are valuable for later analysis. This can be for instance data about the sex or developmental stage of the individual, the sampling or preservation method of the specimen, or the conditions under which the measurement was taken.</p>
 <p>The parameter <code>keep</code> allows you to specify which columns contain valuable information as a character vector. As a negative version of <code>keep</code>, specifying <code>drop</code> would allow you to name the columns that are not valuable, while all others will be kept. Not specifying <code>keep</code> or <code>drop</code> will result in dropping all columns except the core measurement and identifier columns.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.traitdata.html">as.traitdata</a></span><span class="op">(</span><span class="va">heteroptera_raw</span>,
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.traitdata.html">as.traitdata</a></span><span class="op">(</span><span class="va">heteroptera_raw</span>,
               traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,
                          <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>,
                          <span class="st">"Antenna_Seg2"</span>, <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>,
@@ -288,7 +288,7 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [ ] : </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></pre></div>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>The three extensions of the ETS provide standard terms for this kind of information:</p>
 <ul>
 <li>The <a href="https://terminologies.gfbio.org/terms/ets/pages/#extension-taxon"><code>Taxon</code> extension</a> provides further terms for specifying the taxonomic resolution of the observation and to ensure the correct reference in case of synonyms and homonyms.</li>
@@ -296,8 +296,8 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <li>The <a href="https://terminologies.gfbio.org/terms/ets/pages/#extension-occurrence"><code>Occurrence</code> extension</a> contains vocabulary to describe information on the observation context of individual specimens, such as sex, life stage or age. This also includes the method of sampling and preservation, as well as the date and geographical location, which provide an important resource to analyze trait variation due to differences in space and time.</li>
 </ul>
 <p>We highly recommend mapping the input columns into these standard terms by providing a named vector for <code>keep</code> that gives the target ETS terms as vector names.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.traitdata.html">as.traitdata</a></span><span class="op">(</span><span class="va">heteroptera_raw</span>,
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.traitdata.html">as.traitdata</a></span><span class="op">(</span><span class="va">heteroptera_raw</span>,
               traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Body_length"</span>, <span class="st">"Body_width"</span>, <span class="st">"Body_height"</span>, <span class="st">"Thorax_length"</span>,
                          <span class="st">"Thorax_width"</span>, <span class="st">"Head_width"</span>, <span class="st">"Eye_width"</span>, <span class="st">"Antenna_Seg1"</span>,
                          <span class="st">"Antenna_Seg2"</span>, <span class="st">"Antenna_Seg3"</span>, <span class="st">"Antenna_Seg4"</span>, <span class="st">"Antenna_Seg5"</span>,
@@ -351,7 +351,7 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [ ] : </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></pre></div>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note that a lack of a name in the named vector maintains the original name. Note also, that no checking for valid column names (as compared to the traitdata glossary) is performed at this stage. This is to ensure that the raw data table created by <code>as.traittable()</code> can contain any columns that the author considers relevant. The <code>keep</code> parameter can be used to rename columns into intuitive column names.</p>
 <!--
 ## case example: adding further information on traits, species or single measurements
@@ -388,8 +388,8 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <a href="#derived-trait-values" class="anchor"></a>derived trait-values</h2>
 <p>Many traits comprise compound measures of multiple traits, such as length-mass ratios or morphometric indices. Other traits must be refined in terms of factor levels, or reduced to binary trait values. Many of these tasks can be achieved on the matrix raw data using base functions like <code><a href="https://rdrr.io/r/base/transform.html">transform()</a></code>, <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> or <code><a href="https://rdrr.io/r/base/match.html">match()</a></code> or the <code>mutate()</code> function provided by the package ‘plyr’ before conversion into the long-table format.</p>
 <p>However, if the data are converted to long-table format, these tasks may become tedious as they require splitting the data before the computation can be done. The function <code><a href="../reference/mutate.traitdata.html">mutate.traitdata()</a></code> performs these tasks (working as a wrapper to <code><a href="https://rdrr.io/pkg/plyr/man/mutate.html">plyr::mutate()</a></code>) while keeping an eye on the units.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mutate.traitdata.html">mutate.traitdata</a></span><span class="op">(</span><span class="va">dataset2</span>, 
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mutate.traitdata.html">mutate.traitdata</a></span><span class="op">(</span><span class="va">dataset2</span>, 
                             Body_shape <span class="op">=</span> <span class="va">Body_length</span><span class="op">/</span><span class="va">Body_width</span>, 
                             Body_volume <span class="op">=</span> <span class="va">Body_length</span><span class="op">*</span><span class="va">Body_width</span><span class="op">*</span><span class="va">Body_height</span>,
                             Wingload <span class="op">=</span> <span class="va">Wing_length</span><span class="op">*</span><span class="va">Wing_width</span><span class="op">/</span><span class="va">Body_volume</span><span class="op">)</span>
@@ -434,7 +434,7 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; This trait-dataset contains 26 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [ ] : </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></pre></div>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note that all existing traits remain untouched and additional trait measures will be added to the dataset, unless a definition replaces an already existing trait.</p>
 <p>It is important to note that the mutate function works at the level of data resolution that is provided by the data, i.e. for occurrence data with multiple measurements on a single individual, the data columns are mutated per <code>occurrenceID</code>.</p>
 </div>
@@ -449,8 +449,8 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <a href="#refer-to-trait-definitions-via-uris" class="anchor"></a>Refer to trait definitions via URIs</h3>
 <p>Thus, the key information must be provided manually as an own data object in R. However, <code>traitdataform</code> assists in creating an own reference list of traits, a so called ‘thesaurus’, that will be used to feed trait definitions, units or identifiers into the dataset.</p>
 <p>The function to create an object of class ‘thesaurus’ is <code><a href="../reference/as.thesaurus.html">as.thesaurus()</a></code> and deals with several objects created by <code><a href="../reference/as.trait.html">as.trait()</a></code>. The ETS provides a <a href="https://terminologies.gfbio.org/terms/ets/pages/#terms-for-trait-definitions">set of terms to describe trait concepts</a> which can be provided as an input parameter to <code>as.traits()</code>. Using the <code><a href="../reference/as.trait.html">as.trait()</a></code> function allows assigning flexible trait definition while ensuring compliance with the terms of the traitdata standard outlined above. It also allows building a library of trait definitions where single traits can be reused in multiple projects.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/as.trait.html">as.trait</a></span><span class="op">(</span><span class="st">"body_length"</span>,
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/as.trait.html">as.trait</a></span><span class="op">(</span><span class="st">"body_length"</span>,
          expectedUnit <span class="op">=</span> <span class="st">"mm"</span>, valueType <span class="op">=</span> <span class="st">"numeric"</span>,
          traitDescription <span class="op">=</span> <span class="st">"The known longest dimension of the physical structure of organisms"</span>,
          identifier <span class="op">=</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span>,
@@ -473,10 +473,10 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt;  Value type:  numeric </span>
 <span class="co">#&gt;  Expected unit:  mm </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length</span></pre></div>
+<span class="co">#&gt;   http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length</span></code></pre></div>
 <p>E.g. if <em>all</em> of the traits reported in your dataset refer to a definition published under a publicly available identifier, the thesaurus could be created like this:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">thesaurus1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">thesaurus1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span><span class="op">(</span>
           body_length <span class="op">=</span> <span class="fu"><a href="../reference/as.trait.html">as.trait</a></span><span class="op">(</span><span class="st">"body_length"</span>,
                   expectedUnit <span class="op">=</span> <span class="st">"mm"</span>, valueType <span class="op">=</span> <span class="st">"numeric"</span>,
                   identifier <span class="op">=</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span><span class="op">)</span>,
@@ -489,19 +489,19 @@ The function `as.traitdata()` provides a set of parameters to add information at
           eyewidth_corr <span class="op">=</span> <span class="fu"><a href="../reference/as.trait.html">as.trait</a></span><span class="op">(</span><span class="st">"eye_diameter"</span>,
                   expectedUnit <span class="op">=</span> <span class="st">"mm"</span>, valueType <span class="op">=</span> <span class="st">"numeric"</span>,
                   identifier <span class="op">=</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Eye_diameter"</span><span class="op">)</span>
-        <span class="op">)</span></pre></div>
+        <span class="op">)</span></code></pre></div>
 <p>Alternatively, a thesaurus can be created from a <code>data.frame</code>, which might be easier if only trait name and identifier are to be provided and more specific trait definitions are not to be stored in the R object.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">thesaurus1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">thesaurus1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.thesaurus.html">as.thesaurus</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
                       trait <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"body_length"</span>,  <span class="st">"antenna_length"</span>, <span class="st">"metafemur_length"</span>, <span class="st">"eyewidth_corr"</span><span class="op">)</span>,
                       identifier <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait="</span>, 
                                           <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Body_length"</span>, <span class="st">"Antenna_length"</span>, <span class="st">"Femur_length"</span>, <span class="st">"Eye_diameter"</span><span class="op">)</span><span class="op">)</span>, 
                       valueType <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span>,
                       expectedUnit <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p>To transfer the user-provided traits and trait values into standardised values, the function <code><a href="../reference/standardize_traits.html">standardize_traits()</a></code> merges the data table with a reference table of trait definitions to produce values of a compliant format.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">dataset1Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize_traits.html">standardize_traits</a></span><span class="op">(</span><span class="va">dataset1</span>, <span class="va">thesaurus1</span><span class="op">)</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset1Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize_traits.html">standardize_traits</a></span><span class="op">(</span><span class="va">dataset1</span>, <span class="va">thesaurus1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dataset1Std</span><span class="op">)</span>
 <span class="co">#&gt;   traitID   traitName traitValue traitUnit verbatimScientificName</span>
 <span class="co">#&gt; 1       2 body_length  15.846561        mm  Abax_parallelepipedus</span>
@@ -521,7 +521,7 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [ ] : </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></pre></div>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>The output table now contains a duplicate record of the originally provided trait measurements (in <code>verbatimTraitName</code>, <code>verbatimTraitValue</code> and <code>verbatimTraitUnit</code>) and now being standardised into target terms and units as requested by the thesaurus.</p>
 </div>
 <div id="refer-to-own-trait-definitions" class="section level3">
@@ -546,8 +546,8 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <li>optionally, <code>identifier</code> may specify an alphanumeric ID for the specific use in your dataset, but this function is also covered by having defined unambiguous trait labels in field <code>trait</code> which recur in field <code>verbatimTraitName</code> of the main dataset.</li>
 </ul>
 <p>Refer to the <a href="https://terminologies.gfbio.org/terms/ets/pages/#terms-for-trait-definitions">ETS set of terms to describe trait concepts</a>) for further definitions of these terms, as well as the <a href="https://terminologies.gfbio.org/terms/ets/pages/bestpractice.html">best practice guidelines for trait-data publications</a>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="co"># M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W. Weisser, Wolfgang</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W. Weisser, Wolfgang</span>
 <span class="co"># (2016): Morphometric measures of Heteroptera sampled in grasslands across</span>
 <span class="co"># three regions of Germany. figshare.</span>
 <span class="co"># https://doi.org/10.6084/m9.figshare.c.3307611.v1 </span>
@@ -635,10 +635,10 @@ The function `as.traitdata()` provides a set of parameters to add information at
                             expectedUnit <span class="op">=</span> <span class="st">"mm"</span>, valueType <span class="op">=</span> <span class="st">"numeric"</span>,
                             traitDescription <span class="op">=</span> <span class="st">"Widest part of the forewing"</span>,
                             broaderTerm <span class="op">=</span> <span class="st">"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Wing"</span><span class="op">)</span>
-  <span class="op">)</span></pre></div>
+  <span class="op">)</span></code></pre></div>
 <p>Applying <code><a href="../reference/standardize_traits.html">standardize_traits()</a></code> will refer to this dataset-specific thesaurus and append it as an attribute to the R object.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="va">dataset2Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize_traits.html">standardize_traits</a></span><span class="op">(</span><span class="va">dataset2</span>, <span class="va">thesaurus2</span><span class="op">)</span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset2Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize_traits.html">standardize_traits</a></span><span class="op">(</span><span class="va">dataset2</span>, <span class="va">thesaurus2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dataset2Std</span>, <span class="va">occurrenceID</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;      traitID          traitName traitValue traitUnit verbatimScientificName</span>
 <span class="co">#&gt; 185        1        Body_length       2.10        mm       Acalypta nigrina</span>
@@ -808,7 +808,7 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; Rostrum_length               mm</span>
 <span class="co">#&gt; Rostrum_width                mm</span>
 <span class="co">#&gt; Wing_length                  mm</span>
-<span class="co">#&gt; Wing_width                   mm</span></pre></div>
+<span class="co">#&gt; Wing_width                   mm</span></code></pre></div>
 </div>
 </div>
 <div id="standardize-taxa" class="section level1">
@@ -817,8 +817,8 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <p>For taxon name standardisation, the function <code><a href="../reference/standardize_taxa.html">standardize_taxa()</a></code> makes use of fuzzy matching algorithms provided by the package <a href="https://CRAN.R-project.org/package=taxize">‘taxize’ by Scott Chamberlain</a> to match the entries of column <code>verbatimScientificName</code> against the GBIF Backbone Taxonomy. The result is written into a new column <code>scientificName</code>. Additional columns comprise the order (for ambiguous names), the reported taxon rank, as well as a globally unique taxon ID which references the taxon to GBIF Backbone Taxonomy in a universal URI format.</p>
 <p>If further layers of taxonomic information are desired as an output, the function takes the parameter <code>return</code>, which by default contains <code><a href="https://rdrr.io/r/base/c.html">c("taxonID", "scientificName", "order", "taxonRank")</a></code>. Other specifications can be added here.</p>
 <p>Note that for this to work, <code>verbatimScientificName</code> must contain a full account of the species name or higher taxon, no abbreviations (spaces or underscores are handled alright). Note also, that taxon name mapping requires an internet connection and might take some time, depending on the length of your species list.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="va">dataset1Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize_taxa.html">standardize_taxa</a></span><span class="op">(</span><span class="va">dataset1</span><span class="op">)</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset1Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize_taxa.html">standardize_taxa</a></span><span class="op">(</span><span class="va">dataset1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dataset1Std</span><span class="op">)</span>
 <span class="co">#&gt;          scientificName verbatimScientificName verbatimTraitName</span>
 <span class="co">#&gt; 1 Abax parallelepipedus  Abax_parallelepipedus       body_length</span>
@@ -852,7 +852,7 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [ ] : </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></pre></div>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <!--
 ## georeference standardization for Biodiversity Exploratories
 
@@ -881,13 +881,13 @@ head(dataset5Std)
 <a href="#single-stroke-standardization" class="anchor"></a>Single-stroke standardization</h2>
 <p>The functions <code><a href="../reference/standardize_traits.html">standardize_traits()</a></code> and <code><a href="../reference/standardize_taxa.html">standardize_taxa()</a></code> are applied sequentially but not necessarily in that order. The output of the first step can be piped into the second step.</p>
 <p>To make things even simpler, the functions for format conversion and standardization come with a wrapper function <code><a href="../reference/standardize.html">standardize()</a></code>. Therefore it is possible to run the functions in a single-handed way, if all necessary parameters for the intermediate steps are provided. A single call will do, taking all the optional parameters described above.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="va">dataset1Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize.html">standardize</a></span><span class="op">(</span><span class="va">carabids</span>,
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dataset1Std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/standardize.html">standardize</a></span><span class="op">(</span><span class="va">carabids</span>,
             thesaurus <span class="op">=</span> <span class="va">thesaurus1</span>,
             taxa <span class="op">=</span> <span class="st">"name_correct"</span>,
             units <span class="op">=</span> <span class="st">"mm"</span>,
             keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>measurementDeterminedBy <span class="op">=</span> <span class="st">"source_measurement"</span><span class="op">)</span>
-            <span class="op">)</span></pre></div>
+            <span class="op">)</span></code></pre></div>
 <p>As an alternative input pathway, all parameters to <code><a href="../reference/standardize.html">standardize()</a></code> can be specified as attributes of the input object and will be found natively by the function. This allows for the specification of recipes for data integration for projects pulling data from multiple sources.</p>
 </div>
 </div>
@@ -903,18 +903,18 @@ head(dataset5Std)
 <li>No unified trait list or taxon reference exists for the heterogeneous data assembled of different sources (e.g. because spanning many different taxa): Apply standardization to different reference systems before merging the datasets.</li>
 </ul>
 <p>The function call will append the data tables while merging the common columns and maintaining columns that are not present in all datasets (this might produce lots of NA). The column <code>datasetID</code> will be added to keep track of the origin of the data. By default this column will contain the object names of the original datasets, but it can be replaced by more meaningful IDs using the parameter <code>datasetID</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="va">newdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">dataset1Std</span>, <span class="va">dataset2Std</span>, 
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">dataset1Std</span>, <span class="va">dataset2Std</span>, 
                 datasetID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"vanderplas15"</span>, <span class="st">"gossner15"</span><span class="op">)</span>
-              <span class="op">)</span></pre></div>
+              <span class="op">)</span></code></pre></div>
 <p>Note that the package provides a method for the base function <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> that handles this merge. Documentation can be accessed via <code><a href="../reference/rbind.traitdata.html">?rbind.traitdata</a></code>.</p>
 </div>
 <div id="maintaining-metadata" class="section level2">
 <h2 class="hasAnchor">
 <a href="#maintaining-metadata" class="anchor"></a>maintaining metadata</h2>
 <p>The function will handle metadata information on the dataset level as described in the section ‘Metadata’ of the Traitdata Standard (e.g. <code>author</code> or <code>bibliographicCitation</code>) and add a column <code>datasetID</code> as well as <code>datasetName</code> and <code>author</code> if those are provided in the parameter <code>metadata</code> of the <code><a href="../reference/as.traitdata.html">as.traitdata()</a></code> function call which creates the data. The function <code><a href="../reference/as.metadata.html">as.metadata()</a></code> provides a standard structure for this case.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="va">metadata1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.metadata.html">as.metadata</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">metadata1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.metadata.html">as.metadata</a></span><span class="op">(</span>
       datasetName <span class="op">=</span> <span class="st">"Carabid traits"</span>,
       datasetID <span class="op">=</span> <span class="st">"carabids"</span>,
       bibliographicCitation <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/utils/bibentry.html">bibentry</a></span><span class="op">(</span>
@@ -961,18 +961,18 @@ head(dataset5Std)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt;     Cite this trait dataset as: </span>
 <span class="co">#&gt; van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017).</span>
 <span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling intensity."</span>
 <span class="co">#&gt; _Methods in Ecology and Evolution_. doi: 10.1111/2041-210x.12728 (URL:</span>
 <span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/</span></pre></div>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note the use of the <code><a href="https://rdrr.io/r/utils/bibentry.html">bibentry()</a></code> function to create a formal bibliographic entry. Also note that this also affects the way how the dataset is printed into the R console. This facilitates for data users to acknowledge authorship and ownership of the data, while also providing a machine readable structure that can easily be accessed further down the line.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="va">metadata2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.metadata.html">as.metadata</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">metadata2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.metadata.html">as.metadata</a></span><span class="op">(</span>
   datasetName <span class="op">=</span> <span class="st">"Heteroptera morphometry traits"</span>,
   datasetID <span class="op">=</span> <span class="st">"heteroptera"</span>,
   bibliographicCitation <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/utils/bibentry.html">bibentry</a></span><span class="op">(</span>
@@ -1045,8 +1045,6 @@ head(dataset5Std)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt;     Cite this trait dataset as: </span>
 <span class="co">#&gt; van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017).</span>
 <span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling intensity."</span>
@@ -1055,6 +1053,8 @@ head(dataset5Std)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $heteroptera</span>
 <span class="co">#&gt; </span>
@@ -1062,30 +1062,30 @@ head(dataset5Std)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt;     Cite this trait dataset as: </span>
 <span class="co">#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric</span>
 <span class="co">#&gt; measures of Heteroptera sampled in grasslands across three regions of</span>
 <span class="co">#&gt; Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:</span>
 <span class="co">#&gt; https://doi.org/10.1890/14-2159.1).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/</span></pre></div>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>The detailed metadata information of both datasets (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R console. You can access the metadata via the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> function. E.g.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset1</span><span class="op">)</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">bibliographicCitation</span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset1</span><span class="op">)</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">bibliographicCitation</span>
 <span class="co">#&gt; van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017).</span>
 <span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling intensity."</span>
 <span class="co">#&gt; _Methods in Ecology and Evolution_. doi: 10.1111/2041-210x.12728 (URL:</span>
-<span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span></pre></div>
+<span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span></code></pre></div>
 </div>
 <div id="writing-data-recipes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#writing-data-recipes" class="anchor"></a>writing data recipes</h2>
 <p>For projects compiling data from multiple sources, it is recommended best practice to refer to original raw data, potentially even by pulling them from their original repository, and make any changes and standardisation procedures script based in R. If many field-based changes are necessary, you can refer to <a href="https://nicercode.github.io/blog/2013-07-09-modifying-data-with-lookup-tables/">lookup tables</a> to keep the script slim.</p>
 <p><code>traitdataform</code> allows you to script all parameters required for the standardization call into the attributes of the R object. A script for a single data source can then look like this</p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="va">carabids</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://datadryad.org/stash/downloads/file_stream/24267"</span>, 
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">carabids</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://datadryad.org/stash/downloads/file_stream/24267"</span>, 
                                 encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span>
                               <span class="op">)</span>
 
@@ -1122,7 +1122,7 @@ head(dataset5Std)
 
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">carabids</span>, <span class="st">'taxa'</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"name_correct"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">carabids</span>, <span class="st">'units'</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"mm"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">carabids</span>, <span class="st">'keep'</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>measurementDeterminedBy <span class="op">=</span> <span class="st">"source_measurement"</span>, measurementRemarks <span class="op">=</span> <span class="st">"note"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">carabids</span>, <span class="st">'keep'</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>measurementDeterminedBy <span class="op">=</span> <span class="st">"source_measurement"</span>, measurementRemarks <span class="op">=</span> <span class="st">"note"</span><span class="op">)</span></code></pre></div>
 <p>When thus specified, the data can be re-formatted simply by calling <code><a href="../reference/standardize.html">standardize(carabids)</a></code>.</p>
 <!--
 ## add data layers
@@ -1158,20 +1158,20 @@ head(dataset3wide)
 <a href="#writing-data" class="anchor"></a>5. Writing data</h1>
 <p>The final step in converting trait data into a standardised format before uploading the file to a public file hosting service is saving them in a file format that is internationalized, portable and long-term accessible. Internationalization refers to the file encoding (‘UTF-8’ should be used, ‘ASCII’ is possible for data with no special characters) as well as the use of decimal delimiters (highly recommended to use ‘.’) and internationally accepted formatting standards for values such as dates (the international norm for date entries is ISO 8601, i.e. “YYYY-MM-DD”). Portability means that the file can be opened on all operating systems (specifically important, the ‘end of line’ character) and does not rely on proprietary software (like MS Excel or database tools). Long-term accessibility is warranted by choosing a text-based file format (txt, csv or tsv) and by packaging the primary data with all necessary metadata.</p>
 <p>The base R function <code><a href="https://rdrr.io/r/utils/write.table.html">write.table()</a></code> gives full control over these parameters and should be used to export trait-data.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dataset1Std</span>, file <span class="op">=</span> <span class="st">"carabids_std.csv"</span>, 
-            sep <span class="op">=</span> <span class="st">","</span>, dec <span class="op">=</span> <span class="st">"."</span>, quote <span class="op">=</span> <span class="cn">TRUE</span>, eol <span class="op">=</span> <span class="st">"\r"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dataset1Std</span>, file <span class="op">=</span> <span class="st">"carabids_std.csv"</span>, 
+            sep <span class="op">=</span> <span class="st">","</span>, dec <span class="op">=</span> <span class="st">"."</span>, quote <span class="op">=</span> <span class="cn">TRUE</span>, eol <span class="op">=</span> <span class="st">"\r"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Along with these primary data, you should make any ancillary data table available along with the data, e.g. the metadata in a human readable form, as well as the lookup table of traits and taxa:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset1Std</span><span class="op">)</span><span class="op">$</span><span class="va">metadata</span>, file <span class="op">=</span> <span class="st">"metadata.txt"</span><span class="op">)</span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset1Std</span><span class="op">)</span><span class="op">$</span><span class="va">metadata</span>, file <span class="op">=</span> <span class="st">"metadata.txt"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset1Std</span><span class="op">)</span><span class="op">$</span><span class="va">traits</span>, file <span class="op">=</span> <span class="st">"traits.csv"</span>, 
             sep <span class="op">=</span> <span class="st">","</span>, dec <span class="op">=</span> <span class="st">"."</span>, quote <span class="op">=</span> <span class="cn">TRUE</span>, eol <span class="op">=</span> <span class="st">"\r"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset1Std</span><span class="op">)</span><span class="op">$</span><span class="va">taxonomy</span>, file <span class="op">=</span> <span class="st">"taxa.csv"</span>, 
-            sep <span class="op">=</span> <span class="st">","</span>, dec <span class="op">=</span> <span class="st">"."</span>, quote <span class="op">=</span> <span class="cn">TRUE</span>, eol <span class="op">=</span> <span class="st">"\r"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+            sep <span class="op">=</span> <span class="st">","</span>, dec <span class="op">=</span> <span class="st">"."</span>, quote <span class="op">=</span> <span class="cn">TRUE</span>, eol <span class="op">=</span> <span class="st">"\r"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>When publishing the trait data on file servers like Figshare or Zenodo, those files should be uploaded in a single file repository (e.g. in a zip file). R does the archiving for you using <code><a href="https://rdrr.io/r/utils/zip.html">zip()</a></code>:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/zip.html">zip</a></span><span class="op">(</span><span class="st">"carabids_std.zip"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"carabids_std.csv"</span>, <span class="st">"metadata.txt"</span>, <span class="st">"traits.csv"</span>, <span class="st">"taxa.csv"</span><span class="op">)</span> <span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/zip.html">zip</a></span><span class="op">(</span><span class="st">"carabids_std.zip"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"carabids_std.csv"</span>, <span class="st">"metadata.txt"</span>, <span class="st">"traits.csv"</span>, <span class="st">"taxa.csv"</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
 <p>More advise for publishing trait data in a standardised way can be found in our <a href="https://ecologicaltraitdata.github.io/ETS/bestpractice.html">‘Best practice examples for primary data publication’</a> <span class="citation">(Schneider et al., 2018)</span>.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
