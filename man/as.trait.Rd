@@ -13,6 +13,7 @@ as.trait(
   valueType = NA,
   expectedUnit = NA,
   factorLevels = NA,
+  replaceFactorLevels = NA,
   maxAllowedValue = NA,
   minAllowedValue = NA,
   traitDescription = NA,
@@ -46,6 +47,11 @@ definition.}
 \item{factorLevels}{A comma separated list of terms comprising the
 constrained vocabulary for categorical traits or ordinal binary traits.}
 
+\item{replaceFactorLevels}{A list or vector containing synonymous factor
+levels to be mapped onto the target factor levels provided in
+'factorLevels'. Names of the vector or list entries will be superimposed by
+entries in 'factorLevels'.}
+
 \item{maxAllowedValue}{An upper boundary for accepted numerical values.}
 
 \item{minAllowedValue}{A lower boundary for accepted numerical values.}
@@ -56,9 +62,8 @@ refer to a method of measurement.}
 \item{comments}{Details and Examples for clarification of the trait
 definition.}
 
-\item{source}{A character string providing a full bibliographic
-reference to the trait definition (giving title, author, year and
-publication).}
+\item{source}{A character string providing a full bibliographic reference to
+the trait definition (giving title, author, year and publication).}
 
 \item{version}{A character string containing the version number of the
 referenced definition (e.g. "v1.2"), if applicable.}
