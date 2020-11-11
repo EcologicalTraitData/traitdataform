@@ -83,13 +83,7 @@ print.metadata <- function(x, ...) {
          !is.null(x$license))  {
         cat("\n    When using these data, you must acknowledge the following usage policies: \n")
       }
-  
-      # conforms to standard: 
-      if(!is.null(x$conformsTo)) {
-        cat("\n    This dataset conforms to: ")
-        print(x$conformsTo)
-      }
-      
+
       # cite as: 
       if(!is.null(x$bibliographicCitation)) {
         
@@ -98,7 +92,15 @@ print.metadata <- function(x, ...) {
       }
       # published under
       if(!is.null(x$license)) {
-        cat("\n    Published under:", x$license, "\n\n")
+        cat("\n    Published under:", x$license, "\n")
       }
-
+  
+      # conforms to standard: 
+      if(!is.null(x$conformsTo)) {
+        cat("\n    This dataset conforms to: ")
+        print(x$conformsTo)
+        cat("\n")
+      }
+  
+  
 }
