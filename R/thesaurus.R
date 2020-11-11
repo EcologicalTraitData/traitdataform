@@ -133,11 +133,14 @@ print.thesaurus <- function(x, ...) {
 #' @param minAllowedValue A lower boundary for accepted numerical values.
 #' @param factorLevels A comma separated list of terms comprising the
 #'   constrained vocabulary for categorical traits or ordinal binary traits.
+#' @param replaceFactorLevels A list or vector containing synonymous factor
+#'   levels to be mapped onto the target factor levels provided in
+#'   'factorLevels'. Names of the vector or list entries will be superimposed by
+#'   entries in 'factorLevels'.
 #' @param valueType the type of trait values. Possible entries are 'numeric',
 #'   'integer', 'categorical', 'logical', or 'character'.
-#' @param source A character string providing a full bibliographic
-#'   reference to the trait definition (giving title, author, year and
-#'   publication).
+#' @param source A character string providing a full bibliographic reference to
+#'   the trait definition (giving title, author, year and publication).
 #' @param version A character string containing the version number of the
 #'   referenced definition (e.g. "v1.2"), if applicable.
 #' @param author A character string or object of class 'person' (as created by
@@ -164,6 +167,7 @@ as.trait <- function(
   valueType = NA,
   expectedUnit = NA,
   factorLevels = NA,
+  replaceFactorLevels = NA, 
   maxAllowedValue = NA,
   minAllowedValue = NA,
   traitDescription = NA,
@@ -181,6 +185,7 @@ as.trait <- function(
               valueType = valueType,
               expectedUnit = expectedUnit,
               factorLevels = factorLevels,
+              replaceFactorLevels = replaceFactorLevels, 
               maxAllowedValue = maxAllowedValue,
               minAllowedValue = minAllowedValue,
               traitDescription = traitDescription,
@@ -189,6 +194,7 @@ as.trait <- function(
               version = version,
               author = author
               )
+
   class(out) <- c("trait", "list")
   return(out)
 }
@@ -208,3 +214,4 @@ print.trait <- function(x, ...) {
   if(!is.na(x$identifier)) cat( "\n\t", x$identifier)
   cat("\n")
 }
+
