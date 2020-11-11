@@ -33,8 +33,13 @@ pulldata <- function(x = NULL) {
     cat(paste(available, collapse = "\n \t"))
     cat("\n")
   } else {
-    source(system.file( "extdata", paste0(x,".R"), package="traitdataform"))
-    message(paste0("The dataset '", x, "' is now available for use! \n"))
+    
+    tryCatch( source(system.file( "extdata", paste0(x,".R"), package="traitdataform")),
+              warning = function(war) {
+                message("Direct call to data source failed. Please check internet connectivity and re-load data!")
+              } )
+    
+    if(exists(x))  message(paste0("The dataset '", x, "' is now available for use! \n"))
   } 
     
 }
