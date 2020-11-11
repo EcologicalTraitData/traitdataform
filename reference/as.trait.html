@@ -74,7 +74,7 @@ https://ecologicaltraitdata.github.io/ETS/#terms-for-trait-definitions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traitdataform</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -136,6 +136,7 @@ the Ecological Traitdata Standard. Parameters correspond to the definition at
   valueType <span class='op'>=</span> <span class='cn'>NA</span>,
   expectedUnit <span class='op'>=</span> <span class='cn'>NA</span>,
   factorLevels <span class='op'>=</span> <span class='cn'>NA</span>,
+  replaceFactorLevels <span class='op'>=</span> <span class='cn'>NA</span>,
   maxAllowedValue <span class='op'>=</span> <span class='cn'>NA</span>,
   minAllowedValue <span class='op'>=</span> <span class='cn'>NA</span>,
   traitDescription <span class='op'>=</span> <span class='cn'>NA</span>,
@@ -188,6 +189,13 @@ definition.</p></td>
 constrained vocabulary for categorical traits or ordinal binary traits.</p></td>
     </tr>
     <tr>
+      <th>replaceFactorLevels</th>
+      <td><p>A list or vector containing synonymous factor
+levels to be mapped onto the target factor levels provided in
+'factorLevels'. Names of the vector or list entries will be superimposed by
+entries in 'factorLevels'.</p></td>
+    </tr>
+    <tr>
       <th>maxAllowedValue</th>
       <td><p>An upper boundary for accepted numerical values.</p></td>
     </tr>
@@ -207,9 +215,8 @@ definition.</p></td>
     </tr>
     <tr>
       <th>source</th>
-      <td><p>A character string providing a full bibliographic
-reference to the trait definition (giving title, author, year and
-publication).</p></td>
+      <td><p>A character string providing a full bibliographic reference to
+the trait definition (giving title, author, year and publication).</p></td>
     </tr>
     <tr>
       <th>version</th>
