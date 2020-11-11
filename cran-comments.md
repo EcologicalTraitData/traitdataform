@@ -1,14 +1,14 @@
 ## Resubmission
 
-Updating internal terminology according to a change in the Ecological Trait-data Standard (ETS). 
+Fix to comply to CRAN policy: Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error). 
 
 ## Test environments
 
-* local Windows 10 install, R version 4.0.3 (2020-10-21) 
-* macOS High Sierra 10.13.6 , R version 4.0.2 (2020-10-19) on travis-ci
-* Ubuntu 16.04.6 LTS R version 4.0.2 (2020-10-19) and R devel (2020-10-19) on travis-ci
-* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (2020-10-21) on R-hub
-* Debian Linux, R-devel (2020-10-17 r79346), clang, ISO-8859-15 locale on R-hub (2020-10-21)
+* Windows 10, R version 4.0.2 on local install (2020-11-11) 
+* macOS High Sierra 10.13.6, R version 4.0.2 on travis-ci (2020-11-11) 
+* Ubuntu 16.04.6 LTS R version 4.0.2 and R devel  on travis-ci  (2020-11-11) 
+* Windows Server 2008 R2 SP1, R-devel (2020-11-09 r79411), 32/64 bit on win-builder.r-project.org (2020-11-11) 
+* Debian Linux, R-devel (2020-11-09 r79411), clang, ISO-8859-15 locale on R-hub (2020-11-11)
 
 ## R CMD check results
 
