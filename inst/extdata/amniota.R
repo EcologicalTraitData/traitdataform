@@ -11,9 +11,6 @@ amniota <- utils::read.csv("Data_Files/Amniote_Database_Aug_2015.csv",
 file.remove("Data_Files/Amniote_Database_Aug_2015.csv")
 unlink("Data_Files", recursive=TRUE)
 
-#amniota <- utils::read.csv("http://esapubs.org/archive/ecol/E096/269/Data_Files/Amniote_Database_Aug_2015.csv",
-#                           fileEncoding = "UTF-8",
-#                           stringsAsFactors = FALSE)
 
 attr(amniota, 'metadata') <- traitdataform::as.metadata(
   datasetName = "Amniote Database",

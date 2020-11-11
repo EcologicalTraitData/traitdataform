@@ -11,10 +11,6 @@ amniota <- utils::read.csv("PanTHERIA_1-0_WR05_Aug2008.txt",
                            stringsAsFactors = FALSE)
 file.remove("PanTHERIA_1-0_WR05_Aug2008.txt")
 
-#pantheria <- utils::read.csv("http://esapubs.org/archive/ecol/E090/184/PanTHERIA_1-0_WR05_Aug2008.txt", sep = "\t",
-#                             fileEncoding = "UTF-8",
-#                             stringsAsFactors = FALSE)
-
 attr(pantheria,'metadata') <- traitdataform::as.metadata(
   datasetName = "PanTHERIA",
   datasetID = "pantheria",
