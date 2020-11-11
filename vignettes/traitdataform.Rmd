@@ -43,13 +43,13 @@ The first step is to load your data into R. This can be your own data, read from
 
 R knows many ways of getting your data into an R object. In most cases you would read an object from a csv or txt file while maintaining the column headers. 
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, warning=FALSE, error=FALSE}
 carabids <- read.table("../../data/carabid traits final.txt", header = TRUE)
 ```
 
 If reading files from a file repository, you can refer to the URL directly, e.g. 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 # pulling data from van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017) Sensitivity of functional diversity metrics to sampling intensity. Methods in Ecology and Evolution 8(9): 1072-1080. https://doi.org/10.1111/2041-210x.12728
 
 carabids <- read.delim("https://datadryad.org/stash/downloads/file_stream/24267", stringsAsFactors = FALSE)
@@ -72,7 +72,7 @@ As long-table formats draw from a defined set of columns,  merging of datasets i
 
 The function `as.traitdata()` provided in the package assist in transferring data into the measurement long-table format. For this function to work, it needs at least to know about the columns of the original data that contain trait values (parameter `traits`), and the column which contains the taxonomic concept (parameter `taxa`).
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, error=FALSE}
 dataset1 <- as.traitdata(carabids, 
                          taxa = "name_correct",
                          traits = c("body_length", 
@@ -90,7 +90,7 @@ The essential columns are `verbatimTraitName`, `verbatimTraitValue` for the repo
 The function automatically interprets data as a species$\times$traits matrix if the taxa column contains only unique entries and no duplicates. 
 In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column `occurrenceID` which links measurements taken on the same individuals. Both `occurrenceID` and `measurementID` can be provided by the author using the parameter `occurrences` (as a column name or a vector) or `measurements` (as a column name or a vector).
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 if(!l10n_info()$`UTF-8`) {Sys.setlocale("LC_CTYPE", "en_US.UTF-8")}
 
 heteroptera_raw <-  read.delim(url("https://ndownloader.figshare.com/files/5633883", 
@@ -140,7 +140,7 @@ This can be for instance data about the sex or developmental stage of the indivi
 
 The parameter `keep` allows you to specify which columns contain valuable information as a character vector. As a negative version of `keep`, specifying `drop` would allow you to name the columns that are not valuable, while all others will be kept. Not specifying `keep` or `drop` will result in dropping all columns except the core measurement and identifier columns.  
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 dataset2 <- as.traitdata(heteroptera_raw,
               traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
                          "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1",
@@ -165,7 +165,7 @@ The three extensions of the ETS provide standard terms for this kind of informat
 
 We highly recommend mapping the input columns into these standard terms by providing a named vector for `keep` that gives the target ETS terms as vector names. 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 dataset2 <- as.traitdata(heteroptera_raw,
               traits = c("Body_length", "Body_width", "Body_height", "Thorax_length",
                          "Thorax_width", "Head_width", "Eye_width", "Antenna_Seg1",
@@ -228,7 +228,7 @@ Many of these tasks can be achieved on the matrix raw data using base functions 
 However, if the data are converted to long-table format, these tasks may become tedious as they require splitting the data before the computation can be done. 
 The function `mutate.traitdata()` performs these tasks (working as a wrapper to `plyr::mutate()`) while keeping an eye on the units. 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 dataset2 <- mutate.traitdata(dataset2, 
                             Body_shape = Body_length/Body_width, 
                             Body_volume = Body_length*Body_width*Body_height,
@@ -261,7 +261,7 @@ The function to create an object of class 'thesaurus' is `as.thesaurus()` and de
 The ETS provides a [set of terms to describe trait concepts](https://terminologies.gfbio.org/terms/ets/pages/#terms-for-trait-definitions) which can be provided as an input parameter to `as.traits()`.
 Using the `as.trait()` function allows assigning flexible trait definition while ensuring compliance with the terms of the traitdata standard outlined above. It also allows building a library of trait definitions where single traits can be reused in multiple projects.  
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 as.trait("body_length",
          expectedUnit = "mm", valueType = "numeric",
          traitDescription = "The known longest dimension of the physical structure of organisms",
@@ -275,7 +275,7 @@ as.trait("body_length",
 
 E.g. if *all* of the traits reported in your dataset refer to a definition published under a publicly available identifier, the thesaurus could be created like this:  
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 thesaurus1 <- as.thesaurus(
           body_length = as.trait("body_length",
                   expectedUnit = "mm", valueType = "numeric",
@@ -294,7 +294,7 @@ thesaurus1 <- as.thesaurus(
 
 Alternatively, a thesaurus can be created from a `data.frame`, which might be easier if only trait name and identifier are to be provided and more specific trait definitions are not to be stored in the R object. 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 thesaurus1 <- as.thesaurus(data.frame(
                       trait = c("body_length",  "antenna_length", "metafemur_length", "eyewidth_corr"),
                       identifier = paste0("http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=", 
@@ -333,7 +333,7 @@ This reference file should contain at least the following fields for each trait 
 Refer to the [ETS set of terms to describe trait concepts](https://terminologies.gfbio.org/terms/ets/pages/#terms-for-trait-definitions)) for further definitions of these terms, as well as the [best practice guidelines for trait-data publications](https://terminologies.gfbio.org/terms/ets/pages/bestpractice.html). 
 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 # M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W. Weisser, Wolfgang
 # (2016): Morphometric measures of Heteroptera sampled in grasslands across
 # three regions of Germany. figshare.
@@ -505,7 +505,7 @@ After standardizing trait and taxon concepts into unified definitions and conver
 The function call will append the data tables while merging the common columns and maintaining columns that are not present in all datasets (this might produce lots of NA). 
 The column `datasetID` will be added to keep track of the origin of the data. By default this column will contain the object names of the original datasets, but it can be replaced by more meaningful IDs using the parameter `datasetID`. 
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, warning=FALSE, error=FALSE}
 newdata <- rbind(dataset1Std, dataset2Std, 
                 datasetID = c("vanderplas15", "gossner15")
               )
@@ -518,7 +518,7 @@ Note that the package provides a method for the base function `rbind()` that han
 The function will handle metadata information on the dataset level as described in the section 'Metadata' of the Traitdata Standard (e.g. `author` or `bibliographicCitation`) and add a column `datasetID` as well as  `datasetName` and `author` if those are provided in the parameter `metadata` of the `as.traitdata()` function call which creates the data. 
 The function `as.metadata()` provides a standard structure for this case. 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 metadata1 <- as.metadata(
       datasetName = "Carabid traits",
       datasetID = "carabids",
@@ -548,7 +548,7 @@ head(dataset1)
 
 Note the use of the `bibentry()` function to create a formal bibliographic entry. Also note that this also affects the way how the dataset is printed into the R console. This facilitates for data users to acknowledge authorship and ownership of the data, while also providing a machine readable structure that can easily be accessed further down the line. 
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 metadata2 <- as.metadata(
   datasetName = "Heteroptera morphometry traits",
   datasetID = "heteroptera",
@@ -585,7 +585,7 @@ head(database)
 
 The detailed metadata information of both datasets (e.g. license and bibliographic citation) will be stored in the attributes of the dataset and displayed when calling it in R console. You can access the metadata via the `attributes()`  function. E.g.
 
-```{r}
+```{r, warning=FALSE, error=FALSE}
 attributes(dataset1)$metadata$bibliographicCitation
 ```
 
@@ -597,7 +597,7 @@ If many field-based changes are necessary, you can refer to [lookup tables](http
 
 `traitdataform` allows you to script all parameters required for the standardization call into the attributes of the R object. A script for a single data source can then look like this
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, warning=FALSE, error=FALSE}
 carabids <- utils::read.delim(url("https://datadryad.org/stash/downloads/file_stream/24267", 
                                 encoding = "UTF-8")
                               )
@@ -674,14 +674,14 @@ Internationalization refers to the file encoding ('UTF-8' should be used, 'ASCII
 
 The base R function `write.table()` gives full control over these parameters and should be used to export trait-data.
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, warning=FALSE, error=FALSE}
 write.table(dataset1Std, file = "carabids_std.csv", 
             sep = ",", dec = ".", quote = TRUE, eol = "\r", row.names = FALSE)
 ```
 
 Along with these primary data, you should make any ancillary data table available along with the data, e.g. the metadata in a human readable form, as well as the lookup table of traits and taxa:
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, warning=FALSE, error=FALSE}
 capture.output(attributes(dataset1Std)$metadata, file = "metadata.txt")
 
 write.table(attributes(dataset1Std)$traits, file = "traits.csv", 
@@ -692,7 +692,7 @@ write.table(attributes(dataset1Std)$taxonomy, file = "taxa.csv",
 
 When publishing the trait data on file servers like Figshare or Zenodo, those files should be uploaded in a single file repository (e.g. in a zip file). R does the archiving for you using `zip()`: 
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, warning=FALSE, error=FALSE}
 zip("carabids_std.zip", c("carabids_std.csv", "metadata.txt", "traits.csv", "taxa.csv") )
 ```
 
