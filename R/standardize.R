@@ -347,10 +347,10 @@ standardize_traits <- function(x,
          # convert value in standardized value and write into output
          for(j in seq_along(value_original))  {
            
-           value_original_j <- value_original[j] * units::parse_unit(unit_original[j]) 
+           value_original_j <- value_original[j] * units::as_units(unit_original[j])
            
            value_standardized_j <- value_original_j
-           units(value_standardized_j) <- units::parse_unit(unit_target[j])
+           units(value_standardized_j) <- units::as_units(unit_target[j])
            out[out$traitName == i,"traitValue"][j] <- value_standardized_j
          }
          
