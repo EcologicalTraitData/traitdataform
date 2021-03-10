@@ -19,7 +19,7 @@ test_that("mapping of taxa works", {
   dataset2 <- as.traitdata(arthropodtraits)
   
   dd2 <- standardise_taxa(dataset2[c(215,476,774,975,1445,1706,3437,3905,4667,5396,5896,8755,8966),])
-  expect_equal(as.character(dd2$scientificName), c("Acalypta parvula", "Kosswigianella denticauda", "Kosswigianella spinosa", "Kosswigianella spinosa", "Kosswigianella spinosa", "Aspidapion radiolus", "Aspidapion radiolus", "Aspidapion radiolus", "Mocyta fungi", "Gymnetron ictericus", "Gymnetron ictericus", "Gymnetron ictericus", "Trigonocranus emmeae") )
+  expect_equal(as.character(dd2$scientificName), c("Acalypta parvula", "Acanthodelphax denticauda", "Acanthodelphax spinosa", "Acanthodelphax spinosa", "Acanthodelphax spinosa", "Curculio radiolus", "Curculio radiolus", "Curculio radiolus", "Mocyta fungi", "Gymnetron ictericus", "Gymnetron ictericus", "Gymnetron ictericus", "Trigonocranus emmeae") )
   expect_true(all(c("scientificName", "taxonID", "warnings") %in% names(dd2)))
   
   })
