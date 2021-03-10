@@ -107,11 +107,11 @@ We are aiming to provide the following features in future iterations of the pack
 
 ## Cite as
 
-Schneider, F.D. (2020) traitdataform - harmonizing ecological trait data in R, v0.6.1, DOI: [10.5281/zenodo.1489527](http://dx.doi.org/10.5281/zenodo.1489527) http://ecologicaltraitdata.github.io/traitdataform
+Schneider, F.D. (2021) traitdataform - harmonizing ecological trait data in R, v0.6.2, DOI: [10.5281/zenodo.1489527](http://dx.doi.org/10.5281/zenodo.1489527) http://ecologicaltraitdata.github.io/traitdataform
 
 ## License
 
-Copyright (c) 2020 F.D. Schneider, florian.dirk.schneider@gmail.com
+Copyright (c) 2021 F.D. Schneider, florian.dirk.schneider@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
