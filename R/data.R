@@ -72,7 +72,7 @@ pulldata <- function(x = NULL) {
 #' 
 #' @family rawdata
 #' 
-#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#' @source <doi:10.5061/dryad.53ds2>;
 #'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
@@ -121,7 +121,7 @@ NULL
 #'
 #' @family rawdata
 #' 
-#' @source \url{http://dx.doi.org/10.5061/dryad.53ds2};
+#' @source <doi:10.5061/dryad.53ds2>;
 #'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
@@ -140,7 +140,7 @@ NULL
 #' @author Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 #'   Weisser
 #'
-#' @source \url{https://figshare.com/articles/Data_Paper_Data_Paper/3561936};
+#' @source \url{https://figshare.com/articles/dataset/Data_Paper_Data_Paper/3561936};
 #'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
 #'   and related or neighboring rights to this data.
@@ -290,7 +290,7 @@ NULL
 #'   within PanTHERIA and 19 variables were calculated from other spatial data
 #'   sources (see Class V, Section C).
 #'   
-#'   see \url{https://doi.org/10.6084/m9.figshare.c.3301274.v1} for further
+#'   see <doi:10.6084/m9.figshare.c.3301274.v1> for further
 #'   information.
 #'   
 #' @source Cite as:
@@ -303,7 +303,7 @@ NULL
 #'   Bininda-Emonds, Olaf R. P.; Gittleman, John L.; M. Mace, Georgina; Purvis,
 #'   Andy (2016): PanTHERIA: a species-level database of life history, ecology,
 #'   and geography of extant and recently extinct mammals.
-#'   \url{ https://doi.org/10.1890/08-1494.1};
+#'   <doi:10.1890/08-1494.1>;
 #'   
 #'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 #'   0}. To the extent possible under law, the authors have waived all copyright
@@ -330,7 +330,7 @@ NULL
 #'   C., Trøjelsgaard, K., Svenning, J. (2014). Establishing macroecological 
 #'   trait datasets: digitalization, extrapolation, and validation of diet 
 #'   preferences in terrestrial mammals worldwide. Ecol Evol, 4, 2913-2930. 
-#'   \url{https://doi.org/10.1002/ece3.1136}
+#'   <doi:10.1002/ece3.1136>
 #'   
 #'   Additionally, please cite the Dryad data package:
 #'   
@@ -338,7 +338,7 @@ NULL
 #'   Trøjelsgaard K, Svenning J-C (2014) Data from: Establishing macroecological
 #'   trait datasets: digitalization, extrapolation, and validation of diet 
 #'   preferences in terrestrial mammals worldwide. Dryad Digital Repository. 
-#'   \url{https://doi.org/10.5061/dryad.6cd0v}
+#'   <doi:10.5061/dryad.6cd0v>
 #'   
 #'   \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons 
 #'   0}. To the extent possible under law, the authors have waived all copyright
@@ -409,7 +409,7 @@ NULL
 #'   
 #'   Please also cite the data repository on figshare: 
 #'   
-#'   - Oliveira, Brunno Freire; São-Pedro, Vinícius Avelar; Santos-Barrera, Georgina; Penone, Caterina; C. Costa, Gabriel (2017): AmphiBIO_v1. figshare. \url{https://doi.org/10.6084/m9.figshare.4644424.v5}
+#'   - Oliveira, Brunno Freire; São-Pedro, Vinícius Avelar; Santos-Barrera, Georgina; Penone, Caterina; C. Costa, Gabriel (2017): AmphiBIO_v1. figshare. <doi:10.6084/m9.figshare.4644424.v5>
 #'   
 #'   \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
 #'   
