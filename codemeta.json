@@ -17,7 +17,7 @@
   ],
   "issueTracker": "https://github.com/ecologicaltraitdata/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -65,6 +65,11 @@
       "@type": "Person",
       "givenName": "Jessica",
       "familyName": "Burnett"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Iñaki",
+      "familyName": "Ucar"
     }
   ],
   "maintainer": [
@@ -248,7 +253,7 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "2257.63KB",
+  "fileSize": "2257.346KB",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
