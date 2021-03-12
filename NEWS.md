@@ -1,3 +1,7 @@
+# traitdataform 0.6.3
+
+- fix: reference to doi in Rd documentation syntax
+
 # traitdataform 0.6.2
 
 - update call to package `units` (pull request #42 by Iñaki Ucar)

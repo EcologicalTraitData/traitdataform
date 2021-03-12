@@ -17,13 +17,13 @@
   ],
   "issueTracker": "https://github.com/ecologicaltraitdata/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.0.4 (2021-02-15)",
   "author": [
     {
       "@type": "Person",
@@ -253,7 +253,7 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "2257.346KB",
+  "fileSize": "2256.582KB",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
