@@ -22,7 +22,7 @@ from linear model in which antenna length is explained by body length)
 }
 }
 \source{
-\url{doi:10.5061/dryad.53ds2};
+\doi{10.5061/dryad.53ds2};
 \href{https://creativecommons.org/publicdomain/zero/1.0/}{Creative Commons
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
@@ -36,13 +36,13 @@ When using this data, please cite the original publication:
 \itemize{ \item  van der Plas F, van Klink R, Manning P, Olff H, Fischer M
 (2017) Sensitivity of functional diversity metrics to sampling intensity.
 Methods in Ecology and Evolution 8(9): 1072-1080.
-https://doi.org/10.1111/2041-210x.12728 }
+doi: \doi{10.1111/2041-210x.12728} }
 
 Additionally, please cite the Dryad data package:
 
 \itemize{ \item van der Plas F, van Klink R, Manning P, Olff H, Fischer M
 (2017) Data from: Sensitivity of functional diversity metrics to sampling
-intensity. Dryad Digital Repository. https://doi.org/10.5061/dryad.1fn46 }
+intensity. Dryad Digital Repository. doi: \doi{10.5061/dryad.1fn46} }
 }
 \seealso{
 Other rawdata: 

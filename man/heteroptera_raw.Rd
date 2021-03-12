@@ -63,7 +63,7 @@ regions of Germany. Ecology 96:1154-1154.
 \enumerate{
 \item Morphometric measures of Heteroptera sampled in grasslands across three
 regions of Germany. figshare.
-https://doi.org/10.6084/m9.figshare.c.3307611.v1
+doi: \doi{10.6084/m9.figshare.c.3307611.v1}
 }
 }
 
