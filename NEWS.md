@@ -1,3 +1,7 @@
+# traitdataform 0.6.4
+
+- fix tidyverse URL in README
+
 # traitdataform 0.6.3
 
 - fix: reference to doi in Rd documentation syntax
