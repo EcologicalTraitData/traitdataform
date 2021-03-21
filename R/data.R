@@ -50,8 +50,6 @@ pulldata <- function(x = NULL) {
 #' 
 #' @name arthropodtraits
 #' 
-#' @usage pulldata('arthropodtraits')
-#' 
 #' @description Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 #' Araneae, occurring in grasslands in Germany.
 #' 
@@ -88,8 +86,6 @@ NULL
 #' @title Carabid morphological traits
 #'
 #' @name carabids
-#'
-#' @usage pulldata('carabids')
 #' 
 #' @description Average body measures of 120 Carabid species occuring in the Netherlands.
 #'
@@ -144,9 +140,6 @@ NULL
 #' regions of Germany.
 #'
 #' @name heteroptera_raw
-#'
-#' @usage pulldata('heteroptera_raw')
-#'     pulldata('heteroptera')
 #'     
 #' @author Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 #'   Weisser
@@ -219,8 +212,6 @@ NULL
 #' 
 #' @name amniota
 #' 
-#' @usage pulldata('amniota')
-#' 
 #' @description An amniote life-history database to perform comparative analyses
 #'   with birds, mammals, and reptiles, Ecological Archives E096-269
 #'   
@@ -275,9 +266,7 @@ NULL
 #' PanTHERIA mammal traits
 #' 
 #' @name pantheria
-#' 
-#' @usage pulldata('pantheria')
-#' 
+#'  
 #' @description Here we describe a global species-level data set of key
 #'   life-history, ecological and geographical traits of all known extant and
 #'   recently extinct mammals (PanTHERIA) developed for a number of
@@ -340,7 +329,6 @@ NULL
 #' 
 #' @name mammaldiet
 #' 
-#' @usage pulldata('mammaldiet')
 #' 
 #' @description A comprehensive global dataset of diet preferences of mammals 
 #'   ('MammalDIET'). Diet information was digitized from the literature and 
@@ -424,8 +412,6 @@ NULL
 #' AmphiBIO, a global database for amphibian ecological traits
 #' 
 #' @name amphibio 
-#' 
-#' @usage pulldata('amphibio')
 #' 
 #' @description A comprehensive database of natural history traits for amphibians worldwide. 
 #' 
