@@ -9,6 +9,12 @@
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
+\usage{
+pulldata('arthropodtraits')
+}
+\value{
+This is a data object. provides instructions for \code{pulldata()}.
+}
 \description{
 Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 Araneae, occurring in grasslands in Germany.

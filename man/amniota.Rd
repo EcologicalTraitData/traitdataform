@@ -14,6 +14,12 @@ http://esapubs.org/archive/ecol/E096/269/}
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
+\usage{
+pulldata('amniota')
+}
+\value{
+This is a data object. provides instructions for \code{pulldata()}.
+}
 \description{
 An amniote life-history database to perform comparative analyses
 with birds, mammals, and reptiles, Ecological Archives E096-269

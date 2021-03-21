@@ -7,7 +7,10 @@
 pulldata(x = NULL)
 }
 \arguments{
-\item{x}{The name of the dataset to source.}
+\item{x}{the dataset to source. Leave empty for full list of available datasets.}
+}
+\value{
+Makes a raw dataset available in R according to instructions provided by dataset function.
 }
 \description{
 This function sources a recipe for extracting public trait data.

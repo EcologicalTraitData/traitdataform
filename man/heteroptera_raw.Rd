@@ -10,10 +10,16 @@
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
+\usage{
+pulldata('heteroptera_raw')
+    pulldata('heteroptera')
+}
 \value{
 The dataset \code{heteropteraRaw} contains multiple observations of
 each species (occurence table). The dataset \code{heteroptera} is a
 compiled species-trait matrix.
+
+This is a data object. provides instructions for \code{pulldata()}.
 }
 \description{
 Morphometric measures of Heteroptera sampled in grasslands across three

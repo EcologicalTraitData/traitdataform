@@ -27,6 +27,12 @@ from linear model in which antenna length is explained by body length)
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
+\usage{
+pulldata('carabids')
+}
+\value{
+This is a data object. provides instructions for \code{pulldata()}.
+}
 \description{
 Average body measures of 120 Carabid species occuring in the Netherlands.
 }

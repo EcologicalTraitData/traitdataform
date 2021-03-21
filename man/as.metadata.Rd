@@ -14,7 +14,7 @@ as.metadata(
 \arguments{
 \item{...}{named objects of any class. Names must be the same as given by template or they will be ignored when producing the metadata object.}
 
-\item{template}{The default template contains the elements as defined by the Ecological Traitdata Standard. (see Details)}
+\item{template}{The default template contains the elements as defined by the Ecological Traitdata Standard.}
 }
 \value{
 an object of class 'metadata', or - if metadata objects are provided as input - a list object of class 'metadatalist'.
