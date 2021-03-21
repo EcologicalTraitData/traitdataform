@@ -9,9 +9,6 @@
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
-\usage{
-pulldata('arthropodtraits')
-}
 \value{
 This is a data object. provides instructions for \code{pulldata()}.
 }

@@ -16,9 +16,6 @@ Please also cite the data repository on figshare:
 
 \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 }
-\usage{
-pulldata('amphibio')
-}
 \value{
 This is a data object. provides instructions for \code{pulldata()}.
 }

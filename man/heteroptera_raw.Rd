@@ -10,10 +10,6 @@
 0}. To the extent possible under law, the authors have waived all copyright
 and related or neighboring rights to this data.
 }
-\usage{
-pulldata('heteroptera_raw')
-    pulldata('heteroptera')
-}
 \value{
 The dataset \code{heteropteraRaw} contains multiple observations of
 each species (occurence table). The dataset \code{heteroptera} is a
