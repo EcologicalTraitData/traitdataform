@@ -7,8 +7,8 @@
 #'   containing at least the column `verbatimScientificName.
 #' @param method default option is `get_gbif_taxonomy`. In principle, takes any
 #'   function that takes a vector of species names as input to produce a
-#'   taxonomy lookup table (i.e. mapping user-provided `verbatimScientificName` to
-#'   `taxonID` and other taxon-level information). Will allow to chose from
+#'   taxonomy lookup table (i.e. mapping user-provided `verbatimScientificName`
+#'   to `taxonID` and other taxon-level information). Will allow to chose from
 #'   different sources of taxonomic reference.
 #' @param method_options a name vector of arguments to be passed on to `method`.
 #'   See [get_gbif_taxonomy] for options.
@@ -40,11 +40,13 @@
 #' @family standardize
 #' @aliases standardize.taxonomy standardise_taxa
 #'
+#' @return A traidata object with standardized scientific taxon names according
+#'   to GBif Backbone taxonomy.
 #'
 #' @examples
-#' 
+#'
 #' \dontrun{
-#' 
+#'
 #' pulldata("carabids")
 #'
 #' dataset1 <- as.traitdata(carabids,
@@ -58,7 +60,7 @@
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
-#' 
+#'
 #' dataset1Std <- standardize_taxa(dataset1)
 #' }
 standardize_taxa <- function(x, 
@@ -115,11 +117,11 @@ standardize.taxonomy <- standardize_taxa
 
 
 #' Standardize trait names and harmonize measured values and reported facts
-#' 
-#' @description Adds columns to a traitdata table with standardized trait names 
-#'   and relates them to globally unique identifiers via URIs. Optionally 
+#'
+#' @description Adds columns to a traitdata table with standardized trait names
+#'   and relates them to globally unique identifiers via URIs. Optionally
 #'   converts units of values and renames factor levels into accepted terms.
-#'   
+#'
 #' @param x a traitdata object (as returned by `as.traitdata()`) or a data table
 #'   containing at least the column `verbatimScientificName.
 #' @param thesaurus an object of class 'thesaurus' (as returned by
@@ -128,72 +130,76 @@ standardize.taxonomy <- standardize_taxa
 #'   names (see Details).
 #' @param categories target categories for binary/logical traits harmonization.
 #' @param output behaviour of `fixlogical()`. see [fixlogical()].
-#' @param ... parameters to be ignored, forwarded from wrapper function `standardize()`.
-#'   
+#' @param ... parameters to be ignored, forwarded from wrapper function
+#'   `standardize()`.
+#'
 #' @import units
 #' @export
 #' @family standardize
-#' 
-#' @details The function matches the trait names provided in 'verbatimTraitName' to the
-#'   traits provided in the thesaurus (in field 'trait'). Matching must be exact
-#'   (case sensitive). Fuzzy matching may be provided in a later version of the
-#'   package.
-#'   
+#'
+#' @details The function matches the trait names provided in 'verbatimTraitName'
+#'   to the traits provided in the thesaurus (in field 'trait'). Matching must
+#'   be exact (case sensitive). Fuzzy matching may be provided in a later
+#'   version of the package.
+#'
 #'   The function parameter 'rename' should be provided to map trait names where
 #'   user-provided names and thesaurus names are different. In this case, rename
 #'   should be a named vector with the target names used in the thesaurus as
-#'   names, and the original names as provided in 'verbatimTraitName' as value. E.g.
-#'   `rename = c()`
-#'   
+#'   names, and the original names as provided in 'verbatimTraitName' as value.
+#'   E.g. `rename = c()`
+#'
+#' @return A traidata object with standardized trait names according to a
+#'   provided thesaurus.
+#'
 #' @aliases standardise_traits standardize.traits
 #' @family standardize
-#' @examples 
-#' 
-#' 
+#' @examples
+#'
+#'
 #' pulldata("carabids")
-#' 
-#' dataset1 <- as.traitdata(carabids, 
-#'   taxa = "name_correct", 
+#'
+#' dataset1 <- as.traitdata(carabids,
+#'   taxa = "name_correct",
 #'   traits = c("body_length", "antenna_length", "metafemur_length"),
 #'   units = "mm",
-#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+#'   keep = c(datasetID = "source_measurement", measurementRemark = "note"),
 #'   metadata = list(
 #'     bibliographicCitation = attributes(carabids)$citeAs,
-#'     author = "Fons van der Plas", 
+#'     author = "Fons van der Plas",
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
-#' 
+#'
 #' traitlist <- as.thesaurus(
 #' body_length = as.trait("body_length", expectedUnit = "mm", valueType = "numeric",
-#'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+#'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"),
 #' antenna_length = as.trait("antenna_length", expectedUnit = "mm", valueType = "numeric",
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
 #' metafemur_length = as.trait("metafemur_length", expectedUnit = "mm", valueType = "numeric",
 #'    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #' )
-#' 
+#'
 #' dataset1Std <- standardize_traits(dataset1, thesaurus = traitlist)
-#' 
-#' 
-#' 
+#'
+#'
+#'
 #' ## Example: matching of original names to thesaurus
-#' 
+#'
 #' pulldata("heteroptera_raw")
-#' 
-#' dataset2 <- as.traitdata(heteroptera_raw, 
-#'   taxa = "SpeciesID", 
+#'
+#' dataset2 <- as.traitdata(heteroptera_raw,
+#'   taxa = "SpeciesID",
 #'   traits = c("Body_length", "Antenna_Seg1", "Antenna_Seg2",
 #'     "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
-#'   units = "mm", 
+#'   units = "mm",
 #'   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
 #'   metadata = list(
-#'     bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+#'     bibliographicCitation = attributes(heteroptera_raw)$citeAs,
 #'     license = "http://creativecommons.org/publicdomain/zero/1.0/"
 #'     )
 #' )
-#' 
-#' 
+#'
+#'
 #' traits2 <- as.thesaurus(
 #'     Body_length = as.trait("Body_length",
 #'             expectedUnit = "mm", valueType = "numeric",
@@ -224,7 +230,7 @@ standardize.taxonomy <- standardize_taxa
 #'             broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
 #'     )
 #'
-#' dataset2Std <- standardize_traits(dataset2, 
+#' dataset2Std <- standardize_traits(dataset2,
 #'     thesaurus = traits2
 #'     )
 #' 
@@ -386,19 +392,24 @@ standardize.traits <- standardize_traits
 
 
 #' Standardize trait datasets
-#' 
+#'
 #' @description wrapper that applies `standardize.taxonomy()` and
 #'   `standardize.traits()` in one go.
-#'   
-#' @param ... parameters as described for `standardize.traits()` and `standardize.taxonomy()`.
-#' 
-#' @inheritParams standardize_traits 
+#'
+#' @param ... parameters as described for `standardize.traits()` and
+#'   `standardize.taxonomy()`.
+#'
+#' @inheritParams standardize_traits
 #' @inheritParams standardize_taxa
-#' 
+#'
+#' @return A traitdata object with standardized scientific taxon names according
+#'   to GBif Backbone taxonomy and standardized trait names according to a
+#'   thesaurus, if provided.
+#'
 #' @export
-#' 
+#'
 #' @family standardize
-#' 
+#'   
 standardize <- function(x,
                         ...) {
     

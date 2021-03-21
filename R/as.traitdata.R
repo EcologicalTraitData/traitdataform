@@ -70,6 +70,8 @@
 #'   datasets using `rbind()`, the metadata information will be added as
 #'   additional columns and dataset attribution will be listed in attributes.
 #'
+#' @return An object of class 'traitdata'.
+#' 
 #' @export
 #' @importFrom reshape2 melt
 #'

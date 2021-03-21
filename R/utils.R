@@ -14,7 +14,10 @@
 #' 
 #' @author Dennis Heimann, Andreas Ostrowski
 #'
+#' @return Returns dataset from BExIS as a data.frame.
+#'
 #' @details `read.service.blocks()` returns a data.frame array as a list of data.frames.
+#' 
 #' @import XML
 #' @import RCurl
 #' @import getPass

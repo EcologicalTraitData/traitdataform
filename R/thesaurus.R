@@ -147,6 +147,8 @@ print.thesaurus <- function(x, ...) {
 #'   `as.person()`) attributing the author(s) of the trait definition.
 #' @param ... other arguments, passed on to print function.
 #'
+#' @return A structured data.frame object of class 'trait'. 
+#' 
 #' @export
 #'
 #' @examples

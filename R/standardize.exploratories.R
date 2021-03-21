@@ -25,7 +25,7 @@
 #' @param verbose logical; if `FALSE` all messages will be suppressed. 
 #'
 #'
-#' @return std
+#' @return A traitdata object with harmonized location data from the context of the Biodiversity Exploratories project. 
 #' @export
 #'
 #' @import getPass
