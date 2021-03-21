@@ -164,21 +164,26 @@ names (see Details).</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>parameters to be ignored, forwarded from wrapper function <code><a href='standardize.html'>standardize()</a></code>.</p></td>
+      <td><p>parameters to be ignored, forwarded from wrapper function
+<code><a href='standardize.html'>standardize()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A traidata object with standardized trait names according to a
+provided thesaurus.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function matches the trait names provided in 'verbatimTraitName' to the
-traits provided in the thesaurus (in field 'trait'). Matching must be exact
-(case sensitive). Fuzzy matching may be provided in a later version of the
-package.</p>
+    <p>The function matches the trait names provided in 'verbatimTraitName'
+to the traits provided in the thesaurus (in field 'trait'). Matching must
+be exact (case sensitive). Fuzzy matching may be provided in a later
+version of the package.</p>
 <p>The function parameter 'rename' should be provided to map trait names where
 user-provided names and thesaurus names are different. In this case, rename
 should be a named vector with the target names used in the thesaurus as
-names, and the original names as provided in 'verbatimTraitName' as value. E.g.
-<code>rename = c()</code></p>
+names, and the original names as provided in 'verbatimTraitName' as value.
+E.g. <code>rename = c()</code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other standardize: 
@@ -193,21 +198,21 @@ names, and the original names as provided in 'verbatimTraitName' as value. E.g.
 
 <span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"carabids"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>The dataset 'carabids' is now available for use! </span></div><div class='input'>
-<span class='va'>dataset1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>carabids</span>, 
-  taxa <span class='op'>=</span> <span class='st'>"name_correct"</span>, 
+<span class='va'>dataset1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>carabids</span>,
+  taxa <span class='op'>=</span> <span class='st'>"name_correct"</span>,
   traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"body_length"</span>, <span class='st'>"antenna_length"</span>, <span class='st'>"metafemur_length"</span><span class='op'>)</span>,
   units <span class='op'>=</span> <span class='st'>"mm"</span>,
-  keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>datasetID <span class='op'>=</span> <span class='st'>"source_measurement"</span>, measurementRemark <span class='op'>=</span> <span class='st'>"note"</span><span class='op'>)</span>, 
+  keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>datasetID <span class='op'>=</span> <span class='st'>"source_measurement"</span>, measurementRemark <span class='op'>=</span> <span class='st'>"note"</span><span class='op'>)</span>,
   metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
     bibliographicCitation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>carabids</span><span class='op'>)</span><span class='op'>$</span><span class='va'>citeAs</span>,
-    author <span class='op'>=</span> <span class='st'>"Fons van der Plas"</span>, 
+    author <span class='op'>=</span> <span class='st'>"Fons van der Plas"</span>,
     license <span class='op'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     <span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span></div><div class='input'>
 <span class='va'>traitlist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.thesaurus.html'>as.thesaurus</a></span><span class='op'>(</span>
 body_length <span class='op'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span><span class='op'>(</span><span class='st'>"body_length"</span>, expectedUnit <span class='op'>=</span> <span class='st'>"mm"</span>, valueType <span class='op'>=</span> <span class='st'>"numeric"</span>,
-   identifier <span class='op'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span><span class='op'>)</span>, 
+   identifier <span class='op'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"</span><span class='op'>)</span>,
 antenna_length <span class='op'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span><span class='op'>(</span><span class='st'>"antenna_length"</span>, expectedUnit <span class='op'>=</span> <span class='st'>"mm"</span>, valueType <span class='op'>=</span> <span class='st'>"numeric"</span>,
    identifier <span class='op'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"</span><span class='op'>)</span>,
 metafemur_length <span class='op'>=</span> <span class='fu'><a href='as.trait.html'>as.trait</a></span><span class='op'>(</span><span class='st'>"metafemur_length"</span>, expectedUnit <span class='op'>=</span> <span class='st'>"mm"</span>, valueType <span class='op'>=</span> <span class='st'>"numeric"</span>,
@@ -222,14 +227,14 @@ metafemur_length <span class='op'>=</span> <span class='fu'><a href='as.trait.ht
 
 <span class='fu'><a href='pulldata.html'>pulldata</a></span><span class='op'>(</span><span class='st'>"heteroptera_raw"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>The dataset 'heteroptera_raw' is now available for use! </span></div><div class='input'>
-<span class='va'>dataset2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>heteroptera_raw</span>, 
-  taxa <span class='op'>=</span> <span class='st'>"SpeciesID"</span>, 
+<span class='va'>dataset2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.traitdata.html'>as.traitdata</a></span><span class='op'>(</span><span class='va'>heteroptera_raw</span>,
+  taxa <span class='op'>=</span> <span class='st'>"SpeciesID"</span>,
   traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Body_length"</span>, <span class='st'>"Antenna_Seg1"</span>, <span class='st'>"Antenna_Seg2"</span>,
     <span class='st'>"Antenna_Seg3"</span>, <span class='st'>"Antenna_Seg4"</span>, <span class='st'>"Antenna_Seg5"</span>, <span class='st'>"Hind.Femur_length"</span><span class='op'>)</span>,
-  units <span class='op'>=</span> <span class='st'>"mm"</span>, 
+  units <span class='op'>=</span> <span class='st'>"mm"</span>,
   keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>sex <span class='op'>=</span> <span class='st'>"Sex"</span>, references <span class='op'>=</span> <span class='st'>"Source"</span>, lifestage <span class='op'>=</span> <span class='st'>"Wing_development"</span><span class='op'>)</span>,
   metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-    bibliographicCitation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>heteroptera_raw</span><span class='op'>)</span><span class='op'>$</span><span class='va'>citeAs</span>, 
+    bibliographicCitation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>heteroptera_raw</span><span class='op'>)</span><span class='op'>$</span><span class='va'>citeAs</span>,
     license <span class='op'>=</span> <span class='st'>"http://creativecommons.org/publicdomain/zero/1.0/"</span>
     <span class='op'>)</span>
 <span class='op'>)</span>
@@ -267,7 +272,7 @@ metafemur_length <span class='op'>=</span> <span class='fu'><a href='as.trait.ht
             broaderTerm <span class='op'>=</span> <span class='st'>"http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length"</span><span class='op'>)</span>
     <span class='op'>)</span>
 
-<span class='va'>dataset2Std</span> <span class='op'>&lt;-</span> <span class='fu'>standardize_traits</span><span class='op'>(</span><span class='va'>dataset2</span>, 
+<span class='va'>dataset2Std</span> <span class='op'>&lt;-</span> <span class='fu'>standardize_traits</span><span class='op'>(</span><span class='va'>dataset2</span>,
     thesaurus <span class='op'>=</span> <span class='va'>traits2</span>
     <span class='op'>)</span>
 

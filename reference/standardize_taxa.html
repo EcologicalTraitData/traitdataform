@@ -146,8 +146,8 @@ containing at least the column `verbatimScientificName.</p></td>
       <th>method</th>
       <td><p>default option is <code>get_gbif_taxonomy</code>. In principle, takes any
 function that takes a vector of species names as input to produce a
-taxonomy lookup table (i.e. mapping user-provided <code>verbatimScientificName</code> to
-<code>taxonID</code> and other taxon-level information). Will allow to chose from
+taxonomy lookup table (i.e. mapping user-provided <code>verbatimScientificName</code>
+to <code>taxonID</code> and other taxon-level information). Will allow to chose from
 different sources of taxonomic reference.</p></td>
     </tr>
     <tr>
@@ -168,6 +168,10 @@ function <code><a href='get_gbif_taxonomy.html'>get_gbif_taxonomy()</a></code>. 
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A traidata object with standardized scientific taxon names according
+to GBif Backbone taxonomy.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Taxonomic standardisation is an enormous challenge for biodiversity
