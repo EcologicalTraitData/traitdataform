@@ -10,7 +10,8 @@
 #'  
 #'   New recipes can be suggested as a pull requrest via the package development page (https://github.com/EcologicalTraitData/traitdataform). 
 #'  
-#' @param x The name of the dataset to source. 
+#' @param x the dataset to source. Leave empty for full list of available datasets.
+#' @return Makes a raw dataset available in R according to instructions provided by dataset function.
 #'
 #' @family rawdata
 #' @export
@@ -49,6 +50,8 @@ pulldata <- function(x = NULL) {
 #' 
 #' @name arthropodtraits
 #' 
+#' @usage pulldata('arthropodtraits')
+#' 
 #' @description Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 #' Araneae, occurring in grasslands in Germany.
 #' 
@@ -68,6 +71,7 @@ pulldata <- function(x = NULL) {
 #'   Araneae, occurring in grasslands in Germany. Dryad Digital Repository.
 #'   \doi{10.5061/dryad.53ds2} }
 #'   
+#' @return This is a data object. provides instructions for `pulldata()`.
 #' @author Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO, Dziock F, Köhler F, Rabitsch W, Weisser WW
 #' 
 #' @family rawdata
@@ -84,6 +88,8 @@ NULL
 #' @title Carabid morphological traits
 #'
 #' @name carabids
+#'
+#' @usage pulldata('carabids')
 #' 
 #' @description Average body measures of 120 Carabid species occuring in the Netherlands.
 #'
@@ -101,6 +107,8 @@ NULL
 #'   \itemize{ \item van der Plas F, van Klink R, Manning P, Olff H, Fischer M
 #'   (2017) Data from: Sensitivity of functional diversity metrics to sampling
 #'   intensity. Dryad Digital Repository. doi: \doi{10.5061/dryad.1fn46} }
+#'
+#' @return This is a data object. provides instructions for `pulldata()`.
 #' 
 #' @format A data frame containing following columns:
 #'   \itemize{ 
@@ -137,6 +145,9 @@ NULL
 #'
 #' @name heteroptera_raw
 #'
+#' @usage pulldata('heteroptera_raw')
+#'     pulldata('heteroptera')
+#'     
 #' @author Martin M. Gossner , Nadja K. Simons, Leonhard Höck, Wolfgang W.
 #'   Weisser
 #'
@@ -180,6 +191,8 @@ NULL
 #'   each species (occurence table). The dataset \code{heteroptera} is a
 #'   compiled species-trait matrix.
 #'
+#' @return This is a data object. provides instructions for `pulldata()`.
+#' 
 #' @section Citation: Cite this dataset as 
 #'  
 #' -  Gossner, M. M., N. K. Simons, L. Höck, and W. W. Weisser. 2015.
@@ -205,6 +218,8 @@ NULL
 #' Amniote life-history traits
 #' 
 #' @name amniota
+#' 
+#' @usage pulldata('amniota')
 #' 
 #' @description An amniote life-history database to perform comparative analyses
 #'   with birds, mammals, and reptiles, Ecological Archives E096-269
@@ -249,6 +264,8 @@ NULL
 #'   at least one life-history parameter for 21 322 species of birds, mammals,
 #'   and reptiles.
 #'   
+#' @return This is a data object. provides instructions for `pulldata()`.
+#'   
 #' @family rawdata
 
 NULL
@@ -258,6 +275,8 @@ NULL
 #' PanTHERIA mammal traits
 #' 
 #' @name pantheria
+#' 
+#' @usage pulldata('pantheria')
 #' 
 #' @description Here we describe a global species-level data set of key
 #'   life-history, ecological and geographical traits of all known extant and
@@ -293,6 +312,8 @@ NULL
 #'   see \doi{10.6084/m9.figshare.c.3301274.v1} for further
 #'   information.
 #'   
+#' @return This is a data object. provides instructions for `pulldata()`.
+#'   
 #' @source Cite as:
 #'   
 #'   E. Jones, Kate; Bielby, Jon; Cardillo, Marcel; A. Fritz, Susanne; O'Dell,
@@ -318,6 +339,9 @@ NULL
 #' Mammal diet database
 #' 
 #' @name mammaldiet
+#' 
+#' @usage pulldata('mammaldiet')
+#' 
 #' @description A comprehensive global dataset of diet preferences of mammals 
 #'   ('MammalDIET'). Diet information was digitized from the literature and 
 #'   extrapolated for species with missing information. The original and 
@@ -386,6 +410,8 @@ NULL
 #'   digitalization, extrapolation and validation procedures could be 
 #'   transferable to other trait data and taxa.
 #'   
+#' @return This is a data object. provides instructions for `pulldata()`.
+#'   
 #' @author Kissling, W.D., Dalby, L., Fløjgaard, C.,
 #'   Lenoir, J., Sandel, B., Sandom, C., Trøjelsgaard, K., Svenning, J.
 #'   
@@ -399,7 +425,11 @@ NULL
 #' 
 #' @name amphibio 
 #' 
+#' @usage pulldata('amphibio')
+#' 
 #' @description A comprehensive database of natural history traits for amphibians worldwide. 
+#' 
+#' @author Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa
 #' 
 #' @details Current ecological and evolutionary research are increasingly moving from species- to trait-based approaches because traits provide a stronger link to organism’s function and fitness. Trait databases covering a large number of species are becoming available, but such data remains scarce for certain groups. Amphibians are among the most diverse vertebrate groups on Earth, and constitute an abundant component of major terrestrial and freshwater ecosystems. They are also facing rapid population declines worldwide, which is likely to affect trait composition in local communities, thereby impacting ecosystem processes and services. In this context, we introduce AmphiBIO, a comprehensive database of natural history traits for amphibians worldwide. The database releases information on 17 traits related to ecology, morphology and reproduction features of amphibians. We compiled data from more than 1,500 literature sources, and for more than 6,500 species of all orders (Anura, Caudata and Gymnophiona), 61 families and 531 genera. This database has the potential to allow unprecedented large-scale analyses in ecology, evolution and conservation of amphibians.
 #' 
@@ -413,7 +443,8 @@ NULL
 #'   
 #'   \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons BY 4.0}. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
 #'   
-#' @author Brunno Freire Oliveira, Vinícius Avelar São-Pedro, Georgina Santos-Barrera, Caterina Penone, and Gabriel C. Costa
+#' @return This is a data object. provides instructions for `pulldata()`.
+#'   
 #' 
 #' @family rawdata
 
