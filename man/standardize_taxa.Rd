@@ -21,8 +21,8 @@ containing at least the column `verbatimScientificName.}
 
 \item{method}{default option is \code{get_gbif_taxonomy}. In principle, takes any
 function that takes a vector of species names as input to produce a
-taxonomy lookup table (i.e. mapping user-provided \code{verbatimScientificName} to
-\code{taxonID} and other taxon-level information). Will allow to chose from
+taxonomy lookup table (i.e. mapping user-provided \code{verbatimScientificName}
+to \code{taxonID} and other taxon-level information). Will allow to chose from
 different sources of taxonomic reference.}
 
 \item{method_options}{a name vector of arguments to be passed on to \code{method}.
@@ -34,6 +34,10 @@ function \code{get_gbif_taxonomy()}. See 'Details'.}
 
 \item{...}{parameters to be ignored, forwarded from wrapper function
 \code{standardize()}.}
+}
+\value{
+A traidata object with standardized scientific taxon names according
+to GBif Backbone taxonomy.
 }
 \description{
 Adds columns to a traitdata object containing accepted species

@@ -73,6 +73,9 @@ referenced definition (e.g. "v1.2"), if applicable.}
 
 \item{...}{other arguments, passed on to print function.}
 }
+\value{
+A structured data.frame object of class 'trait'.
+}
 \description{
 Creating an object containing a standardised trait definition according to
 the Ecological Traitdata Standard. Parameters correspond to the definition at

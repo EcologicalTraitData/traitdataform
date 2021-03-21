@@ -42,7 +42,7 @@ occurence table (wide table) then provide parameters according to
 \item{verbose}{logical; if \code{FALSE} all messages will be suppressed.}
 }
 \value{
-std
+A traitdata object with harmonized location data from the context of the Biodiversity Exploratories project.
 }
 \description{
 Adds columns of georeference to trait-data table if measurements

@@ -48,6 +48,9 @@ read.service.blocks(
 
 \item{fileEncoding}{character string: if non-empty declares the encoding to be used on a file (not a connection) so the character data can be re-encoded as they are written. See \code{\link[base:connections]{base::connections()}}.}
 }
+\value{
+Returns dataset from BExIS as a data.frame.
+}
 \description{
 Read table from a web service. Inherits functionality of \code{read.table()}.
 }

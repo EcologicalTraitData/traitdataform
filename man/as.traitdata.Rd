@@ -91,6 +91,9 @@ Trait-data Standard v0.9.}
 
 \item{...}{other arguments, passed on to print function.}
 }
+\value{
+An object of class 'traitdata'.
+}
 \description{
 Turns wide-table formats (species-traits matrix and occurrence table) into
 long-table format. As input, the function requires information about which

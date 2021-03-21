@@ -29,7 +29,12 @@ names (see Details).}
 
 \item{output}{behaviour of \code{fixlogical()}. see \code{\link[=fixlogical]{fixlogical()}}.}
 
-\item{...}{parameters to be ignored, forwarded from wrapper function \code{standardize()}.}
+\item{...}{parameters to be ignored, forwarded from wrapper function
+\code{standardize()}.}
+}
+\value{
+A traidata object with standardized trait names according to a
+provided thesaurus.
 }
 \description{
 Adds columns to a traitdata table with standardized trait names
@@ -37,37 +42,37 @@ and relates them to globally unique identifiers via URIs. Optionally
 converts units of values and renames factor levels into accepted terms.
 }
 \details{
-The function matches the trait names provided in 'verbatimTraitName' to the
-traits provided in the thesaurus (in field 'trait'). Matching must be exact
-(case sensitive). Fuzzy matching may be provided in a later version of the
-package.
+The function matches the trait names provided in 'verbatimTraitName'
+to the traits provided in the thesaurus (in field 'trait'). Matching must
+be exact (case sensitive). Fuzzy matching may be provided in a later
+version of the package.
 
 The function parameter 'rename' should be provided to map trait names where
 user-provided names and thesaurus names are different. In this case, rename
 should be a named vector with the target names used in the thesaurus as
-names, and the original names as provided in 'verbatimTraitName' as value. E.g.
-\code{rename = c()}
+names, and the original names as provided in 'verbatimTraitName' as value.
+E.g. \code{rename = c()}
 }
 \examples{
 
 
 pulldata("carabids")
 
-dataset1 <- as.traitdata(carabids, 
-  taxa = "name_correct", 
+dataset1 <- as.traitdata(carabids,
+  taxa = "name_correct",
   traits = c("body_length", "antenna_length", "metafemur_length"),
   units = "mm",
-  keep = c(datasetID = "source_measurement", measurementRemark = "note"), 
+  keep = c(datasetID = "source_measurement", measurementRemark = "note"),
   metadata = list(
     bibliographicCitation = attributes(carabids)$citeAs,
-    author = "Fons van der Plas", 
+    author = "Fons van der Plas",
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
     )
 )
 
 traitlist <- as.thesaurus(
 body_length = as.trait("body_length", expectedUnit = "mm", valueType = "numeric",
-   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"), 
+   identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Body_length"),
 antenna_length = as.trait("antenna_length", expectedUnit = "mm", valueType = "numeric",
    identifier = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Antenna_length"),
 metafemur_length = as.trait("metafemur_length", expectedUnit = "mm", valueType = "numeric",
@@ -82,14 +87,14 @@ dataset1Std <- standardize_traits(dataset1, thesaurus = traitlist)
 
 pulldata("heteroptera_raw")
 
-dataset2 <- as.traitdata(heteroptera_raw, 
-  taxa = "SpeciesID", 
+dataset2 <- as.traitdata(heteroptera_raw,
+  taxa = "SpeciesID",
   traits = c("Body_length", "Antenna_Seg1", "Antenna_Seg2",
     "Antenna_Seg3", "Antenna_Seg4", "Antenna_Seg5", "Hind.Femur_length"),
-  units = "mm", 
+  units = "mm",
   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
   metadata = list(
-    bibliographicCitation = attributes(heteroptera_raw)$citeAs, 
+    bibliographicCitation = attributes(heteroptera_raw)$citeAs,
     license = "http://creativecommons.org/publicdomain/zero/1.0/"
     )
 )
@@ -125,7 +130,7 @@ traits2 <- as.thesaurus(
             broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Femur_length")
     )
 
-dataset2Std <- standardize_traits(dataset2, 
+dataset2Std <- standardize_traits(dataset2,
     thesaurus = traits2
     )
 

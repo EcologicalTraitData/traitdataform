@@ -10,7 +10,13 @@ standardize(x, ...)
 \item{x}{a traitdata object (as returned by \code{as.traitdata()}) or a data table
 containing at least the column `verbatimScientificName.}
 
-\item{...}{parameters as described for \code{standardize.traits()} and \code{standardize.taxonomy()}.}
+\item{...}{parameters as described for \code{standardize.traits()} and
+\code{standardize.taxonomy()}.}
+}
+\value{
+A traitdata object with standardized scientific taxon names according
+to GBif Backbone taxonomy and standardized trait names according to a
+thesaurus, if provided.
 }
 \description{
 wrapper that applies \code{standardize.taxonomy()} and
