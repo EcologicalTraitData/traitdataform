@@ -17,7 +17,7 @@
   ],
   "issueTracker": "https://github.com/ecologicaltraitdata/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -253,7 +253,7 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "2257.258KB",
+  "fileSize": "2260.893KB",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",

@@ -1,3 +1,7 @@
+# traitdataform 0.6.5
+
+- update Rd documentation pages to include return value
+
 # traitdataform 0.6.4
 
 - fix tidyverse URL in README
