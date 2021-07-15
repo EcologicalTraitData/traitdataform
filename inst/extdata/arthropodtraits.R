@@ -1,5 +1,5 @@
 # for roxygen2 documentation please edit file R/data.R!
-arthropodtraits <- utils::read.csv(url("https://datadryad.org/stash/downloads/file_stream/41660", 
+arthropodtraits <- utils::read.csv(url("https://datadryad.org/stash/downloads/file_stream/41139", 
                                        encoding = "latin1"), 
                                    sep = "\t",
                                    stringsAsFactors = FALSE
