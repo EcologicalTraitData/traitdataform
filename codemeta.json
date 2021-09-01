@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "traitdataform",
-  "description": "Assistance for handling ecological trait data and applying the \n    Ecological Trait-Data Standard terminology (Schneider et al. 2019\n    <doi:10.1111/2041-210X.13288>). There are two major use cases: (1) preparation of\n    own trait datasets for upload into public data bases, and (2) harmonizing\n    trait datasets from different sources by re-formatting them into a unified\n    format. See 'traitdataform' website for full documentation. ",
+  "description": "Assistance for handling ecological trait data and applying the \n    Ecological Trait-Data Standard terminology (Schneider et al. 2019\n    <doi:10.1111/2041-210X.13288>). There are two major use cases: (1) preparation of\n    own trait datasets for publication, and (2) harmonizing\n    trait datasets from different sources by re-formatting them into a unified\n    format. See 'traitdataform' website for full documentation. ",
   "name": "traitdataform: Formatting and Harmonizing Ecological Trait-Data",
   "codeRepository": "https://github.com/ecologicaltraitdata/traitdataform",
   "relatedLink": [
@@ -17,13 +17,13 @@
   ],
   "issueTracker": "https://github.com/ecologicaltraitdata/traitdataform/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.4 (2021-02-15)",
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
   "author": [
     {
       "@type": "Person",
@@ -70,6 +70,11 @@
       "@type": "Person",
       "givenName": "Iñaki",
       "familyName": "Ucar"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Matthias",
+      "familyName": "Grenié"
     }
   ],
   "maintainer": [
@@ -230,7 +235,7 @@
   ],
   "releaseNotes": "https://github.com/ecologicaltraitdata/traitdataform/blob/master/NEWS.md",
   "readme": "https://github.com/EcologicalTraitData/traitdataform/blob/master/README.md",
-  "contIntegration": "https://travis-ci.com/EcologicalTraitData/traitdataform",
+  "contIntegration": "https://github.com/EcologicalTraitData/traitdataform/actions",
   "keywords": [
     "dataset",
     "trait-datasets",
@@ -253,7 +258,7 @@
       "url": "https://ecologicaltraitdata.github.io/traitdataform/"
     }
   ],
-  "fileSize": "2260.893KB",
+  "fileSize": "877.292KB",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",

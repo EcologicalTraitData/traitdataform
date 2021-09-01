@@ -1,8 +1,8 @@
 Package: traitdataform
 Type: Package
 Title: Formatting and Harmonizing Ecological Trait-Data
-Version: 0.6.5
-Date: 2021-03-21
+Version: 0.6.6
+Date: 2021-08-31
 Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.com", role = c("aut", "cre"), 
   comment = c(ORCID = "0000-0002-1494-5684")), 
     person("Caterina", "Penone", role = c("ctb"), comment = c(ORCID = "0000-0002-8170-6659")),
@@ -11,11 +11,12 @@ Authors@R: c(person("Florian D.", "Schneider",, "florian.dirk.schneider@gmail.co
     person("Felix","Neff", role = c("ctb")),
     person("Markus J.", "Ankenbrand", role = c("ctb")),
     person("Jessica", "Burnett", role = c("ctb")),
-    person("Iñaki","Ucar", role = c("ctb")))
+    person("Iñaki","Ucar", role = c("ctb")),
+    person("Matthias", "Grenié", role = c("ctb")))
 Description: Assistance for handling ecological trait data and applying the 
     Ecological Trait-Data Standard terminology (Schneider et al. 2019
     <doi:10.1111/2041-210X.13288>). There are two major use cases: (1) preparation of
-    own trait datasets for upload into public data bases, and (2) harmonizing
+    own trait datasets for publication, and (2) harmonizing
     trait datasets from different sources by re-formatting them into a unified
     format. See 'traitdataform' website for full documentation. 
 License: MIT + file LICENSE

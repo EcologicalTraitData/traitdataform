@@ -1,3 +1,7 @@
+# traitdataform 0.6.6
+
+- fix external URLs to Dryad (pull request #45 by @Rekyt)
+
 # traitdataform 0.6.5
 
 - update Rd documentation pages to include return value
