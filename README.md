@@ -1,6 +1,7 @@
 # Package 'traitdataform': Formatting and Harmonizing Ecological Trait-Data 
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) 
+[![R-CMD-check](https://github.com/EcologicalTraitData/traitdataform/workflows/R-CMD-check/badge.svg)](https://github.com/EcologicalTraitData/traitdataform/actions)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN status](https://www.r-pkg.org/badges/version/traitdataform)](https://cran.r-project.org/package=traitdataform)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489527.svg)](https://doi.org/10.5281/zenodo.1489527)
@@ -106,7 +107,7 @@ We are aiming to provide the following features in future iterations of the pack
 
 ## Cite as
 
-Schneider, F.D. (2021) traitdataform - harmonizing ecological trait data in R, v0.6.5, DOI: [10.5281/zenodo.1489527](http://dx.doi.org/10.5281/zenodo.1489527) http://ecologicaltraitdata.github.io/traitdataform
+Schneider, F.D. (2021) traitdataform - harmonizing ecological trait data in R, v0.6.6, DOI: [10.5281/zenodo.1489527](http://dx.doi.org/10.5281/zenodo.1489527) http://ecologicaltraitdata.github.io/traitdataform
 
 ## License
 
