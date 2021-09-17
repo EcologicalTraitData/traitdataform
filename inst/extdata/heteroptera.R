@@ -1,10 +1,10 @@
 # for roxygen2 documentation please edit file R/data.R!
+if(!l10n_info()$`UTF-8`) {suppressWarnings(Sys.setlocale("LC_CTYPE", "en_US.UTF-8"))}
 
-heteroptera <- utils::read.csv(url("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraits.txt"), 
-                               sep = "\t", header = TRUE, 
-                               stringsAsFactors=FALSE,
-                               fileEncoding = "latin1"
-                               )
+heteroptera<-  utils::read.delim(url("https://ndownloader.figshare.com/files/5633880", 
+                                          encoding = "latin1"), sep = "\t", header = TRUE,
+                                      stringsAsFactors=FALSE)
+
 
 attr(heteroptera, 'citeAs') <- utils::bibentry(
   bibtype = "Article",
@@ -21,6 +21,3 @@ attr(heteroptera, 'citeAs') <- utils::bibentry(
 
 attr(heteroptera, 'units') <- c("mm", "mm3", rep("unitless", 8))
 attr(heteroptera, 'taxa') <- "SpeciesID"
-
-print({cat("loading dataset 'heteroptera' from original data source! \n When using this data, please cite the original publication: \n") 
-  (attributes(heteroptera)$citeAs) })

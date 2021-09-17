@@ -1,9 +1,9 @@
 # for roxygen2 documentation please edit file R/data.R!
-arthropodtraits <- utils::read.csv(url("https://datadryad.org/stash/downloads/file_stream/41139", 
-                                       encoding = "latin1"), 
+arthropodtraits <- utils::read.csv(suppdata("10.5061/dryad.53ds2", "ArthropodSpeciesTraits.txt"), 
                                    sep = "\t",
                                    stringsAsFactors = FALSE
 )
+
 
 levels(arthropodtraits$Author) <- iconv(levels(arthropodtraits$Author), to = "UTF-8")
 
@@ -35,44 +35,43 @@ attr(arthropodtraits, 'thesaurus') <-  traitdataform:::as.thesaurus(
                   expectedUnit = "unitless", valueType = "factor",
                   factorLevels = c('0' = "very_low", '0.25' = "low", '0.5' = "medium", '0.75' = "high", '1.0' = "very_high"),
                   traitDescription = "Based on wing dimorphism, flying ability, activity ranges, dispersal strategies, individual movement and colonization dynamics, depending on taxon",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Dispersal_ability"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Dispersal_ability"),
   Feeding_guild = traitdataform:::as.trait("Feeding_guild",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Fine classification of feeding guild across larval and adult stages; less frequent assignments in brackets",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Feeding_guild"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Feeding_guild"),
   Feeding_guild_short = traitdataform:::as.trait("Feeding_guild_short",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Coarse classification of feeding guild, indicating main feeding source across larval and adult stages ",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Feeding_guild_short"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Feeding_guild_short"),
   Feeding_mode = traitdataform:::as.trait("Feeding_mode",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "The way nutrients are ingested",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Feeding_mode"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Feeding_mode"),
   Feeding_specialization = traitdataform:::as.trait("Feeding_specialization",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Host plant specialization in herbivores",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Feeding_specialization"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Feeding_specialization"),
   Feeding_tissue = traitdataform:::as.trait("Feeding_tissue",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Fine classification on the plant tissues sucking herbivores are feeding on ",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Feeding_tissue"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Feeding_tissue"),
   Feeding_plant_part = traitdataform:::as.trait("Feeding_plant_part",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Fine classification on the plant parts chewing herbivores are feeding on",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Feeding_plant_part"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Feeding_plant_part"),
   Endophagous_lifestyle = traitdataform:::as.trait("Endophagous_lifestyle",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Details on endophagously living larvae",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2
-                  Endophagous_lifestyle"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Endophagous_lifestyle"),
   Stratum_use = traitdataform:::as.trait("Stratum_use",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Vertical strata used across larval and adult stages; less frequent assignments in brackets",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Stratum_use"),
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Stratum_use"),
   Stratum_use_short = traitdataform:::as.trait("Stratum_use_short",
                   expectedUnit = "unitless", valueType = "factor",
                   traitDescription = "Main vertical stratum used across larval and adult stages ",
-                  identifier = "https://www.nature.com/articles/sdata201513/tables/2#Stratum_use_short")
+                  identifier = "https://www.nature.com/articles/sdata201513/tables/3#Stratum_use_short")
 )
 
 

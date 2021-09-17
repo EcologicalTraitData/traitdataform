@@ -1,9 +1,8 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-carabids <- utils::read.delim(url("https://datadryad.org/stash/downloads/file_stream/23901", 
-                                encoding = "UTF-8"), 
+carabids <- utils::read.delim(suppdata("10.5061/dryad.1fn46", "carabid traits final.txt"), 
                               stringsAsFactors = FALSE
-                              )
+)
 
 attr(carabids, 'metadata') <- traitdataform::as.metadata(
       datasetName = "Carabid traits",
