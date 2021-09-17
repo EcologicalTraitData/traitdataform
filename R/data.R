@@ -29,7 +29,7 @@ pulldata <- function(x = NULL) {
   libpath <- system.file( "extdata", "carabids.R", package="traitdataform")
   available <- sub(".R", "", dir(sub("carabids.R", "", libpath)))
   
-  if(is.null(x) || !x %in% available) {
+  if(is.null(x) | !x %in% available) {
     cat("Please choose a trait dataset to import! the following trait datasets are available: \n \t")
     cat(paste(available, collapse = "\n \t"))
     cat("\n")
@@ -38,9 +38,13 @@ pulldata <- function(x = NULL) {
     tryCatch( source(system.file( "extdata", paste0(x,".R"), package="traitdataform")),
               warning = function(war) {
                 message("Direct call to data source failed. Please check internet connectivity and re-load data!")
+              },
+              error = function(err) {
+                message("Direct call to data source failed. Please check internet connectivity and re-load data!")
               } )
     
-    if(exists(x))  message(paste0("The dataset '", x, "' is now available for use! \n"))
+    if(exists(x))  message(paste0("The dataset '", x, "' has successfully been downloaded! \n" ) )
+
   } 
     
 }
@@ -53,6 +57,77 @@ pulldata <- function(x = NULL) {
 #' @description Data from: A summary of eight traits of Coleoptera, Hemiptera, Orthoptera and
 #' Araneae, occurring in grasslands in Germany.
 #' 
+#' @format A data frame of 1230 observations and 17 variables.
+#' \describe{
+#'   \item{Suborder}{}
+#'   \item{Family}{}
+#'   \item{SpeciesID}{}
+#'   \item{Author}{}
+#'   \item{Body_Size}{Mean body length (mm)}
+#'   \item{Dispersal_ability}{ordinal scale of 0 = very low, 1 = low, 0,5 =
+#'   medium, 0,75 = high, 1 = very high; Based on wing dimorphism, flying
+#'   ability, activity ranges, dispersal strategies, individual movement and
+#'   colonization dynamics, depending on taxon }
+#'   \item{Feeding_guild}{Fine classification of feeding guild across larval and
+#'   adult stages; less frequent assignments in brackets.
+#'     \describe{
+#'       \item{c}{carnivore}
+#'       \item{c-d}{carni-detritivore}
+#'       \item{c-d-h}{carni-detriti-herbivore}
+#'       \item{c-f}{carni-fungivore}
+#'       \item{c-h}{carni-herbivore}
+#'       \item{c-(h)}{mainly carnivore, rarely herbivore}
+#'       \item{d}{detritivor}
+#'       \item{d-f}{detriti-fungivore}
+#'       \item{d-h}{detriti-herbivore}
+#'       \item{f}{fungivore}
+#'       \item{f-h}{fungi-herbivore}
+#'       \item{h}{herbivor}
+#'       \item{h-(c)}{mainly herbivore, rarely carnivore}
+#'     }
+#'    }
+#'   \item{Feeding_guild_short}{Coarse classification of feeding guild, indicating main feeding source across larval and adult stages}
+#'   \item{Feeding_mode}{The way nutrients are ingested}
+#'   \item{Feeding_specialization}{Host plant specialization in herbivores}
+#'   \item{Feeding_tissue}{Fine classification on the plant tissues sucking herbivores are feeding on}
+#'   \item{Feeding_plant_part}{Fine classification on the plant parts chewing herbivores are feeding on}
+#'   \item{Endophagous_lifestyle}{Details on endophagously living larvae}
+#'   \item{Stratum_use}{Vertical strata used across larval and adult stages; less frequent assignments in brackets}
+#'   \item{Stratum_use_short}{Main vertical stratum used across larval and adult stages}
+#'   \item{Remark}{Indicates species that do neither obligatory nor facultative occur in grasslands; * = non grasland species}
+#' 
+#' } 
+#' 
+#' original description: https://www.nature.com/articles/sdata201513/tables/3
+#' 
+#' 
+#' @details Analyses of species traits have increased our understanding of how
+#'   environmental drivers such as disturbances affect the composition of
+#'   arthropod communities and related processes. There are, however, few
+#'   studies on which traits in the arthropod community are affected by
+#'   environmental changes and which traits affect ecosystem functioning. The
+#'   assembly of arthropod traits of several taxa is difficult because of the
+#'   large number of species, limited availability of trait databases and
+#'   differences in available traits. We sampled arthropod species data from a
+#'   total of 150 managed grassland plots in three regions of Germany. These
+#'   plots represent the spectrum from extensively used pastures to mown
+#'   pastures to intensively managed and fertilized meadows. In this paper, we
+#'   summarize information on body size, dispersal ability, feeding guild and
+#'   specialization (within herbivores), feeding mode, feeding tissue (within
+#'   herbivorous suckers), plant part (within herbivorous chewers), endophagous
+#'   lifestyle (within herbivores), and vertical stratum use for 1,230 species
+#'   of Coleoptera, Hemiptera (Heteroptera, Auchenorrhyncha), Orthoptera
+#'   (Saltatoria: Ensifera, Caelifera), and Araneae, sampled by sweep-netting
+#'   between 2008 and 2012. We compiled traits from various literature sources
+#'   and complemented data from reliable internet sources and the authors’
+#'   experience.
+#'   
+#'   The data set comprises literature trait data of species that were sampled
+#'   and measured in a project within the Biodiversity Exploratories which
+#'   focuses on the effect of land use on arthropod community composition and
+#'   related processes (e.g. species interactions such as herbivory or
+#'   predation) in three regions of Germany
+#'   
 #' @details When using this data, please cite the original publication:
 #' 
 #'   \itemize{ \item  Gossner MM, Simons NK, Achtziger R, Blick T, Dorow WHO,
@@ -180,21 +255,20 @@ NULL
 #'   the functional significance of these traits. Examples include studying the
 #'   functional responses of insect communities to environmental drivers or
 #'   studying how the change in trait composition affects ecosystem processes.
-#' @return The dataset \code{heteropteraRaw} contains multiple observations of
+#' @return The dataset \code{heteroptera_raw} contains multiple observations of
 #'   each species (occurence table). The dataset \code{heteroptera} is a
 #'   compiled species-trait matrix.
 #'
-#' @return This is a data object. provides instructions for `pulldata()`.
+#' @return Returns a data object that includes attributes for data standardisation.
 #' 
 #' @section Citation: Cite this dataset as 
 #'  
 #' -  Gossner, M. M., N. K. Simons, L. Höck, and W. W. Weisser. 2015.
 #' Morphometric measures of Heteroptera sampled in grasslands across three
 #' regions of Germany. Ecology 96:1154-1154.
-#' - Data publication: Gossner, M.M, Simons, N.K., Höck, L., Weisser, W.W.,
-#' 2016. Morphometric measures of Heteroptera sampled in grasslands across three
-#' regions of Germany. figshare.
-#' doi: \doi{10.6084/m9.figshare.c.3307611.v1} 
+#' - Data publication: Gossner, M.M, Simons, N.K., Höck, L., Weisser, W.W., 
+#'   2016. Morphometric measures of Heteroptera sampled in grasslands across three
+#'   regions of Germany. figshare. \doi{10.6084/m9.figshare.c.3307611.v1} 
 #'
 #' @family rawdata
 
@@ -255,7 +329,7 @@ NULL
 #'   at least one life-history parameter for 21 322 species of birds, mammals,
 #'   and reptiles.
 #'   
-#' @return This is a data object. provides instructions for `pulldata()`.
+#' @return Returns a data object that includes attributes for data standardisation.
 #'   
 #' @family rawdata
 
@@ -301,7 +375,7 @@ NULL
 #'   see \doi{10.6084/m9.figshare.c.3301274.v1} for further
 #'   information.
 #'   
-#' @return This is a data object. provides instructions for `pulldata()`.
+#' @return Returns a data object that includes attributes for data standardisation.
 #'   
 #' @source Cite as:
 #'   
