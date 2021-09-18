@@ -6,11 +6,14 @@ heteroptera_raw <-  utils::read.delim(url("https://ndownloader.figshare.com/file
                                     stringsAsFactors=FALSE)
 
 heteroptera_raw$Center_Sampling_region <- iconv(as.character(heteroptera_raw$Center_Sampling_region), to = "UTF-8")
-levels(heteroptera_raw$Author) <- iconv(levels(heteroptera_raw$Author), to = "UTF-8")
+Encoding(heteroptera_raw$Author) <- "latin1"
+heteroptera_raw$Author <- iconv(heteroptera_raw$Author, to = "UTF-8")
 levels(heteroptera_raw$Voucher_ID) <- iconv(levels(heteroptera_raw$Voucher_ID), to = "UTF-8")
 levels(heteroptera_raw$Source) <- iconv(levels(heteroptera_raw$Source), to = "UTF-8")
 
 
+# suppdata("E096-102","HeteropteraMorphometricTraitsRAW.txt", "esa_archives", list = TRUE)
+# esa archives does not resolve correctly
 
 # heteroptera_raw <- data.frame()
 # heteroptera_raw <- readr::read_delim("http://www.esapubs.org/archive/ecol/E096/102/HeteropteraMorphometricTraitsRAW.txt", 
@@ -81,8 +84,8 @@ attr(heteroptera_raw, 'thesaurus') <-  traitdataform:::as.thesaurus(
                                         broaderTerm = "http://ecologicaltraitdata.github.io/TraitDataList/Antenna_length"),
   Front.Tibia_length = traitdataform::as.trait("Front.Tibia_length",
                                         expectedUnit = "mm", valueType = "numeric",
-                                        traitDescription = "Length of the tibia of the foreleg"
-                                               ),
+                                        traitDescription = "Length of the tibia of the foreleg",
+                                        broaderTerm = "http://t-sita.cesab.org/BETSI_vizInfo.jsp?trait=Tibia_length"),
   Mid.Tibia_length = traitdataform::as.trait("Mid.Tibia_length",
                                         expectedUnit = "mm", valueType = "numeric",
                                         traitDescription = "Length of the tibia of the mid leg",
