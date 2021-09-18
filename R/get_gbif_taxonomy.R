@@ -37,8 +37,9 @@
 #'   taxonID is a globally valid URI that links to the taxon description of the
 #'   GBIF backbone taxonomy.
 #'
-#' @import taxize
-#' @importFrom data.table rbindlist
+#' @import taxize 
+#' @import httr
+#' @importFrom data.table rbindlist 
 #' @export
 #'
 #' @examples
@@ -68,6 +69,13 @@ get_gbif_taxonomy <- function(x,
   
   matchtype = status = confidence = NULL
   
+  # test for internet connectivity
+  if(http_error("https://api.gbif.org") ) {
+    message("Connection to Gbif Taxonomy API failed. Please check internet connectivity!")
+    return(rep(NA, length = length(x)))
+    
+  } else {
+    
   # get gbif mappings
 
   temp <- taxize::get_gbifid_(x, messages = verbose)
@@ -242,7 +250,9 @@ get_gbif_taxonomy <- function(x,
   class(out) <- c("data.frame", "taxonomy")
   
   return(out)
-    
+  
+  }
+  
       
 }
  
