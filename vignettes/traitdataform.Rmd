@@ -90,13 +90,12 @@ The essential columns are `verbatimTraitName`, `verbatimTraitValue` for the repo
 The function automatically interprets data as a species$\times$traits matrix if the taxa column contains only unique entries and no duplicates. 
 In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column `occurrenceID` which links measurements taken on the same individuals. Both `occurrenceID` and `measurementID` can be provided by the author using the parameter `occurrences` (as a column name or a vector) or `measurements` (as a column name or a vector).
 
-```{r, warning=FALSE, error=FALSE}
-if(!l10n_info()$`UTF-8`) {Sys.setlocale("LC_CTYPE", "en_US.UTF-8")}
-
-heteroptera_raw <-  read.delim(url("https://ndownloader.figshare.com/files/5633883", 
-                                         encoding = "windows-1252"),
-                                    stringsAsFactors=TRUE)
-
+```{r,  eval = FALSE, warning=FALSE, error=FALSE}
+#
+# heteroptera_raw
+#
+# dataset included in package traitdataform 
+#
 # Data publication: M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W.
 # Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in
 # grasslands across three regions of Germany. figshare.
