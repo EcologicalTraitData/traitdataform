@@ -30,7 +30,7 @@
 #'   will be employed.
 #'
 #'   For reasons of simplicity and because of its high coverage of taxa, the
-#'   function `standardize.taxonomy()` uses the GBIF Backbone Taxonomy as its
+#'   function `standardize_taxa()` uses the GBIF Backbone Taxonomy as its
 #'   reference system and resolves all provided species names to the accepted
 #'   name according to GBIF (resolving misspellings and synonyms in the
 #'   process). We invite pull requests to make this function more general and

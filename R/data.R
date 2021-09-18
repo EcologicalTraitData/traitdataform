@@ -29,7 +29,7 @@ pulldata <- function(x = NULL) {
   libpath <- system.file( "extdata", "carabids.R", package="traitdataform")
   available <- sub(".R", "", dir(sub("carabids.R", "", libpath)))
   
-  if(is.null(x) | !x %in% available) {
+  if(is.null(x) || !x %in% available) {
     cat("Please choose a trait dataset to import! the following trait datasets are available: \n \t")
     cat(paste(available, collapse = "\n \t"))
     cat("\n")
@@ -59,6 +59,7 @@ pulldata <- function(x = NULL) {
 #' 
 #' @format A data frame of 1230 observations and 17 variables.
 #' \describe{
+#'   \item{Order}{}
 #'   \item{Suborder}{}
 #'   \item{Family}{}
 #'   \item{SpeciesID}{}
