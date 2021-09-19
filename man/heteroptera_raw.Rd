@@ -11,11 +11,11 @@
 and related or neighboring rights to this data.
 }
 \value{
-The dataset \code{heteropteraRaw} contains multiple observations of
+The dataset \code{heteroptera_raw} contains multiple observations of
 each species (occurence table). The dataset \code{heteroptera} is a
 compiled species-trait matrix.
 
-This is a data object. provides instructions for \code{pulldata()}.
+Returns a data object that includes attributes for data standardisation.
 }
 \description{
 Morphometric measures of Heteroptera sampled in grasslands across three
@@ -61,11 +61,8 @@ studying how the change in trait composition affects ecosystem processes.
 Morphometric measures of Heteroptera sampled in grasslands across three
 regions of Germany. Ecology 96:1154-1154.
 \item Data publication: Gossner, M.M, Simons, N.K., Höck, L., Weisser, W.W.,
-}
-\enumerate{
-\item Morphometric measures of Heteroptera sampled in grasslands across three
-regions of Germany. figshare.
-doi: \doi{10.6084/m9.figshare.c.3307611.v1}
+2016. Morphometric measures of Heteroptera sampled in grasslands across three
+regions of Germany. figshare. \doi{10.6084/m9.figshare.c.3307611.v1}
 }
 }
 

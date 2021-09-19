@@ -56,7 +56,7 @@ depending on the field of resaerch and taxonomic focus other authorities
 will be employed.
 
 For reasons of simplicity and because of its high coverage of taxa, the
-function \code{standardize.taxonomy()} uses the GBIF Backbone Taxonomy as its
+function \code{standardize_taxa()} uses the GBIF Backbone Taxonomy as its
 reference system and resolves all provided species names to the accepted
 name according to GBIF (resolving misspellings and synonyms in the
 process). We invite pull requests to make this function more general and

@@ -21,7 +21,7 @@ and geography of extant and recently extinct mammals.
 and related or neighboring rights to this data.
 }
 \value{
-This is a data object. provides instructions for \code{pulldata()}.
+Returns a data object that includes attributes for data standardisation.
 }
 \description{
 Here we describe a global species-level data set of key

@@ -143,7 +143,7 @@ dataset2 <- as.traitdata(heteroptera_raw,
   units = "mm",
   keep = c(sex = "Sex", references = "Source", lifestage = "Wing_development"),
   metadata = as.metadata(
-    author = "Gossner MM, Simons NK, HÃ¶ck L and Weisser WW",
+    author = "Gossner MM, Simons NK, Höck L and Weisser WW",
     datasetName = "Morphometric traits Heteroptera",
     bibliographicCitation = attributes(heteroptera_raw)$citeAs,
     license = "http://creativecommons.org/publicdomain/zero/1.0/"

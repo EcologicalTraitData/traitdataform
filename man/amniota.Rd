@@ -15,7 +15,7 @@ http://esapubs.org/archive/ecol/E096/269/}
 and related or neighboring rights to this data.
 }
 \value{
-This is a data object. provides instructions for \code{pulldata()}.
+Returns a data object that includes attributes for data standardisation.
 }
 \description{
 An amniote life-history database to perform comparative analyses
