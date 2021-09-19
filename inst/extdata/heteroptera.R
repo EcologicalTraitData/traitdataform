@@ -5,6 +5,8 @@ heteroptera<-  utils::read.delim(url("https://ndownloader.figshare.com/files/563
                                           encoding = "latin1"), sep = "\t", header = TRUE,
                                       stringsAsFactors=FALSE)
 
+Encoding(heteroptera$Author) <- "latin1"
+heteroptera$Author <- iconv(heteroptera$Author, "latin1", "UTF-8")
 
 attr(heteroptera, 'citeAs') <- utils::bibentry(
   bibtype = "Article",

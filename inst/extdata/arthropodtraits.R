@@ -6,7 +6,7 @@ arthropodtraits <- utils::read.csv(suppdata("10.5061/dryad.53ds2", "ArthropodSpe
 
 
 Encoding(arthropodtraits$Author) <- "latin1" 
-arthropodtraits$Author <- iconv(arthropodtraits$Author), to = "UTF-8")
+arthropodtraits$Author <- iconv(arthropodtraits$Author, "latin1", "UTF-8")
 
 
 attr(arthropodtraits, 'metadata') <- traitdataform::as.metadata(

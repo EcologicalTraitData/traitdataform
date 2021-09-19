@@ -7,8 +7,12 @@ heteroptera_raw <-  utils::read.delim(url("https://ndownloader.figshare.com/file
 
 heteroptera_raw$Center_Sampling_region <- iconv(as.character(heteroptera_raw$Center_Sampling_region), to = "UTF-8")
 Encoding(heteroptera_raw$Author) <- "latin1"
-heteroptera_raw$Author <- iconv(heteroptera_raw$Author, to = "UTF-8")
-levels(heteroptera_raw$Voucher_ID) <- iconv(levels(heteroptera_raw$Voucher_ID), to = "UTF-8")
+heteroptera_raw$Author <- iconv(heteroptera_raw$Author, "latin1", "UTF-8")
+heteroptera_raw$Voucher_ID <- as.factor(heteroptera_raw$Voucher_ID)
+Encoding(levels(heteroptera_raw$Voucher_ID)) <- "latin1"
+levels(heteroptera_raw$Voucher_ID) <- iconv(levels(heteroptera_raw$Voucher_ID),  "latin1", "UTF-8")
+heteroptera_raw$Source <- as.factor(heteroptera_raw$Source)
+Encoding(levels(heteroptera_raw$Source)) <- "latin1"
 levels(heteroptera_raw$Source) <- iconv(levels(heteroptera_raw$Source), to = "UTF-8")
 
 
