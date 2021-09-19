@@ -135,7 +135,6 @@
                          units <span class="op">=</span> <span class="st">"mm"</span>
                          <span class="op">)</span>
 <span class="co">#&gt; Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span>
-
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dataset1</span><span class="op">)</span>
 <span class="co">#&gt;   verbatimScientificName verbatimTraitName verbatimTraitValue verbatimTraitUnit</span>
 <span class="co">#&gt; 1  Abax_parallelepipedus       body_length          15.846561                mm</span>
@@ -144,27 +143,37 @@
 <span class="co">#&gt; 4     Agonum_fuliginosum       body_length           5.090000                mm</span>
 <span class="co">#&gt; 5         Agonum_gracile       body_length           4.880000                mm</span>
 <span class="co">#&gt; 6      Agonum_marginatum       body_length           8.250000                mm</span>
-<span class="co">#&gt;   measurementID</span>
-<span class="co">#&gt; 1             1</span>
-<span class="co">#&gt; 2             2</span>
-<span class="co">#&gt; 3             3</span>
-<span class="co">#&gt; 4             4</span>
-<span class="co">#&gt; 5             5</span>
-<span class="co">#&gt; 6             6</span>
+<span class="co">#&gt;   measurementID measurementDeterminedBy measurementRemarks</span>
+<span class="co">#&gt; 1             1                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 2             2                WOODCOCK               &lt;NA&gt;</span>
+<span class="co">#&gt; 3             3                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 4             4                  ribera               &lt;NA&gt;</span>
+<span class="co">#&gt; 5             5                  ribera deduced_from_genus</span>
+<span class="co">#&gt; 6             6                  ribera               &lt;NA&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [ ] : </span>
+<span class="co">#&gt;  carabids : Carabid traits by Fons van der Plas .</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Cite this trait dataset as: </span>
+<span class="co">#&gt; van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017).</span>
+<span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling intensity."</span>
+<span class="co">#&gt; _Methods in Ecology and Evolution_. doi: 10.1111/2041-210x.12728 (URL:</span>
+<span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note that in the output table the columns have been renamed <a href="https://terminologies.gfbio.org/terms/ets/pages/">according to the ETS</a>. The essential columns are <code>verbatimTraitName</code>, <code>verbatimTraitValue</code> for the reported measurement or fact as well as <code>verbatimScientificName</code> for the taxon concept. The newly assigned column <code>measurementID</code> contains a running number for each individual trait measurement.<br>
 The function automatically interprets data as a species<span class="math inline">\(\times\)</span>traits matrix if the taxa column contains only unique entries and no duplicates. In case of multiple assignments to the same taxon, the script assumes an observation wide-table and procures a new column <code>occurrenceID</code> which links measurements taken on the same individuals. Both <code>occurrenceID</code> and <code>measurementID</code> can be provided by the author using the parameter <code>occurrences</code> (as a column name or a vector) or <code>measurements</code> (as a column name or a vector).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/l10n_info.html">l10n_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">`UTF-8`</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/locales.html">Sys.setlocale</a></span><span class="op">(</span><span class="st">"LC_CTYPE"</span>, <span class="st">"en_US.UTF-8"</span><span class="op">)</span><span class="op">}</span>
-
-<span class="va">heteroptera_raw</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/5633883"</span>, 
-                                         encoding <span class="op">=</span> <span class="st">"windows-1252"</span><span class="op">)</span>,
-                                    stringsAsFactors<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-
+<code class="sourceCode R"><span class="co">#</span>
+<span class="co"># heteroptera_raw</span>
+<span class="co">#</span>
+<span class="co"># dataset included in package traitdataform </span>
+<span class="co">#</span>
 <span class="co"># Data publication: M. Gossner, Martin; K. Simons, Nadja; Hoeck, Leonhard; W.</span>
 <span class="co"># Weisser, Wolfgang (2016): Morphometric measures of Heteroptera sampled in</span>
 <span class="co"># grasslands across three regions of Germany. figshare.</span>
@@ -182,61 +191,9 @@ The function automatically interprets data as a species<span class="math inline"
               taxa <span class="op">=</span> <span class="st">"SpeciesID"</span>,
               occurrences <span class="op">=</span> <span class="st">"ID"</span>
               <span class="op">)</span>
-<span class="co">#&gt; Input is taken to be an occurrence table/an observation -- trait matrix </span>
-<span class="co">#&gt; (i.e. with individual specimens per row and multiple trait measurements in columns). </span>
-<span class="co">#&gt; If this is not the case, please provide parameters!</span>
 
 <span class="co"># show different trait measurements for same occurrence/individual</span>
-<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dataset2</span>, <span class="va">occurrenceID</span> <span class="op">==</span> <span class="st">"5"</span> <span class="op">)</span> 
-<span class="co">#&gt;      verbatimScientificName  verbatimTraitName verbatimTraitValue measurementID</span>
-<span class="co">#&gt; 5          Acalypta parvula        Body_length               1.84             5</span>
-<span class="co">#&gt; 430        Acalypta parvula         Body_width               0.82           430</span>
-<span class="co">#&gt; 855        Acalypta parvula        Body_height               0.56           855</span>
-<span class="co">#&gt; 1280       Acalypta parvula      Thorax_length               0.17          1280</span>
-<span class="co">#&gt; 1705       Acalypta parvula       Thorax_width               0.84          1705</span>
-<span class="co">#&gt; 2130       Acalypta parvula         Head_width               0.36          2130</span>
-<span class="co">#&gt; 2555       Acalypta parvula          Eye_width               0.10          2555</span>
-<span class="co">#&gt; 2980       Acalypta parvula       Antenna_Seg1               0.07          2980</span>
-<span class="co">#&gt; 3405       Acalypta parvula       Antenna_Seg2               0.06          3405</span>
-<span class="co">#&gt; 3830       Acalypta parvula       Antenna_Seg3               0.40          3830</span>
-<span class="co">#&gt; 4255       Acalypta parvula       Antenna_Seg4               0.15          4255</span>
-<span class="co">#&gt; 5105       Acalypta parvula Front.Tibia_length               0.39          4716</span>
-<span class="co">#&gt; 5530       Acalypta parvula   Mid.Tibia_length               0.40          5141</span>
-<span class="co">#&gt; 5955       Acalypta parvula  Hind.Tibia_length               0.50          5566</span>
-<span class="co">#&gt; 6380       Acalypta parvula Front.Femur_length               0.42          5991</span>
-<span class="co">#&gt; 6805       Acalypta parvula  Hind.Femur_length               0.43          6416</span>
-<span class="co">#&gt; 7230       Acalypta parvula  Front.Femur_width               0.08          6841</span>
-<span class="co">#&gt; 7655       Acalypta parvula   Hind.Femur_width               0.07          7266</span>
-<span class="co">#&gt; 8080       Acalypta parvula     Rostrum_length               0.80          7691</span>
-<span class="co">#&gt; 8505       Acalypta parvula      Rostrum_width               0.08          8116</span>
-<span class="co">#&gt; 8930       Acalypta parvula        Wing_length               1.78          8541</span>
-<span class="co">#&gt; 9355       Acalypta parvula         Wing_width               0.65          8966</span>
-<span class="co">#&gt;      occurrenceID</span>
-<span class="co">#&gt; 5               5</span>
-<span class="co">#&gt; 430             5</span>
-<span class="co">#&gt; 855             5</span>
-<span class="co">#&gt; 1280            5</span>
-<span class="co">#&gt; 1705            5</span>
-<span class="co">#&gt; 2130            5</span>
-<span class="co">#&gt; 2555            5</span>
-<span class="co">#&gt; 2980            5</span>
-<span class="co">#&gt; 3405            5</span>
-<span class="co">#&gt; 3830            5</span>
-<span class="co">#&gt; 4255            5</span>
-<span class="co">#&gt; 5105            5</span>
-<span class="co">#&gt; 5530            5</span>
-<span class="co">#&gt; 5955            5</span>
-<span class="co">#&gt; 6380            5</span>
-<span class="co">#&gt; 6805            5</span>
-<span class="co">#&gt; 7230            5</span>
-<span class="co">#&gt; 7655            5</span>
-<span class="co">#&gt; 8080            5</span>
-<span class="co">#&gt; 8505            5</span>
-<span class="co">#&gt; 8930            5</span>
-<span class="co">#&gt; 9355            5</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dataset2</span>, <span class="va">occurrenceID</span> <span class="op">==</span> <span class="st">"5"</span> <span class="op">)</span> </code></pre></div>
 <p>This allows the user to be explicit about the structure of the output data.</p>
 </div>
 <div id="specify-units" class="section level2">
@@ -267,26 +224,36 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <span class="co">#&gt; Input is taken to be an occurrence table/an observation -- trait matrix </span>
 <span class="co">#&gt; (i.e. with individual specimens per row and multiple trait measurements in columns). </span>
 <span class="co">#&gt; If this is not the case, please provide parameters!</span>
-
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dataset2</span><span class="op">)</span> 
-<span class="co">#&gt;   verbatimScientificName verbatimTraitName verbatimTraitValue measurementID</span>
-<span class="co">#&gt; 1       Acalypta nigrina       Body_length               2.35             1</span>
-<span class="co">#&gt; 2       Acalypta nigrina       Body_length               2.10             2</span>
-<span class="co">#&gt; 3       Acalypta nigrina       Body_length               2.17             3</span>
-<span class="co">#&gt; 4       Acalypta nigrina       Body_length               2.15             4</span>
-<span class="co">#&gt; 5       Acalypta parvula       Body_length               1.84             5</span>
-<span class="co">#&gt; 6       Acalypta parvula       Body_length               1.81             6</span>
-<span class="co">#&gt;   occurrenceID Sex</span>
-<span class="co">#&gt; 1            1   f</span>
-<span class="co">#&gt; 2            2   f</span>
-<span class="co">#&gt; 3            3   m</span>
-<span class="co">#&gt; 4            4   m</span>
-<span class="co">#&gt; 5            5   f</span>
-<span class="co">#&gt; 6            6   f</span>
+<span class="co">#&gt;   verbatimScientificName verbatimTraitName verbatimTraitValue verbatimTraitUnit</span>
+<span class="co">#&gt; 1       Acalypta nigrina       Body_length               2.35                mm</span>
+<span class="co">#&gt; 2       Acalypta nigrina       Body_length               2.10                mm</span>
+<span class="co">#&gt; 3       Acalypta nigrina       Body_length               2.17                mm</span>
+<span class="co">#&gt; 4       Acalypta nigrina       Body_length               2.15                mm</span>
+<span class="co">#&gt; 5       Acalypta parvula       Body_length               1.84                mm</span>
+<span class="co">#&gt; 6       Acalypta parvula       Body_length               1.81                mm</span>
+<span class="co">#&gt;   measurementID occurrenceID Sex</span>
+<span class="co">#&gt; 1             1            1   f</span>
+<span class="co">#&gt; 2             2            2   f</span>
+<span class="co">#&gt; 3             3            3   m</span>
+<span class="co">#&gt; 4             4            4   m</span>
+<span class="co">#&gt; 5             5            5   f</span>
+<span class="co">#&gt; 6             6            6   f</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [ ] : </span>
+<span class="co">#&gt;  heteroptera : Heteroptera morphometry traits by Martin M. Gossner .</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Cite this trait dataset as: </span>
+<span class="co">#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric</span>
+<span class="co">#&gt; measures of Heteroptera sampled in grasslands across three regions of</span>
+<span class="co">#&gt; Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:</span>
+<span class="co">#&gt; https://doi.org/10.1890/14-2159.1).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>The three extensions of the ETS provide standard terms for this kind of information:</p>
 <ul>
@@ -316,7 +283,6 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <span class="co">#&gt; Input is taken to be an occurrence table/an observation -- trait matrix </span>
 <span class="co">#&gt; (i.e. with individual specimens per row and multiple trait measurements in columns). </span>
 <span class="co">#&gt; If this is not the case, please provide parameters!</span>
-
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dataset2</span><span class="op">)</span>
 <span class="co">#&gt;   verbatimScientificName verbatimTraitName verbatimTraitValue verbatimTraitUnit</span>
 <span class="co">#&gt; 1       Acalypta nigrina       Body_length               2.35                mm</span>
@@ -349,7 +315,18 @@ Accordingly, the parameter <code>units</code> takes a single character string, o
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 23 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [ ] : </span>
+<span class="co">#&gt;  heteroptera : Heteroptera morphometry traits by Martin M. Gossner .</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Cite this trait dataset as: </span>
+<span class="co">#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric</span>
+<span class="co">#&gt; measures of Heteroptera sampled in grasslands across three regions of</span>
+<span class="co">#&gt; Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:</span>
+<span class="co">#&gt; https://doi.org/10.1890/14-2159.1).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note that a lack of a name in the named vector maintains the original name. Note also, that no checking for valid column names (as compared to the traitdata glossary) is performed at this stage. This is to ensure that the raw data table created by <code>as.traittable()</code> can contain any columns that the author considers relevant. The <code>keep</code> parameter can be used to rename columns into intuitive column names.</p>
 <!--
@@ -432,7 +409,18 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 26 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [ ] : </span>
+<span class="co">#&gt;  heteroptera : Heteroptera morphometry traits by Martin M. Gossner .</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Cite this trait dataset as: </span>
+<span class="co">#&gt; Gossner MM, Simons NK, Hoeck L, Weisser WW (2015). "Morphometric</span>
+<span class="co">#&gt; measures of Heteroptera sampled in grasslands across three regions of</span>
+<span class="co">#&gt; Germany." _Ecology_, *96*, 1154. doi: 10.1890/14-2159.1 (URL:</span>
+<span class="co">#&gt; https://doi.org/10.1890/14-2159.1).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>Note that all existing traits remain untouched and additional trait measures will be added to the dataset, unless a definition replaces an already existing trait.</p>
 <p>It is important to note that the mutate function works at the level of data resolution that is provided by the data, i.e. for occurrence data with multiple measurements on a single individual, the data columns are mutated per <code>occurrenceID</code>.</p>
@@ -516,10 +504,28 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; 4       body_length           5.090000                mm             4</span>
 <span class="co">#&gt; 5       body_length           4.880000                mm             5</span>
 <span class="co">#&gt; 6       body_length           8.250000                mm             6</span>
+<span class="co">#&gt;   measurementDeterminedBy measurementRemarks</span>
+<span class="co">#&gt; 1                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 2                WOODCOCK               &lt;NA&gt;</span>
+<span class="co">#&gt; 3                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 4                  ribera               &lt;NA&gt;</span>
+<span class="co">#&gt; 5                  ribera deduced_from_genus</span>
+<span class="co">#&gt; 6                  ribera               &lt;NA&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [ ] : </span>
+<span class="co">#&gt;  carabids : Carabid traits by Fons van der Plas .</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Cite this trait dataset as: </span>
+<span class="co">#&gt; van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017).</span>
+<span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling intensity."</span>
+<span class="co">#&gt; _Methods in Ecology and Evolution_. doi: 10.1111/2041-210x.12728 (URL:</span>
+<span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <p>The output table now contains a duplicate record of the originally provided trait measurements (in <code>verbatimTraitName</code>, <code>verbatimTraitValue</code> and <code>verbatimTraitUnit</code>) and now being standardised into target terms and units as requested by the thesaurus.</p>
 </div>
@@ -734,7 +740,6 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 26 traits for 179 taxa ( 9386 measurements in total).</span>
 <span class="co">#&gt; NULL</span>
-
 <span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">dataset2Std</span><span class="op">)</span><span class="op">$</span><span class="va">traits</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trait"</span>, <span class="st">"identifier"</span>,<span class="st">"traitDescription"</span>,<span class="st">"expectedUnit"</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt;                                 trait identifier</span>
 <span class="co">#&gt; Body_length               Body_length          1</span>
@@ -840,17 +845,28 @@ The function `as.traitdata()` provides a set of parameters to add information at
 <span class="co">#&gt; 4           241            species Animalia Arthropoda Insecta Coleoptera</span>
 <span class="co">#&gt; 5           122            species Animalia Arthropoda Insecta Coleoptera</span>
 <span class="co">#&gt; 6           242            species Animalia Arthropoda Insecta Coleoptera</span>
-<span class="co">#&gt;      family</span>
-<span class="co">#&gt; 1 Carabidae</span>
-<span class="co">#&gt; 2 Carabidae</span>
-<span class="co">#&gt; 3 Carabidae</span>
-<span class="co">#&gt; 4 Carabidae</span>
-<span class="co">#&gt; 5 Carabidae</span>
-<span class="co">#&gt; 6 Carabidae</span>
+<span class="co">#&gt;      family measurementDeterminedBy measurementRemarks</span>
+<span class="co">#&gt; 1 Carabidae                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 2 Carabidae                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 3 Carabidae                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 4 Carabidae                   klink               &lt;NA&gt;</span>
+<span class="co">#&gt; 5 Carabidae                WOODCOCK               &lt;NA&gt;</span>
+<span class="co">#&gt; 6 Carabidae                WOODCOCK               &lt;NA&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; This trait-dataset contains 4 traits for 120 taxa ( 480 measurements in total).</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [ ] : </span>
+<span class="co">#&gt;  carabids : Carabid traits by Fons van der Plas .</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     When using these data, you must acknowledge the following usage policies: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Cite this trait dataset as: </span>
+<span class="co">#&gt; van der Plas F, van Klink R, Manning P, Olff H, Fischer M (2017).</span>
+<span class="co">#&gt; "Sensitivity of functional diversity metrics to sampling intensity."</span>
+<span class="co">#&gt; _Methods in Ecology and Evolution_. doi: 10.1111/2041-210x.12728 (URL:</span>
+<span class="co">#&gt; https://doi.org/10.1111/2041-210x.12728).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Published under: http://creativecommons.org/publicdomain/zero/1.0/ </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt;     This dataset conforms to: [1] "Ecological Trait-data Standard (ETS) v0.10"</span></code></pre></div>
 <!--
 ## georeference standardization for Biodiversity Exploratories
@@ -937,7 +953,6 @@ head(dataset5Std)
   metadata <span class="op">=</span> <span class="va">metadata1</span>
 <span class="op">)</span>
 <span class="co">#&gt; Input is taken to be a species -- trait matrix. If this is not the case, please provide parameters!</span>
-
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dataset1</span><span class="op">)</span>
 <span class="co">#&gt;   verbatimScientificName verbatimTraitName verbatimTraitValue verbatimTraitUnit</span>
 <span class="co">#&gt; 1  Abax_parallelepipedus    antenna_length           8.518519                mm</span>
@@ -996,8 +1011,9 @@ head(dataset5Std)
   keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"Sex"</span>, references <span class="op">=</span> <span class="st">"Source"</span>, lifestage <span class="op">=</span> <span class="st">"Wing_development"</span><span class="op">)</span>,
   metadata <span class="op">=</span>  <span class="va">metadata2</span>
 <span class="op">)</span>
-<span class="co">#&gt; it seems you are providing repeated measures of traits on multiple specimens of the same species (i.e. an occurrence table)! Sequential identifiers for the occuences will be added. If your dataset contains user-defined occurrenceIDs you may specify the column name in parameter 'occurrences'.</span>
-
+<span class="co">#&gt; Input is taken to be an occurrence table/an observation -- trait matrix </span>
+<span class="co">#&gt; (i.e. with individual specimens per row and multiple trait measurements in columns). </span>
+<span class="co">#&gt; If this is not the case, please provide parameters!</span>
 <span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">dataset1</span>, <span class="va">dataset2</span>, 
                 datasetID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"vanderplas17"</span>, <span class="st">"gossner15"</span><span class="op">)</span>, 
                 metadata_as_columns <span class="op">=</span> <span class="cn">TRUE</span>
@@ -1127,7 +1143,6 @@ When storing data, it might be advised to externalise repetitive entries in a se
 
 ```r
 #example for adding metadata as a table
-
 ```
 
 
@@ -1137,13 +1152,11 @@ The function `cast.traitdata()` rearranges the long-table format into the more i
 
 
 ```r
-
 head(dataset3)
 
 dataset3wide <- cast.traitdata(dataset3)
 
 head(dataset3wide)
- 
 ```
 -->
 </div>
