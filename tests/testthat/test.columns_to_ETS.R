@@ -1,11 +1,6 @@
 context("trait data structure")
 library(traitdataform)
 
-pulldata('heteroptera_raw')
-pulldata('arthropodtraits')
-pulldata('carabids')
-
-
 test_that("encoding and read-in successful", {
   skip_if_not( l10n_info()$`UTF-8` )
   
