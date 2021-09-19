@@ -1,3 +1,10 @@
+# traitdataform 0.6.7
+
+Dependency on external data has been revised to comply with CRAN policy: 
+- demo data are now delivered with the package, to enable offline package testing, examples and vignette building; also more detailled documentation on these data was added. 
+- calls on external data for research purposes now fail with an informative message without causing errors or warnings when the resource is not available 
+- download URLs for research data are resolved from DOIs using package 'suppdata' (where possible) to provide higher stability for external resources 
+
 # traitdataform 0.6.6
 
 - fix external URLs to Dryad (pull request #45 by @Rekyt)
