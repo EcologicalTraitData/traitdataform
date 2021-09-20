@@ -14,7 +14,7 @@ test_that("mapping misspelled names", {
   skip_if_not( curl::has_internet() )
   expect_true(get_gbif_taxonomy("Cicindela_silvatica", fuzzy = TRUE)$scientificName == "Cicindela sylvatica")
   expect_true(get_gbif_taxonomy("Tetrix krausi", fuzzy = TRUE)$scientificName == "Tetrix kraussi")
-  expect_true(is.null(get_gbif_taxonomy("Tetrics krausi", fuzzy = TRUE)$scientificName))
+  expect_true(is.na(get_gbif_taxonomy("Tetrics krausi", fuzzy = TRUE)$scientificName))
   expect_true(get_gbif_taxonomy("Tetrics krausi", conf_threshold = 50, fuzzy = TRUE)$scientificName == "Tetrix kraussi")
   
   })
@@ -45,8 +45,8 @@ test_that("mapping lower or higher taxa", {
 
 test_that("not matching", {
   skip_if_not( curl::has_internet() )
-  expect_true(get_gbif_taxonomy("No_species", fuzzy = TRUE)$warnings == " No match! Check spelling or lower confidence threshold!")
-  expect_true(get_gbif_taxonomy("raoi_sdoi", fuzzy = TRUE)$warnings == "No matching species concept! No match! Check spelling or lower confidence threshold!")
+  expect_true(get_gbif_taxonomy("No_species", fuzzy = TRUE)$warnings == " Check spelling or lower confidence threshold!")
+  expect_true(get_gbif_taxonomy("raoi_sdoi", fuzzy = TRUE)$warnings == "No matching species concept! Check spelling or lower confidence threshold!")
 })
 
 
@@ -55,7 +55,7 @@ test_that("big data handling", {
   skip_on_cran()
 
   # digest(get_gbif_taxonomy(levels(traitdataform:::as_factor_clocale(carabids$name_correct))) )
-  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(carabids$name_correct))), hash = 'f39b05fbe65f2b67064fcf75a21cf550')
+  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(carabids$name_correct))), hash = '6199fd74980af7724c98023902e63b26')
 
   # digest(get_gbif_taxonomy(levels(traitdataform:::as_factor_clocale(heteroptera_raw$SpeciesID))) )
   expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(heteroptera_raw$SpeciesID))), hash = '1580db61920dc2bc49dc936202e83fe3')
