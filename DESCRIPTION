@@ -31,7 +31,7 @@ Imports:
     getPass,
     units,
     suppdata,
-    httr,
+    curl,
     XML,
     RCurl,
     plyr
