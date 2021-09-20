@@ -1,16 +1,10 @@
 context("apply standardize() functions to traitdata")
 
 library(traitdataform)
-
-
-
-if(http_error("https://api.gbif.org") ) {
-  message("Connection to Gbif Taxonomy API failed. Please check internet connectivity!")
-  return(rep(NA, length = length(x)))
-  
-} else {
   
 test_that("mapping of taxa works", {
+  
+  skip_if_not( curl::has_internet() )
 
   dataset1 <- as.traitdata(carabids)
   
@@ -30,14 +24,12 @@ test_that("mapping of taxa works", {
   expect_true(all(c("scientificName", "taxonID", "warnings") %in% names(dd2)))
   
   })
-}
+
 
 
 test_that("mapping of traits based on thesaurus works", {
-  pulldata("heteroptera_raw")
   
   dataset2 <- as.traitdata(heteroptera_raw)
-                            
                           
   traits2 <- as.thesaurus(
      Body_length = as.trait("Body_length",

@@ -2,13 +2,8 @@ context("get gbif taxonomy")
 
 library(traitdataform)
 
-if(http_error("https://api.gbif.org") ) {
-  message("Connection to Gbif Taxonomy API failed. Please check internet connectivity!")
-  return(rep(NA, length = length(x)))
-  
-} else {
-  
 test_that("gbif taxonomy reachable", {
+  skip_if_not( curl::has_internet() )
   # digest(get_gbif_taxonomy(carabids$name_correct[1:12]))
   expect_known_hash(get_gbif_taxonomy(carabids$name_correct[1:12]), hash = 'e94508bb29c9a6b66cc2b92a92ea07f6')
   # digest(get_gbif_taxonomy(arthropodtraits$SpeciesID[1:12]))
@@ -16,6 +11,7 @@ test_that("gbif taxonomy reachable", {
 })
 
 test_that("mapping misspelled names", {
+  skip_if_not( curl::has_internet() )
   expect_true(get_gbif_taxonomy("Cicindela_silvatica", fuzzy = TRUE)$scientificName == "Cicindela sylvatica")
   expect_true(get_gbif_taxonomy("Tetrix krausi", fuzzy = TRUE)$scientificName == "Tetrix kraussi")
   expect_true(is.null(get_gbif_taxonomy("Tetrics krausi", fuzzy = TRUE)$scientificName))
@@ -24,6 +20,7 @@ test_that("mapping misspelled names", {
   })
 
 test_that("mapping synonyms", {
+  skip_if_not( curl::has_internet() )
   expect_true(get_gbif_taxonomy("Limodromus_assimilis")$scientificName == "Platynus assimilis")
   expect_true(get_gbif_taxonomy("Trichocellus_cognatus")$scientificName == "Dicheirotrichus cognatus")
   expect_true(get_gbif_taxonomy("Trichocellus_placidus")$scientificName == "Dicheirotrichus placidus")
@@ -35,6 +32,7 @@ test_that("mapping doubtful taxa", {
   })
 
 test_that("mapping lower or higher taxa", {
+  skip_if_not( curl::has_internet() )
   expect_true(
     get_gbif_taxonomy("Acrocephalus familiaris kingi")$scientificName == "Acrocephalus familiaris kingi")
   
@@ -46,12 +44,14 @@ test_that("mapping lower or higher taxa", {
   })
 
 test_that("not matching", {
+  skip_if_not( curl::has_internet() )
   expect_true(get_gbif_taxonomy("No_species", fuzzy = TRUE)$warnings == " No match! Check spelling or lower confidence threshold!")
   expect_true(get_gbif_taxonomy("raoi_sdoi", fuzzy = TRUE)$warnings == "No matching species concept! No match! Check spelling or lower confidence threshold!")
 })
 
 
 test_that("big data handling", {
+  skip_if_not( curl::has_internet() )
   skip_on_cran()
 
   # digest(get_gbif_taxonomy(levels(traitdataform:::as_factor_clocale(carabids$name_correct))) )
@@ -65,4 +65,3 @@ test_that("big data handling", {
 
 })
 
-}
