@@ -6,7 +6,7 @@ utils::unzip(temp, files = "PanTHERIA_1-0_WR05_Aug2008.txt", exdir = ".")
 unlink(temp)
 rm(temp)
 
-amniota <- utils::read.csv("PanTHERIA_1-0_WR05_Aug2008.txt",
+pantheria <- utils::read.delim("PanTHERIA_1-0_WR05_Aug2008.txt",
                            fileEncoding = "UTF-8",
                            stringsAsFactors = FALSE)
 file.remove("PanTHERIA_1-0_WR05_Aug2008.txt")
@@ -29,5 +29,10 @@ attr(pantheria,'metadata') <- traitdataform::as.metadata(
   license = "http://creativecommons.org/publicdomain/zero/1.0/"
   
 )
-print({cat("loading dataset 'pantheria' from original data source! \n When using this data, please cite the original publication: \n") 
-  (attributes(pantheria)$citeAs) })
+
+#AET – Actual Evapotransipration Rate; C – centigrade; d – days; dd – decimal degrees; deg – degrees; EXT – extrapolated; g – grams; GR – geographic range; Grp – Group; HuPopDen – Human Population Density; Indiv – Individual; Isl - Island; Lat – Latitude; Len – Length; Long – Longitude; Max – Maximum; Met – Metabolic; Min – Minimum; mLO2hr – milliliters of O2 per hr; mm – millimeters;n/km2 – Number per km2; PET – Potential Evapotranspiration Rate; Precip – Precipitation; Temp – Temperature; and 5p – 5th percentile
+
+pantheria[pantheria == -999] <- NA
+attr(pantheria, 'taxa') <- "MSW05_Binomial"
+attr(pantheria, 'keep') <-  c(references = "References", "")
+
