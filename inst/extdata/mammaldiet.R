@@ -1,6 +1,6 @@
 # for roxygen2 documentation please edit file R/data.R!
 
-mammaldiet <- utils::read.csv("https://datadryad.org/stash/downloads/file_stream/21802",
+mammaldiet <- utils::read.csv(suppdata("10.5061/dryad.6cd0v", "MammalDIET_v1.0.txt"),
                               sep = "\t",
                               fileEncoding = "UTF-8",
                               stringsAsFactors = FALSE
