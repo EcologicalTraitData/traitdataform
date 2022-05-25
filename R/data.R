@@ -14,6 +14,7 @@
 #' @return Makes a raw dataset available in R according to instructions provided by dataset function.
 #'
 #' @family rawdata
+#' @import suppdata
 #' @export
 #' @author Florian D. Schneider
 #' @examples
