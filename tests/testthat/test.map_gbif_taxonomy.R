@@ -5,9 +5,9 @@ library(traitdataform)
 test_that("gbif taxonomy reachable", {
   skip_if_not( curl::has_internet() )
   # digest(get_gbif_taxonomy(carabids$name_correct[1:12]))
-  expect_known_hash(get_gbif_taxonomy(carabids$name_correct[1:12]), hash = 'e94508bb29c9a6b66cc2b92a92ea07f6')
+  expect_known_hash(get_gbif_taxonomy(carabids$name_correct[1:12]), hash = 'd37d3df9bed65e2451367aeaf98866dd')
   # digest(get_gbif_taxonomy(arthropodtraits$SpeciesID[1:12]))
-  expect_known_hash(get_gbif_taxonomy(arthropodtraits$SpeciesID[1:12]), hash = 'd36c224f512159f3cf0b7110d0140cf9')
+  expect_known_hash(get_gbif_taxonomy(arthropodtraits$SpeciesID[1:12]), hash = '78fc839027d0fa26b64e6f856ece50b0')
 })
 
 test_that("mapping misspelled names", {
@@ -55,10 +55,10 @@ test_that("big data handling", {
   skip_on_cran()
 
   # digest(get_gbif_taxonomy(levels(traitdataform:::as_factor_clocale(carabids$name_correct))) )
-  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(carabids$name_correct))), hash = '6199fd74980af7724c98023902e63b26')
+  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(carabids$name_correct))), hash = '6e354098357e48a0ef7132a60e00736d')
 
   # digest(get_gbif_taxonomy(levels(traitdataform:::as_factor_clocale(heteroptera_raw$SpeciesID))) )
-  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(heteroptera_raw$SpeciesID))), hash = '1580db61920dc2bc49dc936202e83fe3')
+  expect_known_hash(get_gbif_taxonomy(levels(as_factor_clocale(heteroptera_raw$SpeciesID))), hash = 'b9505ad8e3a6c8f79005b30c42fce201')
 
 #  expect_known_hash(get_gbif_taxonomy(levels(arthropodtraits$SpeciesID)), hash = '2efcaaa0e1')
 
