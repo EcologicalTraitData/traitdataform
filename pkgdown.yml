@@ -1,7 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   traitdataform: traitdataform.html
-last_built: 2021-09-20T15:00Z
+last_built: 2022-05-25T13:42Z
+urls:
+  reference: https://ecologicaltraitdata.github.io/traitdataform/reference
+  article: https://ecologicaltraitdata.github.io/traitdataform/articles
 
