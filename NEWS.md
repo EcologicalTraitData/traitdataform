@@ -1,3 +1,8 @@
+# traitdataform 0.6.8
+
+- fix test value for changed dependencies: new taxon names on gbif.org.
+- add suppdata to NAMESPACE
+
 # traitdataform 0.6.7
 
 Dependency on external data has been revised to comply with CRAN policy: 
