@@ -35,7 +35,8 @@ Imports:
     XML,
     RCurl,
     plyr
-URL: https://ecologicaltraitdata.github.io/traitdataform/, https://github.com/ecologicaltraitdata/traitdataform
+URL: https://ecologicaltraitdata.github.io/traitdataform/,
+    https://github.com/ecologicaltraitdata/traitdataform
 BugReports: https://github.com/ecologicaltraitdata/traitdataform/issues
 VignetteBuilder: knitr
 RoxygenNote: 7.2.0

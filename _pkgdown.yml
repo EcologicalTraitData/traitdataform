@@ -1,31 +1,4 @@
-reference:
-  - title: "Reading and Writing Data"
-    desc: "Functions for importing, standardizing and merging trait data from different sources."
-    contents:
-      - pulldata
-      - as.traitdata
-      - as.trait
-      - as.thesaurus
-      - standardize_taxa
-      - standardize_traits
-      - standardize.exploratories
-      - standardize
-      - mutate.traitdata
-      - rbind.traitdata
-  - title: "Data objects"
-    desc: "List of data objects available after calling `pulldata('<nameofdataset>')`."
-    contens: 
-      - amniota
-      - amphibio
-      - arthropodtraits
-      - carabids
-      - heteroptera
-      - heteroptera_raw
-      - mammaldiet
-      - pantheria
-  - title: "Helper functions"
-    desc: "Internal functions called by the main functions of the package."
-    contents: 
-      - get_gbif_taxonomy
-      - as.metadata
-      - cast.traitdata
+url: https://ecologicaltraitdata.github.io/traitdataform/
+template:
+  bootstrap: 5
+
